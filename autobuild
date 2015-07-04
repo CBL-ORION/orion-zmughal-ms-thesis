@@ -1,0 +1,5 @@
+#!/bin/sh
+# Deps:
+# - inotifywait
+#       Debian: apt-get install inotify-tools
+while true; do inotifywait -e modify -r .; make -W thesis.tex; done
