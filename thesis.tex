@@ -1,21 +1,55 @@
-\documentclass{scrartcl}
-\input{helper}
+\documentclass[12pt]{report}
+\usepackage{uhthesis3}
+\input{helper.tex}
+%\input{definitions.tex}
 
 \bibinput{\jobname}
 
+\setcounter{secnumdepth}{4}
+
 \begin{document}
-\title{Thesis} % TODO
-\author{Zakariyya Mughal}
-\date{2015} % TODO
 
-\maketitle
-\tableofcontents
+\include{meta/title}
+\input{meta/committee.tex}
 
-%\include{literature-review-note}
-%\include{literature-review}
-\include{analysis}
+\copyrightfalse \makecoverpages
+\include{acknowledgements}
+\include{abstract}
 
-\bibliographystyle{plainnat}
+\setlength{\parskip}{.1 in}
+
+\makecontentspages
+
+%uncomment the following for single space drafts
+%\singlespace
+
+% \pagenumbering{romans}{1}
+% \beforepreface
+
+%\pagestyle(empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \input{chapter0Nomenclature.tex}
+% \setcounter{page}{0}
+
+\chapterpages
+
+%turn figures on and off
+\newif \ifFIGS
+
+%\FIGStrue
+\FIGSfalse
+
+\input{ch1_Introduction.tex}
+\input{ch2_Background.tex}
+\input{ch3_Methods.tex}
+\input{ch4_Algorithms.tex}
+\input{ch5_Results.tex}
+\input{ch6_Conclusion.tex}
+
+\bibliographystyle{abbrv}
 \bibliography{\jobname}
-
 \end{document}
