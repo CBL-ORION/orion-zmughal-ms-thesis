@@ -1,4 +1,30 @@
 % 350-word limit
 \begin{abstract}
-Write your abstract
+The extraction of neuron morphology from microscopy imaging data is an
+invaluable method for understanding neuron characteristics. However, due to the
+cost in time and effort, manual neuron reconstruction is not feasible
+for large-scale analysis of neuron datasets. Furthermore, the issues of noisy
+and low-contrast data, multiple scales across datasets, and inter-operator
+variability of neuron tracing between experts make the analysis of the neuron
+morphology a challenging task for both humans and computers.
+
+Over the past decade, multiple methods and systems for neuron morphology
+extraction from 3D microscopy images have been proposed; however, directly
+comparing and collating the results of these methods has been difficult due to
+the complexity involved in reimplementing all the stages of the reconstruction
+pipeline. Recent developments have made it possible to collaboratively share
+both neuron imaging data and code between organisations. This thesis presents
+the design and implementation of a complete system for neuron morphology
+extraction that can be integrated into graphical tools so neuroscience
+researchers can analyse their own neuron data and compare the output against
+both manual and automated tracings.
+
+The thesis describes a system for the segmentation, registration, and
+centreline extraction of 3D neuron data from various kinds of neurons.
+The software is integrated into a popular toolkit for biomedical
+image analysis for ease-of-use and visualisation. The system includes an
+extensive test suite of for both the individual components (unit testing) as
+well as across the whole system (integration tests).
 \end{abstract}
+        \centerline{\vrule width 1.5in height 0.4pt}
+\noindent\textbf{Keywords}: neurons, cell morphology, biomedical image analysis, software engineering
