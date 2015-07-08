@@ -1,4 +1,11 @@
-THESIS_CHAPTERS := ch1_Introduction.tex ch2_Background.tex ch3_Methods.tex ch4_Algorithms.tex ch5_Results.tex ch6_Conclusion.tex
+THESIS_CHAPTERS := \
+	01_introduction/introduction.tex \
+	02_analysis/analysis.tex \
+	03_design/design.tex \
+	04_implementation/implementation.tex \
+	05_testing/testing.tex \
+	06_discussion/discussion.tex \
+	07_conclusion/conclusion.tex
 THESIS_META := meta/title.tex meta/committee.tex
 THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 00_front-matter/notation.tex $(THESIS_META) $(THESIS_CHAPTERS)
 
