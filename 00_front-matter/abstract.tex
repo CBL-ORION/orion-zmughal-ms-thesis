@@ -1,30 +1,57 @@
 % 350-word limit
 \begin{abstract}
-The extraction of neuron morphology from microscopy imaging data is an
-invaluable method for understanding neuron characteristics. However, due to the
-cost in time and effort, manual neuron reconstruction is not feasible
-for large-scale analysis of neuron datasets. Furthermore, the issues of noisy
-and low-contrast data, multiple scales across datasets, and inter-operator
-variability of neuron tracing between experts make the analysis of the neuron
-morphology a challenging task for both humans and computers.
 
-Over the past decade, multiple methods and systems for neuron morphology
-extraction from 3D microscopy images have been proposed; however, directly
-comparing and collating the results of these methods has been difficult due to
-the complexity involved in reimplementing all the stages of the reconstruction
-pipeline. Recent developments have made it possible to collaboratively share
-both neuron imaging data and code between organisations. This thesis presents
-the design and implementation of a complete system for neuron morphology
-extraction that can be integrated into graphical tools so neuroscience
-researchers can analyse their own neuron data and compare the output against
-both manual and automated tracings.
+% * Problem - what is being solved?
+The thesis describes the conversion of the ORION system for neuron
+morphology extraction. The purpose of this conversion is to
+provide a tool that can be used by neuroscience researchers to
+analyse their own neuron data and compare the output against both
+manual and automated tracings. This is in line with the goals of
+open science: a movement that seeks to make the findings and
+processes of research more widely available for peer review and
+reproducibility. By collaboratively sharing both neuron imaging
+data and code between organisations, it is possible to compare
+results of multiple methods without reimplementing all the stages
+of the reconstruction pipeline.
 
-The thesis describes a system for the segmentation, registration, and
-centreline extraction of 3D neuron data from various kinds of neurons.
-The software is integrated into a popular toolkit for biomedical
-image analysis for ease-of-use and visualisation. The system includes an
-extensive test suite of for both the individual components (unit testing) as
-well as across the whole system (integration tests).
+% * Challenges - what are the difficulties of the problem?
+In order to release the existing algorithm so that it can easily
+be incorporated into other tools, the implementation must be
+converted from an interpreted language to a compiled language.
+This presents a challenge because the languages have vastly
+different paradigms. As such, much of the existing code needs to
+be analysed to determine any changes to the design. Creating a new
+implementation also means that the new system can be designed with
+modifiability in mind so that future changes can be easily
+incorporated.
+%
+% * Objectives - what were the main goals/hypotheses?
+The specific objectives are to
+\begin{inparaenum}[(i)]
+\item analyse the ORION algorithm and implementation to
+	determine the architecture for the new system that is
+	efficient and extensible;
+\item integrate the system into a popular toolkit for biomedical
+	image analysis for ease-of-use and visualisation;
+\item develop a test suite of both the individual components (unit
+	testing) and across the whole system (integration tests);
+\item and ensure that the software gives reproducible results by
+	making it easy to build and distribute. % end of sentence
+\end{inparaenum}
+
+% * Impact - how does this effect the scientific community?
+The extraction of neuron morphology from microscopy imaging data
+is an invaluable method for understanding neuron characteristics.
+However, due to the cost in time and effort, manual neuron
+reconstruction is not feasible for large-scale analysis of neuron
+datasets.
+% * Methods - how were the objectives pursued?
+% * Results - what were the (important) findings?
+% * Conclusions - what does it all mean?
+This implementation provides a working method that can be used to
+collect information about neuron morphology that can be used to
+determine statistical properties from various neuron data.
+
 \end{abstract}
-        \centerline{\vrule width 1.5in height 0.4pt}
+	\centerline{\vrule width 1.5in height 0.4pt}
 \noindent\textbf{Keywords}: neurons, cell morphology, biomedical image analysis, software engineering
