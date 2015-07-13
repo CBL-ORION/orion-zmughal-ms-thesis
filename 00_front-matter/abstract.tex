@@ -3,12 +3,13 @@
 
 % * Problem - what is being solved?
 The thesis describes the conversion of the ORION system for neuron
-morphology extraction. The purpose of this conversion is to
-provide a tool that can be used by neuroscience researchers to
-analyse their own neuron data and compare the output against both
-manual and automated tracings. This is in line with the goals of
-open science: a movement that seeks to make the findings and
-processes of research more widely available for peer review and
+morphology extraction from an interpreted language to a compiled
+language. The purpose of this conversion is to provide a tool
+that can be used by neuroscience researchers to analyse their own
+neuron data and compare the output against both manual and
+automated tracings. This is in line with the goals of open
+science: a movement that seeks to make the findings and processes
+of research more widely available for peer review and
 reproducibility. By collaboratively sharing both neuron imaging
 data and code between organisations, it is possible to compare
 results of multiple methods without reimplementing all the stages
@@ -17,13 +18,12 @@ of the reconstruction pipeline.
 % * Challenges - what are the difficulties of the problem?
 In order to release the existing algorithm so that it can easily
 be incorporated into other tools, the implementation must be
-converted from an interpreted language to a compiled language.
-This presents a challenge because the languages have vastly
-different paradigms. As such, much of the existing code needs to
-be analysed to determine any changes to the design. Creating a new
-implementation also means that the new system can be designed with
-modifiability in mind so that future changes can be easily
-incorporated.
+rewritten in a different language. This presents a challenge
+because the languages have vastly different paradigms. As such,
+much of the existing code needs to be analysed to determine any
+changes to the design. Creating a new implementation also means
+that the new system can be designed with modifiability in mind so
+that future changes can be easily incorporated.
 %
 % * Objectives - what were the main goals/hypotheses?
 The specific objectives are to
