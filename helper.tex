@@ -9,6 +9,9 @@
 \usepackage{enumitem}
 \usepackage{siunitx}
 \usepackage{paralist}
+\usepackage{attrib}
+\usepackage{quotchap}
+\usepackage{listings}
 
 %\usepackage{epsfig}
 %\usepackage{epsf}
@@ -19,3 +22,33 @@
 %%     \printarticle{Author00}
 \newcommand{\printarticle}[1]{\citeauthor{#1}, ``\usebibentry{#1}{title}''}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% }}}
+
+%% Fancy quote %%
+%% adapted from <http://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter/53452#53452>
+\definecolor{quotemark}{gray}{0.7}
+\newenvironment{fancyquote}%
+	{%
+	    \vspace{1em}%
+	    \noindent%
+	    \begin{list}{}{%
+		 \setlength{\leftmargin}{0.1\textwidth}%
+		 \setlength{\rightmargin}{0.1\textwidth}%
+			  }%
+		 \item[]%
+		 \begin{picture}(0,0)%
+		 \put(-15,-5){\makebox(0,0){\scalebox{3}{\textcolor{quotemark}{``}}}}%
+		 \end{picture}%
+	}%
+	{%
+	 %\par%
+	 \makebox[0pt][l]{%
+	 \hspace{0.8\textwidth}%
+	 \begin{picture}(0,0)(0,0)%
+	 \put(15,15){\makebox(0,0){%
+	 \scalebox{3}{\color{quotemark}''}}}%
+	 \end{picture}}%
+	\par%
+	   \vspace{0.5em}%
+	 \end{list}%
+	}%
+
