@@ -7,7 +7,9 @@ THESIS_CHAPTERS := \
 	06_discussion/discussion.tex \
 	07_conclusion/conclusion.tex
 THESIS_META := meta/title.tex meta/committee.tex
-THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 00_front-matter/notation.tex $(THESIS_META) $(THESIS_CHAPTERS)
+THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 00_front-matter/notation.tex \
+	helper.tex thesis.bib \
+	$(THESIS_META) $(THESIS_CHAPTERS)
 
 # notation.tex
 #./thesis_template_01.tex
@@ -17,7 +19,7 @@ all: thesis.pdf
 thesis.pdf: thesis.tex $(THESIS_DEP)
 
 %.pdf: %.tex
-	latexmk -pdf -silent -diagnostics $<
+	latexmk -f -pdf -silent -diagnostics $<
 
 %.tex: %.md
 	pandoc -t latex $< -o $@

@@ -1,7 +1,162 @@
+\begin{savequote}[0.55\linewidth]
+	\begin{fancyquote}
+		Each discovery made by an investigator in a basic research
+		laboratory has much larger implications today. The sum of the work in basic
+		biology represents a rapidly expanding tool kit for engineers and inventors to
+		use to construct items of value to society.
+	\end{fancyquote}
+	\qauthor{David Baltimore in \emph{How Biology Became an Information Science}}
+	% TODO cite from \emph{The Invisible Future: The Seamless Integration of Technology Into Everyday Life}
+\end{savequote}
 \chapter{Introduction}\label{ch:introduction}
+
+
+This thesis aims to detail the design and implementation of a
+neuron morphology extraction system. This system is the result of
+converting existing ORION 3\cite{ORION_Santamaria-Pang2015} from
+MATLAB\cite{MATLAB:2013a} code to native C/C++ code.
+This conversion process requires an analysis of the existing code
+to determine. In addition, a rewrite allows for more thorough
+design and testing which is necessary to verify that the code
+behaves as expected and will continue to do so in the future. A
+more complete overview of the goals and motivation of this work
+are given in the following section.
+
+\section{Motivation}
+%  [ Discussion of the application area and context of the
+%    project. ]
+
+% TODO expansion of the ideas in the abstract
+
+\subsection{Scientific software}
+{ % how software has become important in experimental science
+	Quantitative methods are an essential part of scientific research. The
+	experimental sciences depend on the dissemination of the methods used in a
+	study so that it can be clear how results are obtained and analysed. With the
+	rapid increase in computing power, storage, and availability, it has become
+	easier to collect and process larger and more complex datasets using
+	sophisticated methods. Some common approaches to this change is to publish either a
+	description of the algorithm or refer to software that can be obtained separately
+	(either in binary or source code form).
+}
+
+Despite these approaches, there are still several challenges to a successfully
+reproducing a published method.
+{ % problems with a textual description
+	A textual description of an algorithm is rarely a complete description of
+	how an algorithm is implemented. Sophisticated methods often have tiny details
+	that are mistakenly be left out that may be essential for the rest of the
+	processing. One area that this occurs is in a data preprocessing and annotation
+	stage where human interaction and assumptions are not written down.
+}
+{ % problems with software distribution
+	Referencing readily available software packages gives
+	other researchers direct access to the original method
+	used. However, even here, there can be problems. Firstly,
+	even before running the software, it is important to
+	ensure that the
+	software is available years later. This means not only the software itself, but
+	all its dependencies. This can quickly become complicated as technology
+	advances: changes in the Application Programming Interface (API) or Application
+	Binary Interface (ABI) can cause both software distributed in source form or
+	binary form. Both source code and binary software can have
+	dependencies on platforms (e.g., operating systems,
+	runtimes, computer architecture, etc.) and licensing of
+	components that can hinder others from using the software.
+}
+
+{ % backwards compatibility and digital archival
+	Even more precarious is when a dependency used by the
+	software no longer behaves the same way as it did in
+	previous versions. This can lead to software that appears
+	to run, but gives unintended results.  Maintaining
+	backwards compatibility for software is difficult since
+	there are many parts to a non-trivial software system.
+	% Dependency hell
+	Resolving the exact versions of libraries and toolchains
+	needed to build and run can be frustrating and is commonly
+	known as \emph{dependency hell}. This problem can become
+	daunting when dealing with multiple platforms and many
+	libraries. As newer versions of these libraries are
+	released, the maintenance stage of the \emph{systems
+	development life cycle} becomes more important.
+	Unmaintained software is prone to what is known as
+	\emph{bitrot} --- that is, the process through which
+	software that was working no longer works due to changes
+	in the surrounding software ecosystem.
+	There has been some work to prevent bitrot by recording a
+	static copy of the software environment, but the digital
+	archival (comprising both computing machinery and
+	software) is in its infancy and has not caught up to that
+	of paper-based materials.
+}
+
+
+\subsection{Open science and scientific software engineering}
+
+As science becomes more oriented towards using computational
+tools, the ideals of reproducibility and statistical hypothesis
+testing become more difficult to achieve. In recent years, there
+has been a push by researchers to incorporate \emph{open science}
+practices in their work. One prominent advocate for open science
+defines it as
+\begin{quote}
+	\begin{fancyquote}
+	Open science is the idea that scientific knowledge of all kinds
+	should be openly shared as early as is practical in the discovery
+	process.
+	\end{fancyquote}
+	\qauthor{Michael Nielsen\footnote{http://michaelnielsen.org/blog/open-science-2/}} % TODO add more info about quote
+\end{quote}
+
+% Principles of open science <http://openscienceasap.org/open-science/>
+%    
+%   Open Methodology
+%   Open Source
+%   Open Data
+%   Open Access
+%   Open Peer Review
+%   Open Educational Resources
+
+% <https://github.com/openscienceASAP/open-science-sticker>
+
+
 % TODO
-% 1. Introduction
-%    1.1 Objectives
-%    1.2 Literature review
-%        [ Discussion of the application area and context of the
-%          project. ]
+Software Carpentry...
+
+
+\subsection{Open neuroscience}
+% TODO
+Biology and neuroscience in particular have been using more
+quantitative imaging tools: patch clamp, EEG, fMRI, fluorescent
+microscopy ... need to measure what is being looked at ... perform
+statistical analysis across samples
+
+% TODO
+Allen Institute for Brain Science,
+Big Brain project,
+Big Neuron
+NITRC
+Neuinfo  Framework
+Neuromorpho
+\citep{FrontNeuroinform:NeuroDebian}
+
+\begin{enumerate}[(i)]
+\item to evaluate the MATLAB codebase of ORION3 and determine how to structure the new codebase
+\item integrate the 
+\end{enumerate}
+
+\section{Literature review}
+
+% TODO
+%
+% - refactoring and conversion of code
+% - Open science
+% - bioinformatics
+
+\section{Survey of libraries used}
+
+% - cite the architecture of open-source applications
+% - ITK
+% - VTK
+
