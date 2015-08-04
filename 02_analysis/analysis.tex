@@ -16,35 +16,84 @@
 %    [ Analysis of project requirements. How is the older codebase
 %      structured. How is refactoring accomplished. ]
 
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
-TODO TODO TODO
+Before writing a single line of code, it is a good practice to understand the
+scope of the problem. Gathering the deliverables and requirements of the
+project is necessary not only for understanding how long the project will take,
+but also the order in which to implement each component. Establishing this
+order is very useful for test-driven development.
+% TODO describe TDD
 
-\section{Requirements}
+\section{Deliverables}\label{sec:deliverables}
+
+The foremost deliverable is a complete conversion of the existing
+code from MATLAB to native code. This involves an analysis of the
+existing code to see where parts of the algorithm that can be
+converted.
+
+% TODO expand using the abstract
+
 
 \section{Challenges and risks}
 
+While the code for the algorithm already exists, starting with a line-by-line
+translation of the MATLAB code has some limitations outlined as follows.
+\begin{description}
+\item[Toolbox\label{desc:matlab:toolbox}] The code is written to use MATLAB's extensive 
+	specialised toolboxes for image processing and
+	statistics which means that equivalents must be
+	incorporated into the new codebase.
+\item[Memory management\label{desc:matlab:mem}] Since MATLAB is a dynamic array language with
+	automatic memory management, it is simple to create
+	multidimensional array and extend it without having to
+	keep track of the variable's size or the variable
+	lifetime. Since C uses manual memory management, it is
+	necessary to manually allocate and release memory to avoid
+	memory leaks.
+\item[Caching\label{desc:matlab:cache}] The ORION MATLAB code makes frequent use of the file system
+	to cache calculations between runs. The purpose of this is
+	to speed up experiments so that when an experiment is
+	rerun, any images that have been processed in an earlier
+	stage (i.e., segmentation) do not need to be reprocessed
+	in later stages (i.e., centreline extraction). Code
+	written in this form imposes an algorithm structure
+	that is no longer strictly imperative --- the code is now
+	interspersed with checks to see if the data already exists
+	and instead of passing the data between functions using
+	multidimensional arrays as parameters, the parameters to
+	the functions are filenames.
+\item[Subvolume\label{desc:matlab:subvol}] The MATLAB code breaks up the input data into
+	subvolumes. This allows the computation to run a small
+	region of the data which allows for processing data that
+	may be too large to fit entirely memory. Furthermore, when
+	used in conjunction with the aforementioned caching, the
+	steps used for each processing stage can be more granualar
+	which means that if any processing is incomplete (e.g.,
+	because the computer runs out of memory or disk space),
+	the data is not entirely lost. However, this complicates
+	the algorithm because any calculation involving
+	coordinates in a volume must map indices in subvolumes to
+	indices in the corresponding supervolume.
+\end{description}
+
+The \nameref{desc:matlab:cache} and \nameref{desc:matlab:subvol} issues both
+indicate issues that can be described as cross-cutting concerns. Cross-cutting
+concerns are  % TODO aspects ...
+
+% TODO expand the below
+
+This project has
+
+\begin{itemize}
+\item starting with no tests
+\item no automated build system
+\item works entirely inside of MATLAB
+\item has executable components that are called via \texttt{system()} which
+	means that theyt need to be compiled and the path to the components
+	needs to be set
+\end{itemize}
+
 \section{MATLAB version of ORION 3}
 
-The or
 
 \subsection{Callgraph}
 
@@ -60,3 +109,9 @@ There is an alternative called fdep
 The output of this tool is graph that % TODO
 
 \input{02_analysis/call-graph.tex}
+
+\subsection{Processing pipeline}
+
+\subsection{Algorithm}
+
+
