@@ -10,7 +10,6 @@
 \usepackage{enumitem}
 \usepackage[defblank]{paralist}
 \usepackage{attrib}
-\usepackage{quotchap}
 \usepackage{listings}
 
 %\usepackage{epsfig}
@@ -25,6 +24,7 @@
 
 %% Fancy quote %%
 %% adapted from <http://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter/53452#53452>
+\usepackage{quotchap}
 \definecolor{quotemark}{gray}{0.7}
 \newenvironment{fancyquote}%
 	{%
@@ -45,3 +45,31 @@
 	 \end{picture}}%
 	   \vspace{-2.5em}%
 	}%
+
+%% Reference description environment
+%% From <http://tex.stackexchange.com/questions/1230/reference-name-of-description-list-item-in-latex>
+%%
+%% Usage:
+%%
+%%     \begin{description}
+%%         \item [Vehicle\label{itm:vehicle}] Something
+%%         \item [Bus\label{itm:bus}] A type of \ref{itm:vehicle}
+%%         \item [Car\label{itm:car}] A type of \ref{itm:vehicle} smaller than a \ref{itm:bus}
+%%     \end{description}
+%%
+%%     The item `\ref{itm:bus}' is listed on page~\pageref{itm:bus} in section~\nameref{itm:bus}.
+
+\usepackage{nameref}
+
+\makeatletter
+\let\orgdescriptionlabel\descriptionlabel
+\renewcommand*{\descriptionlabel}[1]{%
+  \let\orglabel\label
+  \let\label\@gobble
+  \phantomsection
+  \edef\@currentlabel{#1}%
+  %\edef\@currentlabelname{#1}%
+  \let\label\orglabel
+  \orgdescriptionlabel{#1}%
+}
+\makeatother
