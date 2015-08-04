@@ -5,28 +5,61 @@
 		biology represents a rapidly expanding tool kit for engineers and inventors to
 		use to construct items of value to society.
 	\end{fancyquote}
-	\qauthor{David Baltimore in \emph{How Biology Became an Information Science}, 2001}
-	% TODO cite from \emph{The Invisible Future: The Seamless Integration of Technology Into Everyday Life}
+	\qauthor{David Baltimore in \emph{How Biology Became an Information Science}, 2001~\citep{Baltimore:2001}}
 \end{savequote}
 \chapter{Introduction}\label{ch:introduction}
 
-
 This thesis aims to detail the design and implementation of a
 neuron morphology extraction system. This system is the result of
-converting existing ORION 3\cite{ORION_Santamaria-Pang2015} from
-MATLAB\cite{MATLAB:2013a} code to native C/C++ code.
+converting the existing ORION 3~\citep{ORION_Santamaria-Pang2015} system from
+MATLAB~\citep{MATLAB:2013a} code to native C/C++ code.
 This conversion process requires an analysis of the existing code
-to determine. In addition, a rewrite allows for more thorough
-design and testing which is necessary to verify that the code
-behaves as expected and will continue to do so in the future. A
-more complete overview of the goals and motivation of this work
-are given in the following section.
+to understand its structure and create a plan for replicating the
+same functionality in the in the new system.
+
+This software project can be categorised as a \emph{rewrite}; that
+is, a replication of an existing software system without using
+reusing the existing code. In software engineering, the consensus
+on rewriting software from scratch is that it is difficult and
+that teams should avoid rewrites~\citep{JoelRewrite}. This view
+arises because there are several challenges and risks associated
+with rewriting large systems.
+% reasons why rewrites fail
+\begin{inparablank}
+\item Rewrites often take a long time and instead of adding
+	features, development time is spent on redesign and
+	reimplementation of old features.
+\item In addition, all the institutional knowledge that came from
+	years of bug fixes is often lost with a rewrite.
+\item Rewrites are often expensive in terms of time and effort and
+	are not known to payoff as much as product owners wish.
+\end{inparablank}
+% refactoring over rewriting
+As such, it is preferred to work on slowly refactoring the code
+rather than a complete rewrite.  Refactoring is a process where
+instead of throwing away the existing system, the development
+proceeds by making small, incremental changes over an extended
+period in order to avoid getting the software into a broken state,
+while steadily improving the readability and reusability of the
+software.
 
 \section{Motivation}
 %  [ Discussion of the application area and context of the
 %    project. ]
 
 % TODO expansion of the ideas in the abstract
+
+% understand the goals of the project by talking about the background
+In order to understand why this project is being undertaken, .
+
+For this reason, it is important to know why this thesis is
+proposing a rewrite rather than a refactor.
+. In addition, a rewrite allows for more thorough
+design and testing which is necessary to verify that the code
+behaves as expected and will continue to do so in the future.
+
+A more complete overview of the specific deliverables of this project is
+covered in Section \ref{sec:deliverables}.
 
 \subsection{Scientific software}
 { % how software has become important in experimental science
@@ -81,10 +114,10 @@ reproducing a published method.
 	released, the maintenance stage of the \emph{systems
 	development life cycle} becomes more important.
 	Unmaintained software is prone to what is known as
-	\emph{bitrot} --- that is, the process through which
+	\emph{bit rot} --- that is, the process through which
 	software that was working no longer works due to changes
 	in the surrounding software ecosystem.
-	There has been some work to prevent bitrot by recording a
+	There has been some work to prevent bit rot by recording a
 	static copy of the software environment, but the digital
 	archival (comprising both computing machinery and
 	software) is in its infancy and has not caught up to that
@@ -139,10 +172,13 @@ Big Neuron
 NITRC
 Neuinfo  Framework
 Neuromorpho
+EyeWire
+Knossos / Brainflight
+VirtualFlyBrain
 \citep{FrontNeuroinform:NeuroDebian}
 
 \begin{enumerate}[(i)]
-\item to evaluate the MATLAB codebase of ORION3 and determine how to structure the new codebase
+\item to evaluate the MATLAB codebase of ORION 3 and determine how to structure the new codebase
 \item integrate the
 \end{enumerate}
 
