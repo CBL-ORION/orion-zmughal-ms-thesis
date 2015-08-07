@@ -18,7 +18,7 @@ to understand its structure and create a plan for replicating the
 same functionality in the in the new system.
 
 This software project can be categorised as a \emph{rewrite}; that
-is, a replication of an existing software system without using
+is, a replication of an existing software system without
 reusing the existing code. In software engineering, the consensus
 on rewriting software from scratch is that it is difficult and
 that teams should avoid rewrites~\citep{JoelRewrite}. This view
@@ -50,10 +50,32 @@ software.
 % TODO expansion of the ideas in the abstract
 
 % understand the goals of the project by talking about the background
-In order to understand why this project is being undertaken, .
+In order to understand why this project is being undertaken, it is
+important to understand the background behind why a rewrite is
+necessary as opposed to refactoring the existing codebase.
 
-For this reason, it is important to know why this thesis is
-proposing a rewrite rather than a refactor.
+The primary deliverable of this thesis is a system that is
+compatible with the Vaa3D biomedical imaging toolkit.
+% TODO what is Vaa3D
+~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}
+% TODO explain BigNeuron
+As part of an open-science project called
+BigNeuron~\citep{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}...
+
+From the BigNeuron FAQ~\citep{BigNeuron:FAQ:2015}
+\begin{quote}
+	\begin{fancyquote}
+		Q3. {\bfseries How can I incorporate code written in Matlab, Java, Python or another language other than C/C++?}
+
+		A. BigNeuron is a very large scale project, and enforcing a
+		unified API is critical to ensure fair comparison for any pre-defined
+		assessment. We thus discourage usage of Matlab, Java, Python or other
+		programming languages besides C/C++ for this bench
+		testing.
+	\end{fancyquote}
+\end{quote}
+
+
 . In addition, a rewrite allows for more thorough
 design and testing which is necessary to verify that the code
 behaves as expected and will continue to do so in the future.
@@ -175,7 +197,7 @@ Neuromorpho
 EyeWire
 Knossos / Brainflight
 VirtualFlyBrain
-\citep{FrontNeuroinform:NeuroDebian}
+~\citep{FrontNeuroinform:NeuroDebian}
 
 \begin{enumerate}[(i)]
 \item to evaluate the MATLAB codebase of ORION 3 and determine how to structure the new codebase
