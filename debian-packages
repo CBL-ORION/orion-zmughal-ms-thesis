@@ -1,1 +1,2 @@
 texlive-bibtex-extra # for usebib.sty
+dot2tex # for call graphs
