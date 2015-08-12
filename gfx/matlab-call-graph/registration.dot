@@ -1,0 +1,17 @@
+digraph Registration {
+	graph [fontsize=10 fontname="Verdana" compound=true];
+	node [shape=rect fontsize=10 fontname="Verdana"];
+
+	subgraph cluster_registration_main {
+		registration_main [shape=none]; label = "";
+		subgraph cluster_VolCrop2 {
+			VolCrop2 [shape=none]; label = "";
+			RAWfromMHD -> WriteRAWandMHD
+		}
+		VolCrop2 ->
+		createCharID ->
+		createTranslationFilesNames ->
+		exportAmiraRegistrationParameters ->
+		findMaxIntProjRegistration
+	}
+}
