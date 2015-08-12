@@ -1,0 +1,122 @@
+digraph Registration {
+	graph [fontsize=10 fontname="Verdana" compound=true];
+	node [shape=rect fontsize=10 fontname="Verdana"];
+
+	subgraph cluster_extractCenterlineFromSegmentation {
+		extractCenterlineFromSegmentation [shape=none]; label = "";
+		SWCtoVTK ->
+		createVisualizationFromSWC ->
+		computeDistanceMap ->
+		findSoma3DPoint ->
+		compute_fast_marching ->
+		createSWCfromSegments ->
+		detectCenterlinePoints ->
+		detect_end_points_as_maximal_chains ->
+		getStartingPointsFromSegmentation ->
+		post_process_centerline
+
+		subgraph cluster_SWCtoVTK {
+			SWCtoVTK [shape=none]; label = "";
+			readSWC
+		}
+		subgraph cluster_createVisualizationFromSWC {
+			createVisualizationFromSWC [shape=none]; label = "";
+			uhnToDxf ->
+			updateUHNtypes
+		}
+		subgraph cluster_computeDistanceMap {
+			computeDistanceMap [shape=none]; label = "";
+			RAWfromMHD ->
+			WriteRAWandMHD
+		}
+		subgraph cluster_findSoma3DPoint {
+			findSoma3DPoint [shape=none]; label = "";
+			callHough ->
+			computeDistanceTransformOfSomaAndPipette_02 ->
+			extractAdaptiveSphere ->
+			segmentSomaPipette ->
+			segmentSomaPipetteRemoval ->
+			delete_RAW ->
+			image_MIP_gray
+
+
+			subgraph cluster_callHough {
+				callHough [shape=none]; label = "";
+				center3D ->
+				coin_detect ->
+				draw_soma
+
+				subgraph cluster_coin_detect {
+					coin_detect [shape=none]; label = "";
+					circle_center ->
+					hough_circle
+
+					subgraph cluster_hough_circle {
+						hough_circle [shape=none]; label = "";
+						fastsearch
+					}
+				}
+			}
+
+			subgraph cluster_extractAdaptiveSphere {
+				extractAdaptiveSphere [shape=none]; label = "";
+				circle ->
+				normalizeVo ->
+				traceBack_OR1_P ->
+				report
+			}
+		}
+
+		subgraph cluster_createSWCfromSegments {
+			createSWCfromSegments [shape=none]; label = "";
+			subgraph cluster_createIDforSegments {
+				createIDforSegments [shape=none]; label = "";
+				detectBranchingPointsSWC ->
+				detectTerminalPointsFromSWC ->
+				fix_ordering_of_segments
+
+				subgraph cluster_fix_ordering_of_segments {
+					fix_ordering_of_segments [shape=none]; label = "";
+					move_segment
+				}
+			}
+
+		}
+		subgraph cluster_post_process_centerline {
+			post_process_centerline [shape=none]; label = "";
+			num2string ->
+			detect_crossings ->
+			mergeClose_BranchingPoints ->
+			remove_small_segments_from_SWC ->
+			smooth_SWC ->
+			connectCenterline
+
+			subgraph cluster_detect_crossings {
+				detect_crossings [shape=none]; label = "";
+				subgraph cluster_getDirectionFromPoints {
+					getDirectionFromPoints [shape=none]; label = "";
+					smoothSegments
+				}
+			}
+			subgraph cluster_remove_small_segments_from_SWC {
+				remove_small_segments_from_SWC [shape=none]; label = "";
+				reorganize_SWC ->
+					getDisconnectedComponents ->
+					merge_connected_components
+			}
+			subgraph cluster_smooth_SWC {
+				smooth_SWC [shape=none]; label = "";
+				writeSWC
+			}
+			subgraph cluster_connectCenterline {
+				connectCenterline [shape=none]; label = "";
+				change_rootFromSWC
+			}
+		}
+	}
+}
+/*
+	subgraph cluster_ {
+		[shape=none]; label = "";
+	}
+*/

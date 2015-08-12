@@ -9,22 +9,22 @@ digraph Segmentation {
 
 	subgraph cluster_runSegmentationSpines {
 		color = "black";
-		cluster_runSegmentationSpines_dummy [shape=none label = "runSegmentationSpines"]; label = "";
+		runSegmentationSpines [shape=none]; label = "";
 		/*computeElapsedTime*/
 		subgraph cluster_ORION3_Spines {
 			/*label = "ORION3_Spines";*/
-			cluster_ORION3_Spines_dummy -> cluster_computeEigenvaluesGaussianFilter_dummy -> cluster_ORION3_Dedrites_dummy
-			cluster_ORION3_Spines_dummy [shape=none label="ORION3_Spines"]; label = "";
+			ORION3_Spines -> computeEigenvaluesGaussianFilter -> ORION3_Dedrites
+			ORION3_Spines [shape=none]; label = "";
 			subgraph cluster_computeEigenvaluesGaussianFilter {
 				color = "black";
-				cluster_computeEigenvaluesGaussianFilter_dummy [shape=none label="computeEigenvaluesGaussianFilter"]; label = "";
+				computeEigenvaluesGaussianFilter [shape=none]; label = "";
 				subgraph cluster_FilterTypes {
 					label = "Filter types";
 					color=blue; /* OR */
-					cluster_FilterTypes_dummy [shape=point style=invis];
+					FilterTypes [shape=point style=invis];
 					FilterFrangi FilterSato FilterORION1
 				}
-				/*[>cluster_FilterTypes_dummy<] FilterSato -> getInfoVolume [ltail=cluster_FilterTypes]
+				/*[>FilterTypes<] FilterSato -> getInfoVolume [ltail=cluster_FilterTypes]
 				getInfoVolume ->
 				num2string ->
 				RAWfromMHD ->
@@ -32,14 +32,14 @@ digraph Segmentation {
 			}
 			subgraph cluster_ORION3_Dendrites_callees {
 				/*label = "ORION3_Dendrites";*/
-				cluster_ORION3_Dedrites_dummy [shape=none label="ORION3_Dendrites"]; label = "";
-				cluster_readNegativeSamples_dummy
-					-> cluster_compute2D_DiscrimantFunction_dummy
+				ORION3_Dedrites [shape=none]; label = "";
+				readNegativeSamples
+					-> compute2D_DiscrimantFunction
 					-> getResponseToDiscriminantFunction
 					-> normalizeResponseDiscriminantFunction;
 				normalizeResponseDiscriminantFunction ->
-				cluster_getFeatures_dummy /*getFeatures*/
-				cluster_getFeatures_dummy -> remove_small_conComp3D;
+				getFeatures /*getFeatures*/
+				getFeatures -> remove_small_conComp3D;
 
 				remove_small_conComp3D ->
 					settingDefaultParameters/* ->
@@ -49,18 +49,18 @@ digraph Segmentation {
 					Read_CreateFolderSecondEigenvalueHessian*/
 				subgraph cluster_getFeatures {
 					color = "black";
-					cluster_getFeatures_dummy  [shape=none label="getFeatures"]; label = "";
+					getFeatures  [shape=none]; label = "";
 
 					computeFeatures -> readEigenvaluesGaussianFilter
 				}
 				subgraph cluster_readNegativeSamples {
 					color = "black";
-					cluster_readNegativeSamples_dummy [shape=none label="readNegativeSamples"]; label = "";
+					readNegativeSamples [shape=none]; label = "";
 					multiscaleLaplacianFilter -> Makefilter -> hdaf
 				}
 				subgraph cluster_compute2D_DiscrimantFunction {
 					color = "black";
-					cluster_compute2D_DiscrimantFunction_dummy [shape=none label="compute2D_DiscrimantFunction"]; label = "";
+					compute2D_DiscrimantFunction [shape=none]; label = "";
 					removeIsolatedResponses
 				}
 			}
