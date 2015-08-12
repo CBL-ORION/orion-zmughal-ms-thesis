@@ -66,7 +66,7 @@ translation of the MATLAB code has some limitations outlined as follows.
 	region of the data which allows for processing data that
 	may be too large to fit entirely memory. Furthermore, when
 	used in conjunction with the aforementioned caching, the
-	steps used for each processing stage can be more granualar
+	steps used for each processing stage can be more granular
 	which means that if any processing is incomplete (e.g.,
 	because the computer runs out of memory or disk space),
 	the data is not entirely lost. However, this complicates
@@ -88,7 +88,7 @@ This project has
 \item no automated build system
 \item works entirely inside of MATLAB
 \item has executable components that are called via \texttt{system()} which
-	means that theyt need to be compiled and the path to the components
+	means that they need to be compiled and the path to the components
 	needs to be set
 \end{itemize}
 
@@ -108,7 +108,15 @@ There is an alternative called fdep
 
 The output of this tool is graph that % TODO
 
-\input{02_analysis/call-graph.tex}
+\input{gfx-out/matlab-call-graph/high-level.tex}
+
+\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/segmentation.tex}}
+
+\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/registration.tex}}
+
+\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/tracing.tex}}
+
+%\input{02_analysis/call-graph.tex}
 
 \subsection{Processing pipeline}
 

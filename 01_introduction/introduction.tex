@@ -21,7 +21,7 @@ This software project can be categorised as a \emph{rewrite}; that
 is, a replication of an existing software system without
 reusing the existing code. In software engineering, the consensus
 on rewriting software from scratch is that it is difficult and
-that teams should avoid rewrites~\citep{JoelRewrite}. This view
+that teams should avoid rewrites~\citep{Software-rewrites:Spolsky:2000}. This view
 arises because there are several challenges and risks associated
 with rewriting large systems.
 % reasons why rewrites fail
@@ -47,25 +47,41 @@ software.
 %  [ Discussion of the application area and context of the
 %    project. ]
 
-% TODO expansion of the ideas in the abstract
-
 % understand the goals of the project by talking about the background
 In order to understand why this project is being undertaken, it is
-important to understand the background behind why a rewrite is
-necessary as opposed to refactoring the existing codebase.
+important to understand why a rewrite is necessary as opposed to refactoring
+the existing codebase. Both options require an analysis of the project
+deliverables, that is, a concrete set of goals that will direct the project
+development. These deliverables can be classified as either scientific or
+engineering deliverables. Scientific deliverables are motivated by goals that
+advance the state of scientific knowledge while engineering deliverables focus
+on specific technical aspects of the project that make future project
+maintenance and growth possible. This section will only cover the scientific
+deliverables while engineering deliverables are covered in Section~\ref{sec:deliverables}.
 
-The primary deliverable of this thesis is a system that is
-compatible with the Vaa3D biomedical imaging toolkit.
+The primary scientific deliverable of this thesis is a system for
+neuron reconstruction. This system is designed with the principles of open
+science in mind so that it is usable by biologists to study neuroanatomy (see
+Section~\ref{subsec:open-science}). The secondary deliverable is to make the
+system compatible with the Vaa3D biomedical imaging
+toolkit~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}. This
+toolkit allows biologists to visualise and analyse biomedical imaging datasets.
+It can be extended through the development of plugins.
+
+
+This
+second objective allows the system to be part of the BigNeuron
 % TODO what is Vaa3D
-~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}
+
 % TODO explain BigNeuron
+% TODO explain in relation to DIADEM
 As part of an open-science project called
 BigNeuron~\citep{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}...
 
 From the BigNeuron FAQ~\citep{BigNeuron:FAQ:2015}
 \begin{quote}
 	\begin{fancyquote}
-		Q3. {\bfseries How can I incorporate code written in Matlab, Java, Python or another language other than C/C++?}
+		{Q3. \bfseries How can I incorporate code written in Matlab, Java, Python or another language other than C/C++?}
 
 		A. BigNeuron is a very large scale project, and enforcing a
 		unified API is critical to ensure fair comparison for any pre-defined
@@ -80,10 +96,12 @@ From the BigNeuron FAQ~\citep{BigNeuron:FAQ:2015}
 design and testing which is necessary to verify that the code
 behaves as expected and will continue to do so in the future.
 
-A more complete overview of the specific deliverables of this project is
-covered in Section \ref{sec:deliverables}.
+The following sections cover an overview of the context of this project
+first within the general context of scientific software
+(Section~\ref{subsec:sci-soft}) and finally narrow down its role relative to
+the specific context of neuron reconstruction (Section~\ref{subsec:neuron-tracing})
 
-\subsection{Scientific software}
+\subsection{Scientific software}\label{subsec:sci-soft}
 { % how software has become important in experimental science
 	Quantitative methods are an essential part of scientific research. The
 	experimental sciences depend on the dissemination of the methods used in a
@@ -147,7 +165,7 @@ reproducing a published method.
 }
 
 
-\subsection{Open science and scientific software engineering}
+\subsection{Open science and scientific software engineering}\label{subsec:open-science}
 
 As science becomes more oriented towards using computational
 tools, the ideals of reproducibility and statistical hypothesis
@@ -197,7 +215,13 @@ Neuromorpho
 EyeWire
 Knossos / Brainflight
 VirtualFlyBrain
-~\citep{FrontNeuroinform:NeuroDebian}
+~\citep{NeuroDebian:Halchenko:2012}
+
+\subsection{Neuron reconstruction and tracing}\label{subsec:neuron-tracing}
+
+~\citep{Duke-Southampton-archive:Cannon:1998,DIADEM-dataset:Brown:2011,NeuroMorphVariability:Parekh:2015}
+
+~\citep{DIADEM&Beyond:Liu:2011,NeuroMorphTrends:Halavi:2012,NeuroTracePerspect:Meijering:2010}
 
 \begin{enumerate}[(i)]
 \item to evaluate the MATLAB codebase of ORION 3 and determine how to structure the new codebase
