@@ -36,7 +36,7 @@ with rewriting large systems.
 \end{inparablank}
 % refactoring over rewriting
 As such, it is preferred to work on slowly refactoring the code
-rather than a complete rewrite.  Refactoring is a process where
+rather than a complete rewrite. Refactoring is a process where
 instead of throwing away the existing system, the development
 proceeds by making small, incremental changes over an extended
 period in order to avoid getting the software into a broken state,
@@ -62,19 +62,27 @@ deliverables while engineering deliverables are covered in Section~\ref{sec:deli
 The primary scientific deliverable of this thesis is a system for
 neuron reconstruction. This system is designed with the principles of open
 science in mind so that it is usable by biologists to study neuroanatomy (see
-Section~\ref{subsec:open-science}). The secondary deliverable is to make the
-system compatible with the Vaa3D biomedical imaging
-toolkit~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}. This
-toolkit allows biologists to visualise and analyse biomedical imaging datasets.
-It can be extended through the development of plugins.
-
-
-This
-second objective allows the system to be part of the BigNeuron
-% TODO what is Vaa3D
+Section~\ref{subsec:open-science}).
+{ % what is Vaa3D
+	The secondary deliverable is to make the system compatible
+	with the Vaa3D biomedical imaging toolkit~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}.
+	This toolkit allows biologists to visualise and analyse
+	biomedical imaging datasets. It can be extended through
+	the development of plugins. This allows algorithm
+	developers to make their both their interactive and
+	non-interactive methods for image analysis available
+	for biologists to use without having to switch between
+	multiple programs for processing and visualising data.
+}
 
 % TODO explain BigNeuron
+Creating an image analysis tool that can be easily integrated into
+other systems allows for
+This second objective is necessary for
+BigNeuron project
 % TODO explain in relation to DIADEM
+
+
 As part of an open-science project called
 BigNeuron~\citep{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}...
 
@@ -142,7 +150,7 @@ reproducing a published method.
 	Even more precarious is when a dependency used by the
 	software no longer behaves the same way as it did in
 	previous versions. This can lead to software that appears
-	to run, but gives unintended results.  Maintaining
+	to run, but gives unintended results. Maintaining
 	backwards compatibility for software is difficult since
 	there are many parts to a non-trivial software system.
 	% Dependency hell
