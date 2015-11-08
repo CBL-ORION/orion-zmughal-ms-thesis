@@ -59,74 +59,15 @@ on specific technical aspects of the project that make future project
 maintenance and growth possible. This section will only cover the scientific
 deliverables while engineering deliverables are covered in Section~\ref{sec:deliverables}.
 
-The primary scientific deliverable of this thesis is a system for
+The \emph{primary scientific deliverable} of this thesis is a system for
 neuron reconstruction. This system is designed with the principles of open
 science in mind so that it is usable by biologists to study neuroanatomy (see
 Section~\ref{subsec:open-science}).
-{ % what is Vaa3D
-	The secondary deliverable is to make the system compatible
-	with the Vaa3D biomedical imaging toolkit~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}.
-	This toolkit allows biologists to visualise and analyse
-	biomedical imaging datasets. It can be extended through
-	the development of plugins. This allows algorithm
-	developers to make their both their interactive and
-	non-interactive methods for image analysis available
-	for biologists to use without having to switch between
-	multiple programs for processing and visualising data.
-}
 
-% TODO explain comparing algorithms and DIADEM Challenge
-Creating an image analysis tool that can be easily integrated into
-other systems allows others to reproduce the results in order to
-compare with ground truth data and other algorithms. There
-has been an attempt at comparing neuron morphology extraction
-algorithms in the past under the DIADEM Challenge which
-contributed datasets and a metric for comparing the neuron
-tracings from algorithms against tracings from gold standard
-segmentations~\citep{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
-The DIADEM Challenge used 6 datasets from different neuroscience
-institutions in order to have a diversity in terms of source of
-the neurons (i.e., from different species and structures from
-different brain regions) and in terms of the laboratory protocols
-(i.e., different labelling and microscopy techniques).
-
-The DIADEM Challenge was successful in raising awareness of the
-problem of neuron reconstruction and several new 3D reconstruction
-methods and metrics have been proposed after the end of the DIADEM
-Challenge (see Section~\ref{subsec:neuron-tracing}).  However, the
-lack of larger public datasets, standardised metrics, and readily
-available algorithms have made it difficult to compare new methods
-for neuron reconstruction.
-
-% explain BigNeuron
-To solve this problem, an open-science project called
-BigNeuron~\citep{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}
-continues where the DIADEM Challenge left off. Instead of
-comparing the output on a few datasets as in the DIADEM Challenge,
-BigNeuron aims to enable high-throughput analysis of neuron
-microscopy stacks using multiple methods contributed from various
-algorithm developers. By standarising on the Vaa3D platform, this
-precludes differences between how each method handles data which
-means that all the algorithms can be bench-tested at once without
-a need for translating data between formats.
-
-However, since the Vaa3D is written in C++, incorporating plugin
-code written in non-native languages poses a problem. For this
-reason, the BigNeuron project organisers recommend that all
-algorithms that are submitted be in C or C++. From the BigNeuron
-FAQ~\citep{BigNeuron:FAQ:2015}
-\begin{quote}
-	\begin{fancyquote}
-		{Q3. \bfseries How can I incorporate code written in Matlab, Java, Python or another language other than C/C++?}
-
-		A. BigNeuron is a very large scale project, and enforcing a
-		unified API is critical to ensure fair comparison for any pre-defined
-		assessment. We thus discourage usage of Matlab, Java, Python or other
-		programming languages besides C/C++ for this bench
-		testing.
-	\end{fancyquote}
-\end{quote}
-
+The \emph{secondary scientific deliverable} is to make this system
+compatible with existing tools for image analysis so that it can
+be compared against other methods as part of the BigNeuron
+project (see Section~\ref{subsec:bigneuron}).
 
 In addition, a rewrite allows for more thorough
 design and testing which is necessary to verify that the code
@@ -252,6 +193,74 @@ EyeWire
 Knossos / Brainflight
 VirtualFlyBrain
 ~\citep{NeuroDebian:Halchenko:2012}
+
+\subsection{BigNeuron}
+
+{ % what is Vaa3D
+	The secondary deliverable is to make the system compatible
+	with the Vaa3D biomedical imaging toolkit~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}.
+	This toolkit allows biologists to visualise and analyse
+	biomedical imaging datasets. It can be extended through
+	the development of plugins. This allows algorithm
+	developers to make their both their interactive and
+	non-interactive methods for image analysis available
+	for biologists to use without having to switch between
+	multiple programs for processing and visualising data.
+}
+
+% explain comparing algorithms and DIADEM Challenge
+Creating an image analysis tool that can be easily integrated into
+other systems allows others to reproduce the results in order to
+compare with ground truth data and other algorithms. There
+has been an attempt at comparing neuron morphology extraction
+algorithms in the past under the DIADEM Challenge which
+contributed datasets and a metric for comparing the neuron
+tracings from algorithms against tracings from gold standard
+segmentations~\citep{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
+The DIADEM Challenge used 6 datasets from different neuroscience
+institutions in order to have a diversity in terms of source of
+the neurons (i.e., from different species and structures from
+different brain regions) and in terms of the laboratory protocols
+(i.e., different labelling and microscopy techniques).
+
+The DIADEM Challenge was successful in raising awareness of the
+problem of neuron reconstruction and several new 3D reconstruction
+methods and metrics have been proposed after the end of the DIADEM
+Challenge (see Section~\ref{subsec:neuron-tracing}).  However, the
+lack of larger public datasets, standardised metrics, and readily
+available algorithms have made it difficult to compare new methods
+for neuron reconstruction.
+
+% explain BigNeuron
+To solve this problem, an open-science project called
+BigNeuron~\citep{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}
+continues where the DIADEM Challenge left off. Instead of
+comparing the output on a few datasets as in the DIADEM Challenge,
+BigNeuron aims to enable high-throughput analysis of neuron
+microscopy stacks using multiple methods contributed from various
+algorithm developers. By standarising on the Vaa3D platform, this
+precludes differences between how each method handles data which
+means that all the algorithms can be bench-tested at once without
+a need for translating data between formats.
+
+However, since the Vaa3D is written in C++, incorporating plugin
+code written in non-native languages poses a problem. For this
+reason, the BigNeuron project organisers recommend that all
+algorithms that are submitted be in C or C++. From the BigNeuron
+FAQ~\citep{BigNeuron:FAQ:2015}
+\begin{quote}
+	\begin{fancyquote}
+		{Q3. \bfseries How can I incorporate code written in Matlab, Java, Python or another language other than C/C++?}
+
+		A. BigNeuron is a very large scale project, and enforcing a
+		unified API is critical to ensure fair comparison for any pre-defined
+		assessment. We thus discourage usage of Matlab, Java, Python or other
+		programming languages besides C/C++ for this bench
+		testing.
+	\end{fancyquote}
+\end{quote}
+
+
 
 \section{Literature review}
 
