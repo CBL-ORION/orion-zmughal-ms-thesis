@@ -82,3 +82,15 @@
   \orgdescriptionlabel{#1}%
 }
 \makeatother
+
+
+%% number biblatex bibliography section
+\defbibenvironment{bibliography}
+  {\enumerate
+     {}
+     {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endenumerate}
+  {\item}
