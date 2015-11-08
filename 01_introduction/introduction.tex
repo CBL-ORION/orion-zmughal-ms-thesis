@@ -75,26 +75,46 @@ Section~\ref{subsec:open-science}).
 	multiple programs for processing and visualising data.
 }
 
-% TODO explain BigNeuron
+% TODO explain comparing algorithms and DIADEM Challenge
 Creating an image analysis tool that can be easily integrated into
 other systems allows others to reproduce the results in order to
-compare with ground truth data and other algorithms. While there
+compare with ground truth data and other algorithms. There
 has been an attempt at comparing neuron morphology extraction
-algorithms in the past under the DIADEM Challenge, which
-contributed datasets and a metric for comparing neuron tracings
-against tracings from gold standard segmentations~\citep{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011},
-the lack of larger datasets, different metrics, and readily
+algorithms in the past under the DIADEM Challenge which
+contributed datasets and a metric for comparing the neuron
+tracings from algorithms against tracings from gold standard
+segmentations~\citep{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
+The DIADEM Challenge used 6 datasets from different neuroscience
+institutions in order to have a diversity in terms of source of
+the neurons (i.e., from different species and structures from
+different brain regions) and in terms of the laboratory protocols
+(i.e., different labelling and microscopy techniques).
+
+The DIADEM Challenge was successful in raising awareness of the
+problem of neuron reconstruction and several new 3D reconstruction
+methods and metrics have been proposed after the end of the DIADEM
+Challenge (see Section~\ref{subsec:neuron-tracing}).  However, the
+lack of larger public datasets, standardised metrics, and readily
 available algorithms have made it difficult to compare new methods
 for neuron reconstruction.
 
+% explain BigNeuron
 To solve this problem, an open-science project called
 BigNeuron~\citep{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}
-continues where the DIADEM Challenge left off.
-% TODO explain in relation to DIADEM
+continues where the DIADEM Challenge left off. Instead of
+comparing the output on a few datasets as in the DIADEM Challenge,
+BigNeuron aims to enable high-throughput analysis of neuron
+microscopy stacks using multiple methods contributed from various
+algorithm developers. By standarising on the Vaa3D platform, this
+precludes differences between how each method handles data which
+means that all the algorithms can be bench-tested at once without
+a need for translating data between formats.
 
-
-
-From the BigNeuron FAQ~\citep{BigNeuron:FAQ:2015}
+However, since the Vaa3D is written in C++, incorporating plugin
+code written in non-native languages poses a problem. For this
+reason, the BigNeuron project organisers recommend that all
+algorithms that are submitted be in C or C++. From the BigNeuron
+FAQ~\citep{BigNeuron:FAQ:2015}
 \begin{quote}
 	\begin{fancyquote}
 		{Q3. \bfseries How can I incorporate code written in Matlab, Java, Python or another language other than C/C++?}
@@ -108,7 +128,7 @@ From the BigNeuron FAQ~\citep{BigNeuron:FAQ:2015}
 \end{quote}
 
 
-. In addition, a rewrite allows for more thorough
+In addition, a rewrite allows for more thorough
 design and testing which is necessary to verify that the code
 behaves as expected and will continue to do so in the future.
 
@@ -233,18 +253,24 @@ Knossos / Brainflight
 VirtualFlyBrain
 ~\citep{NeuroDebian:Halchenko:2012}
 
+\section{Literature review}
+
 \subsection{Neuron reconstruction and tracing}\label{subsec:neuron-tracing}
 
 ~\citep{Duke-Southampton-archive:Cannon:1998,DIADEM-dataset:Brown:2011,NeuroMorphVariability:Parekh:2015}
 
 ~\citep{DIADEM&Beyond:Liu:2011,NeuroMorphTrends:Halavi:2012,NeuroTracePerspect:Meijering:2010}
 
+Post-DIADEM
+~\citep{Bauer2010,MIA-anisotropic-path-searching-Xie2011,MICCAI-anisotropic-path-searching-Xie2010,
+Jeong2015,Luo2015,De2015,Gulyanon2015,Santamaria-Pang2015,Mukherjee2014,Hernandez-Herrera2014,Basu2014,Xiao2013,Jimenez2013,Basu2013,Mukherjee2013,Hernandez-Herrera2013,Ming2013,Lee2012,Czarnecki2012}
+
+metrics~\citep{Mayerich2011,Mayerich2012,btmorph-Torben-Nielsen2014,Costa2014,Gillette2015}
+
 \begin{enumerate}[(i)]
 \item to evaluate the MATLAB codebase of ORION 3 and determine how to structure the new codebase
 \item integrate the
 \end{enumerate}
-
-\section{Literature review}
 
 % TODO
 %
