@@ -21,11 +21,11 @@ This software project can be categorised as a \emph{rewrite}; that
 is, a replication of an existing software system without
 reusing the existing code. In software engineering, the consensus
 on rewriting software from scratch is that it is difficult and
-that teams should avoid rewrites~\citep{Software-rewrites:Spolsky:2000}. This view
+that teams should avoid rewrites~\autocite{Software-rewrites:Spolsky:2000}. This view
 arises because there are several challenges and risks associated
 with rewriting large systems.
 % reasons why rewrites fail
-\begin{inparablank}
+\begin{itemize*}[label={}]
 \item Rewrites often take a long time and instead of adding
 	features, development time is spent on redesign and
 	reimplementation of old features.
@@ -33,7 +33,7 @@ with rewriting large systems.
 	years of bug fixes is often lost with a rewrite.
 \item Rewrites are often expensive in terms of time and effort and
 	are not known to payoff as much as product owners wish.
-\end{inparablank}
+\end{itemize*}
 % refactoring over rewriting
 As such, it is preferable to work on slowly refactoring the code
 rather than a complete rewrite. Refactoring is a process where
@@ -287,7 +287,7 @@ Jeong2015,Luo2015,De2015,Gulyanon2015,Santamaria-Pang2015,Mukherjee2014,Hernande
 
 metrics~\citep{Mayerich2011,Mayerich2012,btmorph-Torben-Nielsen2014,Costa2014,Gillette2015}
 
-\begin{enumerate}[(i)]
+\begin{enumerate}[label=(\roman*)]
 \item to evaluate the MATLAB codebase of ORION 3 and determine how to structure the new codebase
 \item integrate the
 \end{enumerate}
