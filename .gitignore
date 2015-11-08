@@ -8,5 +8,7 @@
 *.fls
 *.bbl
 *.blg
+*.bcf
+*.run.xml
 
 draft-pdf/
