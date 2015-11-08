@@ -5,14 +5,14 @@
 		biology represents a rapidly expanding tool kit for engineers and inventors to
 		use to construct items of value to society.
 	\end{fancyquote}
-	\qauthor{David Baltimore in \emph{How Biology Became an Information Science}, 2001~\citep{Baltimore:2001}}
+	\qauthor{David Baltimore in \emph{How Biology Became an Information Science}, 2001~\autocite{Baltimore:2001}}
 \end{savequote}
 \chapter{Introduction}\label{ch:introduction}
 
 This thesis aims to detail the design and implementation of a
 neuron morphology extraction system. This system is the result of
-converting the existing ORION 3~\citep{ORION_Santamaria-Pang2015} system from
-MATLAB~\citep{MATLAB:2013a} code to native C/C++ code.
+converting the existing ORION 3~\autocite{ORION_Santamaria-Pang2015} system from
+MATLAB~\autocite{MATLAB:2013a} code to native C/C++ code.
 This conversion process requires an analysis of the existing code
 to understand its structure and create a plan for replicating the
 same functionality in the in the new system.
@@ -86,7 +86,7 @@ of neuron reconstruction (Section~\ref{subsec:neuron-tracing}).
 	it has become easier to collect and process larger and more complex datasets
 	using sophisticated methods and this has made software and
 	software development an important part of all experimental
-	fields~\citep{SSI:hettrick_2014_14809}.
+	fields~\autocite{SSI:hettrick_2014_14809}.
 	To produce reproducible results, some common approaches to this change are
 	to publish either a description of the algorithm or refer to software
 	that can be obtained separately (either in binary or source code form).
@@ -199,13 +199,13 @@ Neuromorpho
 EyeWire
 Knossos / Brainflight
 VirtualFlyBrain
-~\citep{NeuroDebian:Halchenko:2012}
+~\autocite{NeuroDebian:Halchenko:2012}
 
 \subsection{BigNeuron}\label{subsec:bigneuron}
 
 { % what is Vaa3D
 	The secondary deliverable is to make the system compatible
-	with the Vaa3D biomedical imaging toolkit~\citep{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}.
+	with the Vaa3D biomedical imaging toolkit~\autocite{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}.
 	This toolkit allows biologists to visualise and analyse
 	biomedical imaging datasets. It can be extended through
 	the development of plugins. This allows algorithm
@@ -223,7 +223,7 @@ has been an attempt at comparing neuron morphology extraction
 algorithms in the past under the DIADEM Challenge which
 contributed datasets and a metric for comparing the neuron
 tracings from algorithms against tracings from gold standard
-segmentations~\citep{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
+segmentations~\autocite{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
 The DIADEM Challenge used 6 datasets from different neuroscience
 institutions in order to have a diversity in terms of source of
 the neurons (i.e., from different species and structures from
@@ -240,7 +240,7 @@ for neuron reconstruction.
 
 % explain BigNeuron
 To solve this problem, an open-science project called
-BigNeuron~\citep{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}
+BigNeuron~\autocite{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}
 continues where the DIADEM Challenge left off. Instead of
 comparing the output on a few datasets as in the DIADEM Challenge,
 BigNeuron aims to enable high-throughput analysis of neuron
@@ -254,7 +254,7 @@ However, since the Vaa3D is written in C++, incorporating plugin
 code written in non-native languages poses a problem. For this
 reason, the BigNeuron project organisers recommend that all
 algorithms that are submitted be in C or C++. From the BigNeuron
-FAQ~\citep{BigNeuron:FAQ:2015}
+FAQ~\autocite{BigNeuron:FAQ:2015}
 \begin{quote}
 	\begin{fancyquote}
 		{Q3. \bfseries How can I incorporate code written in Matlab, Java, Python or another language other than C/C++?}
@@ -277,15 +277,15 @@ behaves as expected and will continue to do so in the future.
 
 \subsection{Neuron reconstruction and tracing}\label{subsec:neuron-tracing}
 
-~\citep{Duke-Southampton-archive:Cannon:1998,DIADEM-dataset:Brown:2011,NeuroMorphVariability:Parekh:2015}
+~\autocite{Duke-Southampton-archive:Cannon:1998,DIADEM-dataset:Brown:2011,NeuroMorphVariability:Parekh:2015}
 
-~\citep{DIADEM&Beyond:Liu:2011,NeuroMorphTrends:Halavi:2012,NeuroTracePerspect:Meijering:2010}
+~\autocite{DIADEM&Beyond:Liu:2011,NeuroMorphTrends:Halavi:2012,NeuroTracePerspect:Meijering:2010}
 
 Post-DIADEM
-~\citep{Bauer2010,MIA-anisotropic-path-searching-Xie2011,MICCAI-anisotropic-path-searching-Xie2010,
+~\autocite{Bauer2010,MIA-anisotropic-path-searching-Xie2011,MICCAI-anisotropic-path-searching-Xie2010,
 Jeong2015,Luo2015,De2015,Gulyanon2015,Santamaria-Pang2015,Mukherjee2014,Hernandez-Herrera2014,Basu2014,Xiao2013,Jimenez2013,Basu2013,Mukherjee2013,Hernandez-Herrera2013,Ming2013,Lee2012,Czarnecki2012}
 
-metrics~\citep{Mayerich2011,Mayerich2012,btmorph-Torben-Nielsen2014,Costa2014,Gillette2015}
+metrics~\autocite{Mayerich2011,Mayerich2012,btmorph-Torben-Nielsen2014,Costa2014,Gillette2015}
 
 \begin{enumerate}[label=(\roman*)]
 \item to evaluate the MATLAB codebase of ORION 3 and determine how to structure the new codebase
