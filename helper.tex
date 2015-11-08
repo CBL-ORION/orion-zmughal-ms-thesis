@@ -7,7 +7,11 @@
 \usepackage{graphicx}
 \usepackage{mathtools}
 \usepackage{multirow,booktabs}
-\usepackage[authoryear,sort,comma]{natbib}
+%\usepackage[authoryear,sort,comma]{natbib}
+%\newcommand{\autocite}[1]{\citep{#1}}
+
+\usepackage[style=authoryear,sorting=nyt,isbn=false,backend=biber,maxnames=3,maxcitenames=1] {biblatex}
+
 \usepackage[table,x11names,rgb]{xcolor}
 \usepackage{tikz}
 \usepackage{siunitx}
