@@ -1,4 +1,5 @@
 GFX_OUT_DIR := gfx-out
+GFX_DIR := gfx
 
 THESIS_CHAPTERS := \
 	01_introduction/introduction.tex \
@@ -16,7 +17,8 @@ THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 
 GFX_DEP := $(GFX_OUT_DIR)/matlab-call-graph/high-level.tex \
 	$(GFX_OUT_DIR)/matlab-call-graph/segmentation.tex \
 	$(GFX_OUT_DIR)/matlab-call-graph/registration.tex \
-	$(GFX_OUT_DIR)/matlab-call-graph/tracing.tex
+	$(GFX_OUT_DIR)/matlab-call-graph/tracing.tex \
+	$(GFX_DIR)/sdlc.tex
 
 # notation.tex
 #./thesis_template_01.tex
