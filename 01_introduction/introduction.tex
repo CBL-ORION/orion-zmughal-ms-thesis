@@ -35,7 +35,7 @@ with rewriting large systems.
 	are not known to payoff as much as product owners wish.
 \end{inparablank}
 % refactoring over rewriting
-As such, it is preferred to work on slowly refactoring the code
+As such, it is preferable to work on slowly refactoring the code
 rather than a complete rewrite. Refactoring is a process where
 instead of throwing away the existing system, the development
 proceeds by making small, incremental changes over an extended
@@ -61,29 +61,33 @@ deliverables while engineering deliverables are covered in Section~\ref{sec:deli
 
 The \emph{primary scientific deliverable} of this thesis is a system for
 neuron reconstruction. This system is designed with the principles of open
-science in mind so that it is usable by biologists to study neuroanatomy (see
-Section~\ref{subsec:open-science}).
+science in mind so that it is usable by biologists to study
+neuroanatomy. Section~\ref{subsec:open-science} contains further
+discussion on open-science and how this project achieves this
+goal.
 
 The \emph{secondary scientific deliverable} is to make this system
 compatible with existing tools for image analysis so that it can
 be compared against other methods as part of the BigNeuron
-project (see Section~\ref{subsec:bigneuron}).
+project. The role of BigNeuron in neuroscience research is covered
+in Section~\ref{subsec:bigneuron}.
 
-The following sections cover an overview of the context of this project
-first within the general context of scientific software
-(Section~\ref{subsec:sci-soft}) and finally narrow down its role relative to
-the specific context of neuron reconstruction (Section~\ref{subsec:neuron-tracing})
+The following sections contain an overview of the context of this project
+first within the general context of scientific software (Section~\ref{subsec:sci-soft})
+and finally narrow down its role relative to the specific context
+of neuron reconstruction (Section~\ref{subsec:neuron-tracing}).
 
 \subsection{Scientific software}\label{subsec:sci-soft}
 { % how software has become important in experimental science
 	Quantitative methods are an essential part of scientific research. The
-	experimental sciences depend on the dissemination of the methods used in a
-	study so that it can be clear how results are obtained and analysed. With the
-	rapid increase in computing power, storage, and availability, it has become
-	easier to collect and process larger and more complex datasets using
-	sophisticated methods. Some common approaches to this change is to publish either a
-	description of the algorithm or refer to software that can be obtained separately
-	(either in binary or source code form).
+	experimental sciences depend on the dissemination of the methods used for each
+	study so that it is clear how results are obtained and analysed.
+	With the rapid increase in computing power, storage, and availability,
+	it has become easier to collect and process larger and more complex datasets
+	using sophisticated methods.
+	To produce reproducible results, some common approaches to this change are
+	to publish either a description of the algorithm or refer to software
+	that can be obtained separately (either in binary or source code form).
 }
 
 Despite these approaches, there are still several challenges to a successfully
@@ -91,9 +95,11 @@ reproducing a published method.
 { % problems with a textual description
 	A textual description of an algorithm is rarely a complete description of
 	how an algorithm is implemented. Sophisticated methods often have tiny details
-	that are mistakenly be left out that may be essential for the rest of the
-	processing. One area that this occurs is in a data preprocessing and annotation
-	stage where human interaction and assumptions are not written down.
+	that are mistakenly left out which may be essential for the rest of the
+	processing. One specific area where this occurs often is
+	in data preprocessing and annotation stages which can
+	involve human interaction and, as such, some assumptions
+	may not be written down.
 }
 { % problems with software distribution
 	Referencing readily available software packages gives
@@ -104,7 +110,8 @@ reproducing a published method.
 	software is available years later. This means not only the software itself, but
 	all its dependencies. This can quickly become complicated as technology
 	advances: changes in the Application Programming Interface (API) or Application
-	Binary Interface (ABI) can cause both software distributed in source form or
+	Binary Interface (ABI) can cause incompatibility issues for both
+	software distributed in source form or
 	binary form. Both source code and binary software can have
 	dependencies on platforms (e.g., operating systems,
 	runtimes, computer architecture, etc.) and licensing of
@@ -136,6 +143,8 @@ reproducing a published method.
 	software) is in its infancy and has not caught up to that
 	of paper-based materials.
 }
+% TODO include a figure of the systems development
+% lifecycle and reference above
 
 
 \subsection{Open science and scientific software engineering}\label{subsec:open-science}
