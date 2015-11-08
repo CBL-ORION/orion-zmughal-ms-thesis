@@ -69,10 +69,6 @@ compatible with existing tools for image analysis so that it can
 be compared against other methods as part of the BigNeuron
 project (see Section~\ref{subsec:bigneuron}).
 
-In addition, a rewrite allows for more thorough
-design and testing which is necessary to verify that the code
-behaves as expected and will continue to do so in the future.
-
 The following sections cover an overview of the context of this project
 first within the general context of scientific software
 (Section~\ref{subsec:sci-soft}) and finally narrow down its role relative to
@@ -194,7 +190,7 @@ Knossos / Brainflight
 VirtualFlyBrain
 ~\citep{NeuroDebian:Halchenko:2012}
 
-\subsection{BigNeuron}
+\subsection{BigNeuron}\label{subsec:bigneuron}
 
 { % what is Vaa3D
 	The secondary deliverable is to make the system compatible
@@ -260,7 +256,11 @@ FAQ~\citep{BigNeuron:FAQ:2015}
 	\end{fancyquote}
 \end{quote}
 
+\subsection{Engineering motivation}
 
+In addition, a rewrite allows for more thorough
+design and testing which is necessary to verify that the code
+behaves as expected and will continue to do so in the future.
 
 \section{Literature review}
 
