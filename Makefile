@@ -42,5 +42,10 @@ $(GFX_OUT_DIR)/%.tex : gfx/%.dot
 
 include ~/sw_projects/zmughal/scraps/scraps/build/latex/clean.mk
 
+wc-pdf: thesis.pdf
+	pdftotext thesis.pdf - | wc -w
+wc-tex:
+	find -name '*.tex' | xargs wc -w
+
 clean::
 	rm -Rf $(GFX_OUT_DIR)
