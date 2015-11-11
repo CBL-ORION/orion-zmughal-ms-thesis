@@ -166,14 +166,14 @@ reproducing a published method.
 \end{figure}
 
 { % backwards compatibility and digital preservation
-	% TODO make it explicit that "unintended results" can be
-	% avoided via unit tests
 	Even more precarious is when a dependency used by the
 	software no longer behaves the same way as it did in
 	previous versions. This can lead to software that appears
 	to run, but gives unintended results. Maintaining
 	backwards compatibility for software is difficult since
 	there are many parts to a non-trivial software system.
+	It may be possible to identify these compatibility problems using
+	testing (for more discussion, see Chapter~\ref{ch:testing}).
 	% Dependency hell
 	Resolving the exact versions of libraries and toolchains
 	needed to build and run can be frustrating and is commonly
