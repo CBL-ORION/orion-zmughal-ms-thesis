@@ -1,0 +1,77 @@
+% TODO Design
+% - use the initial MATLAB code as a design and refactor
+%   ( because changing too many things at once makes organisation
+%   difficult )
+% - automated GNU make-based build system:
+%   provides code coverage, debug builds, profiling builds,
+%   AddressSanitizer
+% - automatic compiler extension configurator (for example, GCC branch prediction __builtin_expect() macro)
+% - automatic dependency build flag configuration
+% - automatic prerequisite scanning
+
+% TODO Implementation
+%
+% seg -> registration -> tracing
+%  |         |              |--------------------------> ... -----------> ...
+%  |         |
+%  |         |--------------------> .... -------> ....
+%  v
+% apply filter at multiscale
+%  |
+%  |
+%  |
+%  v
+% get scale for max response
+%  |
+%  |
+%  |
+%  v
+% get vessellness features at that scale
+%  |
+%  |
+%  |
+%  v
+% discriminant
+%
+% - ITK library (interesting because mixing C with C++)
+% - VTK and Vaa3D for visualisation
+% - storage : pixel_type (float32) by default to save space
+% - internal calculations: float64
+% - all calculations are done in memory (could use mmap in the future)
+% - ndarray
+% 
+%
+% usage of GitHub pull requst
+% each subcomponent is implemented on a branch
+%  | master  |
+%       |
+%       |---------------> | seg |
+%                            |---------------> | seg_laplacian |
+%                                                     |---------------> | seg_fftn |
+%                               
+
+
+% TODO testing
+% - use the Test Anything Protocol (TAP) : allows for standardised processing
+% - every time comits are pushed, they areted under gcc and clang
+% - A GitHub pull request and is used to track the progress on the subomponent via Travis-CI
+%   until it passes
+% - isolates breaking changes to that branch
+% - devops: automatic provision of build environment: no manual build instructions
+% - tracing-based comparsiion to original MATLAB output
+%   - implements MATLAB algorithm as-in when using compile time flag
+%   - otherwise a version that may contain bug fixes is compiled
+% - assertions for debug-build throughout code so that programmer
+%   pre-conditions and post-conditions are specified
+% - all external dependencies are managed and versioned in auxiliary
+%   repositories so that the exact same build can be built in case upstream
+%   changes occur
+
+% TODO conclusion
+% - software is a changing system
+% - rewrites across languages are difficult especially if they differ as much as MATLAB and C do
+% -best to approach with rewrite close to original folowed by refactoring
+% - write automated tools
+%   - less work for deployment
+%   - fewer instructions and assumptions are written down
+
