@@ -13,7 +13,12 @@
 \usepackage{caption} % sets the captions to singlespacing
 \captionsetup[figure]{labelfont=it}
 
-\usepackage[style=authoryear,sorting=nyt,isbn=false,backend=biber,maxnames=3,maxcitenames=1] {biblatex}
+% style=authoryear
+\usepackage[style=numeric,sorting=nyt,backend=biber,maxnames=3,maxcitenames=1,%
+isbn=false,url=false % remove extra info
+] {biblatex}
+
+\usepackage[toc,page]{appendix}
 
 \usepackage[table,x11names,rgb]{xcolor}
 \usepackage{tikz}
@@ -88,18 +93,18 @@
 \makeatother
 
 
-%% number biblatex bibliography section
-\defbibenvironment{bibliography}
-  {\enumerate
-	  \singlespacing
-     {}
-     {\setlength{\leftmargin}{\bibhang}%
-      \setlength{\itemindent}{-\leftmargin}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}}
-  {\endenumerate}
-  {\item}
-
+%% number biblatex bibliography section when the biblatex style is not
+%% numeric (e.g., authoryear)
+%\defbibenvironment{bibliography}
+  %{\enumerate
+	  %\singlespacing
+     %{}
+     %{\setlength{\leftmargin}{\bibhang}%
+      %\setlength{\itemindent}{-\leftmargin}%
+      %\setlength{\itemsep}{\bibitemsep}%
+      %\setlength{\parsep}{\bibparsep}}}
+  %{\endenumerate}
+  %{\item}
 
 %% Command used to create description like items inside an `enumerate` environment
 %%
