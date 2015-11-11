@@ -9,6 +9,7 @@
 \usepackage{multirow,booktabs}
 %\usepackage[authoryear,sort,comma]{natbib}
 %\newcommand{\autocite}[1]{\citep{#1}}
+\usepackage[doublespacing]{setspace}
 
 \usepackage[style=authoryear,sorting=nyt,isbn=false,backend=biber,maxnames=3,maxcitenames=1] {biblatex}
 
@@ -38,6 +39,7 @@
 \newenvironment{fancyquote}%
 	{%
 	    \vspace{1em}%
+	    \singlespacing
 	    \noindent%
 		 \begin{picture}(0,0)%
 		 \put(-15,-0){\makebox(0,0){\scalebox{3}{\textcolor{quotemark}{``}}}}%
