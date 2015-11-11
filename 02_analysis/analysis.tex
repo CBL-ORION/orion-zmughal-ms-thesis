@@ -25,35 +25,106 @@ order proves very useful for later in the testing phase of the project
 
 \section{System objectives}\label{sec:objectives}
 
-As opposed to the the scientific delieverables discussed in
+As opposed to the scientific deliverables discussed in
 Section~\ref{sec:motivation}, the system objectives are the engineering
-delieverables; these are more closely tied to the Design and Implementation
+deliverables; these are more closely tied to the Design and Implementation
 phases as these objectives influence decisions made about the underlying
 resources and system architecture.
 
-% TODO define project objectives (engineering deliverables)
-The \emph{primary engineering deliverable} is a complete conversion of the
+% TODO Define the project objectives (engineering deliverables).
+% These are expanded from the list given in the abstract.
+The \emph{first objective} is a complete conversion of the
 existing code from MATLAB to native code. This involves an analysis of the
 existing code to see which parts of the algorithm will be converted.
 
-The \emph{second engineering deliverable} is a test suite to verify that the
-components of the system operate to the design
+The \emph{second objective} is the ability to easily integrate the system with
+Vaa3D as a plugin. This requires looking at the interface that
+Vaa3D uses and creating compatible data structures so that the
+data does not need to converted between multiple formats in
+memory.
+
+The \emph{third objective} is a test suite to verify that the
+components of the system operated on the input and produce 
+expected outputs which are comparable to the original MATLAB code
+and follow expected properties outline in the design.
+
+The \emph{fourth objective} is to ensure that the system provides
+a means for reproducibility by testing the software under different
+conditions and making it possible to the replicate the software
+environment.
 
 \section{Benefits}
-% TODO why are these objectives beneficial?
+% Analyse project requirements: why are these objectives
+% beneficial?
 
-In addition, a rewrite allows for more thorough
-design and testing which is necessary to verify that the code
-behaves as expected and will continue to do so in the future.
+THe first objective requires that all of the MATLAB code be
+replaced by native code. This provides several benefits.
+\begin{enumerate}[a)]
+	\item removes a dependency on MATLAB which requires that
+		all users either install a licensed copy of MATLAB
+		or use the MATLAB Compiler Runtime for deployment;
+	\item provides the benefit that changes in
+		function behaviour between versions of
+		MATLAB do not effect the output of the
+		code.
+	\item certain operations can run fastr in native code than
+		in MATLAB.
+\end{enumerate}
 
+The second objective will allow the code to work with awidely used
+tool for visualasation and analysis. Furthermore, integrating with
+one tool will provide a framework for integrating with other tools
+such as ImageJ. % TODO citation
 
-% TODO expand using the abstract
+The third objective provides a saftey noet so that current and
+future development clearly defines the expectatiion of the code
+not only in the documentation, but as executable tests that can be
+used to indacate when a change causes these expectations to no
+longger be met.
 
-% TODO analyse project requirements
+The fourth objective is what ensues that the prviously discussed
+beneftis are available for others to use on their machines and
+allowing for repduciblity of the neuron reconstruction results.
+This objective is what meks the project an ``open-science''
+project.
 
-% TODO define technical milestones that relate to project objectives
 
 \section{Design principles}
+% Define technical principles that relate to project objectives
+
+% FIXME
+In order to meet the objectives listed in
+Section~\ref{sec:objectives}, certain principles need to be agreed
+upon before the design phase can begin. These principles are meant
+to direct how resources are used in the design and implementation.
+
+% FIXME
+Use a version control software and allow the software to be hosted
+publicly: Git and GitHub.
+
+% FIXME
+Choose main implementation language so that code is portable and
+easily able to be linked with other tools: write in C rather than
+completely in C++.
+
+% FIXME
+Created an automated build system: use a make file build that can
+bed used to build all of the system and automatically run tests:
+use portable make (GNU make). Fewer instructions to read.
+
+% FIXME
+do not optimise the code until it works: use a profiler to find
+where things are slow
+
+% FIXME
+use tests and debugger to incrementally build the code with
+thoughtful refactoring: feedback, start from a structure of MATLAB
+code and migrate to new code layout.
+
+% FIXME
+only add dependencies at the last possible moment: e.g., when you
+need an FFT library, create a stub of input and output and find a
+way to put library code in there.
 
 \section{Challenges and risks}
 
@@ -71,6 +142,11 @@ translation of the MATLAB code has some limitations outlined as follows.
 	lifetime. Since C uses manual memory management, it is
 	necessary to manually allocate and release memory to avoid
 	memory leaks.
+\item[Data layout differences] % FIXME
+	MATLAB uses column-major and 1-based indexing, while C/C++
+	both used row-major and 0-based indexing. Some of the code
+	will be written with the assumption that all indices start
+	at 1 and this may not be documented everywhere.
 \item[Caching\label{desc:matlab:cache}] The ORION MATLAB code makes frequent use of the file system
 	to cache calculations between runs. The purpose of this is
 	to speed up experiments so that when an experiment is
@@ -100,46 +176,3 @@ translation of the MATLAB code has some limitations outlined as follows.
 The \nameref{desc:matlab:cache} and \nameref{desc:matlab:subvol} issues both
 indicate issues that can be described as cross-cutting concerns. Cross-cutting
 concerns are  % TODO aspects ...
-
-% TODO expand the below
-
-This project has
-
-\begin{itemize}
-\item starting with no tests
-\item no automated build system
-\item works entirely inside of MATLAB
-\item has executable components that are called via \texttt{system()} which
-	means that they need to be compiled and the path to the components
-	needs to be set
-\end{itemize}
-
-\section{MATLAB version of ORION 3}
-
-
-\subsection{Callgraph}
-
-In order to understand how the ORION MATLAB code is structured, it
-is necessary to first get the call graph of the code. There is a
-tool built in to MATLAB to do this called
-depfun
-\url{http://www.mathworks.com/help/matlab/ref/depfun.html} % TODO turn into citation
-, however this tool runs slowly when running on the entire codebase.
-There is an alternative called fdep
-\url{http://www.mathworks.com/matlabcentral/fileexchange/17291-fdep--a-pedestrian-function-dependencies-finder}
-
-The output of this tool is graph that % TODO
-
-\input{gfx-out/matlab-call-graph/high-level.tex}
-
-\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/segmentation.tex}}
-
-\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/registration.tex}}
-
-\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/tracing.tex}}
-
-\subsection{Processing pipeline}
-
-\subsection{Algorithm}
-
-
