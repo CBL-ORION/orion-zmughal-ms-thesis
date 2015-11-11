@@ -10,9 +10,9 @@
 	\qauthor{Anonymous}
 \end{savequote}
 
-\chapter{Analysis and requirements}\label{ch:analysis}
+\chapter{Planning and Analysis}\label{ch:analysis}
 % TODO
-% 2. Analysis and Requirements
+% 2. Planning and Analysis
 %    [ Analysis of project requirements. How is the older codebase
 %      structured. How is refactoring accomplished. ]
 
@@ -20,18 +20,40 @@ Before writing a single line of code, it is a good practice to understand the
 scope of the problem. Gathering the deliverables and requirements of the
 project is necessary not only for understanding how long the project will take,
 but also the order in which to implement each component. Establishing this
-order is very useful for test-driven development.
-% TODO describe TDD
+order proves very useful for later in the testing phase of the project
+(Chapter~\ref{ch:testing}).
 
-\section{Deliverables}\label{sec:deliverables}
+\section{System objectives}\label{sec:objectives}
 
-The foremost deliverable is a complete conversion of the existing
-code from MATLAB to native code. This involves an analysis of the
-existing code to see where parts of the algorithm that can be
-converted.
+As opposed to the the scientific delieverables discussed in
+Section~\ref{sec:motivation}, the system objectives are the engineering
+delieverables; these are more closely tied to the Design and Implementation
+phases as these objectives influence decisions made about the underlying
+resources and system architecture.
+
+% TODO define project objectives (engineering deliverables)
+The \emph{primary engineering deliverable} is a complete conversion of the
+existing code from MATLAB to native code. This involves an analysis of the
+existing code to see which parts of the algorithm will be converted.
+
+The \emph{second engineering deliverable} is a test suite to verify that the
+components of the system operate to the design
+
+\section{Benefits}
+% TODO why are these objectives beneficial?
+
+In addition, a rewrite allows for more thorough
+design and testing which is necessary to verify that the code
+behaves as expected and will continue to do so in the future.
+
 
 % TODO expand using the abstract
 
+% TODO analyse project requirements
+
+% TODO define technical milestones that relate to project objectives
+
+\section{Design principles}
 
 \section{Challenges and risks}
 
