@@ -92,7 +92,7 @@ of neuron reconstruction (Section~\ref{subsec:neuron-tracing}).
 	that can be obtained separately (either in binary or source code form).
 }
 
-Despite these approaches, there are still several challenges to a successfully
+Despite these approaches, there are still several challenges to successfully
 reproducing a published method.
 { % problems with a textual description
 	A textual description of an algorithm is rarely a complete description of
@@ -120,7 +120,30 @@ reproducing a published method.
 	components that can hinder others from using the software.
 }
 
+\begin{figure}[tbp]
+\centering
+\input{gfx/sdlc.tex}
+\caption[Systems development life cycle]%
+	{\textbf{Systems development life cycle}: This figure
+	depicts an example of a life cycle used to delineate the
+	stages of development~\autocite{IRM-SDLC:DoJ:2003}. The stages are
+	\begin{description*}
+		\item[Planning] This stage is where a plan for how
+			the project will be managed is created and
+			resources for ;
+		\item[Analysis] ;
+		\item[Design] this  ;
+		\item[Implementation] ;
+		\item[Testing] testing and integration ;
+		\item[Maintenance] possibly the longest .
+	\end{description*}
+}\label{fig:sdlc}
+% TODO describe the systems development life cycle
+\end{figure}
+
 { % backwards compatibility and digital preservation
+	% TODO make it explicit that "unintended results" can be
+	% avoid via unit tests
 	Even more precarious is when a dependency used by the
 	software no longer behaves the same way as it did in
 	previous versions. This can lead to software that appears
@@ -145,12 +168,6 @@ reproducing a published method.
 	software) is in its infancy and has not caught up to that
 	of paper-based materials~\autocite{PreservingExe2013,Thain2015,Meng2015}.
 }
-\begin{figure}
-\centering
-\input{gfx/sdlc.tex}
-\caption{Systems development life cycle}\label{fig:sdlc}
-% TODO describe the systems development life cycle
-\end{figure}
 
 
 \subsection{Open science and scientific software engineering}\label{subsec:open-science}
@@ -161,15 +178,18 @@ testing become more difficult to achieve. In recent years, there
 has been a push by researchers to incorporate \emph{open science}
 practices in their work. One prominent advocate for open science
 defines this as follows:
+\parbox{\textwidth}{
 \begin{quote}
 	\begin{fancyquote}
 	Open science is the idea that scientific knowledge of all kinds
 	should be openly shared as early as is practical in the discovery
 	process.
 	\end{fancyquote}
-	\qauthor{Michael Nielsen\footnote{https://lists.okfn.org/pipermail/open-science/2011-July/000907.html}} % TODO add more info about quote
+	\qauthor{Michael Nielsen\footnote{https://lists.okfn.org/pipermail/open-science/2011-July/000907.html}}
 \end{quote}
+}
 
+% TODO add more info about quote
 The ``scientific knowledge mentioned in the above quote
 encompasses any kind of knowledge including problem definitions,
 ideas, code, data, methodology, and journal articles. The goal is

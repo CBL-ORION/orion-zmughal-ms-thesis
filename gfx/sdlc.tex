@@ -22,7 +22,7 @@
     (\astart+\atip:\rmid) arc (\astart+\atip:\aend+\atip:\rmid);
 }
 
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
   \fill[even odd rule,red!30] circle (4.8) circle (4.2);
   \foreach \x/\text in {0/Planning,1/Analysis,2/Design,3/Implementation,4/Testing,5/Maintenance} {
     \arcarrow{4}{4.5}{5}{\x*60+20}{\x*60+70}{5}{red,draw = red!50!black, very thick}{\text}
