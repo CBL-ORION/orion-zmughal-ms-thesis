@@ -99,3 +99,15 @@
       \setlength{\parsep}{\bibparsep}}}
   {\endenumerate}
   {\item}
+
+
+%% Command used to create description like items inside an `enumerate` environment
+%%
+%% e.g., with enumitem's inline enumerate* environment:
+%%
+%%     \begin{enumerate*}[label={\alph*)}]
+%%       \enumdescitem{First} example
+%%       \enumdescitem{Second} example
+%%       \enumdescitem{Third} example
+%%     \end{enumerate*}
+\newcommand\enumdescitem[1]{\item{\bfseries#1:\,}}
