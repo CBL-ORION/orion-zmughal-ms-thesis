@@ -1,3 +1,25 @@
+% TODO Analysis
+% Project objectives:
+% - Integrate with Vaa3D tool for biomedical image analysis:
+%   - create a plugin
+% - Convert the MATLAB code to C/C++ native code:
+%   - easier to distribute with Vaa3D
+% - Release this code as free/open source software
+%   - for use with BigNeuron open science project
+% - Build a test suite
+%   - testing multiple software environments for portability and reproducibility
+% 
+% Challenges and risks:
+%
+% - Starting without a test suite
+%   - needs to be created using properties of the original code
+% - Memory management
+%   - automatic versus manual management
+% - Data layout differences of n-dimensional arrays
+%   - MATLAB's column-major 1-indexed versus C's row-major 0-indexed
+% - Data handling differences:
+%   - original code makes use of caching and subvolumes for saving time and memory respectively
+
 % TODO Design
 % - use the initial MATLAB code as a design and refactor
 %   ( because changing too many things at once makes organisation
