@@ -24,7 +24,7 @@ GFX_DEP := $(GFX_OUT_DIR)/matlab-call-graph/high-level.tex \
 # notation.tex
 #./thesis_template_01.tex
 #analysis.tex
-all: thesis.pdf
+all: thesis.pdf tags
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
@@ -39,7 +39,10 @@ $(GFX_OUT_DIR):
 
 $(GFX_OUT_DIR)/%.tex : gfx/%.dot
 	mkdir -p `dirname $@`
-	dot2tex --figonly < $< > $@
+	dot2tex -tmath -ftikz --figonly < $< > $@
+
+tags:
+	ctags -R .
 
 include ~/sw_projects/zmughal/scraps/scraps/build/latex/clean.mk
 

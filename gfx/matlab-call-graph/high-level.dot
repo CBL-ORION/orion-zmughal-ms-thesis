@@ -1,5 +1,15 @@
 digraph Main {
 	rankdir=LR;
-	node [shape = box];
-	Segmentation -> Registration -> Tracing;
+	graph [mindist=0.5];
+	proc_seg [label="Segmentation" style = "process"];
+	proc_reg [label="Registration" style = "process"];
+	proc_trace [label="Tracing" style = "process"];
+
+	data_vol [label="3D volume" style = "data"];
+	data_centerline [label="Centreline" style = "data"]
+
+	proc_seg -> proc_reg -> proc_trace;
+
+	data_vol -> proc_seg;
+	proc_trace -> data_centerline;
 }
