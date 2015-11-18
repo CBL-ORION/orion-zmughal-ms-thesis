@@ -1,0 +1,21 @@
+
+\begin{tikzpicture}[node distance=0.3cm]
+
+	\tikzstyle{process} = [draw,shape=rectangle,scale=0.3]
+	\tikzstyle{data} = [draw,shape=circle,style=dashed,scale=0.3]
+	%
+	\node (data_vol)        at (0,0)              [data] {$\mathrm{3D~volume}$};
+
+	\node (proc_seg)        [right=of data_vol] [process] {$\mathrm{Segmentation}$};
+	\node (proc_reg)        [right=of proc_seg] [process] {$\mathrm{Registration}$};
+	\node (proc_trace)      [right=of proc_reg] [process] {$\mathrm{Tracing}$};
+
+	\node (data_centerline) [right=of proc_trace] [data] {$\mathrm{Centreline}$};
+
+	\draw [->] (data_vol)   --  (proc_seg);
+	\draw [->] (proc_seg)   --  (proc_reg);
+	\draw [->] (proc_reg)   --  (proc_trace);
+	\draw [->] (proc_trace) --  (data_centerline);
+%
+\end{tikzpicture}
+

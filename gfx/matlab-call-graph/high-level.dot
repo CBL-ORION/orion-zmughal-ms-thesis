@@ -1,15 +1,20 @@
 digraph Main {
-	rankdir=LR;
 	graph [mindist=0.5];
-	proc_seg [label="Segmentation" style = "process"];
-	proc_reg [label="Registration" style = "process"];
-	proc_trace [label="Tracing" style = "process"];
+	d2tfigpreamble = "
+	\tikzstyle{process} = [draw,shape=box]
+	\tikzstyle{data} = [draw,shape=circle,style=dashed]
+	"
+	proc_seg [label="\mathrm{Segmentation}" style = "process"];
+	proc_reg [label="\mathrm{Registration}" style = "process"];
+	proc_trace [label="\mathrm{Tracing}" style = "process"];
 
-	data_vol [label="3D volume" style = "data"];
-	data_centerline [label="Centreline" style = "data"]
+	data_vol [label="\mathrm{3D~volume}" style = "data"];
+	data_centerline [label="\mathrm{Centreline}" style = "data"];
 
 	proc_seg -> proc_reg -> proc_trace;
 
 	data_vol -> proc_seg;
 	proc_trace -> data_centerline;
+
+	rankdir=LR;
 }

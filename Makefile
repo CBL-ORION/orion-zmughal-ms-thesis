@@ -15,7 +15,7 @@ THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 
 	helper.tex thesis.bib \
 	$(THESIS_META) $(THESIS_CHAPTERS)
 
-GFX_DEP := $(GFX_OUT_DIR)/matlab-call-graph/high-level.tex \
+GFX_DEP := \
 	$(GFX_OUT_DIR)/matlab-call-graph/segmentation.tex \
 	$(GFX_OUT_DIR)/matlab-call-graph/registration.tex \
 	$(GFX_OUT_DIR)/matlab-call-graph/tracing.tex \
