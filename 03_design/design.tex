@@ -49,7 +49,7 @@ and creating equivalent functions in the native code, a direct
 comparison can be made between the two codebases. Thus, each
 function can be converted one-by-one.
 
-\section{Architecture}
+\section{Algorithms and architecture}
 
 The architecture of a software system include both the individual
 components and how they interact with one another, but the core
@@ -57,7 +57,8 @@ data structures that are used to transfer data between the
 components. The following description of the architecture will
 approach these details from the top-down.
 
-The ORION algorithm consists of three parts, namely
+The ORION algorithm consists of three parts (as shown in
+Figure~\ref{fig:high-level-arch}), namely
 \begin{description}
 	\item[Segmentation] to label the
 		foreground and the background of the image;
@@ -67,20 +68,51 @@ The ORION algorithm consists of three parts, namely
 	\item[Tracing] to extract a centreline from the volume to
 		capture the underlying neuron morphology.
 \end{description}
-These 
 
+% TODO fix the diagram
 \begin{figure}
-	\tikzstyle{process} = [draw,shape=box]
-	\tikzstyle{data} = [draw,shape=circle,style=dashed]
 \centering
-\input{gfx-out/matlab-call-graph/high-level.tex}
+\resizebox{1.0\textwidth}{!}{\input{gfx/matlab-call-graph/high-level.tex}}
 \caption[High level diagram of ORION algorithm]{\textbf{High level
 diagram of ORION algorithm}}\label{fig:high-level-arch}
 \end{figure}
 
-\section{Algorithm}
-
 % TODO explain the current ORION algorithm
+\subsection{Segmenation}
+
+\begin{algorithm}
+\caption{Fancy algorithm}
+\begin{algorithmic}[1]
+\If {$i\geq maxval$}
+    \State $i\gets 0$
+\Else
+    \If {$i+k\leq maxval$}
+        \State $i\gets i+k$
+    \EndIf
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Euclid’s algorithm}\label{euclid}
+	\begin{algorithmic}[1]
+	\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
+		\State $r\gets a\bmod b$
+		\While{$r\not=0$}\Comment{We have the answer if r is 0}
+			\State $a\gets b$
+			\State $b\gets r$
+			\State $r\gets a\bmod b$
+		\EndWhile\label{euclidendwhile}
+		\State \textbf{return} $b$\Comment{The gcd is b}
+	\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection{Registration}
+
+\subsection{Tracing}
+
+
 
 \section{Anticipating change}
 
@@ -95,4 +127,20 @@ diagram of ORION algorithm}}\label{fig:high-level-arch}
 \end{description}
 
 
+\subsection{Build system}
 
+% GNU make
+
+\subsubsection{Dependencies}
+
+% - automatic prerequisite scanning
+
+\subsubsection{Configuration}
+
+% - automatic compiler extension configurator (for example, GCC branch prediction __builtin_expect() macro)
+% - automatic dependency build flag configuration
+
+\subsubsection{Devops}
+
+%   provides code coverage, debug builds, profiling builds,
+%   AddressSanitizer
