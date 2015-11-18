@@ -11,4 +11,5 @@
 *.bcf
 *.run.xml
 
-draft-pdf/
+/draft-pdf/
+/gfx-out/
