@@ -9,6 +9,8 @@
 
 \setcounter{secnumdepth}{4}
 
+\input{00_front-matter/notation.tex}
+
 \begin{document}
 
 \include{meta/title}
@@ -46,11 +48,15 @@
 %\FIGStrue
 \FIGSfalse
 
-\input{00_front-matter/notation.tex}
+\printglossaries
 %%% End of Front-matter %%%
 
 %%% Chapters %%%
 \input{01_introduction/introduction.tex}
+
+
+\gls{fn}; \gls{fncon}
+
 \input{02_analysis/analysis.tex}
 \input{03_design/design.tex}
 \input{04_implementation/implementation.tex}

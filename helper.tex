@@ -1,17 +1,27 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+
+\usepackage[table,x11names,rgb]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+\usetikzlibrary{positioning}
+
 \usepackage{hyperref}
-
-%% For displaying algorithms using algorithmicx
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-
 \hypersetup{
     colorlinks,
     linkcolor={red!50!black},
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
 }
+
+%% glossaries needs to be after hyperref
+\usepackage{glossaries}
+\glsdisablehyper % only link from the glossary to the text
+
+%% For displaying algorithms using algorithmicx
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 \usepackage{url}
 \usepackage{longtable}
 \usepackage{float}
@@ -25,21 +35,18 @@
 \captionsetup[figure]{labelfont=it}
 
 % style=authoryear
-\usepackage[style=ieee,sorting=nyt,backend=biber,maxnames=3,maxcitenames=1,%
+\usepackage[style=ieee,sorting=nyt,backend=biber,maxnames=3,%
+%maxcitenames=1,%
 isbn=false,url=false % remove extra info
 ] {biblatex}
 
 \usepackage[toc,page]{appendix}
 
-\usepackage[table,x11names,rgb]{xcolor}
-\usepackage{tikz}
 \usepackage{siunitx}
 \usepackage[inline]{enumitem}
 \usepackage{attrib}
 \usepackage{listings}
 
-\usetikzlibrary{snakes,arrows,shapes}
-\usetikzlibrary{positioning}
 
 %\usepackage{epsfig}
 %\usepackage{epsf}

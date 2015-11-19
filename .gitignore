@@ -10,6 +10,11 @@
 *.blg
 *.bcf
 *.run.xml
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
 
 /draft-pdf/
 /gfx-out/
