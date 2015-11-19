@@ -1,0 +1,16 @@
+\begin{tikzpicture}[node distance=0.5cm]
+	\tikzstyle{step} = [draw,shape=circle,scale=0.4];
+	%
+	\node (step_bg_train)        at (0,0)             [draw,step] {\parbox{3cm}{\centering{}Obtain background training data}};
+
+	\node (step_feat)        [right=of step_bg_train] [draw,step] {\parbox{2cm}{\centering{}Obtain vessellness features}};
+	\node (step_discrim)     [right=of step_feat]     [draw,step] {\parbox{2cm}{\centering{}Learn discriminant function}};
+	\node (step_thresh)      [below=of step_discrim]  [draw,step] {\parbox{2cm}{\centering{}Threshold}};
+	\node (step_post)        [left=of step_thresh]    [draw,step] {\parbox{2cm}{\centering{}Post-processing}};
+
+	\draw [->] (step_bg_train) -- (step_feat);
+	\draw [->] (step_feat) -- (step_discrim);
+	\draw [->] (step_discrim) -- (step_thresh);
+	\draw [->] (step_thresh) -- (step_post);
+%
+\end{tikzpicture}

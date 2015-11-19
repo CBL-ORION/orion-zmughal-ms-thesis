@@ -19,7 +19,8 @@ GFX_DEP := \
 	$(GFX_OUT_DIR)/matlab-call-graph/segmentation.tex \
 	$(GFX_OUT_DIR)/matlab-call-graph/registration.tex \
 	$(GFX_OUT_DIR)/matlab-call-graph/tracing.tex \
-	$(GFX_DIR)/sdlc.tex
+	$(GFX_DIR)/sdlc.tex \
+	$(GFX_DIR)/algorithm/*.tex
 
 # notation.tex
 #./thesis_template_01.tex
