@@ -37,8 +37,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% \input{chapter0Nomenclature.tex}
-% \setcounter{page}{0}
+\printglossary[type=\acronymtype,title={Acronyms},toctitle={Acronyms},nonumberlist]
+\printglossary[title={Glossary},toctitle={Glossary},nonumberlist]
+\cleardoublepage
+\setcounter{page}{0}
 
 \chapterpages
 
@@ -47,16 +49,10 @@
 
 %\FIGStrue
 \FIGSfalse
-
-\printglossaries
 %%% End of Front-matter %%%
 
 %%% Chapters %%%
 \input{01_introduction/introduction.tex}
-
-
-\gls{fn}; \gls{fncon}
-
 \input{02_analysis/analysis.tex}
 \input{03_design/design.tex}
 \input{04_implementation/implementation.tex}
