@@ -15,6 +15,9 @@
 *.gls
 *.glsdefs
 *.ist
+*.acn
+*.acr
+*.alg
 
 /draft-pdf/
 /gfx-out/
