@@ -33,8 +33,9 @@ resources and system architecture.
 % Define the project objectives (engineering deliverables).
 % These are expanded from the list given in the abstract.
 The \emph{first objective} is a complete conversion of the
-existing code from MATLAB to native code. This involves an analysis of the
-existing code to see which parts of the algorithm will be converted.
+existing code from MATLAB to native code which will be referred to
+as \gls{orionmat} and \gls{orionc} respectively. This involves an
+analysis of the existing code to see which parts of the algorithm will be converted.
 
 The \emph{second objective} is the ability to easily integrate the system with
 Vaa3D as a plugin. This requires looking at the interface that
@@ -56,9 +57,9 @@ environment.
 % Analyse project requirements: why are these objectives
 % beneficial?
 
-THe first objective requires that all of the MATLAB code be
+The first objective requires that all of the MATLAB code be
 replaced by native code. This provides several benefits.
-\begin{enumerate}[a)]
+\begin{enumerate}[label={\alph*)}]
 	\item removes a dependency on MATLAB which requires that
 		all users either install a licensed copy of MATLAB
 		or use the MATLAB Compiler Runtime for deployment;
@@ -66,25 +67,25 @@ replaced by native code. This provides several benefits.
 		function behaviour between versions of
 		MATLAB do not effect the output of the
 		code.
-	\item certain operations can run fastr in native code than
+	\item certain operations can run faster in native code than
 		in MATLAB.
 \end{enumerate}
 
-The second objective will allow the code to work with awidely used
-tool for visualasation and analysis. Furthermore, integrating with
+The second objective will allow the code to work with a widely used
+tool for visualisation and analysis. Furthermore, integrating with
 one tool will provide a framework for integrating with other tools
 such as ImageJ. % TODO citation
 
-The third objective provides a saftey noet so that current and
-future development clearly defines the expectatiion of the code
+The third objective provides a safety net so that current and
+future development clearly defines the expectation of the code
 not only in the documentation, but as executable tests that can be
-used to indacate when a change causes these expectations to no
-longger be met.
+used to indicate when a change causes these expectations to no
+longer be met.
 
-The fourth objective is what ensues that the prviously discussed
-beneftis are available for others to use on their machines and
-allowing for repduciblity of the neuron reconstruction results.
-This objective is what meks the project an ``open-science''
+The fourth objective is what ensues that the previously discussed
+benefits are available for others to use on their machines and
+allowing for reproducibility of the neuron reconstruction results.
+This objective is what makes the project an ``open-science''
 project.
 
 
@@ -122,7 +123,7 @@ code and migrate to new code layout.
 
 % FIXME
 only add dependencies at the last possible moment: e.g., when you
-need an FFT library, create a stub of input and output and find a
+need an \acrshort{FFT} library, create a stub of input and output and find a
 way to put library code in there.
 
 \section{Challenges and risks}
@@ -146,7 +147,7 @@ translation of the MATLAB code has some limitations outlined as follows.
 	both used row-major and 0-based indexing. Some of the code
 	will be written with the assumption that all indices start
 	at 1 and this may not be documented everywhere.
-\item[Caching\label{desc:matlab:cache}] The ORION MATLAB code makes frequent use of the file system
+\item[Caching\label{desc:matlab:cache}] The \gls{orionmat} code makes frequent use of the file system
 	to cache calculations between runs. The purpose of this is
 	to speed up experiments so that when an experiment is
 	rerun, any images that have been processed in an earlier

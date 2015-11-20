@@ -11,7 +11,7 @@
 
 This thesis aims to detail the design and implementation of a
 neuron morphology extraction system. This system is the result of
-converting the existing ORION 3~\autocite{ORION_Santamaria-Pang2015} system from
+converting the existing \acrshort{ORION} 3~\autocite{ORION_Santamaria-Pang2015} system from
 MATLAB~\autocite{MATLAB:2013a} code to native C/C++ code.
 This conversion process requires an analysis of the existing code
 to understand its structure and create a plan for replicating the
@@ -111,13 +111,13 @@ reproducing a published method.
 	ensure that the
 	software is available years later. This means not only the software itself, but
 	all its dependencies. This can quickly become complicated as technology
-	advances: changes in the Application Programming Interface (API) or Application
-	Binary Interface (ABI) can cause incompatibility issues for both
-	software distributed in source form or
-	binary form. Both source code and binary software can have
-	dependencies on platforms (e.g., operating systems,
-	runtimes, computer architecture, etc.) and licensing of
-	components that can hinder others from using the software.
+	advances: changes in the \acrfull{API} or \acrfull{ABI}
+	can cause incompatibility issues for both software
+	distributed in source form or binary form. Both source
+	code and binary software can have dependencies on
+	platforms (e.g., operating systems, runtimes, computer
+	architecture, etc.) and licensing of components that can
+	hinder others from using the software.
 }
 
 \begin{figure}[tbp]
@@ -211,17 +211,23 @@ defines this as follows:\vspace{-3.5\parskip}
 	\qauthor{Michael Nielsen\footnote{https://lists.okfn.org/pipermail/open-science/2011-July/000907.html}}
 \end{quote}
 
-% TODO add more info about quote
+% add more info about quote
 The ``scientific knowledge mentioned in the above quote
 encompasses any kind of knowledge including problem definitions,
 ideas, code, data, methodology, and journal articles. The goal is
 to allow for more opportunities for collaboration and sharing of
-information.
+information by having this information available early enough so
+that it is useful to others. This can prevent expensive
+duplication of effort and encourage the direct comparison of
+results that is necessary for meta-analysis studies.
 
-% TODO
-When it comes to computer science research, sharing of the code 
+% CS and software; how much code is used even outside CS
+For computer science research, since the research
+products are often not just papers nor data, but software
+implementations of algorithms, direct comparisons in terms of
+metrics such accuracy and speed must be performed on a variety of
+datasets and machines. 
 
-% TODO complete thought on how much code is used
 According to a survey by the Software Sustainability Institute,
 scientific disciplines implement their own code for
 research~\autocite{SSI:hettrick_2014_14809}.
@@ -277,7 +283,7 @@ Creating an image analysis tool that can be easily integrated into
 other systems allows others to reproduce the results in order to
 compare with ground truth data and other algorithms. There
 has been an attempt at comparing neuron morphology extraction
-algorithms in the past under the DIADEM Challenge which
+algorithms in the past under the \acrshort{DIADEM} Challenge which
 contributed datasets and a metric for comparing the neuron
 tracings from algorithms against tracings from gold standard
 segmentations~\autocite{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
@@ -341,7 +347,7 @@ Jeong2015,Luo2015,De2015,Gulyanon2015,ORION_Santamaria-Pang2015,Mukherjee2014,He
 metrics~\autocite{Mayerich2011,Mayerich2012,btmorph-Torben-Nielsen2014,Costa2014,Gillette2015}
 
 \begin{enumerate}[label=(\roman*)]
-\item to evaluate the MATLAB codebase of ORION 3 and determine how to structure the new codebase
+\item to evaluate the MATLAB codebase of \acrshort{ORION}~3 and determine how to structure the new codebase
 \item integrate the
 \end{enumerate}
 
