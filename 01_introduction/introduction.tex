@@ -226,31 +226,62 @@ For computer science research, since the research
 products are often not just papers nor data, but software
 implementations of algorithms, direct comparisons in terms of
 metrics such accuracy and speed must be performed on a variety of
-datasets and machines. 
+datasets and machines. Computer science is not the only field that
+makes heavy use of software development:
+according to a survey of UK researchers by the Software
+Sustainability Institute which spanned disciplines as diverse as
+social science, medicine, and engineering, as high as 56\% of
+researchers implement their own research software, but 21\% of
+this subset had no training in software
+development~\autocite{SSI:hettrick_2014_14809}.
 
-According to a survey by the Software Sustainability Institute,
-scientific disciplines implement their own code for
-research~\autocite{SSI:hettrick_2014_14809}.
+% scientific code peer review & how retractions to papers can
+% occur due to software errors
+Since software development is already a large part of the research
+process, it can be argued that a review process of scientific
+software is just as important as the paper peer review process.
+There already issues with papers having enough statistical power
+to present reproducible results, but these problems can be
+understood through careful reading of the experimental
+methods~\autocite{Ioannidis2005,Button2013}. Problems in the software
+are harder to analyse based on the papers alone and these have
+been known to result in paper retractions~\autocite{Miller2006,Merali2010,Joppa2013}.
 
-% TODO complete thought on how retractions to papers can occur due
-% to software errors
-Software causing retractions~\autocite{Miller2006,Merali2010,Joppa2013}
-on top of already shakey statistical
-practices~\autocite{Ioannidis2005,Button2013}.
-
-% TODO complete thought on how software engineering needs to be
+% how software engineering needs to be
 % applied to scientific code
-teaching best practices through the Software Carpentry~\autocite{Wilson2006,Wilson2014}
-
+This lack of training in software engineering has prompted many of
+the open science advocates to offer open access teaching
+materials so that training is available to everyone.
+In particular, the Software Carpentry organisation has
+published several guidelines and workshops to teach best
+practices for handling software and data that are relevant to
+scientific research~\autocite{Wilson2006,Wilson2014}. These
+include using traditional software engineering tools and practices
+such as version control systems, build automation, issue
+trackers, and pre-merge code reviews.
 
 \subsection{Open neuroscience}
-% TODO
-Biology and neuroscience in particular have been using more
-quantitative imaging tools: patch clamp, EEG, fMRI, fluorescent
-microscopy ... need to measure what is being looked at ... perform
-statistical analysis across samples
+% neuroscience uses quantitative imaging;
+% problems with comparing data
+The history of biology has been defined by the tools used to
+visualise various biological structures and processes across many
+scales~\cite{moore2012visualizing}. Neuroscience in particular has
+made use of many techniques: from the patch clamp for studying ion
+channels to \acrshort{EEG} for recording brain surface electrical
+activity to \acrshort{fMRI} and fluorescent microscopy for
+observing brain and neuron activity respectively, these techniques
+have collectively allowed neuroscientists to characterise what
+they are looking at.  These techniques have made quantitative
+image analysis a large part of biology when measuring and
+comparing results across different samples. However, the results
+taken from different laboratories may not be comparable due to
+variability in laboratory protocols~\autocite{NeuroMorphVariability:Parekh:2015}
+or simply due to insufficient access to raw data necessary
+necessary to accurately use Bayesian inference for
+predictions~\autocite{Poldrack2011}.
 
-access to data~\autocite{NeuroMorphVariability:Parekh:2015,Poldrack2011}.
+To create a database of neuroscience data that is machine-readable, projects such as
+the \acrfull{NIF}~\cite{Gardner2008} and \acrfull{NITRC}~\cite{Kennedy2016}.
 
 % TODO
 Allen Institute for Brain Science,
@@ -262,6 +293,7 @@ Neuromorpho
 EyeWire
 Knossos / Brainflight
 VirtualFlyBrain
+~\autocite{Helmstaedter2012}
 ~\autocite{NeuroDebian:Halchenko:2012}
 
 \subsection{BigNeuron}\label{subsec:bigneuron}
