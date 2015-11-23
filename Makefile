@@ -54,3 +54,9 @@ wc-tex:
 
 clean::
 	rm -Rf $(GFX_OUT_DIR)
+
+check:
+	@echo "Check for references that are not resolved"
+	@echo "==="
+	-@pdftotext thesis.pdf  - | grep --colour=auto -C1 '??'
+	@echo "==="
