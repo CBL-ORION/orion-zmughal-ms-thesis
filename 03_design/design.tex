@@ -87,7 +87,9 @@ the neuron morphology based on the centreline.}\label{fig:high-level-arch}
 As depicted in Figure~\ref{fig:proc-segmentation}, the
 segmentation process performs one-class classification using the
 background voxels to learn a discriminant function for extracting
-vessel-like structures.
+vessel-like structures. The segmentation uses a multiscale approach so that
+both thin and thick neurite structures can be extracted at once from a single
+volume.
 
 \begin{figure}
 \centering
