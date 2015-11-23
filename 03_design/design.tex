@@ -94,26 +94,27 @@ vessel-like structures.
 \resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/segmentation.tex}}
 \captionsetup{singlelinecheck=off}
 \caption[Diagram of segmentation process]{\textbf{Diagram of segmentation process}:
-\begin{description*}
-	\item[Obtain background training data] This step is used
+\begin{enumerate*}[label={\alph*)}]
+	\enumdescitem{Obtain background training data} This step is used
 		to bootstrap the learning process so that a quick
 		approximation of the distribution of background
 		and foreground voxels can be determined
 		(see Algorithm~\ref{alg:seg_bg_train}).
-	\item[Obtain vessellness features] This step is used to
+	\enumdescitem{Obtain vessellness features} This step is used to
 		obtain features that are used to discriminate
 		vessel-like structures
 		(see Algorithm~\ref{alg:seg_vessellness}).
-	\item[Learn discriminant function]
+	\enumdescitem{Learn discriminant function} Here an accumulator is used to
+		characterise the distribution of the vessellness features
 		(see Algorithm~\ref{alg:seg_discrim}).
-	\item[Threshold]
+	\enumdescitem{Threshold} Using the discriminant function from the previous
+		step, the volume is segmented into foreground and background classes
 		(see Algorithm~\ref{alg:seg_threshold}).
-	\item[Post-processing]
+	\enumdescitem{Post-processing} Removal of artifacts such as small connected components
 		(see Algorithm~\ref{alg:seg_post}).
-\end{description*}
+\end{enumerate*}
 }\label{fig:proc-segmentation}
 \end{figure}
-
 
 \begin{algorithm}
 	\caption{Obtain background training data}\label{alg:seg_bg_train}
