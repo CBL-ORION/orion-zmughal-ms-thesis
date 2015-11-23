@@ -21,22 +21,22 @@ project are determined in the Design phase. This phase is not a
 discrete step that is separate from the following Implementation
 phase; as the implementation continues, the Design is updated to
 take into account new information. As such, it is important that
-the Design be able to incorporate incremental changes otherwise
-incorporating new changes will become difficult --- especially
-when fundamental data structures need to change. The following
+the Design is able to incorporate incremental changes otherwise
+adding new changes will become difficult --- especially
+when fundamental data structures need to be modified. The following
 details these design decisions.
 
 \section{MATLAB version of ORION 3}
 
-% FIXME
 % start with MATLAB code and why
-Since the algorithm already exists as a design in the MATLAB
+Since the algorithm already exists as a design in the \gls{orionmat}
 implementation, this can be leveraged as a starting point for the
-conversion. This means that the structure of the native version of
-ORION will start off with the same structure as the MATLAB
-version. This is to reduce the cognitive load when rewriting and
-testing each component because the inputs and outputs remain the
-same.
+conversion. This means that the structure of \gls{orionc} will
+start off with the same structure as the MATLAB version. This is
+to reduce the cognitive load when rewriting and testing each
+component because the inputs and outputs remain the same and
+keeping the names the same makes it easier to navigate between
+corresponding functions.
 
 % how the original MATLAB code is used as a starting point
 In order to accomplish this, we need an overview of the MATLAB
@@ -51,8 +51,8 @@ function can be converted one-by-one.
 
 \section{Algorithms and architecture}
 
-The architecture of a software system include both the individual
-components and how they interact with one another, but the core
+The architecture of a software system includes both the individual
+components and how they interact with one another and the core
 data structures that are used to transfer data between the
 components. The following description of the architecture will
 approach these details from the top-down.
