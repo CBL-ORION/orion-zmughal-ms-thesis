@@ -44,29 +44,30 @@ data does not need to converted between multiple formats in
 memory.
 
 The \emph{third objective} is a test suite to verify that the
-components of the system operated on the input and produce 
-expected outputs which are comparable to the original MATLAB code
-and follow expected properties outline in the design.
+components of the \gls{orionc} system operate on the same input
+and produce expected outputs which are comparable to the
+\gls{orionmat} code and follow expected properties outlined in the
+design.
 
 The \emph{fourth objective} is to ensure that the system provides
 a means for reproducibility by testing the software under different
 conditions and making it possible to the replicate the software
-environment.
+environment so that others may run the software.
 
 \section{Benefits}
 % Analyse project requirements: why are these objectives
 % beneficial?
 
 The first objective requires that all of the MATLAB code be
-replaced by native code. This provides several benefits.
+replaced by native code. This provides several benefits:
 \begin{enumerate}[label={\alph*)}]
-	\item removes a dependency on MATLAB which requires that
+	\item it removes a dependency on MATLAB which requires that
 		all users either install a licensed copy of MATLAB
 		or use the MATLAB Compiler Runtime for deployment;
-	\item provides the benefit that changes in
+	\item it provides the benefit that changes in
 		function behaviour between versions of
 		MATLAB do not effect the output of the
-		code.
+		code; and
 	\item certain operations can run faster in native code than
 		in MATLAB.
 \end{enumerate}
@@ -74,7 +75,7 @@ replaced by native code. This provides several benefits.
 The second objective will allow the code to work with a widely used
 tool for visualisation and analysis. Furthermore, integrating with
 one tool will provide a framework for integrating with other tools
-such as ImageJ. % TODO citation
+such as ImageJ~\autocite{Schneider2012}.
 
 The third objective provides a safety net so that current and
 future development clearly defines the expectation of the code
@@ -88,15 +89,23 @@ allowing for reproducibility of the neuron reconstruction results.
 This objective is what makes the project an ``open-science''
 project.
 
-
 \section{Design principles}
 % Define technical principles that relate to project objectives
 
-% FIXME
-In order to meet the objectives listed in
-Section~\ref{sec:objectives}, certain principles need to be agreed
-upon before the design phase can begin. These principles are meant
-to direct how resources are used in the design and implementation.
+In order to meet the objectives listed in Section~\ref{sec:objectives},
+certain principles need to be agreed upon before the design phase
+can begin. These principles are meant to direct how resources are
+used in the design and implementation.
+
+The first of these is to keep the project history in version
+control and make the project publicly available as soon as
+possible. This is to address the 
+To address this, we decided to use the Git version
+control system as well as the GitHub hosting service. Due to the
+popularity of this service among 
+Although
+GitHub is not an alternative to an archive system for software
+citations.
 
 % FIXME
 Use a version control software and allow the software to be hosted
@@ -142,11 +151,12 @@ translation of the MATLAB code has some limitations outlined as follows.
 	lifetime. Since C uses manual memory management, it is
 	necessary to manually allocate and release memory to avoid
 	memory leaks.
-\item[Data layout differences] % FIXME
+\item[Data layout differences]
 	MATLAB uses column-major and 1-based indexing, while C/C++
 	both used row-major and 0-based indexing. Some of the code
 	will be written with the assumption that all indices start
-	at 1 and this may not be documented everywhere.
+	at 1 and this may not be documented everywhere. This is
+	discussed in more detail in Section~\ref{subsec:impl:ds}.
 \item[Caching\label{desc:matlab:cache}] The \gls{orionmat} code makes frequent use of the file system
 	to cache calculations between runs. The purpose of this is
 	to speed up experiments so that when an experiment is
@@ -173,6 +183,62 @@ translation of the MATLAB code has some limitations outlined as follows.
 	indices in the corresponding supervolume.
 \end{description}
 
-The \nameref{desc:matlab:cache} and \nameref{desc:matlab:subvol} issues both
-indicate issues that can be described as cross-cutting concerns. Cross-cutting
-concerns are  % TODO aspects ...
+The \nameref{desc:matlab:cache} and \nameref{desc:matlab:subvol}
+issues both indicate issues that can be described as cross-cutting
+concerns. Cross-cutting concerns are parts of the program design
+that do not reside within only a subset of the system and cause
+dependencies between subsystems. These often manifest when an
+action must be taken in every module of a system. A classic
+example of this is logging --- logging must be done in each
+module, but this requires that logging metadata must be persisted
+so that each module can use it. This persistence adds an input to
+each module that does not strictly relate to the function of
+that module. In the same way, caching and handling of subvolumes
+both require that each step read all subvolumes of the previous
+step and write all the subvolumes that will be used in the next
+step. This filename-based coupling makes it difficult to treat
+each step as a self-contained module. By removing these concerns
+altogether in the new design, the \gls{orionc} system will be more
+extensible and modular.
+
+\section{Roads not taken}
+
+There were two possible ways to avoid having to do a rewrite that
+were possible solutions to some of the objectives listed above.
+These were not chosen because they would have not met the primary
+scientific deliverable (open-science) nor the fourth objective
+(reproducibility). Both of these approaches allow for calling
+MATLAB from C code and thus allow for processing with
+\gls{orionmat}. These approaches are as follows:
+\begin{description}
+\item[Using the MATLAB Engine API] This allows for controlling a
+	MATLAB instance using inter-process communication which
+	means each run requires starting a MATLAB process with a
+	valid MATLAB license. This means that \gls{orionmat}
+	can not be run multiple times as each run will use an
+	additional MATLAB licenese. This precludes using
+	\gls{orionmat} on a cluster as each additional process
+	will fail when the number of licenses has run out.
+	Furthermore, the startup time for each MATLAB process is
+	significant enough to slow down each volume processed.
+	This does not meet the reproducibility criteria of the
+	fourth objective as it requires the end-user to have a
+	license that may be difficult to obtain and furthermore
+	can tie the software to a specific version of that
+	software.
+\item[Using the MATLAB Compiler Runtime] This approach allows for
+	distributing MATLAB code to people that do not have
+	MATLAB by using the MATLAB Compiler Runtime along with an
+	encrypted archive of the \gls{orionmat} workspace. Unlike
+	the MATLAB Engine API, this can be used in parallel.
+	However, the encrypted archive is tied to a single
+	operating system (e.g., Windows, GNU/Linux) and computer
+	architecture (e.g., IA32 or IA64). This makes
+	reproducibility difficult since the compilation can only
+	be done on the same kind of computer and version of MATLAB
+	as the corresponding version of the MATLAB Compiler
+	Runtime. This also violates the primary
+	scientific deliverable (open-science) since the deployed
+	code is encrypted and others can not see how the
+	algorithms are implemented.
+\end{description}
