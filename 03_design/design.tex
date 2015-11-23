@@ -94,7 +94,7 @@ volume.
 \begin{figure}
 \centering
 \resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/segmentation.tex}}
-\captionsetup{singlelinecheck=off}
+%\captionsetup{singlelinecheck=off}
 \caption[Diagram of segmentation process]{\textbf{Diagram of segmentation process}:
 \begin{enumerate*}[label={\alph*)}]
 	\enumdescitem{Obtain background training data} This step is used
@@ -118,9 +118,12 @@ volume.
 }\label{fig:proc-segmentation}
 \end{figure}
 
+
 \begin{algorithm}
 	\caption{Obtain background training data}\label{alg:seg_bg_train}
 	\begin{algorithmic}[1]
+		\State $k \gets \text{the number of scales}$
+		\State $\sigma \gets  \{ \sigma_0, \sigma_1, \ldots, \sigma_{k-1} \}$
 	\end{algorithmic}
 \end{algorithm}
 
