@@ -74,45 +74,74 @@ Figure~\ref{fig:high-level-arch}), namely
 \centering
 \resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/high-level.tex}}
 \caption[High level diagram of ORION algorithm]{\textbf{High level
-diagram of ORION algorithm}}\label{fig:high-level-arch}
+diagram of ORION algorithm}: This high-level diagram shows that
+there are three steps to the \gls{orionmat} algorithm as described
+in the text. The input to the algorithm is a 3D volume of
+microscopy data and the output is a graph-based representation of
+the neuron morphology based on the centreline.}\label{fig:high-level-arch}
 \end{figure}
 
 % TODO explain the current ORION algorithm
 \subsection{Segmentation}
 
-% TODO
+As depicted in Figure~\ref{fig:proc-segmentation}, the
+segmentation process performs one-class classification using the
+background voxels to learn a discriminant function for extracting
+vessel-like structures.
+
 \begin{figure}
 \centering
 \resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/segmentation.tex}}
-\caption[Segmentation process]{\textbf{Segmentation process}}\label{fig:proc-segmentation}
+\captionsetup{singlelinecheck=off}
+\caption[Diagram of segmentation process]{\textbf{Diagram of segmentation process}:
+\begin{description*}
+	\item[Obtain background training data] This step is used
+		to bootstrap the learning process so that a quick
+		approximation of the distribution of background
+		and foreground voxels can be determined
+		(see Algorithm~\ref{alg:seg_bg_train}).
+	\item[Obtain vessellness features] This step is used to
+		obtain features that are used to discriminate
+		vessel-like structures
+		(see Algorithm~\ref{alg:seg_vessellness}).
+	\item[Learn discriminant function]
+		(see Algorithm~\ref{alg:seg_discrim}).
+	\item[Threshold]
+		(see Algorithm~\ref{alg:seg_threshold}).
+	\item[Post-processing]
+		(see Algorithm~\ref{alg:seg_post}).
+\end{description*}
+}\label{fig:proc-segmentation}
 \end{figure}
 
 
 \begin{algorithm}
-\caption{Fancy algorithm}
-\begin{algorithmic}[1]
-\If {$i\geq maxval$}
-    \State $i\gets 0$
-\Else
-    \If {$i+k\leq maxval$}
-        \State $i\gets i+k$
-    \EndIf
-\EndIf
-\end{algorithmic}
+	\caption{Obtain background training data}\label{alg:seg_bg_train}
+	\begin{algorithmic}[1]
+	\end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm}
-	\caption{Euclid’s algorithm}\label{euclid}
+	\caption{Obtain vessellness features}\label{alg:seg_vessellness}
 	\begin{algorithmic}[1]
-	\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
-		\State $r\gets a\bmod b$
-		\While{$r\not=0$}\Comment{We have the answer if r is 0}
-			\State $a\gets b$
-			\State $b\gets r$
-			\State $r\gets a\bmod b$
-		\EndWhile\label{euclidendwhile}
-		\State \textbf{return} $b$\Comment{The gcd is b}
-	\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Learn discriminant function}\label{alg:seg_discrim}
+	\begin{algorithmic}[1]
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Threshold}\label{alg:seg_threshold}
+	\begin{algorithmic}[1]
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Post-processing}\label{alg:seg_post}
+	\begin{algorithmic}[1]
 	\end{algorithmic}
 \end{algorithm}
 
@@ -127,7 +156,7 @@ This step is not a set part of the neuron tracing algorithm. This is mean to han
 \begin{figure}
 \centering
 \resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/tracing.tex}}
-\caption[Tracing process]{\textbf{Tracing process}}\label{fig:proc-tracing}
+\caption[Diagram of tracing process]{\textbf{Diagram of tracing process}}\label{fig:proc-tracing}
 \end{figure}
 
 
