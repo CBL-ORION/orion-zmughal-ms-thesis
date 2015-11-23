@@ -24,6 +24,15 @@
 %% For displaying algorithms using algorithmicx
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+%% make \listofalgorithms work with tocbibind.
+%% From "packages algorithm and tocbibind" <http://newsgroups.derkeiler.com/Archive/Comp/comp.text.tex/2005-10/msg01099.html>
+\makeatletter
+\let\l@algorithm\l@figure
+\makeatother
+\renewcommand{\listofalgorithms}{\begingroup
+  \tocfile{List of Algorithms}{loa}
+\endgroup}
+
 
 \usepackage{url}
 \usepackage{longtable}
