@@ -97,43 +97,76 @@ certain principles need to be agreed upon before the design phase
 can begin. These principles are meant to direct how resources are
 used in the design and implementation.
 
+% use Git as VCS (and host on GitHub for visibility)
 The first of these is to keep the project history in version
 control and make the project publicly available as soon as
-possible. This is to address the 
-To address this, we decided to use the Git version
-control system as well as the GitHub hosting service. Due to the
-popularity of this service among 
-Although
-GitHub is not an alternative to an archive system for software
-citations.
+possible. The choice made here is to use the Git version control
+system with the GitHub hosting service (\url{https://github.com/})
+since it has been adopted by many other similarly scoped
+science projects including Vaa3D, OpenCV, and InsightToolkit; this
+gives it easy visibility via search engines. This is to address
+the open-science portion of the scientific deliverables as it
+allows for a workflow that allows work-in-progress changes to
+reside alongside the stable codebase so that even work that is not
+yet complete is available as soon as possible.
 
-% FIXME
-Use a version control software and allow the software to be hosted
-publicly: Git and GitHub.
+% choose C for implementation over C++ (ABI stability)
+The second principle is to choose an implementation language that
+makes integration easy (i.e., the second engineering objective).
+The choices for native languages that are widely available for
+this purpose are C and C++. Due to the way C++ implements
+naming conventions through \emph{name mangling}, this can
+complicate the integration process and make the library
+maintenance more challenging due to changes in the \acrshort{ABI}.
+To mitigate this, one common approach to implement a C wrapper
+\acrshort{API}/\acrshort{ABI} around an existing C++ \acrshort{API}
+in what is known as an hour-glass interface~\autocite{CppCon:Hourglass:2014}.
+This provides a stabilised \acrshort{ABI} which means that if
+libraries are updated independent of the \gls{orionc} code, then
+the \gls{orionc} code will not have to be recompiled. However this can
+complicate development by having to maintain two layers, so to
+keep the development simplified, the main implementation language
+is in C.
 
-% FIXME
-Choose main implementation language so that code is portable and
-easily able to be linked with other tools: write in C rather than
-completely in C++.
+% automated builds using GNU Make
+As with all software, the \gls{orionc} software has a series of
+steps required to prepare the software for building and
+installing and since \gls{orionc} is native code, these steps can
+be complex because it needs to run on multiple platforms. As such,
+it is expedient to create an automated build system that outlines
+the steps needed to build \gls{orionc} so that the process of
+creating the final binaries is replicable by anyone that obtains
+\gls{orionc} and reduces the need for reading manual instructions.
+This automated build system should also be able to run tests to
+ensure that the software works as expected. The \gls{orionc}
+project uses GNU Make since it is a portable build tool that runs
+on many systems. Overall, this specific principle improves
+reproducibility.
 
-% FIXME
-Created an automated build system: use a make file build that can
-bed used to build all of the system and automatically run tests:
-use portable make (GNU make). Fewer instructions to read.
+% do not optimise --- profile
+Another principle that is used to guide the development is to
+avoid premature optimisation; that is, do not attempt to make the
+code more efficient before it is necessary. Instead of guessing
+which parts of the code are slow, use a profiler to measure the
+bottlenecks in the code. It is also not advisable to focus on
+optimisation at the stage of rewriting the software.
 
-% FIXME
-do not optimise the code until it works: use a profiler to find
-where things are slow
-
-% FIXME
-use tests and debugger to incrementally build the code with
-thoughtful refactoring: feedback, start from a structure of MATLAB
-code and migrate to new code layout.
-
-% FIXME
-only add dependencies at the last possible moment: e.g., when you
-need an \acrshort{FFT} library, create a stub of input and output and find a
-way to put library code in there.
+% how to approach the rewrite --- as a piecewise conversion
+% followed by refactoring
+This rewrite should be approached in an incremental manner by
+using test-driven development. For example, instead of trying to convert many
+modules of \gls{orionmat} at once, each is converted one at a
+time after writing tests for that specific component to ensure
+that it works independently. This also means that adding new
+external dependencies is done at the last possible moment. If a
+module of \gls{orionc} requires an \acrshort{FFT} function,
+the function should be created first as an empty stub function
+that is used to understand the minimum number of parameters needed
+to implement the FFT functionality. Then when the external dependency
+is incorporated, the call to the external library can be placed in
+the stub. This helps avoid creating coupling with the external
+library so that different approaches can easily be tried by only
+having to change the code at a single spot.
 
 \section{Challenges and risks}
 
