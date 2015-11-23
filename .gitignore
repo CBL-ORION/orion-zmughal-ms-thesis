@@ -18,6 +18,7 @@
 *.acn
 *.acr
 *.alg
+*.loa
 
 /draft-pdf/
 /gfx-out/
