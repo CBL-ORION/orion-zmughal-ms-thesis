@@ -1,0 +1,32 @@
+\usetheme{Ilmenau}
+\usecolortheme{beaver}
+
+\definecolor{CBLRed}{RGB}{205,0,0}
+\setbeamercolor{frametitle}{fg=white,bg=CBLRed}
+\setbeamercolor{section in head/foot}{fg=white,bg=CBLRed}
+\setbeamercolor{author in head/foot}{bg=CBLRed!20}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{frametitle}[default][center]
+
+
+\usepackage{textcomp}
+\usepackage{fancyvrb}
+\usepackage{changepage}
+\usepackage{multicol}
+\usepackage{wasysym}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\lstset{%basicstyle=\small\ttfamily,
+%numbers=left,
+%escapeinside=||
+}
+\newenvironment{indented}{\begin{adjustwidth}{1.5em}{}}{\end{adjustwidth}}
+
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes,automata}
+
+\logo{\includegraphics[width=0.95\paperwidth]{gfx/cbl-footer.png}}

@@ -6,62 +6,150 @@
                 pdfpagemode={None},pdfpagelayout={SinglePage}}%
         xcolor={x11names},%
 ]{beamer}
-%\usetheme{Warsaw}
-\usecolortheme{beaver}
-\usepackage{textcomp}
-\usepackage{fancyvrb}
-\usepackage{changepage}
-\usepackage{multicol}
-\usepackage{wasysym}
-\usepackage[T1]{fontenc}
-\usepackage{listings}
 
-\lstset{%basicstyle=\small\ttfamily,
-%numbers=left,
-%escapeinside=||
-}
-\newenvironment{indented}{\begin{adjustwidth}{1.5em}{}}{\end{adjustwidth}}
-
-\usepackage{tikz}
-\usetikzlibrary{snakes,arrows,shapes,automata}
-
-\title[\ensuremath{\mathrm{ORION}^c}]{Converting a Neuron Morphology Reconstruction System: Open Science Design and Implementation}
-\author{Zakariyya Mughal}
-\institute{Computational Biomedicine Lab\\University of Houston}
-\date{2015 Nov 30}
+\input{present-helper.tex}
+\input{meta/defense.tex}
 %}}}
 \begin{document}
-
-%  - Title slide.
+%  - Title slide.%{{{
 \frame{\titlepage}
+%}}}
 
 %  - List of committee members (start with advisor and arrange others in alphabetical order of last name).
 \section{Committee}
 \begin{frame}
+\frametitle{Committee}
+\begin{itemize}
+	\item Dr. Ioannis A. Kakadiaris; Dept. of Computer Science
+	\item Dr. Emanuel Papadakis; Dept. of Mathematics
+	\item Dr. Shishir Shah; Dept. of Computer Science
+\end{itemize}
 \end{frame}
 
 %  - Motivation - short introduction to your research, pointers to applications, why the research is important.
 \section{Motivation}
 \begin{frame}
+\frametitle{Motivation}
 \end{frame}
 
-%  - Problem Statement - Goals, objectives, aims. May also include challenges. IMPORTANT: State your specific aims clearly - what you plan to achieve and how you plan to achieve it. Let your contributions to the field of Computer Science be clear.
-\section{Problem statment}
+%  - Problem Statement - Goals, objectives, aims. May also include challenges.
+%        IMPORTANT: State your specific aims clearly - what you plan to achieve and how
+%        you plan to achieve it. Let your contributions to the field of Computer Science
+%        be clear.
+\section{Problem statement}
 \begin{frame}
+\frametitle{Problem statement}
 \end{frame}
 
-%  - Related Work - a catchy name is “State of the Art”. Literature review relevant to specific research. Your committee members are expected to already have a general background in your field. Concentrate on the details of your specific research area. It is preferable to use more recent literature (except for some classical “old” ones). Also avoid reviewing standard concepts that have been around for a long time.
-\section{Related work}
+\section{Challenges and risks}
 \begin{frame}
+\frametitle{Challenges and risks}
+\begin{itemize}
+	\item Starting without a test suite
+	\item Memory management
+	\item Data layout differences of n-dimensional arrays
+	\item Data handling differences
+	\item Reimplement MATLAB Toolbox functions
+\end{itemize}
 \end{frame}
 
-%  - Proposed Framework - this is the most important part of your proposal. Expect most questions from committee members on this. Put in all your best here. Describe the entire framework before separating into work-done and work-left. Do not mix framework with results. You may start with a one-slide overview of the entire framework before going into details. Make sure committee members will be able to understand your work. Relate to previous approaches and how your is an extension or a difference. Include mathematical equations that will explain your work.
-%  - Explain the relevance of each equation. Understand the meaning and significance of each term in the equation irrespective of whether you define them in the slide or not. TIP: Rather than doing your equation twice (for your PPT and Latex write-up), you may do it once in your Latex document and copy into TexPoint for the PPT.
-%  - Preliminary Results - if you already have some results, please show it. Talk about how you propose to validate your results. Show how your results compare with previous results OR how it performs in general, (e.g., in how many images it succeeded or in how many it failed). A chart will be useful. Any statistical comparison should indicate level of significance.
-%  - Present status of the proposed framework - which aspects are completed, which are in progress, and which have not yet been done at all.
+\section{Objectives}
+\begin{frame}
+\frametitle{Objectives}
+\begin{itemize}
+	\item Integrate with Vaa3D tool for biomedical image analysis
+	\item Convert the MATLAB code to C / C++
+	\item Release code as free/open source software for open-science
+	\item Build a test suite
+\end{itemize}
+\end{frame}
+
+\section{Design}
+\begin{frame}
+\frametitle{Design}
+\begin{itemize}
+	\item Use the original MATLAB code as initial design: followed by refactoring the C code
+	\item Automated GNU Make-based build system:
+		\begin{itemize}
+			\item compiler extension configuration
+			\item third-party library build flag configuration
+			\item prerequisite scanning
+		\end{itemize}
+	\item Available on GitHub for public visibility
+\end{itemize}
+\end{frame}
+
+\section{Implementation}
+\begin{frame}
+\frametitle{Implementation}
+\begin{itemize}
+	\item Base data structure is an n-dimensional array (row-major buffer with shape metadata)
+	\item float32 for storage; float64 for calculations
+	\item In-memory calculations
+	\item ITK library used for implementing several filters
+	\item Branch-based component development
+\end{itemize}
+\end{frame}
+
+\section{Testing}
+\begin{frame}
+\frametitle{Testing}
+\begin{itemize}
+	\item Use the Test Anything Protocol (TAP) for test output
+	\item Continuous integration with a pull request based workflow
+	\item Automatic provisioning of build environment
+	\item Tracing-based comparison to original MATLAB function
+	\item Assertions for pre-/post-conditions
+	\item External dependencies managed using version control
+	\item Integration testing with Vaa3D plugin
+\end{itemize}
+\end{frame}
+
+\section{Conclusions}
+\begin{frame}
+\frametitle{Conclusions}
+\begin{itemize}
+	\item Software is an ever-changing system
+	\item The code depends on an ecosystem
+	\item Rewrites across languages are difficult
+	\item Scientific software engineering is very much like traditional software engineering
+	\item Open-science and reproducibility for computational methods requires software engineering skills
+\end{itemize}
+\end{frame}
+
+%  - Related Work - a catchy name is “State of the Art”.
+%        Literature review relevant to specific research. Your committee
+%        members are expected to already have a general background in your field.
+%        Concentrate on the details of your specific research area. It is preferable to
+%        use more recent literature (except for some classical “old” ones). Also avoid
+%        reviewing standard concepts that have been around for a long time.
+%  - Proposed Framework - this is the most important part of your proposal.
+%        Expect most questions from committee members on this. Put in all your
+%        best here. Describe the entire framework before separating into work-done and
+%        work-left. Do not mix framework with results. You may start with a one-slide
+%        overview of the entire framework before going into details. Make sure committee
+%        members will be able to understand your work. Relate to previous approaches and
+%        how your is an extension or a difference. Include mathematical equations that
+%        will explain your work.
+%  - Explain the relevance of each equation. Understand the meaning and
+%        significance of each term in the equation irrespective of whether you define
+%        them in the slide or not. TIP: Rather than doing your equation twice (for your
+%        PPT and Latex write-up), you may do it once in your Latex document and copy
+%        into TexPoint for the PPT.
+%  - Preliminary Results - if you already have some results, please show it.
+%        Talk about how you propose to validate your results. Show how your
+%        results compare with previous results OR how it performs in general, (e.g., in
+%        how many images it succeeded or in how many it failed). A chart will be useful.
+%        Any statistical comparison should indicate level of significance.
+%  - Present status of the proposed framework
+%        - which aspects are completed, which are in progress, and which have not yet been done at all.
 %  - It is advisable to include a timeline of future indicating milestones and when you hope to achieve each.
-%  - Expected Impact - mention specific application areas where you have tried or will try your proposed framework. Also, explain how it can be generalized to other areas in Computer Science. What is the overall benefit for the community? What is the contribution to Computer Science research?
-%  - Conclusion slide could be catchy, something they will remember. Maybe an animation, video, or terse statement that summarizes it all.
+%  - Expected Impact - mention specific application areas where you have tried or will try your proposed framework.
+%        Also, explain how it can be generalized to other areas in Computer
+%        Science. What is the overall benefit for the community? What is the
+%        contribution to Computer Science research?
+%  - Conclusion slide could be catchy, something they will remember.
+%        Maybe an animation, video, or terse statement that summarizes it all.
 %  - Publications - you should list your publications or mention them in relevant sections of the presentation. 
 
 \end{document}
