@@ -25,7 +25,7 @@ GFX_DEP := \
 # notation.tex
 #./thesis_template_01.tex
 #analysis.tex
-all: thesis.pdf tags
+all: thesis.pdf present.pdf tags
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
