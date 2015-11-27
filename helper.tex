@@ -69,6 +69,14 @@
 
 \usepackage{siunitx}
 \usepackage[inline]{enumitem}
+% from <http://tex.stackexchange.com/questions/56249/enumitem-package-and-description-lists>
+% use with enumitem like:
+%     \begin{description}[font=\textpluscolon]
+%         \item[A] ...
+%         \item[B] ...
+%     \end{description}
+\newcommand*{\textpluscolon}[1]{{#1:}}
+
 \usepackage{attrib}
 \usepackage{listings}
 
