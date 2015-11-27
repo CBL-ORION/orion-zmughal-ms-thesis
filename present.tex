@@ -1,33 +1,25 @@
-%% vim:tw=66:spell:wrap:ft=tex:fdm=marker
+%% vim:tw=66:spell:wrap:ft=tex:
 % Preamble {{{
 \documentclass[%
         hyperref={%
                 pdfauthor={Zakariyya Mughal},%
-                pdfpagemode={None},pdfpagelayout={SinglePage}}%
-        xcolor={x11names},%
+                pdfpagemode={None},pdfpagelayout={SinglePage}},%
+        xcolor={x11names}%
 ]{beamer}
 
 \input{present-helper.tex}
-\input{meta/defense.tex}
 %}}}
 \begin{document}
+% meta needs to be in \begin{document} so that tabular works
+\input{meta/defense.tex}
 %  - Title slide.%{{{
 \frame{\titlepage}
 %}}}
 
-%  - List of committee members (start with advisor and arrange others in alphabetical order of last name).
-\section{Committee}
-\begin{frame}
-\frametitle{Committee}
-\begin{itemize}
-	\item Dr. Ioannis A. Kakadiaris; Dept. of Computer Science
-	\item Dr. Emanuel Papadakis; Dept. of Mathematics
-	\item Dr. Shishir Shah; Dept. of Computer Science
-\end{itemize}
-\end{frame}
 
+\section{Introduction}
 %  - Motivation - short introduction to your research, pointers to applications, why the research is important.
-\section{Motivation}
+\subsection{Motivation}
 \begin{frame}
 \frametitle{Motivation}
 \end{frame}
@@ -36,13 +28,45 @@
 %        IMPORTANT: State your specific aims clearly - what you plan to achieve and how
 %        you plan to achieve it. Let your contributions to the field of Computer Science
 %        be clear.
-\section{Problem statement}
-\begin{frame}
-\frametitle{Problem statement}
+\subsection{Problem}
+\begin{frame}<1>[label=prob]\frametitle{Problems}
+\begin{itemize}
+	\item<1-> Neuron reconstruction
+	\item<2-> BigNeuron
+	\item<3-> Open science
+\end{itemize}
 \end{frame}
 
-\section{Challenges and risks}
-\begin{frame}
+\begin{frame}\frametitle{Neuron reconstruction}
+	% TODO
+	[image of neuron volume]
+	$\rightarrow$
+	[image of neuron tracing]
+\end{frame}
+
+\againframe<2>{prob}
+
+\begin{frame}\frametitle{BigNeuron}
+	% TODO
+	[Vaa3D GUI image]
+\end{frame}
+
+\againframe<3>{prob}
+
+\begin{frame}\frametitle{Open science}
+	% TODO
+	Human Genome Project
+	% First example of open research
+	% <https://en.wikipedia.org/wiki/Bermuda_Principles> ---> 1996
+	% - data available in 24 hours of sequence assembly
+	% - immediate publication of annotated sequences
+	% - all data in the public domain
+	Allen Brain Atlas
+	OpenWorm
+	Galaxy Zoo
+\end{frame}
+
+\begin{frame}[label=challenges]
 \frametitle{Challenges and risks}
 \begin{itemize}
 	\item Starting without a test suite
@@ -53,7 +77,7 @@
 \end{itemize}
 \end{frame}
 
-\section{Objectives}
+\subsection{Objectives}
 \begin{frame}
 \frametitle{Objectives}
 \begin{itemize}
@@ -64,7 +88,10 @@
 \end{itemize}
 \end{frame}
 
+\section{Analysis}
+
 \section{Design}
+
 \begin{frame}
 \frametitle{Design}
 \begin{itemize}
@@ -80,6 +107,7 @@
 \end{frame}
 
 \section{Implementation}
+
 \begin{frame}
 \frametitle{Implementation}
 \begin{itemize}
@@ -92,6 +120,7 @@
 \end{frame}
 
 \section{Testing}
+
 \begin{frame}
 \frametitle{Testing}
 \begin{itemize}
@@ -105,7 +134,10 @@
 \end{itemize}
 \end{frame}
 
+\section{Discussion}
+
 \section{Conclusions}
+
 \begin{frame}
 \frametitle{Conclusions}
 \begin{itemize}
