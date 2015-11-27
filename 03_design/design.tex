@@ -118,18 +118,34 @@ volume.
 }\label{fig:proc-segmentation}
 \end{figure}
 
+\begin{algorithm}
+	\caption{Input parameters to segmentation}\label{alg:seg_input}
+	\begin{algorithmic}[1]
+		\State $I \gets \text{the input volume}$
+		\State $k \gets \text{the number of scales}$
+		\State $r \gets  \{ r_0, r_1, \ldots, r_{k-2}, r_{k-1} \}$
+	\end{algorithmic}
+\end{algorithm}
 
 \begin{algorithm}
 	\caption{Obtain background training data}\label{alg:seg_bg_train}
 	\begin{algorithmic}[1]
-		\State $k \gets \text{the number of scales}$
-		\State $\sigma \gets  \{ \sigma_0, \sigma_1, \ldots, \sigma_{k-1} \}$
+		\State $n \gets \text{the degree used for approximation of low-pass filter}$
+		\State $\sigma_{L}[i] \gets \left\{ \frac{0.66}{r[i]} \right\}$
+			\Comment{Experimentally derived relationship between Laplacian scales and radii}
+		\State $\freqdom{L}[i] \gets \Call{LaplacianFilter}{n, \sigma_{L}[i]}$
+			\Comment{Construct Laplacian filters in the frequency domain}
+		\State ${I}_{L}[i] \gets \IFourierTrans{ \freqdom{I} \MultDot \freqdom{L}[i] }$
+		\State
 	\end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm}
 	\caption{Obtain vessellness features}\label{alg:seg_vessellness}
 	\begin{algorithmic}[1]
+		$\Call{Hessian}$
+		$\Call{Eigenvalues}$
+		\Comment{Frangi}
 	\end{algorithmic}
 \end{algorithm}
 
