@@ -43,8 +43,8 @@ In order to accomplish this, we need an overview of the MATLAB
 code. One way to do this is to build a call graph, that is, a
 graphical representation of which functions are called by other
 functions. Using this, it is possible to trace the execution of
-the code. The call graph for the MATLAB code is given in
-Appendix~\ref{appx:matlab-call-graph}. By taking this call graph
+the code. The call graph for the MATLAB code is given in \cref{appx:matlab-call-graph}.
+By taking this call graph
 and creating equivalent functions in the native code, a direct
 comparison can be made between the two codebases. Thus, each
 function can be converted one-by-one.
@@ -57,8 +57,8 @@ data structures that are used to transfer data between the
 components. The following description of the architecture will
 approach these details from the top-down.
 
-The ORION algorithm consists of three parts (as shown in
-Figure~\ref{fig:high-level-arch}), namely
+The ORION algorithm consists of three parts (as shown in \cref{fig:high-level-arch}),
+namely
 \begin{description}
 	\item[Segmentation] to label the
 		foreground and the background of the image;
@@ -84,7 +84,7 @@ the neuron morphology based on the centreline.}\label{fig:high-level-arch}
 % TODO explain the current ORION algorithm
 \subsection{Segmentation}
 
-As depicted in Figure~\ref{fig:proc-segmentation}, the
+As depicted in \cref{fig:proc-segmentation}, the
 segmentation process performs one-class classification using the
 background voxels to learn a discriminant function for extracting
 vessel-like structures. The segmentation uses a multiscale approach so that
@@ -101,19 +101,19 @@ volume.
 		to bootstrap the learning process so that a quick
 		approximation of the distribution of background
 		and foreground voxels can be determined
-		(see Algorithm~\ref{alg:seg_bg_train}).
+		(see \cref{alg:seg_bg_train}).
 	\enumdescitem{Obtain vessellness features} This step is used to
 		obtain features that are used to discriminate
 		vessel-like structures
-		(see Algorithm~\ref{alg:seg_vessellness}).
+		(see \cref{alg:seg_vessellness}).
 	\enumdescitem{Learn discriminant function} Here an accumulator is used to
 		characterise the distribution of the vessellness features
-		(see Algorithm~\ref{alg:seg_discrim}).
+		(see \cref{alg:seg_discrim}).
 	\enumdescitem{Threshold} Using the discriminant function from the previous
 		step, the volume is segmented into foreground and background classes
-		(see Algorithm~\ref{alg:seg_threshold}).
+		(see \cref{alg:seg_threshold}).
 	\enumdescitem{Post-processing} Removal of artifacts such as small connected components
-		(see Algorithm~\ref{alg:seg_post}).
+		(see \cref{alg:seg_post}).
 \end{enumerate*}
 }\label{fig:proc-segmentation}
 \end{figure}

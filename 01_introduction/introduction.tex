@@ -57,12 +57,12 @@ engineering deliverables. Scientific deliverables are motivated by goals that
 advance the state of scientific knowledge while engineering deliverables focus
 on specific technical aspects of the project that make future project
 maintenance and growth possible. This section will only cover the scientific
-deliverables while engineering deliverables are covered in Section~\ref{sec:objectives}.
+deliverables while engineering deliverables are covered in \cref{sec:objectives}.
 
 The \emph{primary scientific deliverable} of this thesis is a system for
 neuron reconstruction. This system is designed with the principles of open
 science in mind so that it is usable by biologists to study
-neuroanatomy. Section~\ref{subsec:open-science} contains further
+neuroanatomy. \Cref{subsec:open-science} contains further
 discussion on open-science and how this project achieves this
 goal.
 
@@ -70,12 +70,12 @@ The \emph{secondary scientific deliverable} is to make this system
 compatible with existing tools for image analysis so that it can
 be compared against other methods as part of the BigNeuron
 project. The role of BigNeuron in neuroscience research is covered
-in Section~\ref{subsec:bigneuron}.
+in \cref{subsec:bigneuron}.
 
 The following sections contain an overview of the context of this project
-first within the general context of scientific software (Section~\ref{subsec:sci-soft})
+first within the general context of scientific software (\cref{subsec:sci-soft})
 and finally narrow down its role relative to the specific context
-of neuron reconstruction (Section~\ref{subsec:neuron-tracing}).
+of neuron reconstruction (\cref{subsec:neuron-tracing}).
 
 \subsection{Scientific software}\label{subsec:sci-soft}
 { % how software has become important in experimental science
@@ -173,7 +173,7 @@ reproducing a published method.
 	backwards compatibility for software is difficult since
 	there are many parts to a non-trivial software system.
 	It may be possible to identify these compatibility problems using
-	testing (for more discussion, see Chapter~\ref{ch:testing}).
+	testing (for more discussion, see \cref{ch:testing}).
 	% Dependency hell
 	Resolving the exact versions of libraries and toolchains
 	needed to build and run can be frustrating and is commonly
@@ -181,7 +181,7 @@ reproducing a published method.
 	daunting when dealing with multiple platforms and many
 	libraries. As newer versions of these libraries are
 	released, the maintenance phase of the \emph{systems
-	development life cycle} becomes more important (see Figure~\ref{fig:sdlc}).
+	development life cycle} becomes more important (see \cref{fig:sdlc}).
 	Unmaintained software is prone to what is known as
 	\emph{bit rot} --- that is, the process through which
 	software that was working no longer works due to changes
@@ -287,7 +287,7 @@ to improve brain mapping and modelling~\autocite{Markram2013,BigBrainIEEESpectru
 Some of these efforts are based on manual data annotation~\autocite{Ascoli2007,Helmstaedter2011,Helmstaedter2012,Marx2013},
 while others such as the BigNeuron project from the Allen Institute for
 Brain Science are focused on completely automated reconstruction. This last
-project is the subject of Section~\ref{subsec:bigneuron}.
+project is the subject of \cref{subsec:bigneuron}.
 
 \subsection{BigNeuron}\label{subsec:bigneuron}
 
@@ -321,7 +321,7 @@ different brain regions) and in terms of the laboratory protocols
 The DIADEM Challenge was successful in raising awareness of the
 problem of neuron reconstruction and several new 3D reconstruction
 methods and metrics have been proposed after the end of the DIADEM
-Challenge (see Section~\ref{subsec:neuron-tracing}).  However, the
+Challenge (see \cref{subsec:neuron-tracing}).  However, the
 lack of larger public datasets, standardised metrics, and readily
 available algorithms have made it difficult to compare new methods
 for neuron reconstruction.
@@ -359,8 +359,7 @@ FAQ~\autocite{BigNeuron:FAQ:2015}\\
 
 This is why a rewrite of the code is necessary rather than trying
 to intergrate MATLAB via the MATLAB Engine Interface. Further
-discussion of the benefits of this decision are discussed in
-Chapter~\ref{ch:analysis}.
+discussion of the benefits of this decision are discussed in \cref{ch:analysis}.
 
 \section{Literature review}
 
