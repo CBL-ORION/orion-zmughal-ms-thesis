@@ -14,6 +14,7 @@ THESIS_META := meta/title.tex meta/committee.tex
 THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 00_front-matter/notation.tex \
 	helper.tex thesis.bib \
 	$(THESIS_META) $(THESIS_CHAPTERS)
+PRESENT_DEP := present-helper.tex meta/defense.tex
 
 GFX_DEP := \
 	$(GFX_OUT_DIR)/matlab-call-graph/segmentation.tex \
@@ -25,12 +26,19 @@ GFX_DEP := \
 # notation.tex
 #./thesis_template_01.tex
 #analysis.tex
-all: thesis.pdf present.pdf tags
+all: thesis.pdf present.pdf present-handout-2x3.pdf tags
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
+XELATEX_OPT := -e '$$pdflatex=q/xelatex -synctex=1 %O %S/'
+present.pdf: LATEXMKRC_FLAGS +=  $(XELATEX_OPT)
+present.pdf: present.tex $(PRESENT_DEP)
+
+present-handout-2x3.pdf: present.pdf
+	pdfjam-slides6up --suffix 'handout-2x3' --batch $<
+
 %.pdf: %.tex
-	latexmk -f -pdf -silent -diagnostics $<
+	-latexmk $(LATEXMKRC_FLAGS) -f -pdf -silent -diagnostics $<
 
 %.tex: %.md
 	pandoc -t latex $< -o $@
