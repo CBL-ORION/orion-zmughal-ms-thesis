@@ -20,6 +20,16 @@
 %% glossaries needs to be after hyperref
 \usepackage[toc,acronym]{glossaries}
 \glsdisablehyper % only link from the glossary to the text
+\glsnopostdottrue % no period at the end of a glossary entry
+
+\newcommand{\cblglossdelimiter}{:}
+\newglossarystyle{cbl-gloss}{%
+\setglossarystyle{list}% base this style on the list style
+\renewcommand*{\glossentry}[2]{%
+\item[\glsentryitem{##1}%
+  \glstarget{##1}{\glossentryname{##1}\cblglossdelimiter}]
+  \glossentrydesc{##1}\glspostdescription\space ##2}
+}
 
 %% For displaying algorithms using algorithmicx
 \usepackage{algorithm}
