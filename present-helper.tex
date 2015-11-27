@@ -1,15 +1,56 @@
+%\usepackage[small,sf,bf]{titlesec}
+
 \usetheme{Ilmenau}
 \usecolortheme{beaver}
+\usepackage{ifxetex}
+
+\ifxetex
+	% set font to Tahoma
+	\usefonttheme{professionalfonts} % using non standard fonts for beamer
+	\usefonttheme{serif} % default family is serif
+	\usepackage{fontspec}
+	\setmainfont{Tahoma}
+\else
+	\usepackage[T1]{fontenc}
+\fi
 
 \definecolor{CBLRed}{RGB}{205,0,0}
+
+% Title on title slide
+\setbeamerfont{title}{size = \Large}
+\setbeamercolor{title}{fg = black, bg = white}
+
 \setbeamercolor{frametitle}{fg=white,bg=CBLRed}
 \setbeamercolor{section in head/foot}{fg=white,bg=CBLRed}
-\setbeamercolor{author in head/foot}{bg=CBLRed!20}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=CBLRed}
+\setbeamercolor{author in head/foot}{fg=white,bg=CBLRed}
 \setbeamertemplate{headline}{}
-\setbeamertemplate{footline}{}
+\beamertemplatenavigationsymbolsempty
 
-\usefonttheme[onlymath]{serif}
+\logo{}
+\def\insertlogo
+{%
+	\color{gray}
+	\begin{tabular*}{\paperwidth}{p{0.01\paperwidth}p{0.84\paperwidth}p{0.15\paperwidth}}
+		&
+		\parbox[c][][c]{\textwidth}{\raggedright
+			\raisebox{-.5\height}{\includegraphics[width=\textwidth]{gfx/cbl-footer.png}}
+		}
+		&
+		\parbox[c][][c]{\textwidth}{%\raggedleft
+			{\large\insertframenumber} %/\inserttotalframenumber
+		}
+	\end{tabular*}
+ }
+
+%\usefonttheme[onlymath]{serif}
 \setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{footline}{}
+%\setbeamertemplate{footline}[frame number]
+
+%% Change beamer bullets to circles rather than the ball default
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[circle]
 
 
 \usepackage{textcomp}
@@ -17,7 +58,6 @@
 \usepackage{changepage}
 \usepackage{multicol}
 \usepackage{wasysym}
-\usepackage[T1]{fontenc}
 \usepackage{listings}
 
 \lstset{%basicstyle=\small\ttfamily,
@@ -29,4 +69,64 @@
 \usepackage{tikz}
 \usetikzlibrary{snakes,arrows,shapes,automata}
 
-\logo{\includegraphics[width=0.95\paperwidth]{gfx/cbl-footer.png}}
+% http://tex.stackexchange.com/questions/12550/changing-default-width-of-blocks-in-beamer/12551#12551
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+
+
+%% TOC at beginning of sections/subsections
+%\AtBeginSection[]
+%{
+%% <beamer>{Table of Contents}
+%        \begin{frame}
+%                \tableofcontents[
+%                                currentsection,
+%                                hideothersubsections,
+%                                sectionstyle=show/shaded,
+%                                subsectionstyle=hide/hide,
+%                ]
+%        \end{frame}
+%}
+%\AtBeginSubsection[]
+%{
+%   \begin{frame}
+%                \begin{tabular}{p{0.3\paperwidth}p{0.7\paperwidth}}
+%                        \tableofcontents[
+%                                        currentsection,
+%                                        hideothersubsections,
+%                                        sectionstyle=show/shaded,
+%                                        subsectionstyle=hide/hide,
+%                        ]
+%                &
+%                        \begin{varblock}[0.5\paperwidth]{}
+%                                \vspace{.2cm}
+%                                \tableofcontents[
+%                                        currentsubsection,
+%                                        hideothersubsections,
+%                                        sectionstyle=hide/hide,
+%                                        subsectionstyle=show/shaded,
+%                                ]
+%                        \end{varblock}
+%                \end{tabular}
+%   \end{frame}
+%}
+
+
+\AtBeginSubsection[]
+{
+  \begin{frame}
+	       \tableofcontents[
+			       currentsection,
+			       hideothersubsections,
+			       sectionstyle=show/shaded,
+			       subsectionstyle=show/shaded,
+	       ]
+  \end{frame}
+}
