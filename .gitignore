@@ -28,7 +28,10 @@
 ## beamer
 *.nav
 *.snm
+## synctex
+*.synctex.gz
 # }}}
 
+*.synctex.gz
 /draft-pdf/
 /gfx-out/
