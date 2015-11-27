@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# From <https://wiki.debian.org/tahoma>
+CURDIR=`dirname "$0"`; cd $CURDIR/..;
+PROJECT_ROOT=`pwd`
+
+cd "$PROJECT_ROOT"
+
+if [ ! -r "font/Tahoma-Roman.ttf" ]; then
+	mkdir -p font/tmp
+	cd font/tmp
+
+	wget http://download.microsoft.com/download/office97pro/fonts/1/w95/en-us/tahoma32.exe
+	sudo apt-get install cabextract || echo "You need 'contrib' in /etc/apt/sources.list"
+	cabextract tahoma32.exe
+
+	mv Tahoma*.TTF "$PROJECT_ROOT/font"
+
+	cd "$PROJECT_ROOT/font"
+	rename -v 's/\.TTF$/.ttf/' *.TTF
+	mv -v Tahoma.ttf Tahoma-Roman.ttf
+	mv -v Tahomabd.ttf Tahoma-Bold.ttf
+
+	rm -rf tmp
+fi
+
+if [ ! -r "/usr/local/share/fonts/Tahoma-Roman.ttf" ]; then
+	# install to system
+	sudo mkdir -p /usr/local/share/fonts # Create directory if it doesn't exist
+	sudo cp Tahoma-Roman.ttf Tahoma-Bold.ttf /usr/local/share/fonts/ # Copy the font there
+	sudo fc-cache /usr/local/share/fonts/ # Update font cache
+	fc-list | grep -i tahoma # Check it's there
+fi
