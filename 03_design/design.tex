@@ -135,7 +135,7 @@ volume.
 			\Comment{Experimentally derived relationship between Laplacian scales and radii}
 		\State $\freqdom{L}[i] \gets \Call{LaplacianFilter}{n, \sigma_{L}[i]}$
 			\Comment{Construct Laplacian filters in the frequency domain}
-		\State ${I}_{L}[i] \gets \IFourierTrans{ \freqdom{I} \MultDot \freqdom{L}[i] }$
+		\State ${I}_{L}[i] \gets \IFourierTrans{ \freqdom{I} \HadamardProd \freqdom{L}[i] }$
 		\State
 	\end{algorithmic}
 \end{algorithm}
