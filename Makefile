@@ -12,9 +12,9 @@ THESIS_CHAPTERS := \
 	appendix/appendix.tex
 THESIS_META := meta/title.tex meta/committee.tex
 THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 00_front-matter/notation.tex \
-	helper.tex thesis.bib \
+	preamble/helper.tex thesis.bib \
 	$(THESIS_META) $(THESIS_CHAPTERS)
-PRESENT_DEP := present-helper.tex meta/defense.tex
+PRESENT_DEP := preamble/present-helper.tex meta/defense.tex
 
 GFX_DEP := \
 	$(GFX_OUT_DIR)/matlab-call-graph/segmentation.tex \
