@@ -2,16 +2,16 @@
 \begin{abstract}
 
 % * Problem - what is being solved?
-The thesis describes the conversion of the ORION system for neuron
-morphology extraction from an interpreted language to a compiled
-language. The purpose of this conversion is to provide a tool
+The thesis describes the conversion of the \acrfull{ORION} system for neuron
+morphology reconstruction from an interpreted language to a compiled
+language. The motivation of this conversion is to provide a tool
 that can be used by neuroscience researchers to analyse their own
 neuron data and compare the output against both manual and
 automated tracings. This is in line with the goals of open
 science: a movement that seeks to make the findings and processes
 of research more widely available for peer review and
 reproducibility. By collaboratively sharing both neuron imaging
-data and code between organisations, it is possible to compare
+data and code between organisations, it is possible to compare the
 results of multiple methods without reimplementing all the stages
 of the reconstruction pipeline.
 
@@ -21,7 +21,7 @@ be incorporated into other tools, the implementation must be
 rewritten in a different language. This presents a challenge
 because the languages have vastly different paradigms. As such,
 much of the existing code needs to be analysed to determine any
-changes to the design. Creating a new implementation also means
+changes needed to the design. Creating a new implementation also means
 that the new system can be designed with modifiability in mind so
 that future changes can be easily incorporated.
 %
@@ -41,7 +41,7 @@ The specific objectives are to
 \end{enumerate*}
 
 % * Impact - how does this effect the scientific community?
-The extraction of neuron morphology from microscopy imaging data
+The reconstruction of neuron morphology from microscopy imaging data
 is an invaluable method for understanding neuron characteristics.
 However, due to the cost in time and effort, manual neuron
 reconstruction is not feasible for large-scale analysis of neuron
@@ -51,7 +51,8 @@ datasets.
 % * Conclusions - what does it all mean?
 This implementation provides a working method for determining
 neuron morphology that can be used to collect statistical
-properties from various neuron data.
+properties from various neuron data
+that can also be extended by the community.
 
 \end{abstract}
 	\centerline{\vrule width 1.5in height 0.4pt}
