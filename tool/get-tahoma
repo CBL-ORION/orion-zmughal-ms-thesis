@@ -22,6 +22,8 @@ if [ ! -r "font/Tahoma-Roman.ttf" ]; then
 	mv -v Tahomabd.ttf Tahoma-Bold.ttf
 
 	rm -rf tmp
+else
+	echo "Tahoma already extracted to font/ directory. Skipping extraction."
 fi
 
 if [ ! -r "/usr/local/share/fonts/Tahoma-Roman.ttf" ]; then
@@ -30,4 +32,6 @@ if [ ! -r "/usr/local/share/fonts/Tahoma-Roman.ttf" ]; then
 	sudo cp Tahoma-Roman.ttf Tahoma-Bold.ttf /usr/local/share/fonts/ # Copy the font there
 	sudo fc-cache /usr/local/share/fonts/ # Update font cache
 	fc-list | grep -i tahoma # Check it's there
+else
+	echo "Tahoma already in the system directory. Skipping installation."
 fi
