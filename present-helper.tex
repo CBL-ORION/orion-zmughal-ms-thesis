@@ -121,12 +121,14 @@
 
 \AtBeginSubsection[]
 {
-  \begin{frame}
-	       \tableofcontents[
-			       currentsection,
-			       hideothersubsections,
-			       sectionstyle=show/shaded,
-			       subsectionstyle=show/shaded,
-	       ]
+	\begin{frame}
+		\begin{multicols}{2}
+			\tableofcontents[
+				currentsection,
+				hideothersubsections,
+				sectionstyle=show/shaded,
+				subsectionstyle=show/shaded,
+			]
+		\end{multicols}
   \end{frame}
 }
