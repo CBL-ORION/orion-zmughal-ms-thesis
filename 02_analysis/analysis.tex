@@ -275,3 +275,18 @@ MATLAB from C code and thus allow for processing with
 	code is encrypted and others can not see how the
 	algorithms are implemented.
 \end{description}
+
+A drawback to the rewrite is that writing native code rather than
+MATLAB code can make maintainance and reproducibility more
+difficult~\autocite{Donoho2009,Collberg2015}. Many considerations
+go into creating portable software and many of these same
+considerations are also necessary for reproducible computational
+science (e.g., file system handling, floating point accuracy,
+compiler differences, and dynamic libraries)~\autocite{PortableCode:Hook:2005}.
+The developers of MATLAB have already done much of the work required
+to make MATLAB portable across different operating systems.
+Fortunately, the \gls{orionmat} code only needs simple file system
+handling support. Other issues such as the aforementioned floating
+point accuracy and compiler differences are still unresolved by
+MATLAB itself and must be addressed in \gls{orionc}. Further
+discussion about these and other issues is \cref{ch:implementation,ch:testing}.
