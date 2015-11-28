@@ -38,7 +38,7 @@ with rewriting large systems.
 	are not known to payoff as much as product owners wish.
 \end{itemize*}
 % refactoring over rewriting
-As such, it is preferable to work on slowly refactoring the code
+Therefore, it is preferable to work on slowly refactoring the code
 rather than a complete rewrite. Refactoring is a process where
 instead of throwing away the existing system, the development
 proceeds by making small, incremental changes over an extended
@@ -54,22 +54,22 @@ software.
 In order to understand why this project is being undertaken, it is
 important to understand why a rewrite is necessary as opposed to refactoring
 the existing codebase. Both options require an analysis of the project
-deliverables, that is, a concrete set of goals that will direct the project
-development. These deliverables can be classified as either scientific or
-engineering deliverables. Scientific deliverables are motivated by goals that
+outcomes and deliverables, that is, a concrete set of goals that will direct the project
+development. These goals can be classified as either scientific
+outcomes or an engineering deliverables. Scientific outcomes are motivated by goals that
 advance the state of scientific knowledge while engineering deliverables focus
 on specific technical aspects of the project that make future project
 maintenance and growth possible. This section will only cover the scientific
-deliverables while engineering deliverables are covered in \cref{sec:objectives}.
+outcomes while engineering deliverables are covered in \cref{sec:objectives}.
 
-The \emph{primary scientific deliverable} of this thesis is a system for
+The \emph{primary scientific outcome} of this thesis is a system for
 neuron reconstruction. This system is designed with the principles of open
 science in mind so that it is usable by biologists to study
 neuroanatomy. \Cref{subsec:open-science} contains further
 discussion on open-science and how this project achieves this
 goal.
 
-The \emph{secondary scientific deliverable} is to make this system
+The \emph{secondary scientific outcome} is to make this system
 compatible with existing tools for image analysis so that it can
 be compared against other methods as part of the BigNeuron
 project. The role of BigNeuron in neuroscience research is covered
@@ -103,8 +103,17 @@ reproducing a published method.
 	that are mistakenly left out which may be essential for the rest of the
 	processing. One specific area where this occurs often is
 	in data preprocessing and annotation stages which can
-	involve human interaction and, as such, some assumptions
-	may not be written down.
+	involve human interaction; as a result of this
+	interaction, some assumptions
+	may not be written down. For example, if the data contains
+	missing values, these instances may be removed based on
+	some criteria. If these criteria are not clearly written
+	down, it can be difficult to apply the same procedure
+	again. This is why many statisticians recommend that the
+	raw data and the tidy data should both be available and if
+	possible, manual processing should be avoided in the data
+	preprocessing step so that it is clear how to regenerate the
+	tidy data from the raw data~\autocite{Sandve2013,datasharing:Leek,Jaffe2015,Wickham:tidy-data}.
 }
 { % problems with software distribution
 	Referencing readily available software packages gives
@@ -118,8 +127,8 @@ reproducing a published method.
 	can cause incompatibility issues for both software
 	distributed in source form or binary form. Both source
 	code and binary software can have dependencies on
-	platforms (e.g., operating systems, runtimes, computer
-	architecture, etc.) and licensing of components that can
+	platforms (e.g., operating systems, runtime systems, computer
+	architecture) and licensing of components that can
 	hinder others from using the software.
 }
 
@@ -216,7 +225,7 @@ defines this as follows:\vspace{-3.5\parskip}
 \end{quote}
 
 % add more info about quote
-The ``scientific knowledge mentioned in the above quote
+The ``scientific knowledge'' mentioned in the above quote
 encompasses any kind of knowledge including problem definitions,
 ideas, code, data, methodology, and journal articles. The goal is
 to allow for more opportunities for collaboration and sharing of
@@ -296,7 +305,7 @@ project is the subject of \cref{subsec:bigneuron}.
 \subsection{BigNeuron}\label{subsec:bigneuron}
 
 { % what is Vaa3D
-	The secondary deliverable is to make the system compatible
+	The secondary outcome is to make the system compatible
 	with the Vaa3D biomedical imaging toolkit~\autocite{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}.
 	This toolkit allows biologists to visualise and analyse
 	biomedical imaging datasets. It can be extended through
