@@ -76,5 +76,5 @@ latexdiff-thesis:
 		echo "Using last tag: $$LTX_COMP"; \
 	else \
 		LTX_COMP=$(LAST_VERSION); \
-	fi
+	fi; \
 	git latexdiff -v --output diff.pdf --ignore-latex-errors --main thesis.tex $$LTX_COMP master
