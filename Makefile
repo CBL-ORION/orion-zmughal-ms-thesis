@@ -60,8 +60,9 @@ wc-pdf: thesis.pdf
 wc-tex:
 	find -name '*.tex' | xargs wc -w
 
-clean::
+cleanall::
 	rm -Rf $(GFX_OUT_DIR)
+	rm -Rf tags
 
 check:
 	@echo "Check for references that are not resolved"
