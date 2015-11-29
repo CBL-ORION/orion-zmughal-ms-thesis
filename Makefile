@@ -69,3 +69,6 @@ check:
 	@echo "==="
 	-@pdftotext thesis.pdf  - | grep --colour=auto -C1 '??'
 	@echo "==="
+
+latexdiff-thesis:
+	git latexdiff --ignore-latex-errors --main thesis.tex $(LAST_VERSION) master
