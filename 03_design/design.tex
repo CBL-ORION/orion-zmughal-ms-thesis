@@ -101,19 +101,19 @@ volume.
 		to bootstrap the learning process so that a quick
 		approximation of the distribution of background
 		and foreground voxels can be determined
-		(see \cref{alg:seg_bg_train}).
+		(\cref{alg:seg_bg_train}).
 	\enumdescitem{Obtain vessellness features} This step is used to
 		obtain features that are used to discriminate
 		vessel-like structures
-		(see \cref{alg:seg_vessellness}).
+		(\cref{alg:seg_vessellness}).
 	\enumdescitem{Learn discriminant function} Here an accumulator is used to
 		characterise the distribution of the vessellness features
-		(see \cref{alg:seg_discrim}).
+		(\cref{alg:seg_discrim}).
 	\enumdescitem{Threshold} Using the discriminant function from the previous
 		step, the volume is segmented into foreground and background classes
-		(see \cref{alg:seg_threshold}).
+		(\cref{alg:seg_threshold}).
 	\enumdescitem{Post-processing} Removal of artifacts such as small connected components
-		(see \cref{alg:seg_post}).
+		(\cref{alg:seg_post}).
 \end{enumerate*}
 }\label{fig:proc-segmentation}
 \end{figure}
