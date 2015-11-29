@@ -237,14 +237,17 @@ extensible and modular.
 \section{Roads not taken}
 
 There were two possible ways to avoid having to do a rewrite that
-were possible solutions to some of the objectives listed above.
+could have fulfilled some of the objectives listed above.
 These were not chosen because they would have not met the primary
 scientific outcome (open-science) nor the fourth objective
 (reproducibility). Both of these approaches allow for calling
 MATLAB from C code and thus allow for processing with
-\gls{orionmat}. These approaches are as follows:
-\begin{description}[font=\textpluscolon]
-\item[Using the MATLAB Engine API] This allows for controlling a
+\gls{orionmat}.
+
+{
+	% Using the MATLAB Engine API
+	The first of these approaches is to use the standard
+	\emph{MATLAB Engine API} that comes with MATLAB. This allows for controlling a
 	MATLAB instance using inter-process communication which
 	means each run requires starting a MATLAB process with a
 	valid MATLAB license. This means that \gls{orionmat}
@@ -257,9 +260,17 @@ MATLAB from C code and thus allow for processing with
 	This does not meet the reproducibility criteria of the
 	fourth objective as it requires the end-user to have a
 	license that may be difficult to obtain and furthermore
-	can tie the software to a specific version of that
+	can tie the software to a specific version of the MATLAB
 	software.
-\item[Using the MATLAB Compiler Runtime] This approach allows for
+}
+
+{
+	% Using the MATLAB Compiler Runtime
+	The second approach is to use the MATLAB Compiler tool
+	to generate a dynamic library (e.g., \computertext{liborion3mat.so} on GNU/Linux and
+	\computertext{liborion3mat.dll} on Windows)
+	from the \gls{orionmat} code that can be linked to C/C++ code.
+	This allows for
 	distributing MATLAB code to people that do not have
 	MATLAB by using the MATLAB Compiler Runtime along with an
 	encrypted archive of the \gls{orionmat} workspace. Unlike
@@ -267,21 +278,37 @@ MATLAB from C code and thus allow for processing with
 	However, the encrypted archive is tied to a single
 	operating system (e.g., Windows, GNU/Linux) and computer
 	architecture (e.g., i386 or x86-64). This makes
-	reproducibility difficult since the compilation can only
-	be done on the same kind of computer and version of MATLAB
-	as the corresponding version of the MATLAB Compiler
-	Runtime. This also violates the primary
-	scientific outcome (open-science) since the deployed
-	code is encrypted and others can not see how the
-	algorithms are implemented.
-\end{description}
+	reproducibility difficult since the dynamic library can
+	only be generated on the same kind of computer and version
+	of MATLAB as the corresponding version of the MATLAB
+	Compiler Runtime.
 
-A drawback to the rewrite is that writing native code rather than
-MATLAB code can make maintenance and reproducibility more
-difficult~\autocite{Donoho2009,Collberg2015}. Many considerations
-go into creating portable software and many of these same
-considerations are also necessary for reproducible computational
-science (e.g., file system handling, floating point accuracy,
+	A preliminary prototype of the MATLAB Compiler approach
+	for interfacing with MATLAB was attempted in the Analysis
+	phase, but rejected as it made distribution difficult and
+	added a large binary dependency that would need to
+	maintained in addition to the \gls{orionmat} code. This
+	approach could work for a research project where the
+	ability for others to run the code on different data sets
+	is sufficient. This can be accomplished by creating a
+	lightweight virtual machine that comes pre-installed with
+	the library and MATLAB Compiler Runtime. Those without
+	access to MATLAB will still be able to run the algorithm
+	as is, but will not able to adapt it by modifying the
+	code. However, we reject this approach in the context of
+	\gls{orion3} as it would violate the primary scientific
+	outcome (open-science) since encrypted code prevents
+	others from seeing how the algorithms for \gls{orionmat}
+	and MATLAB are implemented.
+}
+
+Although we reject the above approaches, there is a benefit to
+using MATLAB. Writing native code rather than MATLAB code can
+make maintenance and reproducibility more difficult if the
+development does not aim for those goals early on~\autocite{Donoho2009,Collberg2015}.
+Many considerations go into creating portable software and many of
+these same considerations are also necessary for reproducible
+computational science (e.g., file system handling, floating point accuracy,
 compiler differences, and dynamic libraries)~\autocite{PortableCode:Hook:2005}.
 The developers of MATLAB have already done much of the work required
 to make MATLAB portable across different operating systems.
