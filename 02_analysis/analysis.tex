@@ -250,3 +250,22 @@ handling support. Other issues such as the aforementioned floating
 point accuracy and compiler differences are still unresolved by
 MATLAB itself and must be addressed in \gls{orionc}. Further
 discussion about these and other issues is \cref{ch:implementation,ch:testing}.
+
+\section{\glsentrytext{orion3} MATLAB call graph}\label{appx:matlab-call-graph}
+
+% TODO clean up
+In order to understand how the ORION MATLAB code is structured, it
+is necessary to first get the call graph of the code. There is a
+tool built in to MATLAB to do this called
+depfun
+\url{http://www.mathworks.com/help/matlab/ref/depfun.html} % TODO turn into citation
+, however this tool runs slowly when running on the entire codebase.
+There is an alternative called fdep
+\url{http://www.mathworks.com/matlabcentral/fileexchange/17291-fdep--a-pedestrian-function-dependencies-finder}
+
+
+\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/segmentation.tex}}
+
+\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/registration.tex}}
+
+\resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/tracing.tex}}
