@@ -1,0 +1,7 @@
+#!/bin/sh
+
+git clone https://gitlab.com/git-latexdiff/git-latexdiff.git
+cd git-latexdiff
+sudo make install
+cd ..
+rm -Rfv git-latexdiff
