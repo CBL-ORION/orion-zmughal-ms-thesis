@@ -68,6 +68,7 @@ check:
 	@echo "Check for references that are not resolved"
 	@echo "==="
 	-@pdftotext thesis.pdf  - | grep --colour=auto -C1 '??'
+	-@fgrep "I didn't find a database entry" *.blg
 	@echo "==="
 
 latexdiff-thesis:
