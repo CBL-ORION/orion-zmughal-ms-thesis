@@ -26,7 +26,7 @@ adding new changes will become difficult --- especially
 when fundamental data structures need to be modified. The following
 details these design decisions.
 
-\section{MATLAB version of \glsentrytext{orion3}}
+\section{Incorporation of \glsentrytext{orionmat}}
 
 % start with MATLAB code and why
 Since the algorithm already exists as a design in the \gls{orionmat}
@@ -38,16 +38,7 @@ component because the inputs and outputs remain the same and
 keeping the names the same makes it easier to navigate between
 corresponding functions.
 
-% how the original MATLAB code is used as a starting point
-In order to accomplish this, we need an overview of the MATLAB
-code. One way to do this is to build a call graph, that is, a
-graphical representation of which functions are called by other
-functions. Using this, it is possible to trace the execution of
-the code. The call graph for the MATLAB code is given in \cref{appx:matlab-call-graph}.
-By taking this call graph
-and creating equivalent functions in the native code, a direct
-comparison can be made between the two codebases. Thus, each
-function can be converted one-by-one.
+% TODO describe naming convention and the way of linking back to original implementation
 
 \section{Algorithms and architecture}
 

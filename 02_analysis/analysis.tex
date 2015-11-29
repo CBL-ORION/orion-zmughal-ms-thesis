@@ -253,19 +253,45 @@ discussion about these and other issues is \cref{ch:implementation,ch:testing}.
 
 \section{\glsentrytext{orion3} MATLAB call graph}\label{appx:matlab-call-graph}
 
+% how the original MATLAB code is used as a starting point
+Even if the \gls{orionc} code is a rewrite, it is a good idea to look at how
+the original \gls{orionmat} codebase is arranged.  One way to do this is to
+build a call graph, that is, a graphical representation of which functions are
+called by other functions. Using this, it is possible to recursively trace the
+execution of the code. By taking this call graph and creating equivalent
+functions in the native code, a direct comparison can be made between the two
+codebases. Thus, each function can be converted one-by-one.
+
 % TODO clean up
-In order to understand how the ORION MATLAB code is structured, it
-is necessary to first get the call graph of the code. There is a
-tool built in to MATLAB to do this called
-depfun
-\url{http://www.mathworks.com/help/matlab/ref/depfun.html} % TODO turn into citation
-, however this tool runs slowly when running on the entire codebase.
-There is an alternative called fdep
-\url{http://www.mathworks.com/matlabcentral/fileexchange/17291-fdep--a-pedestrian-function-dependencies-finder}
+There is a tool built in to MATLAB to create call graphs called
+\computertext{depfun}, %\url{http://www.mathworks.com/help/matlab/ref/depfun.html}
+however this tool runs slowly when running on the entire codebase.
+There is an alternative called \computertext{fdep}~\autocite{MATLAB:fdep}. The
+results of \computertext{fdep} are then passed to the GraphViz graph layout
+tool to visualize the results~\autocite{GraphViz:Gansner:2000}.
+The call graph for the MATLAB code is depicted in \cref{fig:orionmat-segmentation,fig:orionmat-registration,fig:orionmat-tracing}.
 
 
+\begin{figure}
+\centering
 \resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/segmentation.tex}}
+\caption[Callgraph of segmentation process in \glsentrytext{orionmat}]{
+\textbf{\boldmath{} Callgraph of segmentation process in \gls{orionmat}}
+}\label{fig:orionmat-segmentation}
+\end{figure}
 
+\begin{figure}
+\centering
 \resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/registration.tex}}
+\caption[Callgraph of registration process in \glsentrytext{orionmat}]{
+\textbf{\boldmath{} Callgraph of registration process in \gls{orionmat}}
+}\label{fig:orionmat-registration}
+\end{figure}
 
+\begin{sidewaysfigure}
+\centering
 \resizebox{1.0\textwidth}{!}{\input{gfx-out/matlab-call-graph/tracing.tex}}
+\caption[Callgraph of tracing process in \glsentrytext{orionmat}]{
+\textbf{\boldmath{}Callgraph of tracing process in \gls{orionmat}}
+}\label{fig:orionmat-tracing}
+\end{sidewaysfigure}
