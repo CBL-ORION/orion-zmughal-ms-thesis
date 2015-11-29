@@ -5,13 +5,13 @@
 The thesis describes the conversion of the \acrfull{ORION} system for neuron
 morphology reconstruction from an interpreted language to a compiled
 language. The motivation of this conversion is to provide a tool
-that can be used by neuroscience researchers to analyse their own
+that can be used by neuroscience researchers to analyze their own
 neuron data and compare the output against both manual and
 automated tracings. This is in line with the goals of open
 science: a movement that seeks to make the findings and processes
 of research more widely available for peer review and
 reproducibility. By collaboratively sharing both neuron imaging
-data and code between organisations, it is possible to compare the
+data and code between organizations, it is possible to compare the
 results of multiple methods without reimplementing all the stages
 of the reconstruction pipeline.
 
@@ -20,7 +20,7 @@ In order to release the existing algorithm so that it can easily
 be incorporated into other tools, the implementation must be
 rewritten in a different language. This presents a challenge
 because the languages have vastly different paradigms. As a result,
-much of the existing code needs to be analysed to determine any
+much of the existing code needs to be analyzed to determine any
 changes needed to the design. Creating a new implementation also means
 that the new system can be designed with modifiability in mind so
 that future changes can be easily incorporated.
@@ -28,11 +28,11 @@ that future changes can be easily incorporated.
 % * Objectives - what were the main goals/hypotheses?
 The specific objectives are to
 \begin{enumerate*}[label=(\roman*)]
-\item analyse the ORION algorithm and implementation to
+\item analyze the ORION algorithm and implementation to
 	determine the architecture for the new system that is
 	efficient and extensible;
 \item integrate the system into a popular toolkit for biomedical
-	image analysis for ease-of-use and visualisation;
+	image analysis for ease-of-use and visualization;
 \item develop a test suite of both the individual components (unit
 	testing) and across the whole system (integration tests);
 	and % "and" before last item

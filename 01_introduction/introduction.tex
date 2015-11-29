@@ -20,7 +20,7 @@ This conversion process requires an analysis of the existing code
 to understand its structure and create a plan for replicating the
 same functionality in the in the new system.
 
-This software project can be categorised as a \emph{rewrite}; that
+This software project can be categorized as a \emph{rewrite}; that
 is, a replication of an existing software system without
 reusing the existing code. In software engineering, the consensus
 on rewriting software from scratch is that it is difficult and
@@ -85,7 +85,7 @@ of neuron reconstruction (\cref{subsec:neuron-tracing}).
 { % how software has become important in experimental science
 	Quantitative methods are an essential part of scientific research. The
 	experimental sciences depend on the dissemination of the methods used for each
-	study so that it is clear how results are obtained and analysed.
+	study so that it is clear how results are obtained and analyzed.
 	With the rapid increase in computing power, storage, and availability,
 	it has become easier to collect and process larger and more complex datasets
 	using sophisticated methods and this has made software and
@@ -213,7 +213,7 @@ There already issues with papers having enough statistical power
 to present reproducible results, but these problems can be
 understood through careful reading of the experimental
 methods~\autocite{Ioannidis2005,Button2013}. Problems in the software
-are harder to analyse based on the papers alone and these have
+are harder to analyze based on the papers alone and these have
 been known to result in paper retractions~\autocite{Miller2006,Merali2010,Joppa2013}.
 
 % how software engineering needs to be
@@ -221,7 +221,7 @@ been known to result in paper retractions~\autocite{Miller2006,Merali2010,Joppa2
 This lack of training in software engineering has prompted many of
 the open science advocates to offer open access teaching
 materials so that training is available to everyone.
-In particular, the Software Carpentry organisation has
+In particular, the Software Carpentry organization has
 published several guidelines and workshops to teach best
 practices for handling software and data that are relevant to
 scientific research~\autocite{Wilson2006,Wilson2014}. These
@@ -233,13 +233,13 @@ trackers, and pre-merge code reviews.
 % neuroscience uses quantitative imaging;
 % problems with comparing data
 The history of biology has been defined by the tools used to
-visualise various biological structures and processes across many
+visualize various biological structures and processes across many
 scales~\cite{moore2012visualizing}. Neuroscience in particular has
 made use of many techniques: from the patch clamp for studying ion
 channels to \acrshort{EEG} for recording brain surface electrical
 activity to \acrshort{fMRI} and fluorescent microscopy for
 observing brain and neuron activity respectively, these techniques
-have collectively allowed neuroscientists to characterise what
+have collectively allowed neuroscientists to characterize what
 they are looking at.  These techniques have made quantitative
 image analysis a large part of biology when measuring and
 comparing results across different samples. However, the results
@@ -265,11 +265,11 @@ The secondary scientific outcome is to provide an implementation of
 \gls{orion3} for the BigNeuron project. This requires using the common
 interface provided by the the Vaa3D biomedical imaging
 toolkit~\autocite{Vaa3D:site:2015,Vaa3D:Peng:2010,Vaa3D:Peng:2014}.  This
-toolkit allows biologists to visualise and analyse biomedical imaging datasets.
+toolkit allows biologists to visualize and analyze biomedical imaging datasets.
 Vaa3D can be extended through the development of plugins. This allows algorithm
 developers to make their interactive and non-interactive methods for image
 analysis available for biologists to use without having to switch between
-multiple programs for processing and visualising data.
+multiple programs for processing and visualizing data.
 
 % explain comparing algorithms and DIADEM Challenge
 Creating an image analysis tool that can be easily integrated into
@@ -290,7 +290,7 @@ The DIADEM Challenge was successful in raising awareness of the
 problem of neuron reconstruction and several new 3D reconstruction
 methods and metrics have been proposed after the end of the DIADEM
 Challenge (see \cref{subsec:neuron-tracing}).  However, the
-lack of larger public datasets, standardised metrics, and readily
+lack of larger public datasets, standardized metrics, and readily
 available algorithms have made it difficult to compare new methods
 for neuron reconstruction.
 
@@ -301,14 +301,14 @@ continues where the DIADEM Challenge left off. Instead of
 comparing the output on a few datasets as in the DIADEM Challenge,
 BigNeuron aims to enable high-throughput analysis of neuron
 microscopy stacks using multiple methods contributed from various
-algorithm developers. By standardising on the Vaa3D platform, this
+algorithm developers. By standardizing on the Vaa3D platform, this
 precludes differences between how each method handles data which
 means that all the algorithms can be bench-tested at once without
 a need for translating data between formats.
 
 However, since the Vaa3D is written in C++, incorporating plugin
 code written in non-native languages poses a problem. For this
-reason, the BigNeuron project organisers recommend that all
+reason, the BigNeuron project organizers recommend that all
 algorithms that are submitted be in C or C++. From the BigNeuron
 FAQ~\autocite{BigNeuron:FAQ:2015}\\
 \parbox{\textwidth}{
@@ -326,7 +326,7 @@ FAQ~\autocite{BigNeuron:FAQ:2015}\\
 }
 
 This is why a rewrite of the code is necessary rather than trying
-to intergrate MATLAB via the MATLAB Engine Interface. Further
+to integrate MATLAB via the MATLAB Engine Interface. Further
 discussion of the benefits of this decision are discussed in \cref{sec:benefits}.
 
 \section[\glsentrylong{SDLC}]{\Glsentrylong{SDLC}}\label{sec:sdlc}
@@ -342,7 +342,7 @@ of projects; \Cref{fig:sdlc} depicts a simple version used in this project with 
 		and resource allocation details are determined.
 		This includes scheduling, tools, and
 		defining project objectives;
-	\item[Analysis] This phase analyses the project
+	\item[Analysis] This phase analyzes the project
 		requirements and defines specific
 		technical milestones that relate to the
 		objectives defined in the Planning phase;
@@ -425,7 +425,7 @@ replaced by native code. This provides several benefits:
 		all users either install a licensed copy of MATLAB
 		or use the MATLAB Compiler Runtime for deployment;
 	\item it provides the benefit that changes in
-		function behaviour between versions of
+		function behavior between versions of
 		MATLAB do not effect the output of the
 		code; and
 	\item certain operations can run faster in native code than
@@ -433,7 +433,7 @@ replaced by native code. This provides several benefits:
 \end{enumerate}
 
 The second objective will allow the code to work with a widely used
-tool for visualisation and analysis. Furthermore, integrating with
+tool for visualization and analysis. Furthermore, integrating with
 one tool will provide a framework for integrating with other
 biomedical image analysis tools such as ImageJ~\autocite{Schneider2012}.
 

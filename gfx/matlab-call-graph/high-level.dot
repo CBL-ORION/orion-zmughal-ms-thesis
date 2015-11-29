@@ -9,7 +9,7 @@ digraph Main {
 	proc_trace [label="\mathrm{Tracing}" style = "process"];
 
 	data_vol [label="\mathrm{3D~volume}" style = "data"];
-	data_centerline [label="\mathrm{Centreline}" style = "data"];
+	data_centerline [label="\mathrm{Centerline}" style = "data"];
 
 	proc_seg -> proc_reg -> proc_trace;
 

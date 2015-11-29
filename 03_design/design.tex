@@ -65,7 +65,7 @@ namely
 	\item[Registration] for aligning subvolumes so
 		that they can be used to create a single volume;
 		and
-	\item[Tracing] to extract a centreline from the volume to
+	\item[Tracing] to extract a centerline from the volume to
 		capture the underlying neuron morphology.
 \end{description}
 
@@ -78,7 +78,7 @@ diagram of ORION algorithm}: This high-level diagram shows that
 there are three steps to the \gls{orionmat} algorithm as described
 in the text. The input to the algorithm is a 3D volume of
 microscopy data and the output is a graph-based representation of
-the neuron morphology based on the centreline.}\label{fig:high-level-arch}
+the neuron morphology based on the centerline.}\label{fig:high-level-arch}
 \end{figure}
 
 % TODO explain the current ORION algorithm
@@ -107,7 +107,7 @@ volume.
 		vessel-like structures
 		(\cref{alg:seg_vessellness}).
 	\enumdescitem{Learn discriminant function} Here an accumulator is used to
-		characterise the distribution of the vessellness features
+		characterize the distribution of the vessellness features
 		(\cref{alg:seg_discrim}).
 	\enumdescitem{Threshold} Using the discriminant function from the previous
 		step, the volume is segmented into foreground and background classes

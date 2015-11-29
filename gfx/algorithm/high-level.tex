@@ -10,12 +10,12 @@
 	\node (proc_reg)        [right=of proc_seg] [process] {$\mathrm{Registration}$};
 	\node (proc_trace)      [right=of proc_reg] [process] {$\mathrm{Tracing}$};
 
-	\node (data_centerline) [right=of proc_trace] [data] {$\mathrm{Centreline}$};
+	\node (data_centerline) [right=of proc_trace] [data] {$\mathrm{Centerline}$};
 
 	\draw [->] (data_vol)   --  (proc_seg);
 	\draw [->] (proc_seg)   --  (proc_reg);
 	\draw [->] (proc_reg)   --  (proc_trace);
-	\draw [->] (proc_trace) --  (data_centerline);
+	\draw [->] (proc_trace) --  (data_centreline);
 %
 \end{tikzpicture}
 

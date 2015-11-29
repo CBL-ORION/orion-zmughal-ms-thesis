@@ -54,7 +54,7 @@ maintenance more challenging due to changes in the \acrshort{ABI}.
 To mitigate this, one common approach to implement a C wrapper
 \acrshort{API}/\acrshort{ABI} around an existing C++ \acrshort{API}
 in what is known as an hour-glass interface~\autocite{CppCon:Hourglass:2014}.
-This provides a stabilised \acrshort{ABI} which means that if
+This provides a stabilized \acrshort{ABI} which means that if
 libraries are updated independent of the \gls{orionc} code, then
 the \gls{orionc} code will not have to be recompiled. However this can
 complicate development by having to maintain two layers, so to
@@ -78,11 +78,11 @@ reproducibility.
 
 % do not optimise --- profile
 Another principle that is used to guide the development is to
-avoid premature optimisation; that is, do not attempt to make the
+avoid premature optimization; that is, do not attempt to make the
 code more efficient before it is necessary. Instead of guessing
 which parts of the code are slow, use a profiler to measure the
 bottlenecks in the code. It is also not advisable to focus on
-optimisation at the stage of rewriting the software.
+optimization at the stage of rewriting the software.
 
 % how to approach the rewrite --- as a piecewise conversion
 % followed by refactoring
@@ -107,7 +107,7 @@ While the code for the algorithm already exists, starting with a line-by-line
 translation of the MATLAB code has some limitations outlined as follows.
 \begin{description}[font=\textpluscolon]
 \item[Toolbox\label{desc:matlab:toolbox}] The code is written to use MATLAB's extensive 
-	specialised toolboxes for image processing and
+	specialized toolboxes for image processing and
 	statistics which means that equivalents must be
 	incorporated into the new codebase.
 \item[Memory management\label{desc:matlab:mem}] Since MATLAB is a dynamic array language with
@@ -128,7 +128,7 @@ translation of the MATLAB code has some limitations outlined as follows.
 	to speed up experiments so that when an experiment is
 	rerun, any images that have been processed in an earlier
 	stage (i.e., segmentation) do not need to be reprocessed
-	in later stages (i.e., centreline extraction). Code
+	in later stages (i.e., centerline extraction). Code
 	written in this form imposes an algorithm structure
 	that is no longer strictly imperative --- the code is now
 	interspersed with checks to see if the data already exists
