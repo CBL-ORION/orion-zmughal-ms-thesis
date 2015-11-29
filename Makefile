@@ -71,4 +71,10 @@ check:
 	@echo "==="
 
 latexdiff-thesis:
-	git latexdiff --ignore-latex-errors --main thesis.tex $(LAST_VERSION) master
+	if [ -z "$(LAST_VERSION)" ]; then \
+		LTX_COMP=`git tag | tail -1`; \
+		echo "Using last tag: $$LTX_COMP"; \
+	else \
+		LTX_COMP=$(LAST_VERSION); \
+	fi
+	git latexdiff -v --output diff.pdf --ignore-latex-errors --main thesis.tex $$LTX_COMP master
