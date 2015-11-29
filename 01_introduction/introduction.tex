@@ -133,51 +133,6 @@ reproducing a published method.
 	hinder others from using the software.
 }
 
-\begin{figure}[tbp]
-\centering
-\input{gfx/sdlc.tex}
-\caption[Systems development life cycle]%
-	{\textbf{A simple systems development life cycle (SDLC)}: This figure
-	depicts an example of a life cycle used to delineate the
-	phases of development~\autocite{IRM-SDLC:DoJ:2003}. The
-	phases are:
-	\begin{enumerate*}[label={\alph*)}]
-		\enumdescitem{Planning} In this phase, project management
-			and resource allocation details are determined.
-			This includes scheduling, tools, and
-			defining project objectives;
-		\enumdescitem{Analysis} This phase analyses the project
-			requirements and defines specific
-			technical milestones that relate to the
-			objectives defined in the Planning phase;
-		\enumdescitem{Design} The parts of the system are
-			delineated and the expected input/output
-			characteristics of each part are
-			determined;
-		\enumdescitem{Implementation} The physical system is built
-			during this phase using the system design
-			from the previous phase;
-		\enumdescitem{Testing} As the Implementation phase
-			proceeds, each standalone part is tested
-			individually in what are known as unit
-			tests. When the parts interact with each
-			other, integration tests are conducted to
-			determine that these parts are compatible;
-		\enumdescitem{Maintenance} In this phase, the system is put in
-			production and monitored for changes in system
-			performance and project requirements. When these
-			changes necessitate an update to the system, the
-			project may return to the Planning phase.
-	\end{enumerate*}
-
-	It is important to note that the phases of this life cycle
-	are not discrete; there is overlap between phases. For
-	example, parts of the design may change as the
-	implementation continues as more information about the
-	physical system is available.
-}\label{fig:sdlc}
-\end{figure}
-
 { % backwards compatibility and digital preservation
 	Even more precarious is when a dependency used by the
 	software no longer behaves the same way as it did in
@@ -377,6 +332,50 @@ discussion of the benefits of this decision are discussed in \cref{sec:benefits}
 
 \section{System development life cycle}\label{sec:sdlc}
 
+\begin{figure}[tbp]
+\centering
+\input{gfx/sdlc.tex}
+\caption[Systems development life cycle]%
+	{\textbf{A simple systems development life cycle (SDLC)}: This figure
+	depicts an example of a life cycle used to delineate the
+	phases of development~\autocite{IRM-SDLC:DoJ:2003}. The
+	phases are:
+	\begin{enumerate*}[label={\alph*)}]
+		\enumdescitem{Planning} In this phase, project management
+			and resource allocation details are determined.
+			This includes scheduling, tools, and
+			defining project objectives;
+		\enumdescitem{Analysis} This phase analyses the project
+			requirements and defines specific
+			technical milestones that relate to the
+			objectives defined in the Planning phase;
+		\enumdescitem{Design} The parts of the system are
+			delineated and the expected input/output
+			characteristics of each part are
+			determined;
+		\enumdescitem{Implementation} The physical system is built
+			during this phase using the system design
+			from the previous phase;
+		\enumdescitem{Testing} As the Implementation phase
+			proceeds, each standalone part is tested
+			individually in what are known as unit
+			tests. When the parts interact with each
+			other, integration tests are conducted to
+			determine that these parts are compatible;
+		\enumdescitem{Maintenance} In this phase, the system is put in
+			production and monitored for changes in system
+			performance and project requirements. When these
+			changes necessitate an update to the system, the
+			project may return to the Planning phase.
+	\end{enumerate*}
+
+	It is important to note that the phases of this life cycle
+	are not discrete; there is overlap between phases. For
+	example, parts of the design may change as the
+	implementation continues as more information about the
+	physical system is available.
+}\label{fig:sdlc}
+\end{figure}
 
 
 \section{Literature review}
