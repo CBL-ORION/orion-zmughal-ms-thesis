@@ -74,8 +74,8 @@ replaced by native code. This provides several benefits:
 
 The second objective will allow the code to work with a widely used
 tool for visualisation and analysis. Furthermore, integrating with
-one tool will provide a framework for integrating with other tools
-such as ImageJ~\autocite{Schneider2012}.
+one tool will provide a framework for integrating with other
+biomedical image analysis tools such as ImageJ~\autocite{Schneider2012}.
 
 The third objective provides a safety net so that current and
 future development clearly defines the expectation of the code
@@ -249,7 +249,7 @@ MATLAB from C code and thus allow for processing with
 	means each run requires starting a MATLAB process with a
 	valid MATLAB license. This means that \gls{orionmat}
 	can not be run multiple times as each run will use an
-	additional MATLAB licenese. This precludes using
+	additional MATLAB license. This precludes using
 	\gls{orionmat} on a cluster as each additional process
 	will fail when the number of licenses has run out.
 	Furthermore, the startup time for each MATLAB process is
@@ -266,7 +266,7 @@ MATLAB from C code and thus allow for processing with
 	the MATLAB Engine API, this can be used in parallel.
 	However, the encrypted archive is tied to a single
 	operating system (e.g., Windows, GNU/Linux) and computer
-	architecture (e.g., IA32 or IA64). This makes
+	architecture (e.g., i386 or x86-64). This makes
 	reproducibility difficult since the compilation can only
 	be done on the same kind of computer and version of MATLAB
 	as the corresponding version of the MATLAB Compiler
@@ -277,7 +277,7 @@ MATLAB from C code and thus allow for processing with
 \end{description}
 
 A drawback to the rewrite is that writing native code rather than
-MATLAB code can make maintainance and reproducibility more
+MATLAB code can make maintenance and reproducibility more
 difficult~\autocite{Donoho2009,Collberg2015}. Many considerations
 go into creating portable software and many of these same
 considerations are also necessary for reproducible computational
