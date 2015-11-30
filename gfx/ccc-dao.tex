@@ -1,0 +1,33 @@
+%% Cross cutting concerns solved with a DAO
+\usetikzlibrary{arrows}
+\begin{tikzpicture}[node distance=1cm, >= triangle 60]
+
+	\tikzstyle{process} = [draw,shape=rectangle,scale=0.7]
+	\tikzstyle{data} = [draw,shape=circle,style=dashed,scale=0.5]
+	\tikzstyle{object} = [draw,shape=circle,style=solid,scale=0.5]
+	%
+	\node (dao)        at (0,0)      [object] {data access object};
+
+	\node (data0)        [above left=of dao]              [data] {data file a};
+	\node (data1)        [above right=of dao]      [data] {data file b};
+
+	\node (proc0)        [below left=of dao] [process] {Module 0};
+	\node (proc1)        [below=of dao] [process] {Module 1};
+	\node (proc2)        [below right=of dao] [process] {Module 2};
+
+	%\node (data_centreline) [right=of proc_trace] [data] {$\mathrm{Centerline}$};
+
+	\draw [<->] (dao)   --  (data0);
+	\draw [<->] (dao)   --  (data1);
+
+	\draw [<-] (dao)   --  (proc0);
+	\draw [<-] (dao)   --  (proc0);
+
+	\draw [->] (dao)   --  (proc1);
+	\draw [->] (dao)   --  (proc1);
+
+	\draw [->] (dao)   --  (proc2);
+	\draw [->] (dao)   --  (proc2);
+%
+\end{tikzpicture}
+

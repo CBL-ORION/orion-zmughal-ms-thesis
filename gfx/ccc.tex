@@ -1,0 +1,28 @@
+%% Cross cutting concerns
+\usetikzlibrary{arrows,calc}
+\begin{tikzpicture}[node distance=1cm, >= triangle 60]
+
+	\tikzstyle{process} = [draw,shape=rectangle,scale=0.7]
+	\tikzstyle{data} = [draw,shape=circle,style=dashed,scale=0.5]
+	%
+	\node (data0)        at (0,0)              [data] {data file a};
+	\node (data1)        [right=of data0]      [data] {data file b};
+	\coordinate (Middle) at ($(data0)!0.5!(data1)$);
+
+	\node (proc0)        [below left=of data0] [process] {Module 0};
+	\node (proc1)        [below=of Middle] [process] {Module 1};
+	\node (proc2)        [right=of proc1] [process] {Module 2};
+
+	%\node (data_centreline) [right=of proc_trace] [data] {$\mathrm{Centerline}$};
+
+	\draw [<-] (data0)   --  (proc0);
+	\draw [<-] (data1)   --  (proc0);
+
+	\draw [->] (data0)   --  (proc1);
+	\draw [->] (data1)   --  (proc1);
+
+	\draw [->] (data0)   --  (proc2);
+	\draw [->] (data1)   --  (proc2);
+%
+\end{tikzpicture}
+
