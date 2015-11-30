@@ -39,11 +39,11 @@ thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
 present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note
 present-note.pdf: present.tex $(PRESENT_DEP)
-	-$(LATEXMK) '\def\printpresentnotes{}\input{$<}'
+	-$(LATEXMK) '\def\printpresentnotes{} \input $<'
 
 present-handout.pdf: LATEXMKRC_FLAGS += -jobname=present-handout
 present-handout.pdf: present.tex $(PRESENT_DEP)
-	-$(LATEXMK) '\def\printpresenthandout{}\input{$<}'
+	-$(LATEXMK) '\def\printpresenthandout{} \input $<'
 
 
 XELATEX_OPT := -e '$$pdflatex=q/xelatex -synctex=1 %O %S/'

@@ -10,6 +10,7 @@
 \begin{document}
 % meta needs to be in \begin{document} so that tabular works
 \input{meta/defense.tex}
+\setbeamercovered{transparent}
 %  - Title slide.%{{{
 \frame{\titlepage}
 %}}}
@@ -38,80 +39,417 @@
 	\vertcenterimage{\includegraphics[width=0.8\textwidth]{gfx/present/neuron-trace}}
 	\end{tabular}
 	\note{
-% -   confocal and two-photon microscopy
-% -   fluorescent proteins on a single neuron
-% -   sampled in 3D
-% -   problems with manual tracing
-%     -   slow: can take up to 24 hours of work by domain expert on a single neuron
-%     -   difficult in 3D
-% - problems in general
-%     - faint intensity
-%     - lots of noise
+		\begin{itemize}
+		\item
+		  confocal and two-photon microscopy
+		\item
+		  fluorescent proteins on a single neuron
+		\item
+		  sampled in 3D
+		\item
+		  problems with manual tracing
+
+		  \begin{itemize}
+		  \item
+		    slow: can take up to 24 hours of work by domain expert on a single
+		    neuron
+		  \item
+		    difficult in 3D
+		  \end{itemize}
+		\item
+		  problems in general
+
+		  \begin{itemize}
+		  \item
+		    faint intensity
+		  \item
+		    lots of noise
+		  \end{itemize}
+		\end{itemize}
 	}
 \end{frame}
 
 \af{2}{motivation}
-\begin{frame}\frametitle{Open science}
-	% TODO
-	Human Genome Project
-	Allen Brain Atlas
-	OpenWorm
-	Galaxy Zoo
-	%\note{
-%% First example of open research: "Bermuda Principles" (1996)
-%% - data available in 24 hours of sequence assembly
-%% - immediate publication of annotated sequences
-%% - all data in the public domain
-	%}
+\begin{frame}\frametitle{Open science: a definition}
+\centering
+\begin{tabular}{p{0.6\textwidth}c}
+	\begin{minipage}{\linewidth}
+	\begin{quote}
+		\begin{fancyquote}
+		Open science is the idea that scientific knowledge of all kinds
+		should be openly shared as early as is practical in the discovery
+		process.
+		\end{fancyquote}
+		\qauthor{Michael Nielsen}
+	\end{quote}
+	\end{minipage}
+	&
+	\vertcenterimage{\includegraphics[height=0.3\textheight]{gfx/present/michael-nielsen}}
+	\note{
+	Scientific knowledege
+	\begin{itemize}
+	\item
+	  problem definitions
+	\item
+	  ideas
+	\item
+	  code
+	\item
+	  data
+	\item
+	  methodology
+	\item
+	  journal articles
+	\end{itemize}
+	}
+\end{tabular}
+\end{frame}
+
+\begin{frame}\frametitle{``Bermuda Principles'' (1996)}
+	\begin{itemize}
+		\item data available in 24 hours of sequence assembly
+		\item immediate publication of annotated sequences
+		\item all data in the public domain
+	\end{itemize}
+	\note{
+		\begin{itemize}
+		\item
+		  Human Genome Project: one of the earliest open research projects; 20 institutions from around the world; 13 years
+		\item
+		  arose after patent of breast cancer gene (BRCA2)
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Open science projects}
+\centering
+\begin{tabular}{cc}
+	% Human Genome Project
+	\includegraphics[height=0.3\textheight]{gfx/present/HGP}
+	&
+	% OpenWorm
+	\includegraphics[height=0.3\textheight]{gfx/present/OpenWormLogo}
+	\\
+	% Galaxy Zoo
+	\includegraphics[height=0.3\textheight]{gfx/present/Galaxyzoo}
+	&
+	% Allen Brain Atlas
+	\includegraphics[height=0.3\textheight]{gfx/present/allen_brain_atlas_screenshot}
+\end{tabular}
+	\note{
+		\begin{itemize}
+		\item
+		  Human Genome Project
+		\item
+		  OpenWorm: \emph{C. elegans} connectome modelling
+		\item
+		  GalaxyZoo: crowd-source classification of galaxies
+		\item
+		  Allen Brain Atlas: anatomical atlases of mouse and human brain
+		\end{itemize}
+	}
 \end{frame}
 
 \af{3}{motivation}
 \begin{frame}\frametitle{BigNeuron}
-	% TODO
-	[Vaa3D GUI image]
+	\centering
+	\includegraphics[height=0.3\textheight]{gfx/present/alleninsitute12}
+	\note{
+		\begin{itemize}
+		\item
+		  Continuing where the DIADEM Challenge left off
+		\item
+		  Comparing algorithms across large datasets
+		\item
+		  Stitching multiple neuron reconstructions together
+		\end{itemize}
+	}
 \end{frame}
-
-\begin{frame}[label=challenges]
-\frametitle{Challenges and risks}
-\begin{itemize}
-	\item Starting without a test suite
-	\item Memory management
-	\item Data layout differences of n-dimensional arrays
-	\item Data handling differences
-	\item Reimplement MATLAB Toolbox functions
-\end{itemize}
+\begin{frame}\frametitle{BigNeuron}
+	\centering
+	\includegraphics[height=0.5\textheight]{gfx/present/vaa3d-logo}
+	\note{
+		Standardising on Vaa3D image analysis tool
+	}
+\end{frame}
+\begin{frame}\frametitle{BigNeuron}
+	\centering
+	\includegraphics[height=0.5\textheight]{gfx/present/vaa3d-load-swc}
+	\note{
+		This is a neuron tracing loaded into Vaa3D.
+	}
 \end{frame}
 
 \subsection{Objectives}
-\begin{frame}
+\begin{frame}<1>[label=obj]
 \frametitle{Objectives}
 \begin{itemize}
-	\item Integrate with Vaa3D tool for biomedical image analysis
-	\item Convert the MATLAB code to C / C++
-	\item Release code as free/open source software for open-science
-	\item Build a test suite
+	\item<1> Convert the MATLAB code to C / C++
+	\item<2> Integrate with Vaa3D tool for biomedical image analysis
+	\item<3> Build a test suite
+	\item<4> Ensure reproducibility
 \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Conversion}
+	\begin{itemize}
+	\item
+	  Rewrite: \textcolor{red!50}{difficult}
+	\item
+	  Refactor: \textcolor{green!80}{preferred}
+	\item
+	  Middle ground: conversion \arrowright refactor
+	\end{itemize}
+	\note{
+		\begin{itemize}
+		\item
+		  Rewrites are difficult
+
+		  \begin{itemize}
+		  \item
+		    They are behind time before they have been begun.
+		  \item
+		    You can lose some of the knowledge gained by fixing bugs.
+		  \end{itemize}
+		\item
+		  Try to convert the code as closely as possible, then refactor into a
+		  more modular architecture.
+		\end{itemize}
+	}
+\end{frame}
+
+\af{2}{obj}
+\begin{frame}\frametitle{Vaa3D plugin}
+	\centering
+	\includegraphics[height=0.3\textheight]{gfx/present/vaa3d-create-neuron-rec-plugin}
+	\note{
+		The idea behind contributing an algorithm to
+		BigNeuron is to create a plugin that will take
+		data in a standarised form and give back a
+		reconstruction in a standardised form.
+	}
+\end{frame}
+
+\af{3}{obj}
+\begin{frame}\frametitle{Test suite}
+% TODO
+	\begin{itemize}
+	\item
+	  Encodes what the code is expected to do
+	\item
+	  Executable documentation
+	\item
+	  Helps detect regressions
+	\end{itemize}
+	\note{
+		\begin{itemize}
+			\item
+				Programmers are not perfect.
+			\item
+				Even if we are perfect, other programmers that we interface with are
+				not perfect.
+			\item
+				When moving to a new system, pinpoint the differences or at least get
+				a starting point for debugging
+			\item This leads into the reproducibility objective
+		\end{itemize}
+	}
+\end{frame}
+
+\af{4}{obj}
+\begin{frame}\frametitle{Reproducibility for computational science}
+	\begin{itemize}
+	\item
+	  Much of modern science is computational
+	\item
+	  SSI survey of researchers:
+
+	  \begin{itemize}
+	  \item
+	    56\% code
+	  \item
+	    21\% of those: no training in software
+	  \end{itemize}
+	\item
+	  RETRACTIONS
+	\item
+	  Unit tests not validation tests
+	\item
+	  Test many environments
+	\end{itemize}
+	\note{
+		\begin{itemize}
+		\item Note that the number is lowered since this include
+			non-STEM fields. The numbers are as high as 85\% in STEM.
+		\item
+		  Give example of chemistry handedness mistake in protein structure
+		  analysis.
+		\item
+		  Test step-by-step, not just look to see if the results look right
+		\end{itemize}
+	}
 \end{frame}
 
 \section{Analysis}
 
-\subsection{MATLAB}
+\subsection{Challenges}
+\begin{frame}<1>[label=challenges]\frametitle{Challenges and risks}
+\begin{itemize}
+	\item<1> Reimplement MATLAB Toolbox functions
+	\item<2> Memory management
+	\item<3> Data layout differences of $n$-dimensional arrays
+	\item<4> Data handling
+\end{itemize}
+	\note{
+		\begin{itemize}
+		\item
+		  Reimplementing means having to recreate the behavior of MATLAB code
+		  \emph{without} having access to the source
+		\item
+		  garbage collected memory vs.~manual memory management
+		\end{itemize}
+	}
+\end{frame}
+
+%\af{1}{challenges}
+%\af{2}{challenges}
+\af{3}{challenges}
+\begin{frame}\frametitle{Data layout (indices)}
+	\centering
+	\begin{tabular}{|l|c|c|c|c|}
+	\hline
+	MATLAB    & \cellcolor{langM} x(1) & \cellcolor{langM} x(2) & \cellcolor{langM} x(3) & \cellcolor{langM} x(4) \\ \hline
+	C         & \cellcolor{langC} x[0] & \cellcolor{langC} x[1] & \cellcolor{langC} x[2] & \cellcolor{langC} x[3] \\ \hline
+	Data in x & \cellcolor{data} 4     & \cellcolor{data} 3     & \cellcolor{data} 2     & \cellcolor{data} 1     \\ \hline
+	\end{tabular}
+	\note{
+		1-based arrays in MATLAB vs. 0-based arrays in C
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Data layout (row-major and column-major)}
+	\centering
+	\begin{tabular}{cc}
+		MATLAB & C\\[1ex]
+		x(r,c) & x[r][c]\\[1ex]
+		\begin{tabular}{cc|c|c|c|}
+		\backslashbox{r}{c}
+		  & \cellcolor{langM} 1 & \cellcolor{langM} 2 & \cellcolor{langM} 3 \\
+		\cellcolor{langM} 1 & \cellcolor{data} 1 & \cellcolor{data} 4 & \cellcolor{data} 7 \\\hline
+		\cellcolor{langM} 2 & \cellcolor{data} 2 & \cellcolor{data} 5 & \cellcolor{data} 8 \\\hline
+		\cellcolor{langM} 3 & \cellcolor{data} 3 & \cellcolor{data} 6 & \cellcolor{data} 9 \\\hline
+		\end{tabular}
+	&
+		\begin{tabular}{cc|c|c|c|}
+		\backslashbox{r}{c}
+				    & \cellcolor{langC} 0 & \cellcolor{langC} 1 & \cellcolor{langC} 2 \\
+		\cellcolor{langC} 0 & \cellcolor{data} 1 & \cellcolor{data} 2 & \cellcolor{data} 3 \\\hline
+		\cellcolor{langC} 1 & \cellcolor{data} 4 & \cellcolor{data} 5 & \cellcolor{data} 6 \\\hline
+		\cellcolor{langC} 2 & \cellcolor{data} 7 & \cellcolor{data} 8 & \cellcolor{data} 9 \\\hline
+		\end{tabular}
+	\end{tabular}
+	\note{
+		row-major (C/C++) vs. column-major (MATLAB, FORTRAN, R)
+	}
+\end{frame}
+
+\af{4}{challenges}
+\begin{frame}\frametitle{Data handling}
+	\begin{itemize}[<+->]
+		\item Caching
+		\item Subvolume
+	\end{itemize}
+	\note{
+		\begin{itemize}
+		\item
+		  Original code attempts to speed up subsequent runs by saving
+		  intermediate results.
+		\item
+		  Breaks up large volumes into small volumes
+		\item
+		  This is fine, but every part of the codebase uses the same data by
+		  reading from files.
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Coupling via cross-cutting concerns}
+	\begin{figure}[tbp]
+	\centering
+	\input{gfx/ccc.tex}
+	\caption{\textbf{Files accessed by multiple modules}
+	}\label{fig:ccc}
+	\end{figure}
+
+	\note{
+		\begin{itemize}
+			\item
+				As soon as you make changes in one, you have to change the others.
+			\item
+				Imagine changing the file name
+			\item
+				Writes to the file-system, so it will needs file locking if run in
+				parallel
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Reducing coupling via indirection}
+	\begin{figure}[tbp]
+	\centering
+	\input{gfx/ccc-dao.tex}
+	\caption{\textbf{Using a data access object to reduce coupling}
+	}\label{fig:ccc-dao}
+	\end{figure}
+
+	\note{
+		\begin{itemize}
+			\item Any problem in CS can be solved by adding another layer of indirection.
+			\item Possible solution: Add another layer of indirection via a Data Access Object (DAO)
+			\item Reduces coupling between business logic and persistence logic
+			\item Persistence logic can be swapped out
+		\end{itemize}
+	}
+\end{frame}
+
+\subsection{Roads not taken}}
+% TODO describe MATLAB Engine API and MATLAB Compiler Runtime
+
 
 \section{Design}
 
-\begin{frame}
-\frametitle{Design}
+\begin{frame}<1>[label=design]\frametitle{Design}
 \begin{itemize}
-	\item Use the original MATLAB code as initial design: followed by refactoring the C code
-	\item Automated GNU Make-based build system:
-		\begin{itemize}
-			\item compiler extension configuration
-			\item third-party library build flag configuration
-			\item prerequisite scanning
-		\end{itemize}
-	\item Available on GitHub for public visibility
+	\item<1> Call graph as an outline
+	\item<2> Automated build system
+	\item<3> Anticipating change
+	\item<3> Available on GitHub for public visibility
 \end{itemize}
 \end{frame}
+
+\begin{frame}\frametitle{Call graph outline}
+% TODO screenshot of code outline in Vim
+\end{frame}
+
+\af{2}{design}
+\begin{frame}\frametitle{Anticipating change}
+	Directory strucuture
+- lib
+- lib/kitchen-sink
+- lib/t
+- src
+\end{frame}
+
+\af{3}{design}
+\begin{frame}
+	GNU Make-based 
+	\begin{itemize}
+		\item compiler extension configuration
+		\item third-party library build flag configuration
+		\item prerequisite scanning
+	\end{itemize}
+\end{frame}
+
 
 \section{Implementation}
 

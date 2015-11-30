@@ -91,27 +91,7 @@
 %% Fancy quote %%
 %% adapted from <http://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter/53452#53452>
 \usepackage{quotchap}
-\definecolor{quotemark}{gray}{0.7}
-\newenvironment{fancyquote}%
-	{%
-	    \vspace{1em}%
-	    \singlespacing
-	    \noindent%
-		 \begin{picture}(0,0)%
-		 \put(-15,-0){\makebox(0,0){\scalebox{3}{\textcolor{quotemark}{``}}}}%
-		 \end{picture}%
-	\footnotesize\upshape%
-	}%
-	{%
-	 \par%
-	 \makebox[0pt][l]{%
-	 \hspace{\linewidth}%
-	 \begin{picture}(0,0)(0,0)%
-	 \put(15,20){\makebox(0,0){%
-	 \scalebox{3}{\color{quotemark}''}}}%
-	 \end{picture}}%
-	   \vspace{-2.5em}%
-	}%
+\input{preamble/fancyquote.tex}
 
 %% Reference description environment
 %% From <http://tex.stackexchange.com/questions/1230/reference-name-of-description-list-item-in-latex>
