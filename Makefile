@@ -1,3 +1,7 @@
+## Config global
+LATEXMK = latexmk $(LATEXMKRC_FLAGS) -f -pdf -silent -diagnostics
+
+## Config project
 GFX_OUT_DIR := gfx-out
 GFX_DIR := gfx
 
@@ -26,9 +30,17 @@ GFX_DEP := \
 # notation.tex
 #./thesis_template_01.tex
 #analysis.tex
-all: thesis.pdf present.pdf present-handout-2x3.pdf tags
+
+## Rules
+
+all: thesis.pdf present.pdf present-note.pdf present-handout-2x3.pdf tags
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
+
+present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note
+present-note.pdf: present.tex $(PRESENT_DEP)
+	-$(LATEXMK) '\def\printpresentnotes{} \input $<'
+
 
 XELATEX_OPT := -e '$$pdflatex=q/xelatex -synctex=1 %O %S/'
 present.pdf: LATEXMKRC_FLAGS +=  $(XELATEX_OPT)
@@ -38,7 +50,7 @@ present-handout-2x3.pdf: present.pdf
 	pdfjam-slides6up --suffix 'handout-2x3' --batch $<
 
 %.pdf: %.tex
-	-latexmk $(LATEXMKRC_FLAGS) -f -pdf -silent -diagnostics $<
+	-$(LATEXMK) $<
 
 %.tex: %.md
 	pandoc -t latex $< -o $@

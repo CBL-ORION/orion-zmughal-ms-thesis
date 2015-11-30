@@ -6,6 +6,11 @@
                 pdfpagemode={None},pdfpagelayout={SinglePage}},%
         xcolor={x11names}%
 ]{beamer}
+\ifx \printpresentnotes \undefined
+% no notes
+\else
+\setbeameroption{show only notes}
+\fi
 
 \input{preamble/present-helper.tex}
 \begin{document}
@@ -31,8 +36,8 @@
 \begin{frame}<1>[label=prob]\frametitle{Problems}
 \begin{itemize}
 	\item<1-> Neuron reconstruction
-	\item<2-> BigNeuron
 	\item<3-> Open science
+	\item<2-> BigNeuron
 \end{itemize}
 \end{frame}
 
@@ -41,16 +46,12 @@
 	[image of neuron volume]
 	$\rightarrow$
 	[image of neuron tracing]
+	\note{
+		problem with manual tracing
+	}
 \end{frame}
 
 \againframe<2>{prob}
-
-\begin{frame}\frametitle{BigNeuron}
-	% TODO
-	[Vaa3D GUI image]
-\end{frame}
-
-\againframe<3>{prob}
 
 \begin{frame}\frametitle{Open science}
 	% TODO
@@ -63,6 +64,13 @@
 	Allen Brain Atlas
 	OpenWorm
 	Galaxy Zoo
+\end{frame}
+
+\againframe<3>{prob}
+
+\begin{frame}\frametitle{BigNeuron}
+	% TODO
+	[Vaa3D GUI image]
 \end{frame}
 
 \begin{frame}[label=challenges]
