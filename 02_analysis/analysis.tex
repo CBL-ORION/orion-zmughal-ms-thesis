@@ -84,6 +84,15 @@ which parts of the code are slow, use a profiler to measure the
 bottlenecks in the code. It is also not advisable to focus on
 optimization at the stage of rewriting the software.
 
+% think about parallelism --- but do not implement
+This principle does not give the developer a license to write code in a way
+that is not optimizable later. For example, at this stage of the project,
+parallel computing will not be implemented through the use of tools such as
+POSIX threads and OpenMP since it can complicate debugging and testing.
+However, through careful avoidance of programming methods that make parallel
+programming difficult, such as global variables and file system access, later
+refactoring of the code to use a parallel architecture is possible.
+
 % how to approach the rewrite --- as a piecewise conversion
 % followed by refactoring
 This rewrite should be approached in an incremental manner by
@@ -280,16 +289,20 @@ Alternatively, the call graph represents the flow of data --- the lowest levels
 deal with the least amount of data and as you go up higher in the graph more
 pieces of information are integrated together from many sources.
 An illustration of this can be seen in the relationship between 
-data flow of \computertext{multiscaleLaplacianFilter} and \computertext{Makefilter} as sketched in t %TODO
+data flow of \computertext{multiscaleLaplacianFilter} and
+\computertext{Makefilter} as sketched in t %TODO
+
 \begin{algorithm}
-	\caption{Sketch of multiscaleLaplacianFilter and Makefilter functions}\label{alg:dataflow_example}
+	\caption{Sketch of \computertext{multiscaleLaplacianFilter} and
+		\computertext{Makefilter} functions
+	}\label{alg:dataflow_example}
 	\begin{algorithmic}[1]
-		\Procedure{Makefilter}{$filter_size$, $degree$, $scale_factor$}
-		\EndProcedure
-		\Procedure{multiscaleLaplacianFilter}{$Volume$, $degree$, $scales$}
-			\ForAll{ scales \puts scale}
+		\Function{Makefilter}{filter\_size, degree, scale\_factor}
+		\EndFunction
+		\Function{multiscaleLaplacianFilter}{Volume, degree, scales}
+			\For{ scale $\in$ scales}
 			\EndFor
-		\EndProcedure
+		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
 

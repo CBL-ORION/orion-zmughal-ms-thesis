@@ -10,7 +10,7 @@
 	\node (proc_reg)        [right=of proc_seg] [process] {$\mathrm{Registration}$};
 	\node (proc_trace)      [right=of proc_reg] [process] {$\mathrm{Tracing}$};
 
-	\node (data_centerline) [right=of proc_trace] [data] {$\mathrm{Centerline}$};
+	\node (data_centreline) [right=of proc_trace] [data] {$\mathrm{Centerline}$};
 
 	\draw [->] (data_vol)   --  (proc_seg);
 	\draw [->] (proc_seg)   --  (proc_reg);
