@@ -1,17 +1,11 @@
 %% vim:tw=66:spell:wrap:ft=tex:
-% Preamble
-\documentclass[%
-        hyperref={%
-                pdfauthor={Zakariyya Mughal},%
-                pdfpagemode={None},pdfpagelayout={SinglePage}},%
-        xcolor={x11names}%
-]{beamer}
-\ifx \printpresentnotes \undefined
-% no notes
+\ifx \printpresenthandout \undefined
+% no handout
+\documentclass{beamer}
 \else
-\setbeameroption{show only notes}
+\documentclass[handout]{beamer}
 \fi
-
+% Preamble
 \input{preamble/present-helper.tex}
 \begin{document}
 % meta needs to be in \begin{document} so that tabular works
@@ -23,33 +17,30 @@
 
 \section{Introduction}
 %  - Motivation - short introduction to your research, pointers to applications, why the research is important.
-\subsection{Motivation}
-\begin{frame}
-\frametitle{Motivation}
-\end{frame}
-
 %  - Problem Statement - Goals, objectives, aims. May also include challenges.
 %        IMPORTANT: State your specific aims clearly - what you plan to achieve and how
 %        you plan to achieve it. Let your contributions to the field of Computer Science
 %        be clear.
-\subsection{Problem}
-\begin{frame}<1>[label=prob]\frametitle{Problems}
+\subsection{Motivation}
+\begin{frame}<1>[label=motivation]\frametitle{Motivation}
 \begin{itemize}
 	\item<1-> Neuron reconstruction
-	\item<3-> Open science
-	\item<2-> BigNeuron
+	\item<2-> Open science
+	\item<3-> BigNeuron
 \end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Neuron reconstruction}
-	% TODO
 	\centering
 	\begin{tabular}{c}
-	\vertcenterimage{\includegraphics[width=0.8\textwidth]{gfx/present/neuron-vol}} \\\\
+	\vertcenterimage{\flipbox{\includegraphics[width=0.8\textwidth]{gfx/present/neuron-vol}}} \\\\
 	\arrowdown \\\\
 	\vertcenterimage{\includegraphics[width=0.8\textwidth]{gfx/present/neuron-trace}}
 	\end{tabular}
 	\note{
+% -   confocal and two-photon microscopy
+% -   fluorescent proteins on a single neuron
+% -   sampled in 3D
 % -   problems with manual tracing
 %     -   slow: can take up to 24 hours of work by domain expert on a single neuron
 %     -   difficult in 3D
@@ -59,23 +50,22 @@
 	}
 \end{frame}
 
-\againframe<2>{prob}
-
+\af{2}{motivation}
 \begin{frame}\frametitle{Open science}
 	% TODO
 	Human Genome Project
-	% First example of open research
-	% <https://en.wikipedia.org/wiki/Bermuda_Principles> ---> 1996
-	% - data available in 24 hours of sequence assembly
-	% - immediate publication of annotated sequences
-	% - all data in the public domain
 	Allen Brain Atlas
 	OpenWorm
 	Galaxy Zoo
+	%\note{
+%% First example of open research: "Bermuda Principles" (1996)
+%% - data available in 24 hours of sequence assembly
+%% - immediate publication of annotated sequences
+%% - all data in the public domain
+	%}
 \end{frame}
 
-\againframe<3>{prob}
-
+\af{3}{motivation}
 \begin{frame}\frametitle{BigNeuron}
 	% TODO
 	[Vaa3D GUI image]
@@ -104,6 +94,8 @@
 \end{frame}
 
 \section{Analysis}
+
+\subsection{MATLAB}
 
 \section{Design}
 

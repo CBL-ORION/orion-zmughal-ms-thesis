@@ -41,13 +41,17 @@ present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note
 present-note.pdf: present.tex $(PRESENT_DEP)
 	-$(LATEXMK) '\def\printpresentnotes{} \input $<'
 
+present-handout.pdf: LATEXMKRC_FLAGS += -jobname=present-handout
+present-handout.pdf: present.tex $(PRESENT_DEP)
+	-$(LATEXMK) '\def\printpresenthandout{}\input{$<}'
+
 
 XELATEX_OPT := -e '$$pdflatex=q/xelatex -synctex=1 %O %S/'
 present.pdf: LATEXMKRC_FLAGS +=  $(XELATEX_OPT)
 present.pdf: present.tex $(PRESENT_DEP)
 
-present-handout-2x3.pdf: present.pdf
-	pdfjam-slides6up --suffix 'handout-2x3' --batch $<
+present-handout-2x3.pdf: present-handout.pdf
+	pdfjam-slides6up --suffix '2x3' --batch $<
 
 %.pdf: %.tex
 	-$(LATEXMK) $<

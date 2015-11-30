@@ -1,6 +1,13 @@
 %\usepackage[small,sf,bf]{titlesec}
 \input{preamble/common.tex}
 
+\hypersetup{%
+	pdfauthor={Zakariyya Mughal},%
+	pdfpagemode={None},%
+	pdfpagelayout={SinglePage}%
+}
+
+
 \usetheme{Ilmenau}
 \usecolortheme{beaver}
 \usepackage{ifxetex}
@@ -78,58 +85,51 @@
     \usebeamertemplate{block end}%
   \end{actionenv}}
 
+\ifx \printpresentnotes \undefined
+% no notes
+\else
+\setbeameroption{show only notes}
+\fi
+
+%% use as
+%%     \af{ number of overlay }{ slide label }
+%% e.g.,
+%%     \af{2}{intro-slide}
+\newcommand{\af}[2]{\againframe<#1|handout:0>[noframenumbering]{#2}}
+
 
 %% TOC at beginning of sections/subsections
-%\AtBeginSection[]
-%{
-%% <beamer>{Table of Contents}
-%        \begin{frame}
-%                \tableofcontents[
-%                                currentsection,
-%                                hideothersubsections,
-%                                sectionstyle=show/shaded,
-%                                subsectionstyle=hide/hide,
-%                ]
-%        \end{frame}
-%}
-%\AtBeginSubsection[]
-%{
-%   \begin{frame}
-%                \begin{tabular}{p{0.3\paperwidth}p{0.7\paperwidth}}
-%                        \tableofcontents[
-%                                        currentsection,
-%                                        hideothersubsections,
-%                                        sectionstyle=show/shaded,
-%                                        subsectionstyle=hide/hide,
-%                        ]
-%                &
-%                        \begin{varblock}[0.5\paperwidth]{}
-%                                \vspace{.2cm}
-%                                \tableofcontents[
-%                                        currentsubsection,
-%                                        hideothersubsections,
-%                                        sectionstyle=hide/hide,
-%                                        subsectionstyle=show/shaded,
-%                                ]
-%                        \end{varblock}
-%                \end{tabular}
-%   \end{frame}
-%}
-
-
-\AtBeginSubsection[]
-{
-	\begin{frame}
-		\begin{multicols}{2}
-			\tableofcontents[
-				currentsection,
-				hideothersubsections,
-				sectionstyle=show/shaded,
-				subsectionstyle=show/shaded,
-			]
-		\end{multicols}
-  \end{frame}
-}
+\ifx \printpresenthandout \undefined
+	% no handout
+	\AtBeginSubsection[]
+	{
+		\begin{frame}[noframenumbering]
+			\begin{multicols}{2}
+				\tableofcontents[
+					currentsection,
+					hideothersubsections,
+					sectionstyle=show/shaded,
+					subsectionstyle=show/shaded/hide,
+				]
+			\end{multicols}
+	  \end{frame}
+	}
+\else
+	\AtBeginSection[]
+	{
+		\begin{frame}[noframenumbering]
+			\begin{multicols}{2}
+				\tableofcontents[
+					currentsection,
+					currentsubsection,
+					hideothersubsections,
+					sectionstyle=show/shaded,
+					subsectionstyle=show/show/hide,
+				]
+			\end{multicols}
+	  \end{frame}
+	}
+\fi
 
 %% TikZ arrows
 %% From <https://tex.stackexchange.com/questions/61507/drawing-arrows-in-beamer>

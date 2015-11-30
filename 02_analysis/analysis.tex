@@ -270,7 +270,32 @@ There is an alternative called \computertext{fdep}~\autocite{MATLAB:fdep}. The
 results of \computertext{fdep} are then passed to the GraphViz graph layout
 tool to visualize the results~\autocite{GraphViz:Gansner:2000}.
 The call graph for the MATLAB code is depicted in \cref{fig:orionmat-segmentation,fig:orionmat-registration,fig:orionmat-tracing}.
+In each of the figures, the label in the outermost box is a function name in
+\gls{orionmat} and each box inside is functions that are called from inside the
+body of that function. Arrows represent a function call. For example, in
+\cref{fig:orionmat-segmentation}, the \computertext{readNegativeSamples}
+function calls \computertext{multiscaleLaplacianFilter} which in turn calls
+\computertext{Makefilter}.
 
+Alternatively, the call graph represents the flow of data --- the lowest levels
+deal with the least amount of data and as you go up higher in the graph more
+pieces of information are integrated together from many sources.
+An illustration of this can be seen in the relationship between 
+data flow of \computertext{multiscaleLaplacianFilter} and \computertext{Makefilter} as sketched in t %TODO
+\begin{algorithm}
+	\caption{Sketch of multiscaleLaplacianFilter and Makefilter functions}\label{alg:dataflow_example}
+	\begin{algorithmic}[1]
+		\Procedure{Makefilter}{$filter_size$, $degree$, $scale_factor$}
+		\EndProcedure
+		\Procedure{multiscaleLaplacianFilter}{$Volume$, $degree$, $scales$}
+			\ForAll{ scales \puts scale}
+			\EndFor
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+% TODO explain how using this view of the call graphs allows for testing from
+% the bottom-most level to the top
 
 \begin{figure}
 \centering
