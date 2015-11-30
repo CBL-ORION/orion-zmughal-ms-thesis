@@ -4,3 +4,4 @@ dot2tex # for call graphs
 latexmk
 texlive-extra-utils # for pdfnup
 latexdiff # for diff'ing drafts
+ttf-mscorefonts-installer # fonts for slides
