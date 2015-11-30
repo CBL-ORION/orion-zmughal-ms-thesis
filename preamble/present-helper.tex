@@ -1,4 +1,5 @@
 %\usepackage[small,sf,bf]{titlesec}
+\input{preamble/common.tex}
 
 \usetheme{Ilmenau}
 \usecolortheme{beaver}
@@ -34,7 +35,7 @@
 	\begin{tabular*}{\paperwidth}{p{0.01\paperwidth}p{0.84\paperwidth}p{0.15\paperwidth}}
 		&
 		\parbox[c][][c]{\textwidth}{\raggedright
-			\raisebox{-.5\height}{\includegraphics[width=\textwidth]{gfx/cbl-footer.png}}
+			\vertcenterimage{\includegraphics[width=\textwidth]{gfx/cbl-footer.png}}
 		}
 		&
 		\parbox[c][][c]{\textwidth}{%\raggedleft
@@ -65,9 +66,6 @@
 %escapeinside=||
 }
 \newenvironment{indented}{\begin{adjustwidth}{1.5em}{}}{\end{adjustwidth}}
-
-\usepackage{tikz}
-\usetikzlibrary{snakes,arrows,shapes,automata}
 
 % http://tex.stackexchange.com/questions/12550/changing-default-width-of-blocks-in-beamer/12551#12551
 \newenvironment<>{varblock}[2][.9\textwidth]{%
@@ -131,4 +129,28 @@
 			]
 		\end{multicols}
   \end{frame}
+}
+
+%% TikZ arrows
+%% From <https://tex.stackexchange.com/questions/61507/drawing-arrows-in-beamer>
+\tikzset{
+    myarrow/.style={
+        draw,
+        fill=orange,
+        single arrow,
+        minimum height=3.5ex,
+        single arrow head extend=1ex
+    }
+}
+\newcommand{\arrowup}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=90] {};}
+}
+\newcommand{\arrowdown}{%
+\tikz [baseline=-1ex]{\node [myarrow,rotate=-90] {};}
+}
+\newcommand{\arrowright}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=0] {};}
+}
+\newcommand{\arrowleft}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=180] {};}
 }
