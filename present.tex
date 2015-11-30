@@ -1,9 +1,16 @@
 %% vim:tw=66:spell:wrap:ft=tex:
 \ifx \printpresenthandout \undefined
-% no handout
-\documentclass{beamer}
+	\ifx \printpresentarticle \undefined
+		% no handout and no article
+		\documentclass{beamer}
+	\else
+		% print article
+		\documentclass[11pt]{article}
+		\usepackage{beamerarticle}
+	\fi
 \else
-\documentclass[handout]{beamer}
+	% handout
+	\documentclass[handout]{beamer}
 \fi
 % Preamble
 \input{preamble/present-helper.tex}
