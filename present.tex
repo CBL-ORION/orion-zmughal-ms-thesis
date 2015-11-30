@@ -412,8 +412,16 @@
 	}
 \end{frame}
 
-\subsection{Roads not taken}}
+\subsection{Roads not taken}
+\begin{frame}<1>[label=frost]\frametitle{Roads not taken}
+\begin{itemize}
+	\item<1> MATLAB Engine API
+	\item<2> MATLAB Compiler Runtime
+\note{
+}
 % TODO describe MATLAB Engine API and MATLAB Compiler Runtime
+\end{itemize}
+\end{frame}
 
 
 \section{Design}
@@ -428,8 +436,23 @@
 \end{frame}
 
 \begin{frame}\frametitle{Call graph outline}
-% TODO screenshot of code outline in Vim
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth]{gfx/call-graph-outline}
+\end{figure}
 \end{frame}
+
+\begin{frame}\frametitle{Call graph visualized}
+\begin{figure}
+\centering
+\resizebox{0.8\textwidth}{!}{\input{gfx-out/matlab-call-graph/segmentation.tex}}
+\caption[Callgraph of segmentation process in \glsentrytext{orionmat}]{
+\textbf{\boldmath{} Callgraph of segmentation process in \gls{orionmat}}
+}\label{fig:orionmat-segmentation}
+\end{figure}
+\end{frame}
+
+
 
 \af{2}{design}
 \begin{frame}\frametitle{Anticipating change}
