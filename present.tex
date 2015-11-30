@@ -14,6 +14,12 @@
 \fi
 % Preamble
 \input{preamble/present-helper.tex}
+\colorlet{tbackground}{blue!80}
+\colorlet{tobjectives}{red!80}
+\colorlet{tmetrics}{green!120}
+\newcommand{\tbackground}[1]{\textcolor{tbackground}{#1}}
+\newcommand{\tobjectives}[1]{\textcolor{tobjectives}{#1}}
+\newcommand{\tmetrics}[1]{\textcolor{tmetrics}{#1}}
 \begin{document}
 % meta needs to be in \begin{document} so that tabular works
 \input{meta/defense.tex}
@@ -22,10 +28,17 @@
 \frame{\titlepage}
 %}}}
 
+The following text is color-coded based on what kind of
+information it provides the audience:
+\tbackground{background information},
+\tobjectives{objectives},
+\tmetrics{metrics for completion of objectives}.
+
 \section{Goal}
 %  - Motivation - short introduction to your research, pointers to applications, why the research is important.
 \begin{frame}\frametitle{\secname}
 	\centering
+	\tobjectives{
 	The reimplementation of  a system
 	%
 		for \alert{neuron reconstruction}
@@ -33,27 +46,43 @@
 		that is distributed as an \alert{open-science} project
 		and
 	%
-		compatible with the \alert{BigNeuron Project}.
+		compatible with the \alert{BigNeuron} project.
 	%
+	}
 	\end{itemize*}
 \end{frame}
 
 \subsection{Neuron reconstruction}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
-	[what is neuron reconstruction; data acquisition; image analysis]
+	[\tbackground
+		{
+			what is neuron reconstruction; data acquisition; image analysis; why
+			automate (i.e., why automated neuron tracing research is important)
+		}
+	]
 \end{frame}
 
 \subsection{Open science}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
-	[TODO]
+	[\tbackground
+		{
+		what it means to be an open-science project (i.e., open release of all
+		research artifacts as early as possible)
+		}
+	]
 \end{frame}
 
 \subsection{BigNeuron}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
-	[TODO]
+	[\tbackground
+		{
+			goal of BigNeuron and purpose of participation in
+			BigNeuron
+		}
+	]
 \end{frame}
 
 \section{Problem}
@@ -62,16 +91,28 @@
 %        you plan to achieve it. Let your contributions to the field of Computer Science
 %        be clear.
 \begin{frame}\frametitle{\secname}
+	[\tbackground{explain how the ORION code exists in MATLAB form but is difficult to
+	integrate into BigNeuron}; explain challenges in later slides]
 \end{frame}
 
 \subsection{Objectives}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
+	\tobjectives{
+	Taken from abstract. TODO: make concise
 	\begin{enumerate}
-		\item Obj. 1
-		\item Obj. 2
-		\item Obj. 3
+		\item analyze the ORION algorithm and implementation to
+			determine the architecture for the new system that is
+			efficient and extensible;
+		\item integrate the system into a popular toolkit for biomedical
+			image analysis for ease-of-use and visualization;
+		\item develop a test suite of both the individual components (unit
+			testing) and across the whole system (integration tests);
+			and % "and" before last item
+		\item ensure that the software gives reproducible results by
+			making it easy to build and distribute. % end of sentence
 	\end{enumerate}
+	}
 \end{frame}
 
 \section{Related work}
@@ -82,64 +123,73 @@
 %        use more recent literature (except for some classical “old” ones). Also avoid
 %        reviewing standard concepts that have been around for a long time.
 \begin{frame}\frametitle{\secname}
-
+	\tbackground{
+	\begin{itemize}
+		\item Prior work in \alert{neuron reconstruction}
+		\item Principles of \alert{open-science}
+		\item An overview of \alert{BigNeuron}
+	\end{itemize}
+	}
 \end{frame}
 
 \subsection{Neuron reconstruction}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
-	[explain the problem of neuron reconstruction; history of
-	neuron tracing?; biological relevance]
+	[\tbackground{explain the problem of neuron reconstruction; history of
+	neuron tracing; biological relevance and applications}]
 \end{frame}
 
 \subsubsection{DIADEM Challenge}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
-	[explain DIADEM Challenge; data sets; outcomes]
+	[\tbackground{explain DIADEM Challenge; data sets; outcomes}]
 \end{frame}
 
 \subsubsection{Metrics}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
-	[Create a table of metrics]
+	[\tbackground{Create a table of metrics (e.g., precision, recall,
+	DIADEM metric, btmorph, NetMets) and explain how they work}]
 \end{frame}
 
 \subsubsection{Methods}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
-	[Create a table of methods: what data they work with (2D/3D), modality, metrics, what datasets they validated against]
+	[\tbackground{Create a table of methods: what data they work with (2D/3D), modality,
+	metrics, what datasets they validated against}]
 \end{frame}
 
 \subsection{Open science}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
-	[explain open science]
+	[\tbackground{explain open science}]
 \end{frame}
 
 \subsubsection{``Bermuda Principles'''}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
-	[explain ``Bermuda Principles'' from Human Genome Project]
+	[\tbackground{explain ``Bermuda Principles'' from Human Genome Project
+	(early large-scale open research project)}]
 \end{frame}
 
 \subsubsection{Open science projects}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
-	[showcase a few open science projects]
+	[\tbackground{showcase a few open science projects to show breadth}]
 \end{frame}
 
 \subsection{BigNeuron}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
-	[explain what is BigNeuron; how it relates to this thesis;
-		neuron stitching]
+	[\tbackground{explain what BigNeuron is; how it relates to this thesis;
+		neuron stitching; bench testing}]
 \end{frame}
 
 \subsubsection{Vaa3D}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
-	[explain how Vaa3D has a plugin architecture and how it
-	standardizes the BigNeuron project]
+	[\tbackground{explain how Vaa3D has a plugin architecture and how it
+	standardizes the BigNeuron project}]
 \end{frame}
 
 \section{Proposed framework}
@@ -157,26 +207,55 @@
 %        PPT and Latex write-up), you may do it once in your Latex document and copy
 %        into TexPoint for the PPT.
 \begin{frame}\frametitle{\secname}
-	[reiterate the objective]
+	[\tobjectives{reiterate the objectives}]
 \end{frame}
 
 \subsection{Conversion}
 \begin{frame}\frametitle{\subsecname}
-	[explain difficulties with a rewrite vs. a refactor]
+	[\tbackground{explain difficulties with a rewrite vs. a refactor}]
 \end{frame}
 
-\subsection{Conversion}
-\begin{frame}\frametitle{\subsecname}
-	[explain difficulties with a rewrite vs. a refactor]
+\subsubsection{Conversion challenges}
+\begin{frame}\frametitle{\subsubsecname}
+	[\tbackground{challenges when doing a rewrite from MATLAB to native code}]
+\end{frame}
+
+\subsubsection{Call graph}
+\begin{frame}\frametitle{\subsubsecname}
+	[\tbackground{analysis of existing codebase; how this informs the new
+	implementation; why use the call graph instead of
+	attempting to either do a clean room implementation (i.e.,
+	by only reading papers) or creating a new architecture
+	from scratch}]
 \end{frame}
 
 \subsection{Integration}
 \begin{frame}\frametitle{\subsecname}
+	[\tbackground{how to integrate with Vaa3D}\tmetrics{a
+		demonstration video; visual results and metrics from using
+	Vaa3D with neuron data from DIADEM; demonstration of any further analysis
+	that can be done in Vaa3D}]
 \end{frame}
 
-\subsection{Reproducibility}
+\subsection{Testing and Reproducibility}
 \begin{frame}\frametitle{\subsecname}
+	[\tmetrics{dependency tracking by keeping version controlled copies
+		of dependencies; documentation generation; continuous
+	integration and autmotic builds, code coverage}]
 \end{frame}
+
+\subsubsection{Dependency tracking}
+\begin{frame}\frametitle{\subsubsecname}
+	[screenshots of all repos of deps used under the CBL-ORION
+	namespace on GitHub
+	\begin{itemize}
+		\item ITK
+		\item Vaa3D
+		\item kiss-fft
+	\end{itemize}
+	]
+\end{frame}
+
 
 \section{Results}
 %  - Preliminary Results - if you already have some results, please show it.
