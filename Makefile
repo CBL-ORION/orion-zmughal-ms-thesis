@@ -1,5 +1,6 @@
 ## Config global
 LATEXMK = latexmk $(LATEXMKRC_FLAGS) -f -pdf -silent -diagnostics
+XELATEX_OPT := -e '$$pdflatex=q/xelatex -synctex=1 %O %S/'
 
 ## Config project
 GFX_OUT_DIR := gfx-out
@@ -37,20 +38,18 @@ all: thesis.pdf present.pdf present-note.pdf present-article.pdf present-handout
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
-present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note
+present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note $(XELATEX_OPT)
 present-note.pdf: present.tex $(PRESENT_DEP)
 	-$(LATEXMK) '\def\printpresentnote{} \input $<'
 
-present-article.pdf: LATEXMKRC_FLAGS += -jobname=present-article
+present-article.pdf: LATEXMKRC_FLAGS += -jobname=present-article $(XELATEX_OPT)
 present-article.pdf: present.tex $(PRESENT_DEP)
 	-$(LATEXMK) '\def\printpresentarticle{} \input $<'
 
-present-handout.pdf: LATEXMKRC_FLAGS += -jobname=present-handout
+present-handout.pdf: LATEXMKRC_FLAGS += -jobname=present-handout $(XELATEX_OPT)
 present-handout.pdf: present.tex $(PRESENT_DEP)
 	-$(LATEXMK) '\def\printpresenthandout{} \input $<'
 
-
-XELATEX_OPT := -e '$$pdflatex=q/xelatex -synctex=1 %O %S/'
 present.pdf: LATEXMKRC_FLAGS +=  $(XELATEX_OPT)
 present.pdf: present.tex $(PRESENT_DEP)
 
