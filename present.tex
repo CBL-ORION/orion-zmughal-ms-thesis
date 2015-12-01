@@ -17,9 +17,16 @@
 \colorlet{tbackground}{blue!80}
 \colorlet{tobjectives}{red!80}
 \colorlet{tmetrics}{green!120}
-\newcommand{\tbackground}[1]{\textcolor{tbackground}{#1}}
-\newcommand{\tobjectives}[1]{\textcolor{tobjectives}{#1}}
-\newcommand{\tmetrics}[1]{\textcolor{tmetrics}{#1}}
+\ifx \tcolor \undefined
+	% no color
+	\newcommand{\tbackground}[1]{#1}
+	\newcommand{\tobjectives}[1]{#1}
+	\newcommand{\tmetrics}[1]{#1}
+\else
+	\newcommand{\tbackground}[1]{\textcolor{tbackground}{#1}}
+	\newcommand{\tobjectives}[1]{\textcolor{tobjectives}{#1}}
+	\newcommand{\tmetrics}[1]{\textcolor{tmetrics}{#1}}
+\fi
 \begin{document}
 % meta needs to be in \begin{document} so that tabular works
 \input{meta/defense.tex}
@@ -28,11 +35,16 @@
 \frame{\titlepage}
 %}}}
 
-The following text is color-coded based on what kind of
-information it provides the audience:
-\tbackground{background information},
-\tobjectives{objectives},
-\tmetrics{metrics for completion of objectives}.
+\ifx \tcolor \undefined
+\else
+	The following text is color-coded based on what kind of
+	information it provides the audience:
+	\tbackground{background information},
+	\tobjectives{objectives},
+	\tmetrics{metrics for completion of objectives}.
+\fi
+
+\tableofcontents
 
 \section{Goal}
 %  - Motivation - short introduction to your research, pointers to applications, why the research is important.
@@ -165,7 +177,7 @@ information it provides the audience:
 	[\tbackground{explain open science}]
 \end{frame}
 
-\subsubsection{``Bermuda Principles'''}
+\subsubsection{``Bermuda Principles''}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
 	[\tbackground{explain ``Bermuda Principles'' from Human Genome Project
@@ -192,7 +204,6 @@ information it provides the audience:
 	standardizes the BigNeuron project}]
 \end{frame}
 
-\section{Proposed framework}
 %  - Proposed Framework - this is the most important part of your proposal.
 %        Expect most questions from committee members on this. Put in all your
 %        best here. Describe the entire framework before separating into work-done and
@@ -206,58 +217,6 @@ information it provides the audience:
 %        them in the slide or not. TIP: Rather than doing your equation twice (for your
 %        PPT and Latex write-up), you may do it once in your Latex document and copy
 %        into TexPoint for the PPT.
-\begin{frame}\frametitle{\secname}
-	[\tobjectives{reiterate the objectives}]
-\end{frame}
-
-\subsection{Conversion}
-\begin{frame}\frametitle{\subsecname}
-	[\tbackground{explain difficulties with a rewrite vs. a refactor}]
-\end{frame}
-
-\subsubsection{Conversion challenges}
-\begin{frame}\frametitle{\subsubsecname}
-	[\tbackground{challenges when doing a rewrite from MATLAB to native code}]
-\end{frame}
-
-\subsubsection{Call graph}
-\begin{frame}\frametitle{\subsubsecname}
-	[\tbackground{analysis of existing codebase; how this informs the new
-	implementation; why use the call graph instead of
-	attempting to either do a clean room implementation (i.e.,
-	by only reading papers) or creating a new architecture
-	from scratch}]
-\end{frame}
-
-\subsection{Integration}
-\begin{frame}\frametitle{\subsecname}
-	[\tbackground{how to integrate with Vaa3D}\tmetrics{a
-		demonstration video; visual results and metrics from using
-	Vaa3D with neuron data from DIADEM; demonstration of any further analysis
-	that can be done in Vaa3D}]
-\end{frame}
-
-\subsection{Testing and Reproducibility}
-\begin{frame}\frametitle{\subsecname}
-	[\tmetrics{dependency tracking by keeping version controlled copies
-		of dependencies; documentation generation; continuous
-	integration and autmotic builds, code coverage}]
-\end{frame}
-
-\subsubsection{Dependency tracking}
-\begin{frame}\frametitle{\subsubsecname}
-	[screenshots of all repos of deps used under the CBL-ORION
-	namespace on GitHub
-	\begin{itemize}
-		\item ITK
-		\item Vaa3D
-		\item kiss-fft
-	\end{itemize}
-	]
-\end{frame}
-
-
-\section{Results}
 %  - Preliminary Results - if you already have some results, please show it.
 %        Talk about how you propose to validate your results. Show how your
 %        results compare with previous results OR how it performs in general, (e.g., in
@@ -270,28 +229,125 @@ information it provides the audience:
 %        Also, explain how it can be generalized to other areas in Computer
 %        Science. What is the overall benefit for the community? What is the
 %        contribution to Computer Science research?
+\section{Conversion}
 \begin{frame}\frametitle{\secname}
-	% TODO
+	[\tbackground{explain difficulties with a rewrite vs. a refactor}]
 \end{frame}
 
-\subsection{Directory structure}
+\subsection{Conversion challenges}
 \begin{frame}\frametitle{\subsecname}
-	% TODO
+	[\tbackground{challenges when doing a rewrite from MATLAB to native code}]
 \end{frame}
 
-\subsection{Tracing-based comparison}
-\begin{frame}\frametitle{\subsecname}
-	% TODO
+\subsection{Proposed framework for Conversion}
+
+\subsubsection{Call graph}
+\begin{frame}\frametitle{\subsubsecname}
+	[\tbackground{analysis of existing codebase; how this informs the new
+	implementation; why use the call graph instead of
+	attempting to either do a clean room implementation (i.e.,
+	by only reading papers) or creating a new architecture
+	from scratch}]
 \end{frame}
 
-\subsection{Continuous integration}
+\subsubsection{Directory structure}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
+	[ plan for the directory structure (where does each file
+	go) ]
 \end{frame}
 
-\subsection{Dependency tracking}
+\subsection{Results for Conversion}
+
+\subsubsection{Qualitative results}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
+	[
+		\tmetrics{
+			run code on DIADEM data and show the
+			visualization
+		}
+	]
+\end{frame}
+
+\subsubsection{Quantitative Tracing-based comparison}
+\begin{frame}\frametitle{\subsecname}
+	% TODO
+	[ get all intermediate results from MATLAB code and
+	compare to the native code (floating point for volumes,
+	tree metrics for the tracings); run on DIADEM data]
+\end{frame}
+
+
+\section{Integration}
+\begin{frame}\frametitle{\secname}
+	[\tbackground{description of Vaa3D}]
+\end{frame}
+
+\subsection{Proposed framework for Integration}
+\begin{frame}\frametitle{\subsecname}
+	[how to integrate with Vaa3D]
+\end{frame}
+
+\subsection{Results for Integration}
+\begin{frame}\frametitle{\subsecname}
+	[\tmetrics{a demonstration video; visual results and metrics from using
+			Vaa3D with neuron data from DIADEM; demonstration of any further analysis
+	that can be done in Vaa3D}]
+
+\end{frame}
+
+\section{Testing and Reproducibility}
+\begin{frame}\frametitle{\secname}
+	[\tmetrics{why testing is important}]
+\end{frame}
+
+\subsection{Proposed framework for Testing and Reproducibility}
+\begin{frame}\frametitle{\subsubsecname}
+	[
+		testing procedure (TAP harness, floating point
+		issues)
+	]
+\end{frame}
+
+\subsection{Results for Testing and Reproducibility}
+
+\subsubsection{Overview of tests}
+\begin{frame}\frametitle{\subsubsecname}
+	[
+		overview of tests written (grouped by similarity);
+		list of bugs fixed in ORION due to testing;
+		code coverage; list of dead code found
+	]
+\end{frame}
+
+\subsubsection{Dependency tracking}
+\begin{frame}\frametitle{\subsubsecname}
+	[dependency tracking by keeping version controlled copies
+		of dependencies; screenshots of all repos of deps used under the CBL-ORION
+	namespace on GitHub
+	\begin{itemize}
+		\item ITK
+		\item Vaa3D
+		\item kiss-fft
+	\end{itemize}
+	]
+\end{frame}
+
+\subsubsection{Documentation}
+\begin{frame}\frametitle{\subsubsecname}
+	[
+		screenshot of documentation
+	]
+\end{frame}
+
+
+\subsubsection{Continuous integration}
+\begin{frame}\frametitle{\subsecname}
+	% TODO
+	[
+		{screenshots of continuous integration}
+	]
 \end{frame}
 
 \section{Conclusion}
