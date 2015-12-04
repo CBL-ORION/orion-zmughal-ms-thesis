@@ -44,35 +44,25 @@
 	\tmetrics{metrics for completion of objectives}.
 \fi
 
-\tableofcontents
+\ifx \printpresentarticle \undefined \else
+	\tableofcontents
+\fi
 
-\section{Goal}
-%  - Motivation - short introduction to your research, pointers to applications, why the research is important.
-\begin{frame}\frametitle{\secname}
-	\centering
-	\tobjectives{
-	The reimplementation of  a system
-	%
-		for \alert{neuron reconstruction}
-	%
-		that is distributed as an \alert{open-science} project
-		and
-	%
-		compatible with the \alert{BigNeuron} project.
-	%
-	}
-	\end{itemize*}
-\end{frame}
-
+\section{Background}
 \subsection{Neuron reconstruction}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
 	[\tbackground
 		{
 			what is neuron reconstruction; data acquisition; image analysis; why
-			automate (i.e., why automated neuron tracing research is important)
+			automate (i.e., why automated neuron
+			tracing research is important);
+			mention ORION
 		}
 	]
+	\note{
+		Data
+	}
 \end{frame}
 
 \subsection{Open science}
@@ -107,6 +97,23 @@
 	integrate into BigNeuron}; explain challenges in later slides]
 \end{frame}
 
+\section{Goal}
+%  - Motivation - short introduction to your research, pointers to applications, why the research is important.
+\begin{frame}\frametitle{\secname}
+	\centering
+	\tobjectives{
+	The reimplementation of  a system
+	%
+		for \alert{neuron reconstruction}
+	%
+		that is distributed as an \alert{open-science} project
+		and
+	%
+		compatible with the \alert{BigNeuron} project.
+	%
+	}
+\end{frame}
+
 \subsection{Objectives}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
@@ -127,7 +134,7 @@
 	}
 \end{frame}
 
-\section{Related work}
+\section{Context}
 %  - Related Work - a catchy name is “State of the Art”.
 %        Literature review relevant to specific research. Your committee
 %        members are expected to already have a general background in your field.
@@ -229,7 +236,8 @@
 %        Also, explain how it can be generalized to other areas in Computer
 %        Science. What is the overall benefit for the community? What is the
 %        contribution to Computer Science research?
-\section{Conversion}
+
+\section{Methods: Conversion}
 \begin{frame}\frametitle{\secname}
 	[\tbackground{explain difficulties with a rewrite vs. a refactor}]
 \end{frame}
@@ -251,11 +259,36 @@
 \end{frame}
 
 \subsubsection{Directory structure}
-\begin{frame}\frametitle{\subsecname}
+\begin{frame}\frametitle{\subsubsecname}
 	% TODO
 	[ plan for the directory structure (where does each file
 	go) ]
 \end{frame}
+
+\section{Methods: Integration}
+\begin{frame}\frametitle{\secname}
+	[\tbackground{description of Vaa3D}]
+\end{frame}
+
+\subsection{Proposed framework for Integration}
+\begin{frame}\frametitle{\subsecname}
+	[how to integrate with Vaa3D]
+\end{frame}
+
+\section{Methods: Testing and Reproducibility}
+\begin{frame}\frametitle{\secname}
+	[\tmetrics{why testing is important}]
+\end{frame}
+
+\subsection{Proposed framework for Testing and Reproducibility}
+\begin{frame}\frametitle{\subsecname}
+	[
+		testing procedure (TAP harness, floating point
+		issues); integration testing with Vaa3D
+	]
+\end{frame}
+
+\section{Results}
 
 \subsection{Results for Conversion}
 
@@ -278,36 +311,12 @@
 	tree metrics for the tracings); run on DIADEM data]
 \end{frame}
 
-
-\section{Integration}
-\begin{frame}\frametitle{\secname}
-	[\tbackground{description of Vaa3D}]
-\end{frame}
-
-\subsection{Proposed framework for Integration}
-\begin{frame}\frametitle{\subsecname}
-	[how to integrate with Vaa3D]
-\end{frame}
-
 \subsection{Results for Integration}
 \begin{frame}\frametitle{\subsecname}
 	[\tmetrics{a demonstration video; visual results and metrics from using
 			Vaa3D with neuron data from DIADEM; demonstration of any further analysis
 	that can be done in Vaa3D}]
 
-\end{frame}
-
-\section{Testing and Reproducibility}
-\begin{frame}\frametitle{\secname}
-	[\tmetrics{why testing is important}]
-\end{frame}
-
-\subsection{Proposed framework for Testing and Reproducibility}
-\begin{frame}\frametitle{\subsubsecname}
-	[
-		testing procedure (TAP harness, floating point
-		issues)
-	]
 \end{frame}
 
 \subsection{Results for Testing and Reproducibility}
@@ -350,9 +359,15 @@
 	]
 \end{frame}
 
+
 \section{Conclusion}
 %  - Conclusion slide could be catchy, something they will remember.
 %        Maybe an animation, video, or terse statement that summarizes it all.
+\begin{frame}\frametitle{\secname}
+	[
+		mention future work (e.g., NeuroDebian)
+	]
+\end{frame}
 
 
 %  - Publications - you should list your publications or mention them in relevant sections of the presentation.
