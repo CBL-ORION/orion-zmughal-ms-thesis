@@ -27,7 +27,7 @@
 
 \colorlet{langC}{blue!40}
 \colorlet{langM}{orange!20}
-\colorlet{data}{grey!10}
+\colorlet{data}{Grey!10}
 
 % Title on title slide
 \setbeamerfont{title}{size = \Large}
@@ -117,6 +117,7 @@
 					hideothersubsections,
 					sectionstyle=show/shaded,
 					subsectionstyle=show/shaded/hide,
+					subsubsectionstyle=hide,
 				]
 			\end{multicols}
 	  \end{frame}
@@ -132,6 +133,7 @@
 					hideothersubsections,
 					sectionstyle=show/shaded,
 					subsectionstyle=show/show/hide,
+					subsubsectionstyle=hide,
 				]
 			\end{multicols}
 	  \end{frame}
@@ -162,6 +164,16 @@
 \tikz [baseline=-0.5ex]{\node [myarrow,rotate=180] {};}
 }
 
+
+%% no "Figure" in \caption{}
+%% simple caption
+%\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+%% with color
+\setbeamertemplate{caption}{%
+\begin{beamercolorbox}[wd=.5\paperwidth, sep=.2ex]{block
+body}\insertcaption%
+\end{beamercolorbox}%
+}
 
 \input{preamble/fancyquote.tex}
 
