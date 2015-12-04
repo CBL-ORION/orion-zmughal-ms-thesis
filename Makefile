@@ -99,3 +99,6 @@ latexdiff-thesis:
 		LTX_COMP=$(LAST_VERSION); \
 	fi; \
 	git latexdiff -v --output diff.pdf --ignore-latex-errors --main thesis.tex $$LTX_COMP master
+
+dep-debian:
+	sudo apt-get install --no-install-recommends $$( sed 's/#.*$$//g' < debian-packages )
