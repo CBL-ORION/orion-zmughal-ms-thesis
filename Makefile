@@ -90,6 +90,10 @@ check:
 	-@pdftotext thesis.pdf  - | grep --colour=auto -C1 '??'
 	-@fgrep "I didn't find a database entry" *.blg
 	@echo "==="
+	lacheck thesis.tex
+	@echo "==="
+	chktex thesis.tex
+
 
 latexdiff-thesis:
 	if [ -z "$(LAST_VERSION)" ]; then \

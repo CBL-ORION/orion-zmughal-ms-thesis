@@ -5,3 +5,5 @@ latexmk
 texlive-extra-utils # for pdfnup
 latexdiff # for diff'ing drafts
 ttf-mscorefonts-installer # fonts for slides
+chktex # for check target
+lacheck # for check target
