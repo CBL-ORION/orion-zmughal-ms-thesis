@@ -1,3 +1,4 @@
+biber # because we use the biber backend for biblatex
 texlive-bibtex-extra # for usebib.sty
 texlive-generic-extra # for tracklang.sty
 dot2tex # for call graphs
