@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\input{preamble/helper.tex}
+
+\newcommand{\todofig}[1]{%
+	\textcolor{red}{TODO figure: \nolinkurl{#1}}%
+}
+
+\title{Experimental procedures and results}
+\author{Zakariyya Mughal}
+\date{2015-12-06}
+\begin{document}
+\singlespacing
+\input{00_front-matter/notation.tex}
+\maketitle
+\tableofcontents
+
+\section{Conversion}
+
+\subsection{Input}
+
+From the DIADEM dataset, choose a single kind of data set. In this case, we can
+use the Neuromuscular Projection Fibers (NPF).
+
+Technical note: Since the ORION code only as a reader for MetaImage format
+files, use the pre-existing MetaImage files found at
+\nolinkurl{athena.cbl.uh.edu/neuron/Data/Dendrites/Diadem/Data Set 4/}.
+
+\subsection{Procedure}
+
+\begin{itemize}
+	\item Generate a maximum intensity projection of the
+		volume.
+	\item Visualize the ground truth tracing.
+	\item Run the code on the given dataset using
+		\gls{orionmat}
+		and visualise the \gls{orionmat} tracing.
+	\item Run the code on the given datset using
+		\gls{orionc}
+		and visualise the \gls{orionc} tracing.
+\end{itemize}
+
+\subsection{Qualitative results}
+
+For each of the NPF volumes that are processed, create a maximum
+intensity projection (MIP) and display the ground truth
+\begin{center}
+\begin{tabular}{|c|p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
+	\hline
+	\be NPF ID & \be MIP & \be Ground truth tracing & \be \gls{orionmat} tracing & \be \gls{orionc} tracing \\\hline
+	1      & \todofig{1/mip} & \todofig{1/gt_tracing} & \todofig{1/orionmat_tracing} & \todofig{1/orionc_tracing} \\\hline
+	2      & \todofig{2/mip} & \todofig{2/gt_tracing} & \todofig{2/orionmat_tracing} & \todofig{2/orionc_tracing} \\\hline
+	3      & \todofig{3/mip} & \todofig{3/gt_tracing} & \todofig{3/orionmat_tracing} & \todofig{3/orionc_tracing} \\\hline
+\end{tabular}
+\end{center}
+
+\subsection{Quantitative results}
+
+\begin{tabular}{|c|p{0.28\textwidth}|p{0.28\textwidth}|p{0.28\textwidth}|}
+	\hline
+	%%%%%%% header
+	\multirow{2}{*}{\be NPF ID } & \multicolumn{3}{c|}{\be Metrics} \\\cline{2-4}
+				  & \multicolumn{1}{c|}{\be \gls{orionmat} to GT} & \multicolumn{1}{c|}{\be \gls{orionc} to GT} & \multicolumn{1}{c|}{\be \gls{orionmat} to \gls{orionc}} \\\hline
+	%%%%%%% end of header
+		1  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\\hline
+		2  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\\hline
+		3  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\\hline
+\end{tabular}
+
+\section{Integration}
+
+\subsection{Input}
+
+The input is a sample of the same NPF datasets from above.
+
+Technical note: Vaa3D can only open a few formats such as TIFF stacks, so the
+original format of DIADEM dataset should be used. These are also at
+\nolinkurl{athena.cbl.uh.edu/neuron/Data/Dendrites/Diadem/Data Set 4/}.
+
+\subsection{Procedure}
+
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\subsection{Results}
+
+\todofig{Image of Vaa3D interface with tracing}
+
+\section{Testing and reproducibility}
+
+\subsection{Input data}
+
+\begin{itemize}
+	\item f
+\end{itemize}
+
+\subsection{Procedure}
+
+\subsection{Results}
+
+\end{document}

@@ -34,7 +34,8 @@ GFX_DEP := \
 
 ## Rules
 
-all: thesis.pdf present.pdf present-note.pdf present-article.pdf present-handout-2x3.pdf tags
+all: thesis.pdf present.pdf present-note.pdf present-article.pdf present-handout-2x3.pdf tags \
+	experimental.pdf
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
