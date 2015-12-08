@@ -1,0 +1,10 @@
+%% From
+%% <http://tex.stackexchange.com/questions/118939/add-watermark-that-overlays-the-images>
+%% <http://tex.stackexchange.com/questions/132582/transparent-foreground-watermark>
+\usepackage[printwatermark]{xwatermark}
+%% Water mark in the background
+%\newwatermark[allpages,color=red!10,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
+
+\newsavebox\mydraftbox
+\savebox\mydraftbox{\tikz[color=red,opacity=0.3]\node{DRAFT};}
+\newwatermark*[allpages,angle=45,scale=6,xpos=-20,ypos=15]{\usebox\mydraftbox}
