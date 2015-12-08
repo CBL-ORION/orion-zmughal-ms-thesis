@@ -1,6 +1,9 @@
 \documentclass[12pt]{article}
 \input{preamble/helper.tex}
 
+\usepackage[printwatermark]{xwatermark}
+\newwatermark[allpages,color=red!10,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
+
 \newcommand{\todofig}[1]{%
 	\textcolor{red}{TODO figure: \nolinkurl{#1}}%
 }
@@ -23,48 +26,62 @@ use the Neuromuscular Projection Fibers (NPF).
 
 Technical note: Since the ORION code only as a reader for MetaImage format
 files, use the pre-existing MetaImage files found at
-\nolinkurl{athena.cbl.uh.edu/neuron/Data/Dendrites/Diadem/Data Set 4/}.
+\nolinkurl{smb://athena.cbl.uh.edu/neuron/Data/Dendrites/Diadem/Data\%20Set\%204/}.
 
 \subsection{Procedure}
 
-\begin{itemize}
+\begin{enumerate}
 	\item Generate a maximum intensity projection of the
 		volume.
-	\item Visualize the ground truth tracing.
+	\item Visualize the ground truth (GT) tracing.
 	\item Run the code on the given dataset using
 		\gls{orionmat}
 		and visualise the \gls{orionmat} tracing.
 	\item Run the code on the given datset using
 		\gls{orionc}
 		and visualise the \gls{orionc} tracing.
-\end{itemize}
+	\item Compute the Accuracy and Precision metrics between the pairs:
+		\begin{enumerate*}
+			\item \gls{orionmat} to GT 
+			\item \gls{orionc} to GT 
+			\item \gls{orionc} to \gls{orionmat}
+		\end{enumerate*}
+\end{enumerate}
 
 \subsection{Qualitative results}
 
 For each of the NPF volumes that are processed, create a maximum
 intensity projection (MIP) and display the ground truth
 \begin{center}
-\begin{tabular}{|c|p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
-	\hline
-	\be NPF ID & \be MIP & \be Ground truth tracing & \be \gls{orionmat} tracing & \be \gls{orionc} tracing \\\hline
-	1      & \todofig{1/mip} & \todofig{1/gt_tracing} & \todofig{1/orionmat_tracing} & \todofig{1/orionc_tracing} \\\hline
-	2      & \todofig{2/mip} & \todofig{2/gt_tracing} & \todofig{2/orionmat_tracing} & \todofig{2/orionc_tracing} \\\hline
-	3      & \todofig{3/mip} & \todofig{3/gt_tracing} & \todofig{3/orionmat_tracing} & \todofig{3/orionc_tracing} \\\hline
+\renewcommand{\arraystretch}{1.5}% Spread rows out...
+\begin{tabular}{cp{0.2\textwidth}p{0.2\textwidth}p{0.2\textwidth}p{0.2\textwidth}}
+	\toprule
+	\be NPF ID & \be MIP & \be Ground truth tracing & \be \gls{orionmat} tracing & \be \gls{orionc} tracing \\
+	\midrule
+	1      & \todofig{1/mip} & \todofig{1/gt_tracing} & \todofig{1/orionmat_tracing} & \todofig{1/orionc_tracing} \\%\hline
+	2      & \todofig{2/mip} & \todofig{2/gt_tracing} & \todofig{2/orionmat_tracing} & \todofig{2/orionc_tracing} \\%\hline
+	3      & \todofig{3/mip} & \todofig{3/gt_tracing} & \todofig{3/orionmat_tracing} & \todofig{3/orionc_tracing} \\
+	\bottomrule
 \end{tabular}
 \end{center}
 
 \subsection{Quantitative results}
 
-\begin{tabular}{|c|p{0.28\textwidth}|p{0.28\textwidth}|p{0.28\textwidth}|}
-	\hline
+\begin{center}
+\renewcommand{\arraystretch}{1.5}% Spread rows out...
+\begin{tabular}{cp{0.28\textwidth}p{0.28\textwidth}p{0.28\textwidth}}
 	%%%%%%% header
-	\multirow{2}{*}{\be NPF ID } & \multicolumn{3}{c|}{\be Metrics} \\\cline{2-4}
-				  & \multicolumn{1}{c|}{\be \gls{orionmat} to GT} & \multicolumn{1}{c|}{\be \gls{orionc} to GT} & \multicolumn{1}{c|}{\be \gls{orionmat} to \gls{orionc}} \\\hline
+	\toprule
+	\multirow{2}{*}{\be NPF ID } & \multicolumn{3}{c}{\be Metrics} \\
+				  & \multicolumn{1}{c}{\be \gls{orionmat} to GT} & \multicolumn{1}{c}{\be \gls{orionc} to GT} & \multicolumn{1}{c}{\be \gls{orionc} to \gls{orionmat}} \\
+	\midrule
 	%%%%%%% end of header
-		1  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\\hline
-		2  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\\hline
-		3  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\\hline
+		1  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\%\hline
+		2  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\%\hline
+		3  & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * & Accuracy: * \par Precision: * \\
+	\bottomrule
 \end{tabular}
+\end{center}
 
 \section{Integration}
 
@@ -74,27 +91,57 @@ The input is a sample of the same NPF datasets from above.
 
 Technical note: Vaa3D can only open a few formats such as TIFF stacks, so the
 original format of DIADEM dataset should be used. These are also at
-\nolinkurl{athena.cbl.uh.edu/neuron/Data/Dendrites/Diadem/Data Set 4/}.
+\nolinkurl{smb://athena.cbl.uh.edu/neuron/Data/Dendrites/Diadem/Data\%20Set\%204/}.
 
 \subsection{Procedure}
 
-\begin{itemize}
-	\item 
-\end{itemize}
+\begin{enumerate}
+	\item Use the Vaa3D interface to open the DIADEM TIFF stacks.
+	\item Start the \gls{orionc} Vaa3D plugin.
+	\item Take a screenshot of the output.
+\end{enumerate}
 
 \subsection{Results}
 
-\todofig{Image of Vaa3D interface with tracing}
+%\todofig{Image of Vaa3D interface with tracing}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{gfx/vaa3d_DIADEM-NPF-3-025_3D-view}
+\caption{Vaa3D: Visualization of NPF025 TIFF stack}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{gfx/vaa3d_DIADEM-NPF-3-025_APP2-tracing-3D-view}
+\caption{Vaa3D: Tracing of NPF025 using Vaa3D APP2 plugin}
+\end{figure}
 
 \section{Testing and reproducibility}
 
 \subsection{Input data}
 
 \begin{itemize}
-	\item f
+	\item Call graph of \gls{orionmat} (a digraph where each node is a
+		function and each edge is a function call relationship where the first function
+		node calls the second function node).
+	\item Call graph of  \gls{orionc} with corresponding function nodes to
+		those in the call graph of \gls{orionmat}.
+	\item A sample of the volumes in NPF above.
 \end{itemize}
 
 \subsection{Procedure}
+
+\begin{enumerate}
+	\item Run the \gls{orionmat} code on a volume from the input data.
+	\item For each call made in \gls{orionmat}, capture the
+		parameters, return values, and output files of each function.
+	\item For each node in the call graph of \gls{orionc}, pass the
+		parameters of the corresponding \gls{orionmat} call and capture
+		the return values from \gls{orionc} (note that there are no
+		output files since \gls{orionc} works entirely in memory)
+	\item Create a table that shows the difference in the results from each
+		function call.
+\end{enumerate}
 
 \subsection{Results}
 
