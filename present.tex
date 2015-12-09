@@ -252,15 +252,60 @@
 
 \subsection{Neuron reconstruction}
 \begin{frame}\frametitle{\subsecname}
-	% TODO
-	[\tbackground{explain the problem of neuron reconstruction; history of
-	neuron tracing; biological relevance and applications}]
+	\begin{multicols}{2}
+	\begin{itemize}
+		\item<1-> Golgi staining (1873)
+		\item<2-> Improved by Ram\'on y Cajal (1887)
+	\end{itemize}
+	\columnbreak
+	\begin{tikzpicture}[node distance=2cm]
+		\node (img1)
+			{{\includegraphics<1->[width=0.3\textwidth]{gfx/present/Golgi_Hippocampus.jpg}}};
+		\node[below right of=img1] (img2)
+			{{\includegraphics<2->[width=0.3\textwidth]{gfx/present/cajal-chick-cerebellum.jpg}}};
+		%\pause
+		%\node (img3) at (img2.south west) [yshift=1cm] {\includegraphics[height=3cm]{img3}};
+	\end{tikzpicture}
+	\end{multicols}
+	\note{
+		reticular theory vs. neuron doctrine
+
+		[\tbackground{explain the problem of neuron reconstruction; history of
+		neuron tracing; biological relevance and applications}]
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Digital neuron reconstruction}
+	\begin{multicols}{2}
+	\begin{itemize}
+		\item<1-> The early days (late 1960s): Glaser and Van der loos, 1965; Blinkov and Ivanitskii, 1968; Macku
+˚ and Hradil, 1968
+		\item<2-> Manual tracing (1980s -- late 1990s): NeuroLucida
+		\item<3-> DIADEM (2009 -- 2010)
+	\end{itemize}
+	\columnbreak
+	\begin{tikzpicture}[node distance=2cm]
+		\node (img1)
+			{{\includegraphics<1->[width=0.3\textwidth]{gfx/present/Golgi_Hippocampus.jpg}}};
+		\node[below right of=img1] (img2)
+			{{\includegraphics<2->[width=0.3\textwidth]{gfx/present/cajal-chick-cerebellum.jpg}}};
+		%\pause
+		%\node (img3) at (img2.south west) [yshift=1cm] {\includegraphics[height=3cm]{img3}};
+	\end{tikzpicture}
+	\end{multicols}
+	\note{
+		% TODO
+	}
 \end{frame}
 
 \subsubsection{DIADEM Challenge}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
 	[\tbackground{explain DIADEM Challenge; data sets; outcomes}]
+\end{frame}
+
+\begin{frame}\frametitle{DIADEM datasets}
+	% TODO
 \end{frame}
 
 \subsubsection{Metrics}
@@ -572,7 +617,7 @@
 
         \end{tabular}
         \note{
-                1-based arrays in MATLAB vs. 0-based arrays in C
+		% TODO
         }
 \end{frame}
 
