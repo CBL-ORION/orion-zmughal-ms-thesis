@@ -2,6 +2,7 @@
 \usepackage[british]{babel}
 
 \usepackage[table,x11names,dvipsnames,rgb]{xcolor}
+\usepackage{colortbl}
 \usepackage{tikz}
 \usetikzlibrary{snakes,arrows,shapes,automata}
 \usetikzlibrary{positioning}
@@ -23,3 +24,7 @@
 %% make everything in the box bold; both the text and mathematics: using
 %% \boldmath from `bm` package
 \newcommand{\be}{\bfseries\boldmath}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%

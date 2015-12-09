@@ -35,6 +35,7 @@
 \input{meta/defense.tex}
 %% transitions are made transparent rather than hidden
 \setbeamercovered{transparent}
+\input{00_front-matter/notation.tex}
 %  - Title slide.%{{{
 \frame{\titlepage}
 %}}}
@@ -73,6 +74,7 @@
 		]
 	}
 	\note{
+		% TODO more notes
 		\begin{itemize}
 		\item
 		  confocal and two-photon microscopy
@@ -114,37 +116,38 @@
 		should be openly shared as early as is practical in the discovery
 		process.
 		\end{fancyquote}
-		\qauthor{Michael Nielsen}
+		--- \qauthor{Michael Nielsen}
 	\end{quote}
 	\end{minipage}
 	&
 	\vertcenterimage{\includegraphics[height=0.3\textheight]{gfx/present/michael-nielsen}}
-	\note{
-	Scientific knowledge
-	\begin{itemize}
-	\item
-	  problem definitions
-	\item
-	  ideas
-	\item
-	  code
-	\item
-	  data
-	\item
-	  methodology
-	\item
-	  journal articles
-	\end{itemize}
-	}
 \end{tabular}
 	\note{
-	% TODO
-	[\tbackground
-		{%
-		what it means to be an open-science project (i.e., open release of all
-		research artifacts as early as possible)
-		}
-	]
+		% TODO more notes
+		Scientific knowledge
+		\begin{itemize}
+		\item
+		  problem definitions
+		\item
+		  ideas
+		\item
+		  code
+		\item
+		  data
+		\item
+		  methodology
+		\item
+		  journal articles
+		\end{itemize}
+	}
+	\note{
+		% TODO more notes
+		[\tbackground
+			{%
+			what it means to be an open-science project (i.e., open release of all
+			research artifacts as early as possible)
+			}
+		]
 	}
 \end{frame}
 
@@ -153,15 +156,17 @@
 	\centering
 	\includegraphics[height=0.6\textheight]{gfx/bigneuron-website}
 	\note{
-	% TODO
-	[\tbackground
-		{%
-			goal of BigNeuron and purpose of participation in
-			BigNeuron
-		}
-	]
+		% TODO more notes
+		[\tbackground
+			{%
+				goal of BigNeuron and purpose of participation in
+				BigNeuron and how each algorithm must be released under
+				open-science
+			}
+		]
 	}
 	\note{
+		% TODO more notes
 		\begin{itemize}
 		\item
 		  Continuing where the DIADEM Challenge left off
@@ -179,8 +184,17 @@
 %        you plan to achieve it. Let your contributions to the field of Computer Science
 %        be clear.
 \begin{frame}\frametitle{\secname}
-	[\tbackground{explain how the ORION code exists in MATLAB form but is difficult to
-	integrate into BigNeuron}; explain challenges in later slides]
+	\Huge
+	\renewcommand{\arraystretch}{1.5}% Spread rows out...
+	\begin{tabular}{m{5em}m{1em}m{4em}m{1em}}
+		BigNeuron & + & \vertcenterimage{\includegraphics[height=2em]{gfx/present/mathworks-logo}} & \textcolor{red}{\xmark} \\[1em]
+		BigNeuron & + & C/C++ & \textcolor{green}{\cmark}
+	\end{tabular}
+	\note{
+		% TODO more notes
+		[\tbackground{explain how the ORION code exists in MATLAB form but is difficult to
+		integrate into BigNeuron}; explain challenges in later slides]
+	}
 \end{frame}
 
 \section{Goal}
@@ -202,25 +216,19 @@
 
 \subsection{Objectives}
 \begin{frame}\frametitle{\subsecname}
-	% TODO
 	\tobjectives{%
-	Taken from abstract. TODO: make concise
 	% TODO choose icons for each objective to put in the slide
 	% headers
 	% - conversion : recycle?
 	% - integration: gears?
 	% - testing: Erlenmeyer flask (for science)?
-	\begin{enumerate}
-		\item analyze the ORION algorithm and implementation to
-			determine the architecture for the new system that is
-			efficient and extensible;
-		\item integrate the system into a popular toolkit for biomedical
-			image analysis for ease-of-use and visualization;
-		\item develop a test suite of both the individual components (unit
-			testing) and across the whole system (integration tests);
+	\begin{enumerate}[<+->]
+		\setlength\itemsep{1em}
+		\item convert the ORION algorithm: \gls{orionmat} $\rightarrow$ \gls{orionc};
+		\item integrate \gls{orionc} with Vaa3D;
 			and % "and" before last item
-		\item ensure that the software gives reproducible results by
-			making it easy to build and distribute. % end of sentence
+		\item create a test suite and ensure
+			reproducible results. % end of sentence
 	\end{enumerate}
 	}
 \end{frame}
@@ -473,6 +481,22 @@
 
 \end{frame}
 
+\begin{frame}% TODO title
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{gfx/vaa3d_DIADEM-NPF-3-025_3D-view}
+\caption{Vaa3D: Visualization of NPF025 TIFF stack}
+\end{figure}
+\end{frame}
+
+\begin{frame}% TODO title
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{gfx/vaa3d_DIADEM-NPF-3-025_APP2-tracing-3D-view}
+\caption{Vaa3D: Tracing of NPF025 using Vaa3D APP2 plugin}
+\end{figure}
+\end{frame}
+
 \subsection{Results for Testing and Reproducibility}
 
 \subsubsection{Overview of tests}
@@ -516,6 +540,40 @@
 	[
 		{screenshots of continuous integration}
 	]
+\end{frame}
+
+\begin{frame}\frametitle{Estimating error in stages}
+        \centering
+	\begin{tabular}{|p{2cm}|c|c|c|c|}
+		\toprule
+                                         & one                    & two                    & three                  & four                   \\%\hline
+		\midrule
+                  \hline
+                  \gls{orionmat}         & \cellcolor{langM} x(1) & \cellcolor{langM} x(2) & \cellcolor{langM} x(3) & \cellcolor{langM} x(4) \\%\hline
+                  \gls{orionc}           & \cellcolor{langC} x[0] & \cellcolor{langC} x[1] & \cellcolor{langC} x[2] & \cellcolor{langC} x[3] \\%\hline
+                  C with Matlab          & \cellcolor{langCM} 4   & \cellcolor{langCM} 3   & \cellcolor{langCM} 2   & \cellcolor{langCM} 1   \\%\hline
+
+                  Matlab - C             & \cellcolor{diffone} 4  & \cellcolor{diffone} 3  & \cellcolor{diffone} 2  & \cellcolor{diffone} 1  \\%\hline
+                  Matlab - C with Matlab & \cellcolor{difftwo} 4  & \cellcolor{difftwo} 3  & \cellcolor{difftwo} 2  & \cellcolor{difftwo} 1  \\%\hline
+		  \bottomrule
+        \end{tabular}
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Estimating error in stages (vertical)}
+        \centering
+        \begin{tabular}{|l|c|c|c|c|}
+		stage  & \gls{orionmat}         & \gls{orionc}           & C with Matlab           & Matlab - C               & Matlab - C with Matlab   \\ \hline
+		\hline
+		one    & \cellcolor{langM} x(1) & \cellcolor{langC} x(2) & \cellcolor{langCM} x(3) & \cellcolor{diffone} x(4) & \cellcolor{difftwo} x(4) \\ \hline
+		two    & \cellcolor{langM} x[0] & \cellcolor{langC} x[1] & \cellcolor{langCM} x[2] & \cellcolor{diffone} x[3] & \cellcolor{difftwo} x(4) \\ \hline
+		three  & \cellcolor{langM} 4    & \cellcolor{langC} 3    & \cellcolor{langCM} 2    & \cellcolor{diffone} 1    & \cellcolor{difftwo} x(4) \\ \hline
+
+        \end{tabular}
+        \note{
+                1-based arrays in MATLAB vs. 0-based arrays in C
+        }
 \end{frame}
 
 
