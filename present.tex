@@ -254,8 +254,8 @@
 \begin{frame}\frametitle{\subsecname}
 	\begin{multicols}{2}
 	\begin{itemize}
-		\item<1-> Golgi staining (1873)
-		\item<2-> Improved by Ram\'on y Cajal (1887)
+		\item<1-> Golgi~staining --- Camillo~Golgi (1873)
+		\item<2-> Improved by Ram\'on~y~Cajal (1887)
 	\end{itemize}
 	\columnbreak
 	\begin{tikzpicture}[node distance=2cm]
@@ -278,20 +278,12 @@
 \begin{frame}\frametitle{Digital neuron reconstruction}
 	\begin{multicols}{2}
 	\begin{itemize}
-		\item<1-> The early days (late 1960s): Glaser and Van der loos, 1965; Blinkov and Ivanitskii, 1968; Macku
-˚ and Hradil, 1968
+		\item<1-> The early days (late 1960s): Glaser and Van der loos, 1965; Blinkov and Ivanitskii, 1968; Macku and Hradil, 1968
 		\item<2-> Manual tracing (1980s -- late 1990s): NeuroLucida
 		\item<3-> DIADEM (2009 -- 2010)
 	\end{itemize}
 	\columnbreak
-	\begin{tikzpicture}[node distance=2cm]
-		\node (img1)
-			{{\includegraphics<1->[width=0.3\textwidth]{gfx/present/Golgi_Hippocampus.jpg}}};
-		\node[below right of=img1] (img2)
-			{{\includegraphics<2->[width=0.3\textwidth]{gfx/present/cajal-chick-cerebellum.jpg}}};
-		%\pause
-		%\node (img3) at (img2.south west) [yshift=1cm] {\includegraphics[height=3cm]{img3}};
-	\end{tikzpicture}
+	% TODO image of computer-microscope system
 	\end{multicols}
 	\note{
 		% TODO
@@ -301,7 +293,30 @@
 \subsubsection{DIADEM Challenge}
 \begin{frame}\frametitle{\subsubsecname}
 	% TODO
-	[\tbackground{explain DIADEM Challenge; data sets; outcomes}]
+	\begin{center}
+	\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+	\be \begin{center}CF\end{center} & \be \begin{center}CA3\end{center} & \be \begin{center}NL1\end{center} \\
+	\vertcenterimage{\includegraphics[width=0.3\textwidth]{gfx/vaa3D-DIADEM-1-CF_1-MIP.png}} & \vertcenterimage{\includegraphics[width=0.3\textwidth]{gfx/vaa3D-DIADEM-2-HCA3-Section-1-MIP.png}} & \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-3-NL1-01-MIP.png}} \\
+	\vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-1-CF_1-3D.png}}  & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-2-HCA3-Section-1-3D.png}}  & \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-3-NL1-01-3D.png}}
+	\end{tabular}
+	\end{center}
+	\note{
+		[\tbackground{explain DIADEM Challenge; data sets; outcomes}]
+	}
+\end{frame}
+
+\begin{frame}\frametitle{\subsubsecname}
+	% TODO
+	\begin{center}
+	\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+	 \be \begin{center}NPF\end{center} & \be \begin{center}OP\end{center} & \be \begin{center}CL\end{center} \\
+	\vertcenterimage{\todofig{gfx/vaa3D-DIADEM-4-NPF-MIP.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-5-OP-MIP.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-6-CL-MIP.png}} \\
+	\vertcenterimage{\todofig{gfx/vaa3D-DIADEM-4-NPF-3D.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-5-OP-3D.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-6-CL-3D.png}}
+	\end{tabular}
+	\end{center}
+	\note{
+		[\tbackground{explain DIADEM Challenge; data sets; outcomes}]
+	}
 \end{frame}
 
 \begin{frame}\frametitle{DIADEM datasets}
@@ -416,6 +431,35 @@
 	\note{
 		This is a neuron tracing loaded into Vaa3D.
 	}
+\end{frame}
+
+\subsection{ORION}
+\begin{frame}\frametitle{\subsecname}
+	\begin{enumerate}
+		\def\labelenumi{\arabic{enumi}.}
+		\item Segmentation
+		\item Tracing
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{ORION: Segmentation}
+	Given volume \(V\) and scales \(s_{k}\):
+	\begin{enumerate}
+		\def\labelenumi{\arabic{enumi}.}
+		\item Detect training points
+		\begin{enumerate}
+			\def\labelenumii{\arabic{enumii}.}
+			\item Create a Laplacian filter of scale \(\sigma_{k}^{L}\): \(F_{k}^{L}\)
+			\item Create a filter from the second
+				derivatives of a Gaussian of scale
+				\(\sigma_{k}^{G}\) to compute the
+				Hessian: \(F_{k}^{G}\).
+			\item For each voxel, find the \(k^{th}\) scale which has
+				a maximum response to \(F_{k,L}\).
+				Assign the two largest eigenvalues
+				to a feature vector.
+		\end{enumerate}
+	\end{enumerate}
 \end{frame}
 
 %  - Proposed Framework - this is the most important part of your proposal.
