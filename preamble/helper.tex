@@ -2,6 +2,12 @@
 
 \usepackage{tocbibind}
 
+% need to make the title bold using \be so that even mathematics
+% in the title are bold
+\def\bfseries{\fontseries \bfdefault \selectfont \boldmath}
+%\usepackage{titlesec}
+%\titleformat*{\section}{\normalfont\be\Large}
+
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
