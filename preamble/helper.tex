@@ -23,14 +23,13 @@
 
 %% - add a colon (\cblglossdelimiter) between the name of the entries of the
 %%   glossary and the glossary description
-%% - use \be to make the entry name bold and \rm to make the delimiter not bold
 \newcommand{\cblglossdelimiter}{:}
 \newglossarystyle{cbl-gloss}{%
 \setglossarystyle{list}% base this style on the list style
 \renewcommand*{\glossentry}[2]{%
 \item[\glsentryitem{##1}%
   \glstarget{##1}{%
-	{\be\glossentryname{##1}}%   %% bold everything in glossentryname
+	{\glossentryname{##1}}%
 	{~\rm\cblglossdelimiter}%    %% delimiter should be \rm
 	}]%
   \glossentrydesc{##1}\glspostdescription\space ##2}
