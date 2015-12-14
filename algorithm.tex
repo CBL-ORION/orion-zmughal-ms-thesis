@@ -7,11 +7,66 @@
 \author{Zakariyya Mughal}
 \date{2015-12-12}
 
-\newcommand{\InputVolume}{$V[ijk]$}
-\newcommand{\InputVolumeDimensions}{m_0 \times m_1 \times m_2}
+\newcommand{\Dim}[1]{\ensuremath{\left|#1\right|}}
+\newcommand{\InputVolumeIndices}{\ensuremath{[i,j,k]}}
+\newcommand{\InputVolumeName}{\ensuremath{V}}
+\newcommand{\InputVolume}{\ensuremath{\InputVolumeName\InputVolumeIndices}}
+\newcommand{\InputVolumeDimensions}{\ensuremath{\Dim{\InputVolumeName}_0 \times \Dim{\InputVolumeName}_1 \times \Dim{\InputVolumeName}_2}}
+
+\newcommand{\LaplacianFilterApproxDegree}{\ensuremath{d^{L}}}
+\newcommand{\RadiiScalesName}{\ensuremath{r}}
+\newcommand{\RadiiScales}{\ensuremath{\RadiiScalesName_{s}}}
 
 \begin{document}
-\InputVolume{} is the input volume of dimensions
-\InputVolumeDimensions{}.
+\maketitle
+\tableofcontents
+
+\section{Segmentation}
+
+\subsection{Input}
+
+\begin{description}
+	\item[\InputVolume{}] is the input volume of dimensions
+		\InputVolumeDimensions{} which contains the intensity values taken
+		from the microscope modality.
+	\item[\RadiiScales{}] is a \Dim{\RadiiScalesName}-vector where each element
+		represents the radius of the neurite to segment.
+	\item[\LaplacianFilterApproxDegree{}] is the degree of the
+		Taylor series used to calculate the approximation
+		to the Laplacian filter.
+\end{description}
+
+\subsection{Extract features}
+
+\paragraph{Laplacian scale parameter}
+
+\(\sigma^{L}_{s}\) is a \Dim{\RadiiScalesName}-vector
+
+\paragraph{Hessian scale parameter}
+
+\(\sigma^{G}_{s}\) is a \Dim{\RadiiScalesName}-vector
+
+\paragraph{Laplacian filter (HDAF)}
+
+\(V^{L}_{s}\InputVolumeIndices\) is a \Dim{\RadiiScalesName}-vector of
+\Dim{\InputVolumeName} dimensional volumes where each element
+contains the filter response for scale \(\sigma^{L}_{s}\).
+
+\paragraph{Hessian filter}
+
+\(\lambda_{s,1}\InputVolumeIndices\),
+\(\lambda_{s,2}\InputVolumeIndices\), and
+\(\lambda_{s,3}\InputVolumeIndices\) are
+a collection of \Dim{\RadiiScalesName}-count
+\Dim{\InputVolumeName} dimensional volumes where each element is
+the respective eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3\) for scale
+\(\sigma^{G}_{s}\) (i.e., the eigenvalues are sorted in ascending
+order).
+
+\paragraph{Maximal Laplacian filter response}
+
+\[ R_{\mathrm{max}}^{L}\InputVolumeIndices = \argmax_{s} \(V^{L}_{s}\InputVolumeIndices\) \]
+
+\section{Tracing}
 
 \end{document}
