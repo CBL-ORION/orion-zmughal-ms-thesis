@@ -1,23 +1,11 @@
 \documentclass[12pt]{article}
 \input{preamble/helper.tex}
-
+\input{00_front-matter/notation.tex}
 \input{preamble/draftwatermark.tex}
-\usepackage{braket}
-\usepackage{breqn}
 
 \title{Algorithm}
 \author{Zakariyya Mughal}
 \date{2015-12-12}
-
-\newcommand{\Dim}[1]{\ensuremath{\left|#1\right|}}
-\newcommand{\InputVolumeIndices}{\ensuremath{[i,j,k]}}
-\newcommand{\InputVolumeName}{\ensuremath{V}}
-\newcommand{\InputVolume}{\ensuremath{\InputVolumeName\InputVolumeIndices}}
-\newcommand{\InputVolumeDimensions}{\ensuremath{\Dim{\InputVolumeName}_0 \times \Dim{\InputVolumeName}_1 \times \Dim{\InputVolumeName}_2}}
-
-\newcommand{\LaplacianFilterApproxDegree}{\ensuremath{d^{L}}}
-\newcommand{\RadiiScalesName}{\ensuremath{r}}
-\newcommand{\RadiiScales}{\ensuremath{\RadiiScalesName_{s}}}
 
 \begin{document}
 \maketitle
@@ -59,6 +47,14 @@ subtracting one when calculating using indices.
 contains the filter response for scale \(\sigma^{L}_{s}\).
 
 \paragraph{Hessian filter}
+
+
+Hessian filter is defined as
+\begin{dmath}
+H(V)_{i,j} = \frac{\partial{}^{2}I}{\partial{}e_{i}\partial{}e_{j}}
+\end{dmath}
+where \(e_{0}, e_{1}, e_{2}\) are the basis vectors for the 3D
+coordinate system of the volume \(V\).
 
 \(\lambda_{s,1}\InputVolumeIndices\),
 \(\lambda_{s,2}\InputVolumeIndices\), and
