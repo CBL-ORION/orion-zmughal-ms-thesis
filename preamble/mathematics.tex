@@ -5,6 +5,11 @@
 \newcommand{\HadamardProd}{\mathop{\odot}}%
 \newcommand{\SetIntersection}{\mathbin{\cap}}%
 
+\newcommand{\FuncTo}[3]{#1\colon #2 \to #3}%
+%% \FuncTo{f}{\Sreal^n}{\Sreal}
+%% gives
+%% f: R^n -> R
+
 \newcommand{\FourierTrans}[1]{\ensuremath{\mathcal{F}\left\{#1\right\}}}
 \newcommand{\IFourierTrans}[1]{\ensuremath{\mathcal{F}^{-1}\left\{#1\right\}}}
 
@@ -12,3 +17,21 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 
 \newcommand{\Dim}[1]{\ensuremath{\left|#1\right|}}
+
+%% Sets
+\newcommand{\Sreal}{\ensuremath{\mathbb{R}}}
+\newcommand{\Scomplex}{\ensuremath{\mathbb{C}}}
+\newcommand{\Snatural}{\ensuremath{\mathbb{N}}}
+\newcommand{\Sinteger}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Srational}{\ensuremath{\mathbb{Q}}}
+\newcommand{\Sirrational}{\ensuremath{\mathbb{J}}}
+
+%% Complex numbers
+\newcommand{\realpart}[1]{\ensuremath{\mathfrak{R}\left\{#1\right\}}}
+\newcommand{\imagpart}[1]{\ensuremath{\mathfrak{I}\left\{#1\right\}}}
+
+\newcommand{\tens}[1]{\mathsf{\underline{#1}}}	% tensor
+\newcommand{\vect}[1]{\overrightarrow{#1}}	% vector
+
+\def\abs#1{\left| #1 \right|}	% use instead of $|x|$
+\def\norm#1{\left\| #1 \right\|}% use instead of $\|x\|$

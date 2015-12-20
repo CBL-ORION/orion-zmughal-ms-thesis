@@ -27,29 +27,42 @@ subtracting one when calculating using indices.
 		represents the radius of the neurite to segment.
 	\item[\LaplacianFilterApproxDegree{}] is the degree of the
 		Taylor series used to calculate the approximation
-		to the Laplacian filter.
+		to the Laplacian filter. This is set to \(60\) based on Paul's
+		experiments.
+
+		TODO: show a graph of HDAF at different
 \end{description}
 
 \subsection{Extract features}
 
-\paragraph{Laplacian scale parameter}
+\subsubsection{Laplacian scale parameter}
 
-\(\sigma^{L}_{s}\) is a \Dim{\RadiiScalesName}-vector
+\newcommand{\LaplacianScalesName}{\vect{\sigma}^{L}}
+\newcommand{\LaplacianScales}{\LaplacianScalesName_{s}}
 
-\paragraph{Hessian scale parameter}
+\(\LaplacianScales\) is a \Dim{\RadiiScalesName}-vector such that
+\(
+\LaplacianScales = \frac{\RadiiScales{}}{0.66}
+\)
 
-\(\sigma^{G}_{s}\) is a \Dim{\RadiiScalesName}-vector
+TODO explain that 0.66 was chosen by using linear regression and fixing
+\(\LaplacianFilterApproxDegree{} = 60\).
 
-\paragraph{Laplacian filter (HDAF)}
+\subsubsection{Hessian scale parameter}
 
-\(V^{L}_{s}\InputVolumeIndices\) is a \Dim{\RadiiScalesName}-vector of
+\(\vect{\sigma}^{G}_{s}\) is a \Dim{\RadiiScalesName}-vector which is set to
+\(\vect{\sigma}^{G}_{s} = \RadiiScales{}\) that is, the radius at which to segment.
+
+\subsubsection{Laplacian filter (HDAF)}
+
+\(\tens{V}^{L}_{s}\InputVolumeIndices\) is a \Dim{\RadiiScalesName}-vector of
 \Dim{\InputVolumeName} dimensional volumes where each element
-contains the filter response for scale \(\sigma^{L}_{s}\).
+contains the filter response for scale \(\vect{\sigma}^{L}_{s}\).
 
-\paragraph{Hessian filter}
+\subsubsection{Hessian filter}
 
 
-Hessian filter is defined as
+Hessian filter is defined for a function \(\FuncTo{f}{\Sreal^{n}}{\Sreal}\)
 \begin{dmath}
 H(V)_{i,j} = \frac{\partial{}^{2}I}{\partial{}e_{i}\partial{}e_{j}}
 \end{dmath}
@@ -61,11 +74,11 @@ coordinate system of the volume \(V\).
 \(\lambda_{s,3}\InputVolumeIndices\) are
 a collection of \Dim{\RadiiScalesName}-count
 \Dim{\InputVolumeName} dimensional volumes where each element is
-the respective eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3\) for scale
+the respective eigenvalues \(\abs{\lambda_1} \le \abs{\lambda_2} \le \abs{\lambda_3}\) for scale
 \(\sigma^{G}_{s}\) (i.e., the eigenvalues are sorted in ascending
 order).
 
-\paragraph{Maximal Laplacian filter response}
+\subsubsection{Maximal Laplacian filter response}
 
 \begin{dmath*}
 R_{\mathrm{max}}^{L}\InputVolumeIndices = \argmax_{s} \(V^{L}_{s}\InputVolumeIndices\)
@@ -75,7 +88,7 @@ where \(R_{\mathrm{max}}^{L}\) is a volume of dimension
 all elements satisfy
 \(0 \le R_{\mathrm{max}}^{L}\InputVolumeIndices < \Dim{\RadiiScalesName}\)
 
-\paragraph{Feature vector}
+\subsubsection{Feature vector}
 
 
 \begin{dmath*}
@@ -94,7 +107,7 @@ of eigenvalues used as features.
 
 \subsection{Discriminant function}
 
-\subsection{Input}
+\subsubsection{Input}
 
 \begin{description}
 	\item[\(F^{G}\)] is a volume that contains the feature vector for each
@@ -102,7 +115,7 @@ of eigenvalues used as features.
 	\item[\(H_n\)] is a scalar number of bins.
 \end{description}
 
-\subsection{Bin bounds and edges}
+\subsubsection{Bin bounds and edges}
 
 The 2D histogram minima and maxima are computed for each feature
 \begin{dmath*}
@@ -122,7 +135,7 @@ Bin edges are computed for each \(\mnth{q}\) feature
 where \(w\) is the index of the leading edge to the
 \(\mnth{w}\) bin and \( 0 \le w \le  H_n \).
 
-\subsection{Histogram accumulation}
+\subsubsection{Histogram accumulation}
 
 \begin{dmath*}
 	H[x,y] =  \Dim{ \operatorname{Bin}(F^G, x, y) }
