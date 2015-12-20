@@ -1,18 +1,37 @@
-\newcommand{\SegGroundTotal}{\ensuremath{S_{\mathrm{G,T}}}}
-\newcommand{\SegAutomaticTotal}{\ensuremath{S_{\mathrm{A,T}}}}
-\newcommand{\SegAutomaticCorrect}{\ensuremath{S_{\mathrm{A,C}}}}
-\newcommand{\SegAutomaticMissing}{\ensuremath{S_{\mathrm{A,miss}}}}
-\newcommand{\SegAutomaticExtra}{\ensuremath{S_{\mathrm{A,extra}}}}
+\newcommand{\SegGroundTotal}{S_{\mathrm{G,T}}}
+\newcommand{\SegAutomaticTotal}{S_{\mathrm{A,T}}}
+\newcommand{\SegAutomaticCorrect}{S_{\mathrm{A,C}}}
+\newcommand{\SegAutomaticMissing}{S_{\mathrm{A,miss}}}
+\newcommand{\SegAutomaticExtra}{S_{\mathrm{A,extra}}}
 
-\newcommand{\InputVolumeIndices}{\ensuremath{[i,j,k]}}
-\newcommand{\InputVolumeName}{\ensuremath{\tens{V}}}
-\newcommand{\InputVolume}{\ensuremath{\InputVolumeName\InputVolumeIndices}}
-\newcommand{\InputVolumeDimensions}{\ensuremath{\Dim{\InputVolumeName}_0 \times \Dim{\InputVolumeName}_1 \times \Dim{\InputVolumeName}_2}}
+\newcommand{\InputVolumeIndices}{[i,j,k]}
+\newcommand{\ScaleIndex}{s}
 
-\newcommand{\LaplacianFilterApproxDegree}{\ensuremath{d^{L}}}
-\newcommand{\RadiiScalesName}{\ensuremath{\vect{r}}}
-\newcommand{\RadiiScales}{\ensuremath{\RadiiScalesName_{s}}}
+%%% Input to the segmentation
+\newcommand{\InputVolumeName}{\tens{V}}
+\newcommand{\InputVolume}{\InputVolumeName}
+\newcommand{\InputVolumeElem}{\InputVolume\InputVolumeIndices}
+\newcommand{\InputVolumeDimensions}{\Dim{\InputVolumeName}_0 \times \Dim{\InputVolumeName}_1 \times \Dim{\InputVolumeName}_2}
 
+%%% Used by the Laplacian filter
+\newcommand{\LaplacianFilterApproxDegree}{d^{L}}
+
+%%% Used to constrol the \LaplacianScales and \HessianScales
+\newcommand{\RadiiScalesName}{\vect{r}}
+\newcommand{\RadiiScales}{\vect{r}_{\ScaleIndex}}
+
+%%% Input to Laplacian filter
+\newcommand{\LaplacianScalesName}{\vect{\sigma}^{L}}
+\newcommand{\LaplacianScales}{\vect{\sigma}^{L}_{\ScaleIndex}}
+
+%%% Input to Hessian filter
+\newcommand{\HessianScalesName}{\vect{\sigma}^{G}}
+\newcommand{\HessianScales}{\vect{\sigma}^{G}_{\ScaleIndex}}
+
+%%% Output of the Laplacian filter
+\newcommand{\LaplacianOutputVolumeName}{\tens{V}^{L}}
+\newcommand{\LaplacianOutputVolume}{\tens{V}^{L}_{\ScaleIndex}}
+\newcommand{\LaplacianOutputVolumeElem}{\LaplacianOutputVolume\InputVolumeIndices}
 
 % TODO Notation and stylistic conventions
 
@@ -70,7 +89,7 @@
 	name={\ensuremath{       {z = x \HadamardProd y}}},%
 	sort={not: product, Hadamard},
 	description={Hadamard product (or pointwise/entrywise
-product) of $x$ and $y$ such that $z_i = x_i y_i$ }}
+product) of $\vect{x}$ and $\vect{y}$ such that $\vect{z}_i = \vect{x}_i \vect{y}_i$ }}
 
 
 

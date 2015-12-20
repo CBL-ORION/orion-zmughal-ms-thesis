@@ -20,62 +20,68 @@ subtracting one when calculating using indices.
 \subsection{Input}
 
 \begin{description}
-	\item[\InputVolume{}] is the input volume of dimensions
-		\InputVolumeDimensions{} which contains the intensity values taken
+	\item[\(\InputVolume{}\)] is the input volume of dimensions
+		\(\InputVolumeDimensions{}\) which contains the intensity values taken
 		from the microscope modality.
-	\item[\RadiiScales{}] is a \Dim{\RadiiScalesName}-vector where each element
+	\item[\(\RadiiScales{}\)] is a \Dim{\RadiiScalesName}-vector where each element
 		represents the radius of the neurite to segment.
-	\item[\LaplacianFilterApproxDegree{}] is the degree of the
-		Taylor series used to calculate the approximation
-		to the Laplacian filter. This is set to \(60\) based on Paul's
+	\item[\(\LaplacianFilterApproxDegree{}\)] is the degree of the
+		exponential Taylor series used to calculate the approximation
+		to the Laplacian filter. This is set to \(\num{60}\) based on Paul's
 		experiments.
 
-		TODO: show a graph of HDAF at different
+		\todo{show a graph of HDAF using different Taylor series approximations.}
 \end{description}
 
 \subsection{Extract features}
 
 \subsubsection{Laplacian scale parameter}
 
-\newcommand{\LaplacianScalesName}{\vect{\sigma}^{L}}
-\newcommand{\LaplacianScales}{\LaplacianScalesName_{s}}
-
 \(\LaplacianScales\) is a \Dim{\RadiiScalesName}-vector such that
-\(
-\LaplacianScales = \frac{\RadiiScales{}}{0.66}
-\)
+\begin{dmath*}
+\LaplacianScales = \frac{\RadiiScales{}}{\num{0.66}}
+\end{dmath*}
 
-TODO explain that 0.66 was chosen by using linear regression and fixing
-\(\LaplacianFilterApproxDegree{} = 60\).
+\todo{explain that \num{0.66} was chosen by using linear regression and fixing
+\(\LaplacianFilterApproxDegree{} = \num{60}\).}
 
 \subsubsection{Hessian scale parameter}
 
-\(\vect{\sigma}^{G}_{s}\) is a \Dim{\RadiiScalesName}-vector which is set to
-\(\vect{\sigma}^{G}_{s} = \RadiiScales{}\) that is, the radius at which to segment.
+\(\HessianScales\) is a \Dim{\RadiiScalesName}-vector which is set to
+\(\HessianScales = \RadiiScales{}\) that is, the radius at which to segment.
 
 \subsubsection{Laplacian filter (HDAF)}
 
-\(\tens{V}^{L}_{s}\InputVolumeIndices\) is a \Dim{\RadiiScalesName}-vector of
-\Dim{\InputVolumeName} dimensional volumes where each element
-contains the filter response for scale \(\vect{\sigma}^{L}_{s}\).
+\(\LaplacianOutputVolume\) is a \Dim{\RadiiScalesName}-vector of
+\Dim{\InputVolumeName}-dimensional volumes where each element
+contains the filter response for scale \(\LaplacianScales\).
 
 \subsubsection{Hessian filter}
 
 
 Hessian filter is defined for a function \(\FuncTo{f}{\Sreal^{n}}{\Sreal}\)
-\begin{dmath}
-H(V)_{i,j} = \frac{\partial{}^{2}I}{\partial{}e_{i}\partial{}e_{j}}
-\end{dmath}
-where \(e_{0}, e_{1}, e_{2}\) are the basis vectors for the 3D
-coordinate system of the volume \(V\).
+as
+\begin{dmath*}
+	H(f)_{i,j}(\vect{x}) = \frac{\partial{}^{2} f(\vect{x})}{\partial{}x_{i}\partial{}x_{j}}
+\end{dmath*}
+for a point \(\vect{x} = (x_0, x_1, x_2, \dotsc, x_{n-1}) \in \Sreal^{n}\)
+
+For a 3D volume \(V\), we compute the Hessian as
+\begin{dmath*}
+	H(V)_{i,j}(\vect{x}) = \frac{\partial{}^{2} V(\vect{x})}{\partial{}x_{i}\partial{}x_{j}}
+\end{dmath*}
+where \(\vect{x} = (x_{0}, x_{1}, x_{2})\) is a point in the 3D
+coordinate system of \(V\).
+
+\todo{explain how a Gaussian 2nd derivative filter is used to smooth piecewise noise from discrete volume}
 
 \(\lambda_{s,1}\InputVolumeIndices\),
 \(\lambda_{s,2}\InputVolumeIndices\), and
 \(\lambda_{s,3}\InputVolumeIndices\) are
 a collection of \Dim{\RadiiScalesName}-count
-\Dim{\InputVolumeName} dimensional volumes where each element is
-the respective eigenvalues \(\abs{\lambda_1} \le \abs{\lambda_2} \le \abs{\lambda_3}\) for scale
-\(\sigma^{G}_{s}\) (i.e., the eigenvalues are sorted in ascending
+\Dim{\InputVolumeName}-dimensional volumes where each element is
+the respective eigenvalues \(\abs{\lambda_1} \le \abs{\lambda_2} \le \abs{\lambda_3}\)
+of \(H(V)\) for scale \(\sigma^{G}_{s}\) (i.e., the eigenvalues are sorted in ascending
 order).
 
 \subsubsection{Maximal Laplacian filter response}
