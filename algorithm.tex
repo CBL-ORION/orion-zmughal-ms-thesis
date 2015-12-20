@@ -19,16 +19,19 @@ subtracting one when calculating using indices.
 
 \subsection{Input}
 
+\newcommand{\foobar}[1]{\bm{#1}}
+
 \begin{description}
-	\item[\(\InputVolume{}\)] is the input volume of dimensions
+	\item[\(\InputVolumeName{}\)] is the input volume of dimensions
 		\(\InputVolumeDimensions{}\) which contains the intensity values taken
 		from the microscope modality.
-	\item[\(\RadiiScales{}\)] is a \Dim{\RadiiScalesName}-vector where each element
+	\item[\(\RadiiScalesName{}\)] is a \Dim{\RadiiScalesName}-tuple where each element
+		\(\RadiiScalesElem \in \RadiiScalesName\)
 		represents the radius of the neurite to segment.
 	\item[\(\LaplacianFilterApproxDegree{}\)] is the degree of the
 		exponential Taylor series used to calculate the approximation
 		to the Laplacian filter. This is set to \(\num{60}\) based on Paul's
-		experiments.
+		experiments. $\sigma {\boldsymbol{\sigma}} {\bm{\alpha}} {\bm{\sigma}}$
 
 		\todo{show a graph of HDAF using different Taylor series approximations.}
 \end{description}
@@ -37,77 +40,91 @@ subtracting one when calculating using indices.
 
 \subsubsection{Laplacian scale parameter}
 
-\(\LaplacianScales\) is a \Dim{\RadiiScalesName}-vector such that
-\begin{dmath*}
-\LaplacianScales = \frac{\RadiiScales{}}{\num{0.66}}
-\end{dmath*}
+\(\LaplacianScalesName\) is a \Dim{\RadiiScalesName}-tuple such that
+\begin{equation*}
+	\LaplacianScalesName \ni \LaplacianScalesElem{} = \frac{\RadiiScalesElem{}}{\num{0.66}}
+\end{equation*}
 
 \todo{explain that \num{0.66} was chosen by using linear regression and fixing
 \(\LaplacianFilterApproxDegree{} = \num{60}\).}
 
 \subsubsection{Hessian scale parameter}
 
-\(\HessianScales\) is a \Dim{\RadiiScalesName}-vector which is set to
-\(\HessianScales = \RadiiScales{}\) that is, the radius at which to segment.
+\(\HessianScalesName\) is a \Dim{\RadiiScalesName}-tuple where each element
+\begin{equation*}
+	\HessianScalesName \ni \HessianScalesElem{} = \RadiiScalesElem{}
+\end{equation*}
+that is, the radius at which to segment.
 
 \subsubsection{Laplacian filter (HDAF)}
 
-\(\LaplacianOutputVolume\) is a \Dim{\RadiiScalesName}-vector of
-\Dim{\InputVolumeName}-dimensional volumes where each element
-contains the filter response for scale \(\LaplacianScales\).
+\(\LaplacianOutputVolumeName\) is a \Dim{\RadiiScalesName}-tuple
+where each element \(\LaplacianOutputVolumeElem \in \LaplacianOutputVolumeName\)
+is a \Dim{\InputVolumeName}-dimensional volume
+that contains the filter response for the corresponding Laplacian scale \(\LaplacianScalesElem\).
 
 \subsubsection{Hessian filter}
 
 
 Hessian filter is defined for a function \(\FuncTo{f}{\Sreal^{n}}{\Sreal}\)
 as
-\begin{dmath*}
+\begin{equation*}
 	H(f)_{i,j}(\vect{x}) = \frac{\partial{}^{2} f(\vect{x})}{\partial{}x_{i}\partial{}x_{j}}
-\end{dmath*}
+\end{equation*}
 for a point \(\vect{x} = (x_0, x_1, x_2, \dotsc, x_{n-1}) \in \Sreal^{n}\)
 
-For a 3D volume \(V\), we compute the Hessian as
-\begin{dmath*}
-	H(V)_{i,j}(\vect{x}) = \frac{\partial{}^{2} V(\vect{x})}{\partial{}x_{i}\partial{}x_{j}}
-\end{dmath*}
+For a 3D volume \(\tens{V}\), we compute the Hessian as
+\begin{equation*}
+	H(\tens{V})_{i,j}(\vect{x}) = \frac{\partial{}^{2} \tens{V}(\vect{x})}{\partial{}x_{i}\partial{}x_{j}}
+\end{equation*}
 where \(\vect{x} = (x_{0}, x_{1}, x_{2})\) is a point in the 3D
-coordinate system of \(V\).
+coordinate system of \(\tens{V}\).
 
 \todo{explain how a Gaussian 2nd derivative filter is used to smooth piecewise noise from discrete volume}
 
-\(\lambda_{s,1}\InputVolumeIndices\),
-\(\lambda_{s,2}\InputVolumeIndices\), and
-\(\lambda_{s,3}\InputVolumeIndices\) are
-a collection of \Dim{\RadiiScalesName}-count
-\Dim{\InputVolumeName}-dimensional volumes where each element is
-the respective eigenvalues \(\abs{\lambda_1} \le \abs{\lambda_2} \le \abs{\lambda_3}\)
-of \(H(V)\) for scale \(\sigma^{G}_{s}\) (i.e., the eigenvalues are sorted in ascending
+\(\EigFirstName\), \(\EigSecondName\), and \(\EigThirdName\) are
+are each \Dim{\RadiiScalesName}-tuples where the elements
+\begin{equation*}
+\begin{aligned}
+	\EigFirstElem  &\in \EigFirstName  \\
+	\EigSecondElem &\in \EigSecondName \\
+	\EigThirdElem  &\in \EigThirdName  \\
+\end{aligned}
+\end{equation*}
+are each \Dim{\InputVolumeName}-dimensional volumes
+containing the first, second, and third eigenvalues respectively of \(H(\InputVolumeName)\)
+for scale \(\HessianScalesElem\).
+Each 3-tuple of eigenvalues is sorted so that
+\(\abs{\EigFirstElem\InputVolumeElemIndices}
+\le \abs{\EigSecondElem\InputVolumeElemIndices}
+\le \abs{\EigThirdElem\InputVolumeElemIndices}\)
+(i.e., the eigenvalues are sorted in ascending
 order).
 
 \subsubsection{Maximal Laplacian filter response}
 
-\begin{dmath*}
-R_{\mathrm{max}}^{L}\InputVolumeIndices = \argmax_{s} \(V^{L}_{s}\InputVolumeIndices\)
-\end{dmath*}
-where \(R_{\mathrm{max}}^{L}\) is a volume of dimension
+\begin{equation*}
+\MaxResponseLaplacianElemIndices = \argmax_{s} \(\LaplacianOutputVolumeElemIndices\)
+\end{equation*}
+where \(\MaxResponseLaplacianName\) is a volume of dimension
 \(\Dim{\InputVolumeName}\) where each element is an index such that
 all elements satisfy
-\(0 \le R_{\mathrm{max}}^{L}\InputVolumeIndices < \Dim{\RadiiScalesName}\)
+\(0 \le \MaxResponseLaplacianElemIndices < \Dim{\RadiiScalesName}\)
 
 \subsubsection{Feature vector}
 
 
-\begin{dmath*}
-F^{G}\InputVolumeIndices = \Set{
+\begin{equation*}
+\FeaturesElemIndices = \Set{
 \left(
-\lambda_{r,2}\InputVolumeIndices,
-\lambda_{r,3}\InputVolumeIndices
+	\EigSecondElemIndices,
+	\EigThirdElemIndices
 \right)
 |
-r = R_{\mathrm{max}}^{L}\InputVolumeIndices
+s = R_{\mathrm{max}}^{L}\InputVolumeIndices
 }
-\end{dmath*}
-where \(F^{G}\) is a volume of dimensions \Dim{\InputVolume} with
+\end{equation*}
+where \(\FeaturesName\) is a volume of dimensions \(\Dim{\InputVolumeName}\) with
 elements that are each tuples of length two, that is, the number
 of eigenvalues used as features.
 
@@ -116,39 +133,39 @@ of eigenvalues used as features.
 \subsubsection{Input}
 
 \begin{description}
-	\item[\(F^{G}\)] is a volume that contains the feature vector for each
+	\item[\(\FeaturesName\)] is a volume that contains the feature vector for each
 		voxel in the volume.
-	\item[\(H_n\)] is a scalar number of bins.
+	\item[\(\HistogramBinCount\)] is a scalar number of bins.
 \end{description}
 
 \subsubsection{Bin bounds and edges}
 
 The 2D histogram minima and maxima are computed for each feature
-\begin{dmath*}
-	h_{\mathrm{min},q} = \min \Set{ f_q | f_q \in ( f_0, f_1 ) = f \in F^{G} }
-\end{dmath*}
-\begin{dmath*}
-	h_{\mathrm{max},q} = \max \Set{ f_q | f_q \in ( f_0, f_1 ) = f \in F^{G} }
-\end{dmath*}
+\begin{equation*}
+	\HistogramMinElem = \min \Set{ f_{\FeatureIndex} | f_{\FeatureIndex} \in ( f_0, f_1 ) = f \in \FeaturesName }
+\end{equation*}
+\begin{equation*}
+	\HistogramMaxElem = \max \Set{ f_{\FeatureIndex} | f_{\FeatureIndex} \in ( f_0, f_1 ) = f \in \FeaturesName }
+\end{equation*}
 
-Bin edges are computed for each \(\mnth{q}\) feature
-\begin{dmath*}
-	b_q[w] =
-		h_{\mathrm{min},q} +
-		\frac{ h_{\mathrm{max},q}  - h_{\mathrm{min},q}  }
-		     { H_n } \, w
-\end{dmath*}
+Bin edges are computed for each \(\mnth{{\FeatureIndex}}\) feature
+\begin{equation*}
+	b_{\FeatureIndex}[w] =
+		\HistogramMinElem +
+		\frac{ \HistogramMaxElem  - \HistogramMinElem  }
+		     { \HistogramBinCount } \, w
+\end{equation*}
 where \(w\) is the index of the leading edge to the
-\(\mnth{w}\) bin and \( 0 \le w \le  H_n \).
+\(\mnth{w}\) bin and \( 0 \le w \le  \HistogramBinCount \).
 
 \subsubsection{Histogram accumulation}
 
-\begin{dmath*}
-	H[x,y] =  \Dim{ \operatorname{Bin}(F^G, x, y) }
-\end{dmath*}
-where \(H[x,y]\) is a \(H_n \times H_n\) matrix and
-where \(\operatorname{Bin}(F^G, x, y)\) is the set of all tuples
-\((f_0, f_1) \in F^G\) such that
+\begin{equation*}
+	H[x,y] =  \Dim{ \BinFunc(\FeaturesName, x, y) }
+\end{equation*}
+where \(H[x,y]\) is a \(\HistogramBinCount \times \HistogramBinCount\) matrix and
+where \(\operatorname{Bin}(\FeaturesName, x, y)\) is the set of all tuples
+\((f_0, f_1) \in \FeaturesName\) such that
 \begin{enumerate}
 	\item \(b_0[x] \le f_0 < b_0[x+1]\) and
 	\item \(b_1[y] \le f_1 < b_1[y+1]\).

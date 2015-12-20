@@ -39,6 +39,8 @@ all: thesis.pdf present.pdf present-note.pdf present-article.pdf present-handout
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
+algorithm.pdf: algorithm.tex $(THESIS_DEP)
+
 # this will fail unless the presentation uses \note{...}
 present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note $(XELATEX_OPT)
 present-note.pdf: present.tex $(PRESENT_DEP)

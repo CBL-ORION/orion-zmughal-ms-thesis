@@ -30,8 +30,22 @@
 \newcommand{\realpart}[1]{\ensuremath{\mathfrak{R}\left\{#1\right\}}}
 \newcommand{\imagpart}[1]{\ensuremath{\mathfrak{I}\left\{#1\right\}}}
 
-\newcommand{\tens}[1]{\mathsf{\underline{#1}}}	% tensor
-\newcommand{\vect}[1]{\overrightarrow{#1}}	% vector
+\newcommand{\tens}[1]{\underline{#1}}            % tensor
+\newcommand{\vect}[1]{\overrightarrow{#1}}       % vector
+\newcommand{\tuple}[1]{\overline{#1}} % tuple
+%\newcommand{\tuple}[1]{\bm{#1}} % tuple
+%\newcommand{\tuple}[1]{\mathbf{#1}} % tuple
+%\newcommand{\tuple}[1]{\boldsymbol{\mathbf{#1}}}
+%\newcommand{\tuple}[1]{\boldsymbol{\mathbf{\bm{#1}}}}
+%\newcommand*\tuple[1]{\mathbf{\bm{#1}}}
+%\def\tuple#1{\bm{#1}}
+\newcommand{\scalar}[1]{#1}                      % scalar
+
+%\usepackage{bm,xstring}
+%\def\tuple#1%
+    %{\IfSubStr{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz}{#1}
+        %{\mathbf{#1}}
+        %{\bm{#1}}}
 
 \def\abs#1{\left| #1 \right|}	% use instead of $|x|$
 \def\norm#1{\left\| #1 \right\|}% use instead of $\|x\|$

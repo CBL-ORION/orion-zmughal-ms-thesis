@@ -7,31 +7,56 @@
 \newcommand{\InputVolumeIndices}{[i,j,k]}
 \newcommand{\ScaleIndex}{s}
 
-%%% Input to the segmentation
+%% Input to the segmentation
 \newcommand{\InputVolumeName}{\tens{V}}
-\newcommand{\InputVolume}{\InputVolumeName}
-\newcommand{\InputVolumeElem}{\InputVolume\InputVolumeIndices}
+\newcommand{\InputVolumeElemIndices}{\InputVolume\InputVolumeIndices}
 \newcommand{\InputVolumeDimensions}{\Dim{\InputVolumeName}_0 \times \Dim{\InputVolumeName}_1 \times \Dim{\InputVolumeName}_2}
 
-%%% Used by the Laplacian filter
-\newcommand{\LaplacianFilterApproxDegree}{d^{L}}
+%% Used by the Laplacian filter
+\newcommand{\LaplacianFilterApproxDegree}{\scalar{d^{L}}}
 
-%%% Used to constrol the \LaplacianScales and \HessianScales
-\newcommand{\RadiiScalesName}{\vect{r}}
-\newcommand{\RadiiScales}{\vect{r}_{\ScaleIndex}}
+%% Used to constrol the \LaplacianScales and \HessianScales
+\newcommand{\RadiiScalesName}{\tuple{r}}
+\newcommand{\RadiiScalesElem}{\scalar{r}_{\ScaleIndex}}
 
-%%% Input to Laplacian filter
-\newcommand{\LaplacianScalesName}{\vect{\sigma}^{L}}
-\newcommand{\LaplacianScales}{\vect{\sigma}^{L}_{\ScaleIndex}}
+%% Input to Laplacian filter
+\newcommand{\LaplacianScalesName}{\tuple{\sigma}^{L}}
+\newcommand{\LaplacianScalesElem}{\scalar{\sigma}^{L}_{\ScaleIndex}}
 
-%%% Input to Hessian filter
-\newcommand{\HessianScalesName}{\vect{\sigma}^{G}}
-\newcommand{\HessianScales}{\vect{\sigma}^{G}_{\ScaleIndex}}
+%% Input to Hessian filter
+\newcommand{\HessianScalesName}{\tuple{\sigma}^{G}}
+\newcommand{\HessianScalesElem}{\scalar{\sigma}^{G}_{\ScaleIndex}}
 
-%%% Output of the Laplacian filter
-\newcommand{\LaplacianOutputVolumeName}{\tens{V}^{L}}
-\newcommand{\LaplacianOutputVolume}{\tens{V}^{L}_{\ScaleIndex}}
-\newcommand{\LaplacianOutputVolumeElem}{\LaplacianOutputVolume\InputVolumeIndices}
+%% Output of the Laplacian filter
+\newcommand{\LaplacianOutputVolumeName}{\tuple{V}^{L}}
+\newcommand{\LaplacianOutputVolumeElem}{\tens{V}^{L}_{\ScaleIndex}}
+\newcommand{\LaplacianOutputVolumeElemIndices}{\LaplacianOutputVolumeElem\InputVolumeIndices}
+
+%% Eigenvalue 1,2,3
+%% 1
+\newcommand{\EigFirstName}{\tuple{\lambda}_{1}}
+\newcommand{\EigFirstElem}{\tens{\lambda}_{s,1}}
+\newcommand{\EigFirstElemIndices}{\EigFirstElem\InputVolumeIndices}
+%% 2
+\newcommand{\EigSecondName}{\tuple{\lambda}_{2}}
+\newcommand{\EigSecondElem}{\tens{\lambda}_{s,2}}
+\newcommand{\EigSecondElemIndices}{\EigSecondElem\InputVolumeIndices}
+%% 3
+\newcommand{\EigThirdName}{\tuple{\lambda}_{3}}
+\newcommand{\EigThirdElem}{\tens{\lambda}_{s,3}}
+\newcommand{\EigThirdElemIndices}{\EigThirdElem\InputVolumeIndices}
+
+\newcommand{\MaxResponseLaplacianName}{\tens{R}_{\mathrm{max}}^{L}}
+\newcommand{\MaxResponseLaplacianElemIndices}{\MaxResponseLaplacianName\InputVolumeIndices}
+
+\newcommand{\FeaturesName}{\tens{F}^{G}}
+\newcommand{\FeaturesElemIndices}{\FeaturesName\InputVolumeIndices}
+
+\newcommand{\HistogramBinCount}{\scalar{H}_{n}}
+
+\newcommand{\FeatureIndex}{q}
+\newcommand{\HistogramMinElem}{\scalar{h}_{\mathrm{min},\FeatureIndex}}
+\newcommand{\HistogramMaxElem}{\scalar{h}_{\mathrm{max},\FeatureIndex}}
 
 % TODO Notation and stylistic conventions
 
