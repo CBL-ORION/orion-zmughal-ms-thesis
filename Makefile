@@ -35,11 +35,14 @@ GFX_DEP := \
 ## Rules
 
 all: thesis.pdf present.pdf present-note.pdf present-article.pdf present-handout-2x3.pdf tags \
-	experimental.pdf biblio.pdf algorithm.pdf
+	experimental.pdf biblio.pdf algorithm.pdf test.pdf
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
 algorithm.pdf: algorithm.tex $(THESIS_DEP)
+
+test.pdf: LATEXMKRC_FLAGS += $(XELATEX_OPT)
+test.pdf: test.tex
 
 # this will fail unless the presentation uses \note{...}
 present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note $(XELATEX_OPT)
