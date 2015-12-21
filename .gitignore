@@ -28,6 +28,7 @@
 ## beamer
 *.nav
 *.snm
+*.vrb
 ## synctex
 *.synctex.gz
 ## xwatermark
