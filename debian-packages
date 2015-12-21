@@ -9,3 +9,4 @@ ttf-mscorefonts-installer # fonts for slides
 chktex # for check target
 lacheck # for check target
 texlive-xetex # xelatex needed for presentation (because it uses TrueType font)
+texlive-fonts-extra # fontawesome

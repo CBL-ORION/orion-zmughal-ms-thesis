@@ -14,6 +14,7 @@
 \fi
 % Preamble
 \input{preamble/present-helper.tex}
+\usepackage{fontawesome}
 \colorlet{tbackground}{blue!80}
 \colorlet{tobjectives}{red!80}
 \colorlet{tmetrics}{green!120}
@@ -219,16 +220,20 @@
 	\tobjectives{%
 	% TODO choose icons for each objective to put in the slide
 	% headers
-	% - conversion : recycle?
-	% - integration: gears?
-	% - testing: Erlenmeyer flask (for science)?
+	% - conversion : recycle? \faRecycle
+	% - integration: gears? \faCogs
+	% - testing: Erlenmeyer flask (for science)? \faFlask
 	\begin{enumerate}[<+->]
 		\setlength\itemsep{1em}
-		\item convert the ORION algorithm: \gls{orionmat} $\rightarrow$ \gls{orionc};
-		\item integrate \gls{orionc} with Vaa3D;
+		\item convert the ORION algorithm: \faRefresh
+			\begin{center}
+				\gls{orionmat} $\rightarrow$ \gls{orionc};
+			\end{center}
+		\item integrate \gls{orionc} with Vaa3D; \faCogs{}
 			and % "and" before last item
 		\item create a test suite and ensure
-			reproducible results. % end of sentence
+			reproducible results. \faCheckSquareO % end of sentence
+
 	\end{enumerate}
 	}
 \end{frame}
