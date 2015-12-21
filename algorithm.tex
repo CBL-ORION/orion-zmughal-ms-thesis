@@ -31,7 +31,7 @@ subtracting one when calculating using indices.
 	\item[\(\LaplacianFilterApproxDegree{}\)] is the degree of the
 		exponential Taylor series used to calculate the approximation
 		to the Laplacian filter. This is set to \(\num{60}\) based on Paul's
-		experiments. $\sigma {\boldsymbol{\sigma}} {\bm{\alpha}} {\bm{\sigma}}$
+		experiments.
 
 		\todo{show a graph of HDAF using different Taylor series approximations.}
 \end{description}
@@ -101,6 +101,11 @@ Each 3-tuple of eigenvalues is sorted so that
 (i.e., the eigenvalues are sorted in ascending
 order).
 
+\subsection{Background training set}
+
+The training set for the the background class is made up of pixels that are
+either on the background
+
 \subsubsection{Maximal Laplacian filter response}
 
 \begin{equation*}
@@ -110,6 +115,7 @@ where \(\MaxResponseLaplacianName\) is a volume of dimension
 \(\Dim{\InputVolumeName}\) where each element is an index such that
 all elements satisfy
 \(0 \le \MaxResponseLaplacianElemIndices < \Dim{\RadiiScalesName}\)
+
 
 \subsubsection{Feature vector}
 
