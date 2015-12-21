@@ -638,37 +638,8 @@
 
 \begin{frame}\frametitle{Estimating error in stages}
         \centering
-	\begin{tabular}{|p{2cm}|c|c|c|c|}
-		\toprule
-                                         & one                    & two                    & three                  & four                   \\%\hline
-		\midrule
-                  \hline
-                  \gls{orionmat}         & \cellcolor{langM} x(1) & \cellcolor{langM} x(2) & \cellcolor{langM} x(3) & \cellcolor{langM} x(4) \\%\hline
-                  \gls{orionc}           & \cellcolor{langC} x[0] & \cellcolor{langC} x[1] & \cellcolor{langC} x[2] & \cellcolor{langC} x[3] \\%\hline
-                  C with Matlab          & \cellcolor{langCM} 4   & \cellcolor{langCM} 3   & \cellcolor{langCM} 2   & \cellcolor{langCM} 1   \\%\hline
-
-                  Matlab - C             & \cellcolor{diffone} 4  & \cellcolor{diffone} 3  & \cellcolor{diffone} 2  & \cellcolor{diffone} 1  \\%\hline
-                  Matlab - C with Matlab & \cellcolor{difftwo} 4  & \cellcolor{difftwo} 3  & \cellcolor{difftwo} 2  & \cellcolor{difftwo} 1  \\%\hline
-		  \bottomrule
-        \end{tabular}
+	\input{table/estimating-errors-horizontal.tex}
 \end{frame}
-
-
-
-\begin{frame}\frametitle{Estimating error in stages (vertical)}
-        \centering
-        \begin{tabular}{|l|c|c|c|c|c|}
-		stage  & \gls{orionmat}         & \gls{orionc}           & C + Matlab           & Matlab - C               & Matlab - (C + Matlab)   \\ \midrule
-		one    & \cellcolor{langM} x(1) & \cellcolor{langC} x(2) & \cellcolor{langCM} x(3) & \cellcolor{diffone} x(4) & \cellcolor{difftwo} x(4) \\ \hline
-		two    & \cellcolor{langM} x[0] & \cellcolor{langC} x[1] & \cellcolor{langCM} x[2] & \cellcolor{diffone} x[3] & \cellcolor{difftwo} x(4) \\ \hline
-		three  & \cellcolor{langM} 4    & \cellcolor{langC} 3    & \cellcolor{langCM} 2    & \cellcolor{diffone} 1    & \cellcolor{difftwo} x(4) \\ \hline
-
-        \end{tabular}
-        \note{
-		% TODO
-        }
-\end{frame}
-
 
 \section{Conclusion}
 %  - Conclusion slide could be catchy, something they will remember.
