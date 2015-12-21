@@ -28,21 +28,25 @@ GFX_DEP := \
 	$(GFX_DIR)/sdlc.tex \
 	$(GFX_DIR)/algorithm/*.tex
 
-# notation.tex
-#./thesis_template_01.tex
-#analysis.tex
-
 ## Rules
 
-all: thesis.pdf present.pdf present-note.pdf present-article.pdf present-handout-2x3.pdf tags \
-	experimental.pdf biblio.pdf algorithm.pdf test.pdf
+MINIMAL_TARGETS := thesis.pdf present.pdf
+NOTES_TARGETS := note/experimental.pdf note/biblio.pdf note/algorithm.pdf note/test.pdf
+PRESENT_EXTRA_TARGETS := present-note.pdf present-article.pdf present-handout-2x3.pdf
+
+ALL_TARGETS := $(MINIMAL_TARGETS) $(PRESENT_EXTRA_TARGETS) $(NOTES_TARGETS)
+
+all:  $(ALL_TARGETS) tags
+
+minimal: $(MINIMAL_TARGETS)
+
+notes: $(NOTES_TARGETS)
 
 thesis.pdf: thesis.tex $(THESIS_DEP) $(GFX_DEP)
 
 algorithm.pdf: algorithm.tex $(THESIS_DEP)
 
-test.pdf: LATEXMKRC_FLAGS += $(XELATEX_OPT)
-test.pdf: test.tex
+note/test.pdf: LATEXMKRC_FLAGS += $(XELATEX_OPT)
 
 # this will fail unless the presentation uses \note{...}
 present-note.pdf: LATEXMKRC_FLAGS += -jobname=present-note $(XELATEX_OPT)
@@ -62,6 +66,10 @@ present.pdf: present.tex $(PRESENT_DEP)
 
 present-handout-2x3.pdf: present-handout.pdf
 	pdfjam-slides6up --suffix '2x3' --batch $<
+
+
+note/%.pdf: note/%.tex
+	-$(LATEXMK) --outdir=note $<
 
 %.pdf: %.tex
 	-$(LATEXMK) $<
@@ -87,6 +95,7 @@ wc-tex:
 	find -name '*.tex' | xargs wc -w
 
 cleanall::
+	rm -Rf $(ALL_TARGETS)
 	rm -Rf $(GFX_OUT_DIR)
 	rm -Rf tags
 
@@ -112,3 +121,5 @@ latexdiff-thesis:
 
 dep-debian:
 	sudo apt-get install --no-install-recommends $$( sed 's/#.*$$//g' < debian-packages )
+
+.PHONY: all minimal notes wc-pdf wc-tex check latexdiff-thesis dep-debian
