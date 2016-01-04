@@ -65,7 +65,7 @@ is in C.
 As with all software, the \gls{orionc} software has a series of
 steps required to prepare the software for building and
 installing and since \gls{orionc} is native code, these steps can
-be complex because it needs to run on multiple platforms. As such,
+be complex because it needs to run on multiple platforms. Therefore,
 it is expedient to create an automated build system that outlines
 the steps needed to build \gls{orionc} so that the process of
 creating the final binaries is replicable by anyone that obtains
@@ -80,7 +80,7 @@ reproducibility.
 Another principle that is used to guide the development is to
 avoid premature optimization; that is, do not attempt to make the
 code more efficient before it is necessary. Instead of guessing
-which parts of the code are slow, use a profiler to measure the
+which parts of the code are slow, a profiler can be used to measure the
 bottlenecks in the code. It is also not advisable to focus on
 optimization at the stage of rewriting the software.
 
@@ -104,7 +104,7 @@ external dependencies is done at the last possible moment. If a
 module of \gls{orionc} requires an \acrshort{FFT} function,
 the function should be created first as an empty stub function
 that is used to understand the minimum number of parameters needed
-to implement the FFT functionality. Then when the external dependency
+to implement the \acrshort{FFT} functionality. Then when the external dependency
 is incorporated, the call to the external library can be placed in
 the stub. This helps avoid creating coupling with the external
 library so that different approaches can easily be tried by only
@@ -285,29 +285,45 @@ body of that function. Arrows represent a function call. For example, in
 function calls \computertext{multiscaleLaplacianFilter} which in turn calls
 \computertext{Makefilter}.
 
+% explain how using this view of the call graphs allows for
+% testing from the bottom-most level to the top
 Alternatively, the call graph represents the flow of data --- the lowest levels
 deal with the least amount of data and as you go up higher in the graph more
 pieces of information are integrated together from many sources.
 An illustration of this can be seen in the relationship between 
 data flow of \computertext{multiscaleLaplacianFilter} and
-\computertext{Makefilter} as sketched in t %TODO
-
+\computertext{Makefilter} as sketched in
+\cref{alg:dataflow_example}. What this shows is that a function
+lower in the call graph, \computertext{Makefilter}, is a simpler function in terms of
+information processing than its parent in the call graph,
+\computertext{multiscaleLaplacianFilter}, which has to integrate
+information from multiple calls to the \computertext{Makefilter}
+child function. This kind of relationship is generally the case
+between functions in a call graph and this is why it
+is often easier to test functions lower in the call graph first
+--- there is less data to take into account and the functions
+lower in the call graph are generally more standalone. This means
+that they can easily be individually tested. This view allows for
+a testing strategy that starts from the bottom-most level of the
+call graph and steadily moves upwards.
 \begin{algorithm}
 	\caption{Sketch of \computertext{multiscaleLaplacianFilter} and
 		\computertext{Makefilter} functions
 	}\label{alg:dataflow_example}
 	\begin{algorithmic}[1]
-		\Function{Makefilter}{filter\_size, degree, scale\_factor}
+		%TODO
+		\Function{Makefilter}{\(filter\_size, degree, scale\_factor\)}
+			\State \Return{\(F\)} \Comment{Calculates a filter \(F\) given the above parameters}
 		\EndFunction
-		\Function{multiscaleLaplacianFilter}{Volume, degree, scales}
-			\For{ scale $\in$ scales}
+
+		\Function{multiscaleLaplacianFilter}{\(Volume, degree, scales\)}
+			\For{ \(scale_i \in scales\) }
+				\State \(F_i \gets \Call{Makefilter}{\Dim{Volume}, degree, scale}\)
 			\EndFor
+			\State \(MaxScale(x,y,z) \gets \argmax_{i} (Volume \Convolve F_i)(x,y,z)\)
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
-
-% TODO explain how using this view of the call graphs allows for testing from
-% the bottom-most level to the top
 
 \begin{figure}
 \centering
