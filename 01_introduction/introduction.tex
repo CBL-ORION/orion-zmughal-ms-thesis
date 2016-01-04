@@ -35,7 +35,7 @@ with rewriting large systems.
 \item In addition, all the institutional knowledge that came from
 	years of bug fixes is often lost with a rewrite.
 \item Rewrites are often expensive in terms of time and effort and
-	are not known to payoff as much as product owners wish.
+	are not known to pay off as much as product owners wish.
 \end{itemize*}
 % refactoring over rewriting
 Therefore, it is preferable to work on slowly refactoring the code
@@ -43,7 +43,7 @@ rather than a complete rewrite. Refactoring is a process where
 instead of throwing away the existing system, the development
 proceeds by making small, incremental changes over an extended
 period in order to avoid getting the software into a broken state,
-while steadily improving the readability and reusability of the
+while steadily improving the maintainability and reusability of the
 software.
 
 \section{Motivation}\label{sec:motivation}
@@ -106,8 +106,8 @@ reproducing a published method.
 	in data preprocessing and annotation stages which can
 	involve human interaction; as a result of this
 	interaction, some assumptions
-	may not be written down. For example, if the data contains
-	missing values, these instances may be removed based on
+	may not be written down. For example, if the data contain
+	instances with missing values, these instances may be removed based on
 	some criteria. If these criteria are not clearly written
 	down, it can be difficult to apply the same procedure
 	again. This is why many statisticians recommend that the
@@ -209,7 +209,7 @@ development~\autocite{SSI:hettrick_2014_14809}.
 Since software development is already a large part of the research
 process, it can be argued that a review process of scientific
 software is just as important as the paper peer review process.
-There already issues with papers having enough statistical power
+There are already issues with papers not having enough statistical power
 to present reproducible results, but these problems can be
 understood through careful reading of the experimental
 methods~\autocite{Ioannidis2005,Button2013}. Problems in the software
@@ -218,8 +218,8 @@ been known to result in paper retractions~\autocite{Miller2006,Merali2010,Joppa2
 
 % how software engineering needs to be
 % applied to scientific code
-This lack of training in software engineering has prompted many of
-the open science advocates to offer open access teaching
+This lack of training in software engineering has prompted many
+open science advocates to offer open access teaching
 materials so that training is available to everyone.
 In particular, the Software Carpentry organization has
 published several guidelines and workshops to teach best
@@ -246,7 +246,7 @@ comparing results across different samples. However, the results
 taken from different laboratories may not be comparable due to
 variability in laboratory protocols~\autocite{NeuroMorphVariability:Parekh:2015}
 or simply due to insufficient access to raw data necessary
-necessary to accurately use Bayesian inference for
+to accurately use Bayesian inference for
 predictions~\autocite{Poldrack2011}.
 
 To address this problem, projects such as the \acrfull{NIF}~\cite{Gardner2008}
@@ -279,7 +279,7 @@ has been an attempt at comparing neuron morphology extraction
 algorithms in the past under the \acrshort{DIADEM} Challenge which
 contributed datasets and a metric for comparing the neuron
 tracings from algorithms against tracings from gold standard
-segmentations~\autocite{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
+reconstructions~\autocite{DIADEM&Beyond:Liu:2011,DIADEM-dataset:Brown:2011,DIADEM-metric-Gillette2011}.
 The DIADEM Challenge used six datasets from different neuroscience
 institutions in order to have a diversity in terms of source of
 the neurons (i.e., from different species and structures from
@@ -298,11 +298,11 @@ for neuron reconstruction.
 To solve this problem, an open-science project called
 BigNeuron~\autocite{BigNeuron:Peng:2015,DIADEM2BigNeuron:Peng:2015}
 continues where the DIADEM Challenge left off. Instead of
-comparing the output on a few datasets as in the DIADEM Challenge,
+comparing the output on a few datasets, as in the DIADEM Challenge,
 BigNeuron aims to enable high-throughput analysis of neuron
 microscopy stacks using multiple methods contributed from various
 algorithm developers. By standardizing on the Vaa3D platform, this
-precludes differences between how each method handles data which
+precludes any issues that might arise due to differences between how each method handles data which
 means that all the algorithms can be bench-tested at once without
 a need for translating data between formats.
 
@@ -428,19 +428,19 @@ replaced by native code. This provides several benefits:
 		function behavior between versions of
 		MATLAB do not effect the output of the
 		code; and
-	\item certain operations can run faster in native code than
+	\item it implements certain operations that can run faster in native code than
 		in MATLAB.
 \end{enumerate}
 
-The second objective will allow the code to work with a widely used
+The second objective will allow the code to work with Vaa3D, a widely used
 tool for visualization and analysis. Furthermore, integrating with
 one tool will provide a framework for integrating with other
 biomedical image analysis tools such as ImageJ~\autocite{Schneider2012}.
 
 The third objective provides a safety net so that current and
 future development clearly defines the expectation of the code
-not only in the documentation, but as executable tests that can be
-used to indicate when a change causes these expectations to no
+not only in the documentation, but as executable tests that
+indicate when a change causes these expectations to no
 longer be met.
 
 The fourth objective is what ensues that the previously discussed
@@ -464,14 +464,3 @@ Post-DIADEM algorithms
 Jeong2015,Luo2015,De2015,Gulyanon2015,ORION_Santamaria-Pang2015,Mukherjee2014,Hernandez-Herrera2014,Basu2014,Xiao2013,Jimenez2013,Basu2013,Mukherjee2013,Hernandez-Herrera2013,Ming2013,Lee2012,Czarnecki2012}
 
 TODO: post-DIADEM metrics~\autocite{Mayerich2011,Mayerich2012,btmorph-Torben-Nielsen2014,Costa2014,Gillette2015}
-
-\begin{enumerate}[label=(\roman*)]
-\item to evaluate the MATLAB codebase of \gls{orion3} and determine how to structure the new codebase
-\item integrate the
-\end{enumerate}
-
-% TODO
-%
-% - refactoring and conversion of code
-% - Open science
-% - bioinformatics

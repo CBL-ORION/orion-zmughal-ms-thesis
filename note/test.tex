@@ -1,47 +1,31 @@
 \documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
 \input{preamble/present-helper.tex}
+\usetikzlibrary{mindmap,trees,shadows,positioning}
+\input{test-arrow-shade.tex}
 
- \edef\defaultpgflinewidth{\the\pgflinewidth}
+%\usetikzlibrary{mindmap,trees,shadows}
 
-%% PGF change color decoration for path
-\makeatletter
-\pgfkeys{/pgf/decoration/.cd, start color/.store in =\startcolor, end color/.store in   =\endcolor, visibility/.estore in =\decorateopacity}
-\pgfdeclaredecoration{color change}{initial}{
- \state{initial}[width=0pt, next state=line, persistent precomputation={%
-   \pgfmathdivide{50}{\pgfdecoratedpathlength}%
-   \let\increment=\pgfmathresult%
-   \let\dop=\decorateopacity%
-   \def\x{0}%
- }]{}
- \state{line}[width=.5pt,   persistent postcomputation={%
-     \pgfmathadd@{\x}{\increment}%
-     \let\x=\pgfmathresult%
-   }]{%
-   %\pgfsetlinewidth{1\defaultpgflinewidth}%
-   \pgfsetarrows{-}%
-   \pgfpathmoveto{\pgfpointorigin}%
-   \pgfpathlineto{\pgfqpoint{.75pt}{0pt}}%
-   \pgfsetstrokeopacity{\decorateopacity}%
-   \pgfsetstrokecolor{\endcolor!\x!\startcolor}%
-   \pgfusepath{stroke}%
- }
- \state{final}{%
-   \pgfsetlinewidth{\defaultpgflinewidth}%
-   \pgfpathmoveto{\pgfpointorigin}%
-   \color{\endcolor!\x!\startcolor}%
-   \pgfusepath{stroke}%
- }}
-\makeatother
+\tikzset{
+    vertex/.style = {
+        circle,
+        fill            = black,
+        outer sep = 2pt,
+        inner sep = 1pt,
+    }
+}
 
-% Styles
+%% tikz parameters
+\usetikzlibrary{shapes }
+% Styles 
 \tikzstyle{function} = [draw,fill=blue!60,shape=rectangle, text centered,text=white, text width=3cm, minimum size=2.5cm]
 \tikzstyle{data}     = [draw,fill=orange,shape=ellipse, text centered,text=white, text width=2.5cm, minimum size=2.5cm]
-\tikzstyle{d2f}  = [draw, line width = 2pt,
-      decoration = {color change, start color=blue, end color=orange},
-      decorate]
-\tikzstyle{f2d}  = [draw, line width = 2pt,
-      decoration = {color change, start color=orange, end color=blue},
-      decorate]
+%\tikzstyle{f2d}  = [line width=0.1cm,draw, left color=blue, right color=orange, ultra thick, -stealth]
+\tikzstyle{d2f}  = [line width=0.1cm,draw, left color=orange, right color=blue, ultra thick, -stealth]
+\tikzstyle{f2d}  = [line width=0.1cm,draw=transparent!0, shade path={shading xsep=0.125cm, left color=blue, right color=orange}, ultra thick, -stealth]
+%\tikzstyle{d2f}  = [line width=0.1cm,draw=transparent!0, shade path={shading xsep=0.125cm, left color=orange, right color=blue}, ultra thick, -stealth]
+
 
 
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -53,7 +37,7 @@
 \newcommand{\InputVolumeIndices}{\ensuremath{[i,j,k]}}
 \newcommand{\Dim}[1]{\ensuremath{\left|#1\right|}}
 \newcommand{\RadiiScalesName}{\ensuremath{r}}
-
+ 
 
 \begin{frame}[fragile]
 \frametitle{Feature Extraction}
@@ -62,9 +46,9 @@
 \begin{tikzpicture}[node distance=3cm and 1cm]
   \tikzset{
     every node/.style={font={\Large}},
-    invisible/.style={opacity=0, decoration = {visibility=0}},
-    transparent/.style={opacity=0.5, text opacity=0.9, decoration = {visibility=0.5}},
-    visible/.style={opacity=1, font={\Large\be}, decoration = {visibility=1}},
+    invisible/.style={opacity=0},
+    transparent/.style={opacity=0.5, text opacity=0.9},
+    visible/.style={opacity=1,font={\Large\be}},
     visible on/.style={temporal=#1{invisible}{visible}{transparent}},
     temporal/.code args={<#1>#2#3#4}{%
       \temporal<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}{\pgfkeysalso{#4}
@@ -72,9 +56,9 @@
     },
   }
 %% Input nodes
-\node[data, label={[align=left] below:Scalar Degree of Taylor}, visible on=<1->] (dl) at (0, 12) {$d^{L}$};
-\node[data, label={[align=left] below:$M = m_{0}  \times m_{1} \times m_{2} $\\ Volume of \\ intensity pixels}, visible=<1->] (Vijk) at (0,6) {$V\InputVolumeIndices$};
-\node[data, label={[align=left] below:$n$-vector\\ with elements\\ representing\\ the radius to\\ segment (scale)}, visible on=<1->] (rs) at (0,0) {$r_{s}$};
+\node[data, label={[align=left] below:Scalar Degree of Taylor}, visible on=<1->] (dl) at (0, 12) {$d^{L}$};  
+\node[data, label={[align=left] below:$M = m_{0}  \times m_{1} \times m_{2} $\\ Volume of \\ intensity pixels}, visible=<1->] (Vijk) at (0,6) {$V\InputVolumeIndices$};  
+\node[data, label={[align=left] below:$n$-vector\\ with elements\\ representing\\ the radius to\\ segment (scale)}, visible on=<1->] (rs) at (0,0) {$r_{s}$};  
 
 %% First row nodes
 \node[function, right=of Vijk, visible on=<2>] (field21) {Laplacian\\ scale\\ parameter};
@@ -83,9 +67,9 @@
 \node[data, right=of field23, visible on=<5>] (field24) {$V^{L}_{s}\InputVolumeIndices$};
 \node[function, right=of field24, visible on=<6>,text width=4.5cm] (field25) {$\displaystyle\argmax_{s}V^{L}_{s}\InputVolumeIndices$};
 
-\node[data, right=of field25, visible on=<7>, label={[align=left, visible on=<7>] below:M volume of $s^{th}$\\  index elements}] (field26) {$R_{\mathrm{max}}^{L}\InputVolumeIndices$};
+\node[data, right=of field25, visible on=<7>, label={[align=left, visible on=<7>] below:M volume of $s^{th}$\\  index elements}] (field26) {$R_{\mathrm{max}}^{L}\InputVolumeIndices$}; 
 
-
+  
 %% Second row nodes
 \node[function, right=of rs, visible on=<8>] (field11) {Hessian\\ scale\\ parameter};
 \node[data, right=of field11, visible on=<9>,  label={[align=left, visible on=<9>] below:$\Dim{\RadiiScalesName}-vector$}] (field12) {$\sigma^{G}_{s}$};
@@ -95,26 +79,31 @@
 
 
 %% First row connections
-\path[d2f, visible on=<4>] (dl) to[in=90,out=0] (field23);
-\path[d2f, visible on=<4>] (Vijk) to[in=150,out=45] (field23);
-\path[d2f, visible on=<10>] (Vijk) to[in=150,out=325] (field13);
-\path[d2f, visible on=<2>] (rs) to[in=225,out=15] (field21);
-\path[d2f, visible on=<8>] (rs) to[in=180,out=0] (field11);
+\draw[->,d2f, visible on=<4>] (dl) to[in=90,out=0] (field23);
+\draw[->,d2f, visible on=<4>] (Vijk) to[in=150,out=45] (field23);
+\draw[->,d2f, visible on=<10>] (Vijk) to[in=150,out=325] (field13);
+\draw[->,d2f, visible on=<2>] (rs) to[in=225,out=15] (field21);
+\draw[->,d2f, visible on=<8>] (rs) to[in=180,out=0] (field11);
 
 %% L1
-\path[f2d, visible on=<9>] (field11) to[in=180,out=0] (field12);
-\path[d2f, visible on=<10>] (field12) to[in=180,out=0] (field13);
-\path[f2d, visible on=<11>] (field13) to[in=180,out=0] (field14);
-\path[d2f, visible on=<12>] (field14) to[in=180,out=0] (field15);
+\draw[->,f2d, visible on=<9>] (field11) to[in=180,out=0] (field12);
+\draw[->,d2f, visible on=<10>] (field12) to[in=180,out=0] (field13);
+\draw[->,f2d, visible on=<11>] (field13) to[in=180,out=0] (field14);
+\draw[->,d2f, visible on=<12>] (field14) to[in=180,out=0] (field15);
 
 %% L2
-\path[f2d, visible on=<3>] (field21) to[in=180,out=0] (field22);
-\path[d2f, visible on=<4>] (field22) to[in=180,out=0] (field23);
-\path[f2d, visible on=<5>] (field23) to[in=180,out=0] (field24);
-\path[d2f, visible on=<6>] (field24) to[in=180,out=0] (field25);
-\path[f2d, visible on=<7>] (field25) to[in=180,out=0] (field26);
+\draw[->,f2d, visible on=<3>] (field21) to[in=180,out=0] (field22);
+\draw[->,d2f, visible on=<4>] (field22) to[in=180,out=0] (field23);
+\draw[->,f2d, visible on=<5>] (field23) to[in=180,out=0] (field24);
+\draw[->,d2f, visible on=<6>] (field24) to[in=180,out=0] (field25);
+\draw[->,f2d, visible on=<7>] (field25) to[in=180,out=0] (field26);
 
-\end{tikzpicture}
+
+\draw [draw=transparent!0, shade path={shading xsep=0.125cm, left color=red, right color=blue}, 
+    ultra thick, -stealth]
+    (2,-1.5) .. controls ++(0,2) and ++(0,-2) .. (-2,1.5);
+
+\end{tikzpicture} 
 }
 \end{frame}
 
