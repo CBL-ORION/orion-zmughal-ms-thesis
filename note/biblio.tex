@@ -17,19 +17,106 @@
 \section{Datasets}
 
 \begin{enumerate}[label={}]
-  \enumdescitem{\printarticle{Duke-Southampton-archive:Cannon:1998}} TODO
+		\enumdescitem{\printarticle{Duke-Southampton-archive:Cannon:1998}}
+			This paper describes a dataset of neuron
+			morphology that was developed as a
+			collaboration between Duke University and
+			Southampton University. This early dataset
+			introduced the SWC format for representing
+			neuronal arbors.
 
-  \enumdescitem{\printarticle{DIADEM-dataset:Brown:2011}} TODO
+		\enumdescitem{\printarticle{Ascoli2007}}
+			This paper describes the
+			NeuroMorpho.Org project which collects
+			neuronal morphology submitted from various
+			laboratories. These submissions are used
+			to perform statistical analysis in order
+			to characterise different kinds of
+			neurons. These data are taken from various
+			cell types and different species. Each
+			reconstruction has metadata that can be
+			searched to narrow down to certain kinds
+			of neuron sources.
+
+		\enumdescitem{\printarticle{DIADEM-dataset:Brown:2011}}
+			This paper describes the datasets from the
+			DIADEM Challenge. Each dataset was
+			obtained from different laboratories using
+			different protocols for data acquisition.
 \end{enumerate}
 
 \section{History}
 
 \begin{enumerate}[label={}]
-	\enumdescitem{\printarticle{DIADEM&Beyond:Liu:2011}} TODO
+	\enumdescitem{\printarticle{DIADEM&Beyond:Liu:2011}}
+		This editorial paper covers details of the DIADEM
+		Challenge and summarises the results of the
+		algorithms. It notes that many of the algorithms
+		require human intervention to achieve a high level
+		of accuracy against the gold standard tracings. It
+		also notes that while many algorithms worked on
+		multiple datasets, none of the algorithms were
+		able to generalise to \emph{all} the datasets.
+		It also describes several directions for future
+		research:
+		\begin{enumerate}[label={}]
+			\enumdescitem{Time-lapse data}
+				Moving from 3D volume data to 4D
+				image sequences.
+			\enumdescitem{Subcellular structures}
+				Using markers to identify sites on the
+				neuron itself that can be identified.
+			\enumdescitem{Dense trees} Working with
+				data that contains dense neuronal arbors
+				as opposed to sparse neuronal cells that
+				were used in many of the DIADEM datasets.
+			\enumdescitem{Long-distance dendritic projections}
+				Expand the dataset to include data
+				that has longer neuronal
+				projections that are common in
+				dendrites.
+			\enumdescitem{Electron microscopy}
+				The DIADEM datasets all came from
+				optical microscopy.
+				Neuroscientists also make heavy
+				use of EM data and this data is
+				also useful for studying neuronal
+				structures.
+			\enumdescitem{Moving to neural circuits and the connectome}
+				The DIADEM datasets only have
+				single neurons, but
+				neuroscientists eventually want to
+				move on to imaging multiple
+				neurons to see how the structure
+				of connections is important for
+				signaling.
+		\end{enumerate}
 
-	\enumdescitem{\printarticle{NeuroMorphTrends:Halavi:2012}} TODO
+	\enumdescitem{\printarticle{NeuroMorphTrends:Halavi:2012}}
+		This review article provides a literature review
+		of the various techniques used for neuron tracing
+		using computers. This includes the early history
+		from the late 1960s onwards towards the DIADEM
+		Challenge. In particular, the paper provides an
+		overview of the brain regions and cell types that
+		are studied most often and the imaging modalities
+		that are used by neuromorphologists. This data is
+		obtained through literature mining of 902
+		publications. In addition, the authors attempted
+		to obtain the data from the papers that they cover
+		in their literature mining survey and the results
+		of this are available on NeuroMorpho.Org.
 
-	\enumdescitem{\printarticle{NeuroTracePerspect:Meijering:2010}} TODO
+	\enumdescitem{\printarticle{NeuroTracePerspect:Meijering:2010}}
+		This review article describes the difficulties faced when
+		trying to acquire neuron morphology data and the
+		various computational tasks that must be
+		performed in order to perform digital
+		reconstructions of the neuron data. It also
+		contains a survey of various reconstruction tools
+		that are available. This paper occurred before the
+		completion of the DIADEM Challenge, so it does not
+		cover later advances in in neuron tracing.
 \end{enumerate}
 
 \section{Methods}
