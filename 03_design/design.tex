@@ -14,7 +14,7 @@
 %      decisions. Describe the libraries that are used and
 %      why. Documentation system. ]
 
-% FIXME
+% TODO FIXME
 % explain the importance of the Design phase
 Once the planning is done, the actual technical details of the
 project are determined in the Design phase. This phase is not a
@@ -38,7 +38,21 @@ component because the inputs and outputs remain the same and
 keeping the names the same makes it easier to navigate between
 corresponding functions.
 
-% TODO describe naming convention and the way of linking back to original implementation
+% describe naming convention and the way of linking back to
+% original implementation
+To facilitate this way of working, the filenames and directory
+structure of the original MATLAB code are copied verbatim: instead
+of using the \computertext{.m} extension for MATLAB files, the
+\computertext{.c} extension is used. Inside each of these
+\computertext{.c} files, a function signature is defined that
+matches the one found in MATLAB with the exception that the name
+is prefixed with \computertext{orion\_} such that a \gls{orionmat}
+function named \computertext{hdaf} would appear as
+\gls{orionc} function named \computertext{orion\_hdaf}.
+This prefixing is common in C libraries as a way to provide
+an application-specific namespace for symbols. This helps avoid
+naming collisions where multiple libraries may define the same
+symbol and these multiple definitions will need to be disambiguated.
 
 \section{Algorithms and architecture}
 
@@ -48,7 +62,9 @@ data structures that are used to transfer data between the
 components. The following description of the architecture will
 approach these details from the top-down.
 
-The ORION algorithm consists of three parts (as shown in \cref{fig:high-level-arch}),
+The ORION algorithm consists of three parts (as shown in
+\cref{fig:high-level-arch} where data is drawn as dashed-line
+ovals and processing is drawn as solid-lined rectangles),
 namely
 \begin{description}[font=\textpluscolon]
 	\item[Segmentation] to label the
@@ -60,7 +76,6 @@ namely
 		capture the underlying neuron morphology.
 \end{description}
 
-% TODO add information about the convention used to nodes shapes
 \begin{figure}
 \centering
 \resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/high-level.tex}}
@@ -118,6 +133,18 @@ volume.
 	\end{algorithmic}
 \end{algorithm}
 
+\begin{description}
+	\item[\(\InputVolumeName{}\)] is the input volume of dimensions
+		\(\InputVolumeDimensions{}\) which contains the intensity values taken
+		from the microscope modality.
+	\item[\(\RadiiScalesName{}\)] is a \Dim{\RadiiScalesName}-tuple where each element
+		\(\RadiiScalesElem \in \RadiiScalesName\)
+		represents the radius of the neurite to segment.
+	\item[\(\LaplacianFilterApproxDegree{}\)] is the degree of the
+		exponential Taylor series used to calculate the approximation
+		to the Laplacian filter.
+\end{description}
+
 \begin{algorithm}
 	\caption{Obtain background training data}\label{alg:seg_bg_train}
 	\begin{algorithmic}[1]
@@ -160,7 +187,7 @@ volume.
 
 \subsection{Registration}
 
-% FIXME
+% TODO FIXME
 This step is not a set part of the neuron tracing algorithm. This
 is meant to handle the subvolume.
 

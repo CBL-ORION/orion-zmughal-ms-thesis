@@ -32,8 +32,12 @@ subtracting one when calculating using indices.
 		exponential Taylor series used to calculate the approximation
 		to the Laplacian filter. This is set to \(\num{60}\) based on Paul's
 		experiments.
-
-		\todo{show a graph of HDAF using different Taylor series approximations.}
+	\item[\(\LaplacianFilterScaleFactor{}\)] is a factor that
+		is used to find the scale of the Laplacian filter
+		filter for which a tubular structure with a radius
+		\(\RadiiScalesElem \in \RadiiScalesName\)
+		gives a maximal response. This is fixed for a
+		given value of \(\LaplacianFilterApproxDegree\).
 \end{description}
 
 \subsection{Extract features}
@@ -42,10 +46,10 @@ subtracting one when calculating using indices.
 
 \(\LaplacianScalesName\) is a \Dim{\RadiiScalesName}-tuple such that
 \begin{equation*}
-	\LaplacianScalesName \ni \LaplacianScalesElem{} = \frac{\RadiiScalesElem{}}{\num{0.66}}
+	\LaplacianScalesName \ni \LaplacianScalesElem{} = \frac{\RadiiScalesElem{}}{\LaplacianFilterScaleFactor}
 \end{equation*}
 
-\todo{explain that \num{0.66} was chosen by using linear regression and fixing
+\todo{explain that \(\LaplacianFilterScaleFactor = \num{0.66}\) was chosen by using linear regression and fixing
 \(\LaplacianFilterApproxDegree{} = \num{60}\).}
 
 \subsubsection{Hessian scale parameter}
