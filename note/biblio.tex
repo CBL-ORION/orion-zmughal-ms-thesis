@@ -116,64 +116,235 @@
 		contains a survey of various reconstruction tools
 		that are available. This paper occurred before the
 		completion of the DIADEM Challenge, so it does not
-		cover later advances in in neuron tracing.
+		cover later advances in neuron tracing.
 \end{enumerate}
 
 \section{Methods}
 
 \begin{enumerate}[label={}]
 		\enumdescitem{\printarticle{Bauer2010}}
+			This paper presents a method for
+			automatic segmentation of 3D volumes of blood
+			vessels especially where the vessel tree
+			contains many overlapping structures. This
+			is achieved by first extracting the
+			tubular shapes using a Hessian filter. The
+			results of the Hessian filter are then
+			further processed by using a medialness filter
+			to suppress false data (such as tumors or
+			overlapping structures) that might occur at
+			the boundaries of the vessel. Once the
+			tubular structures are detected, the
+			centreline is extracted by traversing the
+			medialness response along the path with
+			maximal value.
 
-		\enumdescitem{\printarticle{MIA-anisotropic-path-searching-Xie2011}}
-
-		\enumdescitem{\printarticle{MICCAI-anisotropic-path-searching-Xie2010}}
+			The centreline and boundary provides structural
+			information that can be used to construct
+			model of the vessel structure that takes
+			into account properties of blood flow
+			(vessel radius, branching angle). This
+			structural information is then used as
+			a shape prior for assigning each tube to a
+			tree in order to handle multiple
+			trees.
+		\enumdescitem{\printarticle{MICCAI-anisotropic-path-searching-Xie2010}
+		and \printarticle{MIA-anisotropic-path-searching-Xie2011}}
+			These papers cover a method for tracing
+			based on choosing seed points that
+			represent the underlying neuronal
+			structure and then connecting these seeds
+			to produce a neuron tree. The seeding is
+			initiated by applying a windowing cube on
+			the volume in order to detect seed
+			candidates at the local maxima. These
+			seeds candidates are pruned to simplify
+			tracing. Then a cost function is
+			introduced in order to a find a path
+			between the seed points. This cost
+			function incorporates a smoothness term
+			which constrains new edges between seed
+			points so that large changes in
+			orientation are avoided. Finally, these
+			local edges are used to construct a
+			global tree by using the
+			minimal-spanning-tree (MST) algorithm.
 
 		\enumdescitem{\printarticle{Jeong2015}}
+			This paper presents a method that learns
+			to correspond line segments with
+			curvilinear structures. However, this does
+			not cover reconstruction of 3D data.
 
 		\enumdescitem{\printarticle{Luo2015}}
+			This paper presents a method for neuron
+			reconstruction that is based on an
+			open-curve snake model. This method
+			start by a seed detection step that is
+			based on what is known as a Sliding Volume
+			Filter which selects a spherical region
+			around each voxel in order to calculate
+			the orientation of the gradient vectors
+			within that region relative to center of
+			the spherical region. By calculating the
+			filter response as the cosine of the
+			orientation, regions with a high response
+			have more voxels where the gradient is
+			oriented towards the center which
+			indicates a tubular region. This filter
+			response is used for initial seed point
+			selection. These seed points are further
+			pruned by using the eigenvalues of the
+			Hessian of the volume to choose points
+			that lie along the centerline of the
+			tubular structure. The intensity of the
+			voxels at the seed points is recalculated to
+			create an SVF-enhanced image which is then
+			used by an open-curve snake model for
+			neuron tracing. This model creates a
+			deformable model that is used to add edges
+			to a curve that extends along the
+			direction of the eigenvalue of the Hessian
+			calculated earlier.
 
 		\enumdescitem{\printarticle{De2015}}
+			This paper only handles 2D images.
 
 		\enumdescitem{\printarticle{Gulyanon2015}}
+			This paper uses a joint probability model
+			to both optimize voxel labels (foreground,
+			background) and open-curve snake model
+			configurations. This probability model
+			uses the Frangi vessellness features as a
+			data prior. A Discriminative Random
+			Field is used to determine initial labels
+			for the voxel classifications and voxels
+			with a high confidence are used as the 
+			initial seed points of 3D snake configuration.
+			This inference is performed on subvolumes
+			so that the probability model only uses
+			the local intensity distribution.
 
-		\enumdescitem{\printarticle{ORION_Santamaria-Pang2015}}
+		\enumdescitem{\printarticle{Jimenez2013} and
+		\printarticle{Hernandez-Herrera2013} and \printarticle{Hernandez-Herrera2014} and \printarticle{ORION_Santamaria-Pang2015}}
+			In \autocite{Jimenez2013}, a method that
+			first uses low-pass,
+			high-pass, and Laplacian filter responses
+			are used as features
+			to train an SVM to classify voxels as
+			being background or foreground. This is
+			used to binarize the neuron data so that
+			only a subset of the volume needs to be
+			analysed for seed selection. Seed
+			selection is performed by applying a
+			distance transform to the binary volume
+			and then only keeping voxels that have a
+			greater distances than the average
+			distance in the 26-neighborhood of that
+			voxel. Tracing between these seed points
+			is then done with a variation of
+			Dijkstra's algorithm that adds weights
+			based on the distance transform
+			and on the orientation between each successive
+			edge. These constraints keep the centerline path
+			from deviating from the center of the
+			tubular structure and from having sharp
+			changes in direction.
 
-		\enumdescitem{\printarticle{Mukherjee2014}}
+			In \autocite{Hernandez-Herrera2013}, a
+			general model of the frequency-domain
+			properties involved in neuron data
+			acquisition is described and used to
+			generate synthetic data from the DIADEM
+			tracing dataset.
 
-		\enumdescitem{\printarticle{Hernandez-Herrera2014}}
+			\Autocite{Hernandez-Herrera2014} describes
+			a segmentation method based on one-class
+			classification. This segmentation method
+			uses the Laplacian filter response in
+			order to create a training set of
+			background voxels. Two representative
+			eigenvalues of the Hessian filter are then
+			used to create a discriminant function
+			based on the distribution of these
+			eigenvalues.
 
-		\enumdescitem{\printarticle{Basu2014}}
-
-		\enumdescitem{\printarticle{Xiao2013}}
-
-		\enumdescitem{\printarticle{Jimenez2013}}
-
-		\enumdescitem{\printarticle{Basu2013}}
-
-		\enumdescitem{\printarticle{Mukherjee2013}}
-
-		\enumdescitem{\printarticle{Hernandez-Herrera2013}}
-
-		\enumdescitem{\printarticle{Ming2013}}
-
-		\enumdescitem{\printarticle{Lee2012}}
-
-		\enumdescitem{\printarticle{Czarnecki2012}}
+		%\enumdescitem{\printarticle{Basu2013} and \printarticle{Basu2014}}
+		%\enumdescitem{\printarticle{Czarnecki2012}}
+		%\enumdescitem{\printarticle{Lee2012}}
+		%\enumdescitem{\printarticle{Ming2013}}
+		%\enumdescitem{\printarticle{Mukherjee2013} and \printarticle{Mukherjee2014}}
+		%\enumdescitem{\printarticle{Xiao2013}}
 \end{enumerate}
 
 
 \section{Metrics}
 
 \begin{enumerate}[label={}]
-		\enumdescitem{\printarticle{Mayerich2011}}
+		\enumdescitem{\printarticle{DIADEM-metric-Gillette2011}
+		and \printarticle{Gillette2015}}
+			This paper describes the metric used to
+			compare the automated neuron tracing
+			output against the DIADEM ground truth
+			tracings. This method works on the SWC
+			format which provides both spatial
+			location and radius for each point in the
+			neuron tree. The method of registering the
+			test tracing to the gold standard tracing
+			starts by choosing an unregistered gold
+			standard bifurcation node. To check that
+			there is a matching node in the test
+			tracing, the method looks for a test node
+			that is in within a cylindrical region
+			around the same spatial location as the
+			gold standard node in order to find a
+			match. The matching continues along both
+			the parent and any children of the gold
+			standard node. In order to determine that
+			a gold standard node and test node are
+			sufficiently close, a path length error is
+			calculated by taking the path length
+			between a nodes in the test tracing
+			divided by the corresponding path length
+			in the gold standard tracing. As long as
+			this path length error is within
+			acceptable bounds, the path is considered
+			a match. Finally, if there are any gold
+			standard nodes that have not been
+			registered, the algorithm tries to
+			determine if any existing path that passes
+			through that node in order to determine a
+			match.
 
-		\enumdescitem{\printarticle{Mayerich2012}}
+		\enumdescitem{\printarticle{Mayerich2011} and \printarticle{Mayerich2012}}
+			This paper describes a method for
+			measuring the similarity between two
+			tracings by using a Gaussian-weighted distance
+			field between a given point in one tree
+			and the closest point in the other
+			tree. This allows for small deviations
+			between the two trees without excessive
+			penalization. This similarity metric is
+			then applied to every in one tree in order
+			to determine a graph coloring that assigns
+			each node in one tree to a corresponding
+			node in the other tree.
 
 		\enumdescitem{\printarticle{btmorph-Torben-Nielsen2014}}
+			This paper describes the implementation of
+			a library for measuring various
+			neuromorphological measures of a single.
+			It does not directly compare multiple
+			trees.
 
 		\enumdescitem{\printarticle{Costa2014}}
-
-		\enumdescitem{\printarticle{Gillette2015}}
+			This paper proposes a similarity metric by
+			defining a log-likelihood scoring matrix
+			based on whether or not neurons are of the
+			same type. The application for this is not
+			to compare two trees directly, but to
+			cluster and search large databases of
+			neuromorphology data.
 \end{enumerate}
 
 \end{document}
