@@ -79,7 +79,7 @@ in \cref{subsec:bigneuron}.
 The following sections contain an overview of the context of this project
 first within the general context of scientific software (\cref{subsec:sci-soft})
 and finally narrow down its role relative to the specific context
-of neuron reconstruction (\cref{subsec:neuron-tracing}).
+of neuron reconstruction (\cref{sec:neuron-tracing}).
 
 \subsection{Scientific software}\label{subsec:sci-soft}
 { % how software has become important in experimental science
@@ -234,7 +234,7 @@ trackers, and pre-merge code reviews.
 % problems with comparing data
 The history of biology has been defined by the tools used to
 visualize various biological structures and processes across many
-scales~\cite{moore2012visualizing}. Neuroscience in particular has
+scales~\autocite{moore2012visualizing}. Neuroscience in particular has
 made use of many techniques: from the patch clamp for studying ion
 channels to \acrshort{EEG} for recording brain surface electrical
 activity to \acrshort{fMRI} and fluorescent microscopy for
@@ -249,8 +249,8 @@ or simply due to insufficient access to raw data necessary
 to accurately use Bayesian inference for
 predictions~\autocite{Poldrack2011}.
 
-To address this problem, projects such as the \acrfull{NIF}~\cite{Gardner2008}
-and \acrfull{NITRC}~\cite{Kennedy2016} provide databases of neuroscience data
+To address this problem, projects such as the \acrfull{NIF}~\autocite{Gardner2008}
+and \acrfull{NITRC}~\autocite{Kennedy2016} provide databases of neuroscience data
 and tools that are machine-readable. These are part of recent research efforts
 to improve brain mapping and modelling~\autocite{Markram2013,BigBrainIEEESpectrum:2013}.
 Some of these efforts are based on manual data annotation~\autocite{Ascoli2007,Helmstaedter2011,Helmstaedter2012,Marx2013},
@@ -289,7 +289,7 @@ different brain regions) and in terms of the laboratory protocols
 The DIADEM Challenge was successful in raising awareness of the
 problem of neuron reconstruction and several new 3D reconstruction
 methods and metrics have been proposed after the end of the DIADEM
-Challenge (see \cref{subsec:neuron-tracing}).  However, the
+Challenge (see \cref{sec:neuron-tracing}).  However, the
 lack of larger public datasets, standardized metrics, and readily
 available algorithms have made it difficult to compare new methods
 for neuron reconstruction.
@@ -449,18 +449,213 @@ allowing for reproducibility of the neuron reconstruction results.
 This objective is what makes the project an ``open-science''
 project.
 
-\section{Literature review}
+\section{Neuron reconstruction and tracing}\label{sec:neuron-tracing}
 
-\subsection{Neuron reconstruction and tracing}\label{subsec:neuron-tracing}
+Computational neuromorphology was first started in the late 1960s
+with initial attempts to capture microscopy images for computer
+storage and analysis~\autocite{NeuroMorphTrends:Halavi:2012,NeuroTracePerspect:Meijering:2010}.
+However, due to limitations in computer processing and storage, it
+was not until the late 1990s that a public dataset of neuron
+morphology was available~\autocite{Duke-Southampton-archive:Cannon:1998}.
+With the release of the DIADEM Challenge data, there was an
+opportunity for more researchers to participate in the development
+of automated neuron reconstruction algorithms~\autocite{DIADEM-dataset:Brown:2011}.
 
-TODO: discuss neuron tracing datasets that exist
-~\autocite{Duke-Southampton-archive:Cannon:1998,DIADEM-dataset:Brown:2011}
+After the DIADEM Challenge concluded, there have been several
+papers that provide new approaches for neuron reconstruction.  The
+papers can be grouped roughly into either segmentation-based
+reconstruction or seed point reconstruction methods. Segmentation-based
+reconstruction uses image features to determine tubular structures
+for labelling the volume and as such obtains the centerline and
+structure boundary at once. Seed point segmentation works by
+obtaining seed points that are representative of the centerline
+and then connecting these seed points to reconstruct the neuron.
 
-TODO: History of neuron-tracing algorithms up to DIADEM
-~\autocite{DIADEM&Beyond:Liu:2011,NeuroMorphTrends:Halavi:2012,NeuroTracePerspect:Meijering:2010}
+\subsection{Segmentation-based reconstruction}
 
-Post-DIADEM algorithms
-~\autocite{Bauer2010,MIA-anisotropic-path-searching-Xie2011,MICCAI-anisotropic-path-searching-Xie2010,
-Jeong2015,Luo2015,De2015,Gulyanon2015,ORION_Santamaria-Pang2015,Mukherjee2014,Hernandez-Herrera2014,Basu2014,Xiao2013,Jimenez2013,Basu2013,Mukherjee2013,Hernandez-Herrera2013,Ming2013,Lee2012,Czarnecki2012}
+In \textcite{Bauer2010}, the authors present a method for
+automatic segmentation of 3D volumes of blood
+vessels especially where the vessel tree
+contains many overlapping structures. This
+is achieved by first extracting the
+tubular shapes using a Hessian filter. The
+results of the Hessian filter are then
+further processed by using a medialness filter
+to suppress false data (such as tumors or
+overlapping structures) that might occur at
+the boundaries of the vessel. Once the
+tubular structures are detected, the
+centreline is extracted by traversing the
+medialness response along the path with
+maximal value. The centreline and boundary provides structural
+information that can be used to construct
+model of the vessel structure that takes
+into account properties of blood flow
+(vessel radius, branching angle). This
+structural information is then used as
+a shape prior for assigning each tube to a
+tree in order to handle multiple
+trees.
 
-TODO: post-DIADEM metrics~\autocite{Mayerich2011,Mayerich2012,btmorph-Torben-Nielsen2014,Costa2014,Gillette2015}
+In \textcite{Jimenez2013}, the authors
+present a method that first uses low-pass, high-pass, and Laplacian filter responses
+as features to train an \acrshort{SVM} to classify voxels as
+being background or foreground. This is
+used to binarize the neuron data so that
+only a subset of the volume needs to be
+analysed for seed selection. Seed
+selection is performed by applying a
+distance transform to the binary volume
+and then only keeping voxels that have a
+greater distances than the average
+distance in the 26-neighborhood of that
+voxel. Tracing between these seed points
+is then done with a variation of
+Dijkstra's algorithm that adds weights
+based on the distance transform
+and on the orientation between each successive
+edge. These constraints keep the centerline path
+from deviating from the center of the
+tubular structure and from having sharp
+changes in direction.
+
+\Textcite{Hernandez-Herrera2014} describes
+a segmentation method based on one-class
+classification. This segmentation method
+uses the Laplacian filter response in
+order to create a training set of
+background voxels. Two representative
+eigenvalues of the Hessian filter are then
+used to create a discriminant function
+based on the distribution of these
+eigenvalues. This discriminant function is then used for
+segmentation.
+
+\subsection{Seed point reconstruction}
+
+In \textcite{MICCAI-anisotropic-path-searching-Xie2010,MIA-anisotropic-path-searching-Xie2011},
+the authors cover a method for tracing
+based on choosing seed points that
+represent the underlying neuronal
+structure and then connecting these seeds
+to produce a neuron tree. The seeding is
+initiated by applying a windowing cube on
+the volume in order to detect seed
+candidates at the local maxima. These
+seeds candidates are pruned to simplify
+tracing. Then a cost function is
+introduced in order to a find a path
+between the seed points. This cost
+function incorporates a smoothness term
+which constrains new edges between seed
+points so that large changes in
+orientation are avoided. Finally, these
+local edges are used to construct a
+global tree by using the
+minimal-spanning-tree (MST) algorithm.
+
+\Textcite{Luo2015} presents a method for neuron
+reconstruction that is based on an
+open-curve snake model. This method
+start by a seed detection step that is
+based on what is known as a Sliding Volume
+Filter which selects a spherical region
+around each voxel in order to calculate
+the orientation of the gradient vectors
+within that region relative to center of
+the spherical region. By calculating the
+filter response as the cosine of the
+orientation, regions with a high response
+have more voxels where the gradient is
+oriented towards the center which
+indicates a tubular region. This filter
+response is used for initial seed point
+selection. These seed points are further
+pruned by using the eigenvalues of the
+Hessian of the volume to choose points
+that lie along the centerline of the
+tubular structure. The intensity of the
+voxels at the seed points is recalculated to
+create an SVF-enhanced image which is then
+used by an open-curve snake model for
+neuron tracing. This model creates a
+deformable model that is used to add edges
+to a curve that extends along the
+direction of the eigenvalue of the Hessian
+calculated earlier.
+
+\Textcite{Gulyanon2015}
+ uses a joint probability model
+to both optimize voxel labels (foreground,
+background) and open-curve snake model
+configurations. This probability model
+uses the Frangi vessellness features as a
+data prior. A Discriminative Random
+Field is used to determine initial labels
+for the voxel classifications and voxels
+with a high confidence are used as the 
+initial seed points of 3D snake configuration.
+This inference is performed on subvolumes
+so that the probability model only uses
+the local intensity distribution.
+
+\subsection{Neuron tree similarity metrics}
+
+The DIADEM Challenge also provided a metric for comparing tracings
+from automated reconstruction to gold standard tracings from human
+experts~\autocite{DIADEM-metric-Gillette2011,Gillette2015}.
+			This method works on the SWC
+			format which provides both a spatial
+			location and a radius for each point in the
+			neuron tree. The method of registering the
+			test tracing to the gold standard tracing
+			starts by choosing an unregistered gold
+			standard bifurcation node. To check that
+			there is a matching node in the test
+			tracing, the method looks for a test node
+			that is in within a cylindrical region
+			around the same spatial location as the
+			gold standard node in order to find a
+			match. The matching continues along both
+			the parent and any children of the gold
+			standard node. In order to determine that
+			a gold standard node and test node are
+			sufficiently close, a path length error is
+			calculated by taking the path length
+			between a nodes in the test tracing
+			divided by the corresponding path length
+			in the gold standard tracing. As long as
+			this path length error is within
+			acceptable bounds, the path is considered
+			a match. Finally, if there are any gold
+			standard nodes that have not been
+			registered, the algorithm tries to
+			determine if any existing path that passes
+			through that node in order to determine a
+			match.
+
+Recently, a new method for measuring the similarity of neuron
+tracings has been proposed in
+\autocite{Mayerich2011,Mayerich2012}.
+			This method
+			measures the similarity between two
+			tracings by using a Gaussian-weighted distance
+			field between a given point in one tree
+			and the closest point in the other
+			tree. This allows for small deviations
+			between the two trees without excessive
+			penalization. This similarity metric is
+			then applied to every point in one tree in order
+			to determine a graph coloring that assigns
+			each node in one tree to a corresponding
+			node in the other tree.
+
+There are still many more challenges for working with
+neuromorphology data including working with time-lapse data,
+handling subcellular structures and dense trees that contain
+multiple neurons, and dealing with electron microscopy
+data~\autocite{DIADEM&Beyond:Liu:2011}. The target of all these
+challenges is to capture the dynamics of large neural circuits in
+hopes that understanding how groups of neurons work will provide
+insight into brain function.
+
