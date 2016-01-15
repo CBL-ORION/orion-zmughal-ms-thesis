@@ -12,8 +12,7 @@ THESIS_CHAPTERS := \
 	03_design/design.tex \
 	04_implementation/implementation.tex \
 	05_testing/testing.tex \
-	06_discussion/discussion.tex \
-	07_conclusion/conclusion.tex \
+	06_conclusion/conclusion.tex \
 	appendix/appendix.tex
 THESIS_META := meta/title.tex meta/committee.tex
 THESIS_DEP := 00_front-matter/abstract.tex 00_front-matter/acknowledgements.tex 00_front-matter/notation.tex \
