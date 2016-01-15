@@ -13,47 +13,153 @@
 	\qauthor{Steve Savitzky in \emph{The Programmer's Alphabet}, 1981~\autocite{ProgrammersAlphabet}}
 \end{savequote}
 \chapter{Implementation}\label{ch:implementation}
-% TODO
 % 4. Implementation
 %    4.1 Data structures
 %        [ n-d array (e.g. row-major, column-major) ]
 %    4.2 Prototyping components
 %    4.3 Integration
 %        [ Vaa3D & BigNeuron ]
-%    4.4 Build system
 
-As discussed in \cref{ch:design}, the Implementation stage
-starts by converting the MATLAB code to native code by following
-the 
-
-The Implementation
-Using the Analysis and Design from the previous chapters
+As discussed in \cref{ch:design}, the Implementation stage starts by converting
+the MATLAB code to native code by following the same architecture as the
+\gls{orionmat} code as initial point. This chapter discusses the real world
+characteristics of the code used to implement \gls{orionc}.
+This starts with the data structures that are used for calculations.
+Implementing a data structure that captures the domain of the problem correctly
+is the most important first step in any software system because once a data
+structure is chosen, it can be difficult to change as every part of the code
+relies on the properties of that data structure.
 
 \section{Data structures}\label{subsec:impl:ds}
 
 % column-major, row-major
 
 The main data structure used in the implementation is an
-n-dimensional array or tensor. Since the algorithm is meant to
-work with 3D data, the 
+\(n\)-dimensional array or tensor. Since the algorithm is meant to
+work with 3D data, the \(n\)-dimensional array has a fixed \(n = 3\).
+To define this data structure, we need to examine the memory layout.
+There are two approaches to this: column-major and row-major. The difference between the two is based on which dimension index
+changes the faster when accessing memory linearly. This difference is
+illustrated in \cref{fig:col-row-major} which depicts a data that is stored in memory
+with increasing value from \num{1} to \num{9}. The indices to access the same
+value differ between MATLAB and C not only due to MATLAB's \num{1}-based indexing and
+C's \num{0}-based indexing, but also the memory layout.
+\this {fig:col-row-major}
+\begin{figure}
+	\centering
+	\begin{tabular}{cc}
+		MATLAB & C\\[1ex]
+		x(r,c) & x[r][c]\\[1ex]
+		\begin{tabular}{cc|c|c|c|}
+		\backslashbox{r}{c}
+		  & \cellcolor{langM} 1 & \cellcolor{langM} 2 & \cellcolor{langM} 3 \\
+		\cellcolor{langM} 1 & \cellcolor{data} 1 & \cellcolor{data} 4 & \cellcolor{data} 7 \\\hline
+		\cellcolor{langM} 2 & \cellcolor{data} 2 & \cellcolor{data} 5 & \cellcolor{data} 8 \\\hline
+		\cellcolor{langM} 3 & \cellcolor{data} 3 & \cellcolor{data} 6 & \cellcolor{data} 9 \\\hline
+		\end{tabular}
+	&
+		\begin{tabular}{cc|c|c|c|}
+		\backslashbox{r}{c}
+				    & \cellcolor{langC} 0 & \cellcolor{langC} 1 & \cellcolor{langC} 2 \\
+		\cellcolor{langC} 0 & \cellcolor{data} 1 & \cellcolor{data} 2 & \cellcolor{data} 3 \\\hline
+		\cellcolor{langC} 1 & \cellcolor{data} 4 & \cellcolor{data} 5 & \cellcolor{data} 6 \\\hline
+		\cellcolor{langC} 2 & \cellcolor{data} 7 & \cellcolor{data} 8 & \cellcolor{data} 9 \\\hline
+		\end{tabular}
+	\end{tabular}
+	\caption{Difference in memory layout between MATLAB (column-major) and C (row-major).}\label{fig:col-row-major}
+\end{figure}
 
-MATLAB also has a similar data structure that can be accessed via the MEX interface.
+For \gls{orionc}, the \(n\)-dimensional array  is stored as row-major
+as this is the default that most C programmers expect. This array is
+represented by the C structure
+\begin{lstlisting}
+typedef struct {
+ pixel_type* p;                   /* allocated memory for data */
+
+ size_t sz[PIXEL_NDIMS];          /* size of each dimension    */
+ pixel_type spacing[PIXEL_NDIMS]; /* physical spacing          */
+} ndarray3;
+\end{lstlisting}
+where
+\computertext{pixel_type} is represents the floating point storage type used
+for the \(n\)-dimensional data, \computertext{p} is a pointer to the block of
+memory where the data is stored, and \computertext{PIXEL_NDIMS} is the constant
+\num{3}.
+ The \computertext{spacing} field is used to
+store the physical spacing between items in the \(n\)-dimensional grid and is
+used for normalizing calculations.
+
+There are also other data structures that are mainly used for book-keeping and
+storage of the algorithm parameters. For example, to obtain the output of the
+Hessian filter, a collection of the eigenvalue features and the
+associated scales used for that filter are returned by using the C structure
+\begin{lstlisting}
+typedef struct {
+ float scale;               /* scale used for this filter result    */
+ array_ndarray3* eig_feat;  /* the three eigenvalues for each voxel */
+} orion_eig_feat_result;
+\end{lstlisting}
+This allows for access to the filter response as well as
+the original parameters that generated that response.
 
 \section{Numerical considerations}
 
+Scientific computing often uses floating point for calculations, but the
+techniques for reducing numerical error are often overlooked~\autocite{Goldberg:1991:floating}.
+For example, a simple summation of a list of floating point numbers accumulates
+numerical errors as more numbers are numbers are added. To compensate for this
+numerical error, algorithms such as Kahan summation are used to accumulate this error
+in another \emph{running compensation} variable~\autocite{Kahan:1965:summation}.
+
+Another numerical consideration is making sure that the result of the floating
+point operations can fit within the limits of the storage type. For example,
+multiplying large floating point numbers can cause the result to become larger
+than the largest \computertext{double} (64-bit) floating point value which
+means that the result is no longer representable. This can happen when
+calculating factorials for a Taylor series. To avoid this, it is important to
+calculate the bounds of a calculation and provide error checking for when the
+input could lead to invalid results. For a factorial function that works with
+64-bit floating point data, we can calculate the bounds of input to the
+function \(n!\) as \(n \in [ 0, 170 ]\). In addition, since the domain of the
+input variable is so small, storing the pre-calculated data in a lookup table
+can help avoid numerical errors that accumulate through multiplication.
+
 % TODO real data -> conjugate symmetric --- r2c, c2r
-
-
 
 \section{Prototyping components}
 
-\section{Integration}
+As mentioned before, the design of \gls{orionc} initially follows the
+architecture of the \gls{orionmat} code. To accomplish this, each MATLAB
+function has a corresponding C function that is located in a similarly named
+file. Using the call graphs obtained in \cref{appx:matlab-call-graph}, we first
+choose a function that is a leaf node in the call graph. This function requires
+very little data for its inputs, so testing the \gls{orionc} implementation
+against the \gls{orionmat} implementation does not require a lot of set up for
+each of the parameters. In order to prototype the \gls{orionc} function,
+we take a set of test parameters and apply them to the \gls{orionmat} function
+and capture its output. This output is then placed inside a test file and used
+to compare the C output to the MATLAB output. This procedure is then repeated
+for each parent function in the call graph.
 
-\section{Survey of libraries used}
+\section{Library integration}
 
-TODO: discuss ITK, VTK, Kiss-FFT.
+Some of the calculations needed for this implementation require outside
+libraries. In order to integrate with these libraries, it is necessary to
+convert the \gls{orionc} data structures into appropriate data structures for each library.
 
-% - cite the architecture of open-source applications
-% - ITK
-% - VTK
+To compute the vessellness filter, the ITK library is
+used~\autocite{Ibanez:2012:ITK}. This library is widely used in biomedical
+image analysis and has many implementations of filters that are commonly used
+for image segmentation. The ITK library uses a data structure called
+\computertext{itk::Image} for to store the inputs and outputs for calculations.
+This data structure is internally very similar to the \gls{orionc}
+\computertext{ndarray3} data structure as they both use a row-major block of
+memory to store their data. As such, it is possible to convert the
+\computertext{ndarray3} data to \computertext{itk::Image} data without having
+to copy the data by sharing the buffer between the two libraries.
 
+For computation of the fast-Fourier transform, a small library called Kiss FFT
+is used~\autocite{kissfft}. This library has functions for computing an
+\(n\)-dimensional \gls{FFT}. This library also uses a \(n\)-dimensional array data
+structure that is similar to \computertext{ndarray3} which makes it easy to
+write a wrapper to the \gls{FFT} code that takes an \computertext{ndarray3} input.

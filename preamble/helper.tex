@@ -86,6 +86,9 @@
 
 \usepackage{attrib}
 \usepackage{listings}
+\lstset{language=C,%
+basicstyle=\footnotesize\singlespacing%
+} 
 
 
 %\usepackage{epsfig}
@@ -156,9 +159,11 @@
 %%     \end{enumerate*}
 \newcommand\enumdescitem[1]{\item{\bfseries#1:\,}}
 
-\newcommand\computertext[1]{\texttt{#1}}
-\newcommand\computertextfamily{\ttfamily}
-
 \usepackage[nameinlink,capitalize]{cleveref}
+
+\colorlet{langC}{blue!40}
+\colorlet{langM}{orange!20}
+\colorlet{data}{gray!10}
+
 
 \input{preamble/mathematics.tex}

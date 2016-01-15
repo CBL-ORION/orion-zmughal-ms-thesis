@@ -29,7 +29,9 @@
 	\newcommand{\tmetrics}[1]{\textcolor{tmetrics}{#1}}
 \fi
 
-\input{preamble/draftwatermark.tex}
+%\input{preamble/draftwatermark.tex}
+
+\input{note/seg-fig-pre.tex}
 
 \begin{document}
 % meta needs to be in \begin{document} so that tabular works
@@ -283,7 +285,7 @@
 \begin{frame}\frametitle{Digital neuron reconstruction}
 	\begin{multicols}{2}
 	\begin{itemize}
-		\item<1-> The early days (late 1960s): Glaser and Van der loos, 1965; Blinkov and Ivanitskii, 1968; Macku and Hradil, 1968
+		\item<1-> The early days (late 1960s): digital acquisition
 		\item<2-> Manual tracing (1980s -- late 1990s): NeuroLucida
 		\item<3-> DIADEM (2009 -- 2010)
 	\end{itemize}
@@ -301,8 +303,13 @@
 	\begin{center}
 	\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
 	\be \begin{center}CF\end{center} & \be \begin{center}CA3\end{center} & \be \begin{center}NL1\end{center} \\
-	\vertcenterimage{\includegraphics[width=0.3\textwidth]{gfx/vaa3D-DIADEM-1-CF_1-MIP.png}} & \vertcenterimage{\includegraphics[width=0.3\textwidth]{gfx/vaa3D-DIADEM-2-HCA3-Section-1-MIP.png}} & \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-3-NL1-01-MIP.png}} \\
-	\vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-1-CF_1-3D.png}}  & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-2-HCA3-Section-1-3D.png}}  & \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-3-NL1-01-3D.png}}
+	\vertcenterimage{\includegraphics[width=0.3\textwidth]{gfx/vaa3D-DIADEM-1-CF_1-MIP.png}}
+	& \vertcenterimage{\includegraphics[width=0.3\textwidth]{gfx/vaa3D-DIADEM-2-HCA3-Section-1-MIP.png}}
+	& \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-3-NL1-01-MIP.png}} \\
+	%
+	\vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-1-CF_1-3D.png}}
+	& \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/DIADEM-dataset/x-selection-gray-dt2.png}}
+	& \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/vaa3D-DIADEM-3-NL1-01-3D.png}}
 	\end{tabular}
 	\end{center}
 	\note{
@@ -315,8 +322,13 @@
 	\begin{center}
 	\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
 	 \be \begin{center}NPF\end{center} & \be \begin{center}OP\end{center} & \be \begin{center}CL\end{center} \\
-	\vertcenterimage{\todofig{gfx/vaa3D-DIADEM-4-NPF-MIP.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-5-OP-MIP.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-6-CL-MIP.png}} \\
-	\vertcenterimage{\todofig{gfx/vaa3D-DIADEM-4-NPF-3D.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-5-OP-3D.png}} & \vertcenterimage{\todofig{gfx/vaa3D-DIADEM-6-CL-3D.png}}
+		\vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/DIADEM-dataset/x-selection-default-dt4-im25.png}}
+		& \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/DIADEM-dataset/2d-default-dt5-v2.png}}
+		& \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/DIADEM-dataset/2d-custom-dt6.png}} \\
+		%
+		\vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/DIADEM-dataset/MIP-default-dt4-im25.png}}
+		& \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/DIADEM-dataset/alpha-default-dt5-v2.png}}
+		& \vertcenterimage{\includegraphics[width=0.2\textwidth]{gfx/DIADEM-dataset/mIP-custom-dt6-v2.png}}
 	\end{tabular}
 	\end{center}
 	\note{
@@ -324,28 +336,29 @@
 	}
 \end{frame}
 
-\begin{frame}\frametitle{DIADEM datasets}
-	% TODO
-\end{frame}
+%\subsubsection{Metrics}
+%\begin{frame}\frametitle{\subsubsecname}
+	%% TODO
+	%\note{
+	%[\tbackground{Create a table of metrics (e.g., precision, recall,
+	%DIADEM metric, btmorph, NetMets) and explain how they work}]
+	%}
+%\end{frame}
 
-\subsubsection{Metrics}
-\begin{frame}\frametitle{\subsubsecname}
-	% TODO
-	[\tbackground{Create a table of metrics (e.g., precision, recall,
-	DIADEM metric, btmorph, NetMets) and explain how they work}]
-\end{frame}
-
-\subsubsection{Methods}
-\begin{frame}\frametitle{\subsubsecname}
-	% TODO
-	[\tbackground{Create a table of methods: what data they work with (2D/3D), modality,
-	metrics, what datasets they validated against}]
-\end{frame}
+%\subsubsection{Methods}
+%\begin{frame}\frametitle{\subsubsecname}
+	%% TODO
+	%[\tbackground{Create a table of methods: what data they work with (2D/3D), modality,
+	%metrics, what datasets they validated against}]
+%\end{frame}
 
 \subsection{Open science}
 \begin{frame}\frametitle{\subsecname}
-	% TODO
-	[\tbackground{explain open science}]
+	\begin{itemize}
+		\item Make research as public as much as possible
+		\item Ensure that software/data can be run again
+		\item Related: open access publishing, open data
+	\end{itemize}
 \end{frame}
 
 \subsubsection{``Bermuda Principles''}
@@ -405,6 +418,39 @@
 	}
 \end{frame}
 
+\begin{frame}\frametitle{Reproducibility for computational science}
+	\begin{itemize}
+	\item
+	  Much of modern science is computational
+	\item
+	  SSI survey of researchers:
+
+	  \begin{itemize}
+	  \item
+	    56\% code
+	  \item
+	    21\% of those: no training in software
+	  \end{itemize}
+	\item
+	  RETRACTIONS
+	\item
+	  Unit tests not validation tests
+	\item
+	  Test many environments
+	\end{itemize}
+	\note{
+		\begin{itemize}
+		\item Note that the number is lowered since this include
+			non-STEM fields. The numbers are as high as 85\% in STEM.
+		\item
+		  Give example of chemistry handedness mistake in protein structure
+		  analysis.
+		\item
+		  Test step-by-step, not just look to see if the results look right
+		\end{itemize}
+	}
+\end{frame}
+
 \subsection{BigNeuron}
 \begin{frame}\frametitle{\subsecname}
 	\centering
@@ -448,23 +494,37 @@
 \end{frame}
 
 \begin{frame}\frametitle{ORION: Segmentation}
-	Given volume \(V\) and scales \(s_{k}\):
+	Given volume \(\InputVolumeName\) and scales \(\RadiiScalesElem \in \RadiiScalesName\):
 	\begin{enumerate}
 		\def\labelenumi{\arabic{enumi}.}
 		\item Detect training points
 		\begin{enumerate}
 			\def\labelenumii{\arabic{enumii}.}
-			\item Create a Laplacian filter of scale \(\sigma_{k}^{L}\): \(F_{k}^{L}\)
+			\item Create a Laplacian filter of scale
+				\(\LaplacianScalesElem\): \(\LaplacianOutputVolumeElem\)
 			\item Create a filter from the second
 				derivatives of a Gaussian of scale
-				\(\sigma_{k}^{G}\) to compute the
-				Hessian: \(F_{k}^{G}\).
-			\item For each voxel, find the \(k^{th}\) scale which has
-				a maximum response to \(F_{k,L}\).
+				\(\RadiiScalesElem\) to compute
+				the two largest eigenvalues of the Hessian:
+				\(\EigSecondElem\) and
+				\(\EigThirdElem\).
+			\item For each voxel, find the \(\ScaleIndex^{th}\) scale which has
+				a maximum response to
+				\(\LaplacianOutputVolumeElem\).
 				Assign the two largest eigenvalues
 				to a feature vector.
 		\end{enumerate}
 	\end{enumerate}
+\end{frame}
+
+\input{note/seg-fig.tex}
+
+\begin{frame}
+	\begin{figure}
+		\centering
+		\resizebox{0.9\textwidth}{!}{\input{gfx/algorithm/tracing.tex}}
+		%\caption[Diagram of tracing process]{\textbf{Diagram of tracing process}}\label{fig:proc-tracing}
+	\end{figure}
 \end{frame}
 
 %  - Proposed Framework - this is the most important part of your proposal.
@@ -497,51 +557,192 @@
 
 \subsection{Conversion}
 \begin{frame}\frametitle{\subsecname}
-	[\tbackground{explain difficulties with a rewrite vs.\ a refactor}]
+	\begin{itemize}
+		\item<1-> Rewrite vs. Refactor
+		\item<2-> MATLAB version: \gls{orionmat}
+		\item<2-> C version: \gls{orionc}
+		\item<3-> Work function-by-function
+	\end{itemize}
 \end{frame}
 
 \subsubsection{Conversion challenges}
 \begin{frame}\frametitle{\subsubsecname}
+		\begin{itemize}
+			\item<1-> C is very different from MATLAB
+			\item<2-> No existing tests
+			\item<3-> Remove code that is MATLAB specific
+		\end{itemize}
+	\note{
 	[\tbackground{challenges when doing a rewrite from MATLAB to native code}]
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Data handling}
+	\begin{itemize}[<+->]
+		\item Caching
+		\item Subvolume
+	\end{itemize}
+	\note{
+		\begin{itemize}
+		\item
+		  Original code attempts to speed up subsequent runs by saving
+		  intermediate results.
+		\item
+		  Breaks up large volumes into small volumes
+		\item
+		  This is fine, but every part of the codebase uses the same data by
+		  reading from files.
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Coupling via cross-cutting concerns}
+	\begin{figure}[tbp]
+	\centering
+	\input{gfx/ccc.tex}
+	\caption{\textbf{Files accessed by multiple modules}
+	}\label{fig:ccc}
+	\end{figure}
+
+	\note{
+		\begin{itemize}
+			\item
+				As soon as you make changes in one, you have to change the others.
+			\item
+				Imagine changing the file name
+			\item
+				Writes to the file-system, so it will needs file locking if run in
+				parallel
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Reducing coupling via indirection}
+	\begin{figure}[tbp]
+	\centering
+	\input{gfx/ccc-dao.tex}
+	\caption{\textbf{Using a data access object to reduce coupling}
+	}\label{fig:ccc-dao}
+	\end{figure}
+
+	\note{
+		\begin{itemize}
+			\item Any problem in CS can be solved by adding another layer of indirection.
+			\item Possible solution: Add another layer of indirection via a Data Access Object (DAO)
+			\item Reduces coupling between business logic and persistence logic
+			\item Persistence logic can be swapped out
+		\end{itemize}
+	}
+\end{frame}
+
+\subsection{Roads not taken}
+\begin{frame}<1>[label=frost]\frametitle{Roads not taken}
+\begin{itemize}
+	\item<1> MATLAB Engine API
+	\item<2> MATLAB Compiler Runtime
+\note{
+}
+% TODO describe MATLAB Engine API and MATLAB Compiler Runtime
+\end{itemize}
 \end{frame}
 
 \subsubsection{Call graph}
 \begin{frame}\frametitle{\subsubsecname}
+	\begin{tabular}{p{0.4\textwidth}c}
+		\begin{minipage}{\linewidth}
+			\begin{itemize}
+				\item<1-> Already existing architecture
+				\item<2-> Create a graph of function calls
+				\item<3-> Provides an order to work in
+			\end{itemize}
+		\end{minipage}
+		&
+		\begin{minipage}{\linewidth}
+		%\vertcenterimage{\includegraphics[height=0.3\textheight]{gfx-out/matlab-call-graph/segmentation.tex}}
+		\resizebox{0.6\linewidth}{!}{\input{gfx-out/matlab-call-graph/segmentation.tex}}
+		\end{minipage}
+	\end{tabular}
+	\note{
 	[\tbackground{analysis of existing codebase; how this informs the new
 	implementation; why use the call graph instead of
 	attempting to either do a clean room implementation (i.e.,
 	by only reading papers) or creating a new architecture
 	from scratch}]
+	}
 \end{frame}
 
 \subsubsection{Directory structure}
 \begin{frame}\frametitle{\subsubsecname}
-	% TODO
+	\begin{itemize}
+		\item<1-> \computertext{lib/container}: container data structures (e.g., resizable arrays)
+		\item<2-> \computertext{lib/ndarray}: n-dimensional array and volume processing code (e.g., FFT)
+		\item<3-> \computertext{lib/numeric}: numeric helper functions (e.g., polynomial calculation)
+		\item<4-> \computertext{lib/simple-log}: logging code
+	\end{itemize}
+	\note{
 	[ plan for the directory structure (where does each file
 	go) ]
+	}
+\end{frame}
+
+\begin{frame}\frametitle{\subsubsecname}
+	\begin{itemize}
+		\item<1-> \computertext{lib/kitchen-sink}: implementation of functions that match \gls{orionmat} code
+		\item<2-> \computertext{lib/vaa3d-plugin}: code to integrate with Vaa3D
+		\item<3-> \computertext{lib/t}: tests for all the above
+	\end{itemize}
 \end{frame}
 
 \subsection{Integration}
 \begin{frame}\frametitle{\subsecname}
+	\begin{itemize}
+		\item BigNeuron requires working with Vaa3D
+		\item Use a standard API for all algorithms
+	\end{itemize}
+	\note{
 	[\tbackground{description of Vaa3D}]
+	}
 \end{frame}
 
 \subsubsection{Vaa3D integration}
 \begin{frame}\frametitle{\subsubsecname}
-	[how to integrate with Vaa3D]
+	\centering
+	\includegraphics[height=0.3\textheight]{gfx/present/vaa3d-create-neuron-rec-plugin}
+	\note{
+		The idea behind contributing an algorithm to
+		BigNeuron is to create a plugin that will take
+		data in a standarised form and give back a
+		reconstruction in a standardised form.
+	}
 \end{frame}
 
 \subsection{Testing and Reproducibility}
 \begin{frame}\frametitle{\subsecname}
+	\begin{itemize}
+		\item<1-> Write simple tests: simple to read, simple to verify
+		\item<2-> Sanity checking
+		\item<3-> Are dependencies working as expected?
+		\item<4-> Tests can be run by others
+	\end{itemize}
+	\note{
 	[\tmetrics{why testing is important}]
+	}
 \end{frame}
 
 \subsubsection{Testing procedure}
 \begin{frame}\frametitle{\subsubsecname}
+	\begin{itemize}
+		\item<1-> Analytic solutions
+		\item<2-> Property testing
+		\item<3-> Floating point
+		\item<4-> Integration: test whole pipeline with data
+	\end{itemize}
+	\note{
 	[
 		testing procedure (TAP harness, floating point
 		issues); integration testing with Vaa3D
 	]
+	}
 \end{frame}
 
 \section{Results}
@@ -551,28 +752,34 @@
 \subsubsection{Qualitative results}
 \begin{frame}\frametitle{\subsecname}
 	% TODO
+	\vertcenterimage{\includegraphics[width=0.8\textwidth]{gfx/present/neuron-trace}}
+	\note{
 	[
 		\tmetrics{%
 			run code on DIADEM data and show the
 			visualization
 		}
 	]
+	}
 \end{frame}
 
-\subsubsection{Quantitative Tracing-based comparison}
-\begin{frame}\frametitle{\subsecname}
-	% TODO
-	[ get all intermediate results from MATLAB code and
-	compare to the native code (floating point for volumes,
-	tree metrics for the tracings); run on DIADEM data]
-\end{frame}
+%\subsubsection{Quantitative Tracing-based comparison}
+%\begin{frame}\frametitle{\subsecname}
+	%% TODO
+	%[ get all intermediate results from MATLAB code and
+	%compare to the native code (floating point for volumes,
+	%tree metrics for the tracings); run on DIADEM data]
+%\end{frame}
 
 \subsection{Results for Integration}
 \begin{frame}\frametitle{\subsecname}
-	[\tmetrics{a demonstration video; visual results and metrics from using
-			Vaa3D with neuron data from DIADEM; demonstration of any further analysis
-	that can be done in Vaa3D}]
-
+	\begin{itemize}
+		\item Load TIFF stack into Vaa3D
+		\item Run plugin code
+	\end{itemize}
+	%[\tmetrics{a demonstration video; visual results and metrics from using
+			%Vaa3D with neuron data from DIADEM; demonstration of any further analysis
+	%that can be done in Vaa3D}]
 \end{frame}
 
 \begin{frame}% TODO title
@@ -587,7 +794,7 @@
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{gfx/vaa3d_DIADEM-NPF-3-025_APP2-tracing-3D-view}
-\caption{Vaa3D: Tracing of NPF025 using Vaa3D APP2 plugin}
+\caption{Vaa3D: Tracing of NPF025 using Vaa3D plugin}
 \end{figure}
 \end{frame}
 
@@ -595,33 +802,60 @@
 
 \subsubsection{Overview of tests}
 \begin{frame}\frametitle{\subsubsecname}
+	\begin{itemize}
+		\item<1-> Numeric tests: does factorial work?
+		\item<2-> I/O tests: can data be read from disk properly?
+		\item<3-> Library integration: does FFT library work?
+		\item<4-> Current code coverage by tests: 76.29\%.
+	\end{itemize}
+	\note{
 	[
 		overview of tests written (grouped by similarity);
 		list of bugs fixed in ORION due to testing;
 		code coverage; list of dead code found
 	]
+	}
+\end{frame}
+
+\begin{frame}\frametitle{\subsubsecname}
+	\begin{itemize}
+		\item<1-> Tests fix bugs and anticipate change
+		\item<2-> Is the filter really isotropic?
+		\item<3-> ITK Hessian filter and volume spacing changes
+		\item<3-> Differences in compilers
+	\end{itemize}
 \end{frame}
 
 \subsubsection{Dependency tracking}
 \begin{frame}\frametitle{\subsubsecname}
+	\note{
 	[dependency tracking by keeping version controlled copies
 		of dependencies; screenshots of all repos of deps used under the CBL-ORION
 	namespace on GitHub
-	\begin{itemize}
-		\item ITK
-		\item Vaa3D
-		\item kiss-fft
-	\end{itemize}
 	]
+	}
+		\begin{figure}[tbp]
+			\centering
+			\includegraphics[width=1.0\textwidth]{gfx/gh-dep_0}
+		\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{\subsubsecname}
+	\begin{figure}[tbp]
+		\centering
+		\includegraphics[width=0.9\textwidth]{gfx/gh-dep_1}
+	\end{figure}
 \end{frame}
 
 \subsubsection{Documentation}
 \begin{frame}\frametitle{\subsubsecname}
+	\note{
 	[ screenshot of documentation ]
+	}
 		\begin{figure}[tbp]
 			\centering
 			% <https://github.com/CBL-ORION/orion/wiki>
-			\includegraphics[width=1.0\textwidth]{gfx/doc_placeholder}
+			\includegraphics[width=1.0\textwidth]{gfx/doc-dev}
 			\caption{\textbf{Documentation website}
 			}\label{fig:doc-wiki}
 		\end{figure}
@@ -629,27 +863,75 @@
 
 
 \subsubsection{Continuous integration}
-\begin{frame}\frametitle{\subsecname}
-	% TODO
-	[
-		{screenshots of continuous integration}
-	]
+%\note{
+%[
+	%{screenshots of continuous integration}
+%]
+%}
+\begin{frame}\frametitle{\subsecname} \centering\includegraphics[width=1.0\textwidth]{gfx/ci-0} \end{frame}
+\begin{frame}\frametitle{\subsecname} \centering\includegraphics[width=1.0\textwidth]{gfx/ci-1} \end{frame}
+\begin{frame}\frametitle{\subsecname} \centering\includegraphics[width=1.0\textwidth]{gfx/ci-2} \end{frame}
+\begin{frame}\frametitle{\subsecname} \centering\includegraphics[height=0.65\textwidth]{gfx/ci-3} \end{frame}
+
+\begin{frame}\frametitle{Estimating error in stages}
+\begin{figure}
+	\resizebox{0.8\linewidth}{!}{\input{gfx/compare.tex}}
+	\caption{Full pipeline}
+\end{figure}
 \end{frame}
 
 \begin{frame}\frametitle{Estimating error in stages}
-        \centering
-	\input{table/estimating-errors-horizontal.tex}
+	\begin{itemize}
+	\item<1-> Set breakpoints at every function start and end
+	\item<2-> Run the MATLAB code
+	\item<3-> Save the state of the input and output data at
+		each breakpoint with stack frame ID
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Estimating error in stages}
+	\begin{itemize}
+		\item<1-> Load the MATLAB data
+		\item<2-> Convert MATLAB to C data structures
+		\item<3-> Compare the results using an appropriate method
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Estimating error for Makefilter}
+	\centering
+	%\input{table/estimating-errors-horizontal.tex}
+	\begin{tabular}{cc}
+		\toprule
+                  \be{}Stack ID                              & \be{} histogram intersection \\                   
+		\midrule
+			1 & 0.999973665203964 \\
+			2 & 0.999967508148729 \\
+			3 & 0.999978416844418 \\
+			4 & 0.999982131154914 \\
+			5 & 0.999959276433577 \\
+		\bottomrule
+        \end{tabular}
 \end{frame}
 
 \section{Conclusion}
 %  - Conclusion slide could be catchy, something they will remember.
 %        Maybe an animation, video, or terse statement that summarizes it all.
 \begin{frame}\frametitle{\secname}
+	\begin{itemize}
+		\item<1-> Project set up for future work
+		\item<2-> Automatic testing for every change
+		\item<3-> Can be packaged for Vaa3D, NeuroDebian
+	\end{itemize}
+	\note{
 	[
 		mention future work (e.g., NeuroDebian)
 	]
+	}
 \end{frame}
 
+\begin{frame}\frametitle{\secname}
+	\centering\Huge Questions?
+\end{frame}
 
 %  - Publications - you should list your publications or mention them in relevant sections of the presentation.
 

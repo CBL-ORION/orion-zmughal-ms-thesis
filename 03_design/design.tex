@@ -14,7 +14,6 @@
 %      decisions. Describe the libraries that are used and
 %      why. Documentation system. ]
 
-% TODO FIXME
 % explain the importance of the Design phase
 Once the planning is done, the actual technical details of the
 project are determined in the Design phase. This phase is not a
@@ -76,122 +75,281 @@ namely
 		capture the underlying neuron morphology.
 \end{description}
 
-\begin{figure}
-\centering
-\resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/high-level.tex}}
-\caption[High level diagram of ORION algorithm]{\textbf{High level
-diagram of ORION algorithm}: This high-level diagram shows that
-there are three steps to the \gls{orionmat} algorithm as described
-in the text. The input to the algorithm is a 3D volume of
-microscopy data and the output is a graph-based representation of
-the neuron morphology based on the centerline.}\label{fig:high-level-arch}
-\end{figure}
+%For the following description of the algorithm, all indices are
+%0-based in order to match the indexing found in the \gls{orionc}
+%code and reduce the need for subtracting one when calculating
+%using indices.
 
-% TODO explain the current ORION algorithm
-\subsection{Segmentation}
+%\begin{figure}
+%\centering
+%\resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/high-level.tex}}
+%\caption[High level diagram of ORION algorithm]{\textbf{High level
+%diagram of ORION algorithm}: This high-level diagram shows that
+%there are three steps to the \gls{orionmat} algorithm as described
+%in the text. The input to the algorithm is a 3D volume of
+%microscopy data and the output is a graph-based representation of
+%the neuron morphology based on the centerline.}\label{fig:high-level-arch}
+%\end{figure}
 
-As depicted in \cref{fig:proc-segmentation}, the
-segmentation process performs one-class classification using the
-background voxels to learn a discriminant function for extracting
-vessel-like structures. The segmentation uses a multiscale approach so that
-both thin and thick neurite structures can be extracted at once from a single
-volume.
+%% explain the current ORION algorithm
+%\subsection{Segmentation}
 
-\begin{figure}
-\centering
-\resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/segmentation.tex}}
-%\captionsetup{singlelinecheck=off}
-\caption[Diagram of segmentation process]{\textbf{Diagram of segmentation process}:
-\begin{enumerate*}[label={\alph*)}]
-	\enumdescitem{Obtain background training data} This step is used
-		to bootstrap the learning process so that a quick
-		approximation of the distribution of background
-		and foreground voxels can be determined
-		(\cref{alg:seg_bg_train}).
-	\enumdescitem{Obtain vessellness features} This step is used to
-		obtain features that are used to discriminate
-		vessel-like structures
-		(\cref{alg:seg_vessellness}).
-	\enumdescitem{Learn discriminant function} Here an accumulator is used to
-		characterize the distribution of the vessellness features
-		(\cref{alg:seg_discrim}).
-	\enumdescitem{Threshold} Using the discriminant function from the previous
-		step, the volume is segmented into foreground and background classes
-		(\cref{alg:seg_threshold}).
-	\enumdescitem{Post-processing} Removal of artifacts such as small connected components
-		(\cref{alg:seg_post}).
-\end{enumerate*}
-}\label{fig:proc-segmentation}
-\end{figure}
+%As depicted in \cref{fig:proc-segmentation}, the
+%segmentation process performs one-class classification using the
+%background voxels to learn a discriminant function for extracting
+%vessel-like structures. The segmentation uses a multiscale approach so that
+%both thin and thick neurite structures can be extracted at once from a single
+%volume.
 
-\begin{algorithm}
-	\caption{Input parameters to segmentation}\label{alg:seg_input}
-	\begin{algorithmic}[1]
-		\State $I \gets \text{the input volume}$
-		\State $k \gets \text{the number of scales}$
-		\State $r \gets  \{ r_0, r_1, \ldots, r_{k-2}, r_{k-1} \}$
-	\end{algorithmic}
-\end{algorithm}
+%\begin{figure}
+%\centering
+%\resizebox{1.0\textwidth}{!}{\input{gfx/algorithm/segmentation.tex}}
+%%\captionsetup{singlelinecheck=off}
+%\caption[Diagram of segmentation process]{\textbf{Diagram of segmentation process}:
+%\begin{enumerate*}[label={\alph*)}]
+	%\enumdescitem{Obtain background training data} This step is used
+		%to bootstrap the learning process so that a quick
+		%approximation of the distribution of background
+		%and foreground voxels can be determined
+		%(\cref{alg:seg_bg_train}).
+	%\enumdescitem{Obtain vessellness features} This step is used to
+		%obtain features that are used to discriminate
+		%vessel-like structures
+		%(\cref{alg:seg_vessellness}).
+	%\enumdescitem{Learn discriminant function} Here an accumulator is used to
+		%characterize the distribution of the vessellness features
+		%(\cref{alg:seg_discrim}).
+	%\enumdescitem{Threshold} Using the discriminant function from the previous
+		%step, the volume is segmented into foreground and background classes
+		%(\cref{alg:seg_threshold}).
+	%\enumdescitem{Post-processing} Removal of artifacts such as small connected components
+		%(\cref{alg:seg_post}).
+%\end{enumerate*}
+%}\label{fig:proc-segmentation}
+%\end{figure}
 
-\begin{description}
-	\item[\(\InputVolumeName{}\)] is the input volume of dimensions
-		\(\InputVolumeDimensions{}\) which contains the intensity values taken
-		from the microscope modality.
-	\item[\(\RadiiScalesName{}\)] is a \Dim{\RadiiScalesName}-tuple where each element
-		\(\RadiiScalesElem \in \RadiiScalesName\)
-		represents the radius of the neurite to segment.
-	\item[\(\LaplacianFilterApproxDegree{}\)] is the degree of the
-		exponential Taylor series used to calculate the approximation
-		to the Laplacian filter.
-\end{description}
+%\begin{algorithm}
+	%\caption{Input parameters to segmentation}\label{alg:seg_input}
+	%\begin{algorithmic}[1]
+		%\State $I \gets \text{the input volume}$
+		%\State $k \gets \text{the number of scales}$
+		%\State $r \gets  \{ r_0, r_1, \ldots, r_{k-2}, r_{k-1} \}$
+	%\end{algorithmic}
+%\end{algorithm}
 
-\begin{algorithm}
-	\caption{Obtain background training data}\label{alg:seg_bg_train}
-	\begin{algorithmic}[1]
-		\State $n \gets \text{the degree used for approximation of low-pass filter}$
-		\State $\sigma_{L}[i] \gets \left\{ \frac{0.66}{r[i]} \right\}$
-			\Comment{Experimentally derived relationship between Laplacian scales and radii}
-		\State $\freqdom{L}[i] \gets \Call{LaplacianFilter}{n, \sigma_{L}[i]}$
-			\Comment{Construct Laplacian filters in the frequency domain}
-		\State ${I}_{L}[i] \gets \IFourierTrans{ \freqdom{I} \HadamardProd \freqdom{L}[i] }$
-		\State
-	\end{algorithmic}
-\end{algorithm}
+%The following parameters are used as the input to the segmentation
+%algorithm:
+%\begin{description}
+	%\item[\(\InputVolumeName{}\)] is the input volume of dimensions
+		%\(\InputVolumeDimensions{}\) which contains the intensity values taken
+		%from the microscope modality.
+	%\item[\(\RadiiScalesName{}\)] is a \Dim{\RadiiScalesName}-tuple where each element
+		%\(\RadiiScalesElem \in \RadiiScalesName\)
+		%represents the radius of the neurite to segment.
+	%\item[\(\LaplacianFilterApproxDegree{}\)] is the degree of the
+		%exponential Taylor series used to calculate the approximation
+		%to the Laplacian filter.
+	%\item[\(\LaplacianFilterScaleFactor{}\)] is a factor that
+		%is used to find the scale of the Laplacian filter
+		%filter for which a tubular structure with a radius
+		%\(\RadiiScalesElem \in \RadiiScalesName\)
+		%gives a maximal response. This is fixed for a
+		%given value of \(\LaplacianFilterApproxDegree\).
+%\end{description}
 
-\begin{algorithm}
-	\caption{Obtain vessellness features}\label{alg:seg_vessellness}
-	\begin{algorithmic}[1]
-		$\Call{Hessian}$
-		$\Call{Eigenvalues}$
-		\Comment{Frangi}
-	\end{algorithmic}
-\end{algorithm}
+%To obtain the background training set, we use a Laplacian filter
+%with a scale parameter in order to detect the edges
 
-\begin{algorithm}
-	\caption{Learn discriminant function}\label{alg:seg_discrim}
-	\begin{algorithmic}[1]
-	\end{algorithmic}
-\end{algorithm}
 
-\begin{algorithm}
-	\caption{Threshold}\label{alg:seg_threshold}
-	\begin{algorithmic}[1]
-	\end{algorithmic}
-\end{algorithm}
 
-\begin{algorithm}
-	\caption{Post-processing}\label{alg:seg_post}
-	\begin{algorithmic}[1]
-	\end{algorithmic}
-\end{algorithm}
+%\subsubsection{Laplacian scale parameter}
 
-\subsection{Registration}
+%\(\LaplacianScalesName\) is a \Dim{\RadiiScalesName}-tuple such that
+%\begin{equation*}
+	%\LaplacianScalesName \ni \LaplacianScalesElem{} = \frac{\RadiiScalesElem{}}{\LaplacianFilterScaleFactor}
+%\end{equation*}
 
-% TODO FIXME
-This step is not a set part of the neuron tracing algorithm. This
-is meant to handle the subvolume.
+%\todo{explain that \(\LaplacianFilterScaleFactor = \num{0.66}\) was chosen by using linear regression and fixing
+%\(\LaplacianFilterApproxDegree{} = \num{60}\).}
 
-\subsection{Tracing}
+%\subsubsection{Hessian scale parameter}
+
+%\(\HessianScalesName\) is a \Dim{\RadiiScalesName}-tuple where each element
+%\begin{equation*}
+	%\HessianScalesName \ni \HessianScalesElem{} = \RadiiScalesElem{}
+%\end{equation*}
+%that is, the radius at which to segment.
+
+%\subsubsection{Laplacian filter (HDAF)}
+
+%\(\LaplacianOutputVolumeName\) is a \Dim{\RadiiScalesName}-tuple
+%where each element \(\LaplacianOutputVolumeElem \in \LaplacianOutputVolumeName\)
+%is a \Dim{\InputVolumeName}-dimensional volume
+%that contains the filter response for the corresponding Laplacian scale \(\LaplacianScalesElem\).
+
+%\begin{algorithm}
+	%\caption{Calculate}\label{alg:seg_bg_train}
+	%\begin{algorithmic}[1]
+		%\State $\freqdom{L}[i] \gets \Call{LaplacianFilter}{n, \sigma_{L}[i]}$
+			%\Comment{Construct Laplacian filters in the frequency domain}
+		%\State ${I}_{L}[i] \gets \IFourierTrans{ \freqdom{I} \HadamardProd \freqdom{L}[i] }$
+		%\State
+	%\end{algorithmic}
+%\end{algorithm}
+
+
+%\subsubsection{Hessian filter}
+
+
+%Hessian filter is defined for a function \(\FuncTo{f}{\Sreal^{n}}{\Sreal}\)
+%as
+%\begin{equation*}
+	%H(f)_{i,j}(\vect{x}) = \frac{\partial{}^{2} f(\vect{x})}{\partial{}x_{i}\partial{}x_{j}}
+%\end{equation*}
+%for a point \(\vect{x} = (x_0, x_1, x_2, \dotsc, x_{n-1}) \in \Sreal^{n}\)
+
+%For a 3D volume \(\tens{V}\), we compute the Hessian as
+%\begin{equation*}
+	%H(\tens{V})_{i,j}(\vect{x}) = \frac{\partial{}^{2} \tens{V}(\vect{x})}{\partial{}x_{i}\partial{}x_{j}}
+%\end{equation*}
+%where \(\vect{x} = (x_{0}, x_{1}, x_{2})\) is a point in the 3D
+%coordinate system of \(\tens{V}\).
+
+%\todo{explain how a Gaussian 2nd derivative filter is used to smooth piecewise noise from discrete volume}
+
+%\(\EigFirstName\), \(\EigSecondName\), and \(\EigThirdName\) are
+%are each \Dim{\RadiiScalesName}-tuples where the elements
+%\begin{equation*}
+%\begin{aligned}
+	%\EigFirstElem  &\in \EigFirstName  \\
+	%\EigSecondElem &\in \EigSecondName \\
+	%\EigThirdElem  &\in \EigThirdName  \\
+%\end{aligned}
+%\end{equation*}
+%are each \Dim{\InputVolumeName}-dimensional volumes
+%containing the first, second, and third eigenvalues respectively of \(H(\InputVolumeName)\)
+%for scale \(\HessianScalesElem\).
+%Each 3-tuple of eigenvalues is sorted so that
+%\(\abs{\EigFirstElem\InputVolumeElemIndices}
+%\le \abs{\EigSecondElem\InputVolumeElemIndices}
+%\le \abs{\EigThirdElem\InputVolumeElemIndices}\)
+%(i.e., the eigenvalues are sorted in ascending
+%order).
+
+%\subsection{Background training set}
+
+%The training set for the the background class is made up of pixels that are
+%either on the background
+
+%\subsubsection{Maximal Laplacian filter response}
+
+%\begin{equation*}
+%\MaxResponseLaplacianElemIndices = \argmax_{s} \(\LaplacianOutputVolumeElemIndices\)
+%\end{equation*}
+%where \(\MaxResponseLaplacianName\) is a volume of dimension
+%\(\Dim{\InputVolumeName}\) where each element is an index such that
+%all elements satisfy
+%\(0 \le \MaxResponseLaplacianElemIndices < \Dim{\RadiiScalesName}\)
+
+
+%\subsubsection{Feature vector}
+
+
+%\begin{equation*}
+%\FeaturesElemIndices = \Set{
+%\left(
+	%\EigSecondElemIndices,
+	%\EigThirdElemIndices
+%\right)
+%|
+%s = R_{\mathrm{max}}^{L}\InputVolumeIndices
+%}
+%\end{equation*}
+%where \(\FeaturesName\) is a volume of dimensions \(\Dim{\InputVolumeName}\) with
+%elements that are each tuples of length two, that is, the number
+%of eigenvalues used as features.
+
+%\subsection{Discriminant function}
+
+%\subsubsection{Input}
+
+%\begin{description}
+	%\item[\(\FeaturesName\)] is a volume that contains the feature vector for each
+		%voxel in the volume.
+	%\item[\(\HistogramBinCount\)] is a scalar number of bins.
+%\end{description}
+
+%\subsubsection{Bin bounds and edges}
+
+%The 2D histogram minima and maxima are computed for each feature
+%\begin{equation*}
+	%\HistogramMinElem = \min \Set{ f_{\FeatureIndex} | f_{\FeatureIndex} \in ( f_0, f_1 ) = f \in \FeaturesName }
+%\end{equation*}
+%\begin{equation*}
+	%\HistogramMaxElem = \max \Set{ f_{\FeatureIndex} | f_{\FeatureIndex} \in ( f_0, f_1 ) = f \in \FeaturesName }
+%\end{equation*}
+
+%Bin edges are computed for each \(\mnth{{\FeatureIndex}}\) feature
+%\begin{equation*}
+	%b_{\FeatureIndex}[w] =
+		%\HistogramMinElem +
+		%\frac{ \HistogramMaxElem  - \HistogramMinElem  }
+		     %{ \HistogramBinCount } \, w
+%\end{equation*}
+%where \(w\) is the index of the leading edge to the
+%\(\mnth{w}\) bin and \( 0 \le w \le  \HistogramBinCount \).
+
+%\subsubsection{Histogram accumulation}
+
+%\begin{equation*}
+	%H[x,y] =  \Dim{ \BinFunc(\FeaturesName, x, y) }
+%\end{equation*}
+%where \(H[x,y]\) is a \(\HistogramBinCount \times \HistogramBinCount\) matrix and
+%where \(\operatorname{Bin}(\FeaturesName, x, y)\) is the set of all tuples
+%\((f_0, f_1) \in \FeaturesName\) such that
+%\begin{enumerate}
+	%\item \(b_0[x] \le f_0 < b_0[x+1]\) and
+	%\item \(b_1[y] \le f_1 < b_1[y+1]\).
+%\end{enumerate}
+
+
+
+%\begin{algorithm}
+	%\caption{Obtain vessellness features}\label{alg:seg_vessellness}
+	%\begin{algorithmic}[1]
+		%$\Call{Hessian}$
+		%$\Call{Eigenvalues}$
+		%\Comment{Frangi}
+	%\end{algorithmic}
+%\end{algorithm}
+
+%\begin{algorithm}
+	%\caption{Learn discriminant function}\label{alg:seg_discrim}
+	%\begin{algorithmic}[1]
+	%\end{algorithmic}
+%\end{algorithm}
+
+%\begin{algorithm}
+	%\caption{Threshold}\label{alg:seg_threshold}
+	%\begin{algorithmic}[1]
+	%\end{algorithmic}
+%\end{algorithm}
+
+%\begin{algorithm}
+	%\caption{Post-processing}\label{alg:seg_post}
+	%\begin{algorithmic}[1]
+	%\end{algorithmic}
+%\end{algorithm}
+
+
+
+%\subsection{Registration}
+
+%% TODO FIXME
+%This step is not a set part of the neuron tracing algorithm. This
+%is meant to handle the subvolume.
+
+%\subsection{Tracing}
 
 % TODO
 \begin{figure}
@@ -204,31 +362,96 @@ is meant to handle the subvolume.
 
 \section{Anticipating change}
 
-% TODO automatic prerequisite scanning
+Since the code for \gls{orionc} changes rapidly throughout the project, it is
+necessary that the code structure is planned so that it does not have
+to change too drastically as new components are added to the project. This
+requires developing a project structure that does not require too many manual
+changes which slow down development. In the following, various aspects of the
+code structure and how they improve the code's ability to easily incorporate change.
 
 \subsection{Directory structure}
 
+The first part of setting up a new project is choosing a directory structure.
+This determines where new files should go. A common structure is to create
+separate directories for code for a library and code that will be compiled into
+an executable. This is reflected in the directory structure where
+%
 \begin{description}[font=\computertextfamily\textpluscolon]
-\item[lib]
-\item[lib/t]
-\item[src]
+\item[lib] contains subdirectories which have all the source code that will be
+	compiled together to create a library file (i.e., \computertext{liborion.a} on
+	many Unix systems);
+\item[lib/t] contains source files that have a matching directory layout to the
+	rest of the \computertext{lib} directory so that it is easy to find the corresponding test to a given component
+	(e.g., a library source file \computertext{lib/path/func.c} will have a
+	corresponding test source file in \computertext{lib/t/path/func.c}); and
+\item[src] contains source files that will be compiled into executables that can be run at the command-line.
 \end{description}
-
 
 \subsection{Build system}
 
 % GNU make
-
-\subsubsection{Dependencies}
+Whenever a native build system is chosen, an important property is that it
+should be portable. In order to fulfill this property, the build system is
+written using GNU~\computertext{make} which is a portable version of the Unix
+\computertext{make} build tool. This tool works by reading a
+\computertext{Makefile} that lists the prerequisites for a given target file
+and a set of commands needed to build those prerequisites. If the target is
+older than any one of its prerequisites, then that target file is rebuilt. This
+allows for testing changes to large projects without out needing to rebuild the
+entire project.
 
 % - automatic prerequisite scanning
+Another property is that the build system should not have to require many
+changes when adding new source code to the project.  This is accomplished by
+using automatic dependency scanning. Before any code is compiled, the files are
+scanned to create a list of prerequisites for each file. By scanning for
+prerequisites, most of the files in the project do not need explicit rules in
+the \computertext{Makefile} which means that when a new file is added to the
+project, no changes to the build system are necessary.
+
+An automatic build system allows for easily building the project on a new
+machine. If the build system is portable and well-tested, the project should
+build on the new system without manual intervention. When making a project for
+scientific purposes, this is essential for reproducibility because the knowledge of
+how to build the software is completely written down in an executable form.
 
 \subsubsection{Configuration}
 
-% - automatic compiler extension configurator (for example, GCC branch prediction __builtin_expect() macro)
 % - automatic dependency build flag configuration
+Software projects do not live in isolation; many projects depend on outside
+libraries to implement functionality. However, whenever a dependency is added,
+this adds another point where the build could break. Outside libraries are not
+necessarily in the same location on every system. In order to portably build the
+\gls{orionc} with these outside libraries, the build system has automatic build
+configuration that scans for the location of any dependencies that it needs.
+This allows the same build system to be used on multiple systems without having
+to use any fixed paths that are specific to a single computer.
 
-\subsubsection{Dev Ops}
+% - automatic compiler extension configurator (for example, GCC branch prediction __builtin_expect() macro)
+In addition, sometimes developers may want to enable system-specific features
+in order to speed up their code. When this happens, the code must be able to
+detect when such features are available and use a fallback if they are not
+available. The build system for \gls{orionc} contains an automatic system
+configuration scanner that it uses for this purpose. This configuration scanner
+is currently only used to enable the GCC compiler's branch prediction macro
+(\computertext{__builtin_expect}) which is used to give hints to the compiler
+whether or not a given condition is likely or not~\autocite{drepper2007memory}.
 
-%   provides code coverage, debug builds, profiling builds,
-%   AddressSanitizer
+\subsubsection{Debugging}
+
+As the project progresses, the development is inevitably going to come across
+bugs. When programming in C or C++, the class of bugs that occur are different
+from the kinds that occur in MATLAB. These usually are related to invalid
+memory access (e.g., buffer overflows, stack overflows). To help ease debugging,
+the build system must also support tools that can help track these errors.
+These tools often require the addition of build options that add extra metadata
+to the compiled code. The build system thus supports
+%
+\begin{enumerate*}[label={}]
+	\enumdescitem{code coverage builds} which are used to determine how
+		much of the code is tested by the testing code;
+	\enumdescitem{debug builds} to enable debugging symbols that can be
+		used to stop and inspect the execution of a program and catch memory access violations; and
+	\enumdescitem{profiling builds} which can be used to understand the
+		areas of the code that are running slowly in order to intelligently decide whether to optimize it.
+\end{enumerate*}

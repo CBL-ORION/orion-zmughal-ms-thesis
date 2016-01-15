@@ -1,0 +1,41 @@
+ \edef\defaultpgflinewidth{\the\pgflinewidth}
+
+%% PGF change color decoration for path
+\makeatletter
+\pgfkeys{/pgf/decoration/.cd, start color/.store in =\startcolor, end color/.store in   =\endcolor, visibility/.estore in =\decorateopacity}
+\pgfdeclaredecoration{color change}{initial}{
+ \state{initial}[width=0pt, next state=line, persistent precomputation={%
+   \pgfmathdivide{50}{\pgfdecoratedpathlength}%
+   \let\increment=\pgfmathresult%
+   \let\dop=\decorateopacity%
+   \def\x{0}%
+ }]{}
+ \state{line}[width=.5pt,   persistent postcomputation={%
+     \pgfmathadd@{\x}{\increment}%
+     \let\x=\pgfmathresult%
+   }]{%
+   %\pgfsetlinewidth{1\defaultpgflinewidth}%
+   \pgfsetarrows{-}%
+   \pgfpathmoveto{\pgfpointorigin}%
+   \pgfpathlineto{\pgfqpoint{.75pt}{0pt}}%
+   \pgfsetstrokeopacity{\decorateopacity}%
+   \pgfsetstrokecolor{\endcolor!\x!\startcolor}%
+   \pgfusepath{stroke}%
+ }
+ \state{final}{%
+   \pgfsetlinewidth{\defaultpgflinewidth}%
+   \pgfpathmoveto{\pgfpointorigin}%
+   \color{\endcolor!\x!\startcolor}%
+   \pgfusepath{stroke}%
+ }}
+\makeatother
+
+% Styles
+\tikzstyle{function} = [draw,fill=blue!60,shape=rectangle, text centered,text=white, text width=3cm, minimum size=2.5cm]
+\tikzstyle{data}     = [draw,fill=orange,shape=ellipse, text centered,text=white, text width=2.5cm, minimum size=2.5cm]
+\tikzstyle{d2f}  = [draw, line width = 2pt,
+      decoration = {color change, start color=blue, end color=orange},
+      decorate]
+\tikzstyle{f2d}  = [draw, line width = 2pt,
+      decoration = {color change, start color=orange, end color=blue},
+      decorate]
