@@ -14,22 +14,118 @@
 %    [ Test plans and test results. Unit tests and integration tests.
 %      Tools for testing. ]
 
-% TODO make it explicit that "unintended results" can be
-% avoided via unit tests
+When testing a system, there are two related procedures that are
+used to ensure that the system is working in the intended manner:
+verification and validation. Verification is testing whether a the
+implementation of a model is correctly implemented. This is analogous to
+asking  ``did we build it right?''. Validation is checking the accuracy of the model to
+a real system. This asks ``was it the right thing to buid?''~\autocite{Boehm:1989}.
+
+When testing is done on the whole system to check if the final output makes
+sense, this is a kind of validation. This is how the \gls{orionmat} is
+currently tested. However, validation testing can not stand on its own. We also
+need to improve the system's verification testing. One such way is to implement
+unit testing. This kind of testing involves running each unit of the system (such as a function)
+and checking if the expected outputs are generated for a given set of inputs.
 
 % TODO describe TDD
+By performing unit tests, the expectation of a given unit is recorded in a way
+that it can be run repeatedly and in completely automated manner. This allows
+for running the same tests both in new environments and whenever a part of the
+code changes. Since it is completely automated, debugging in case there are any
+unmet expectations can be performed quickly. However, testing can only prove
+the existence of bugs, not their absence. This is why a particular form of
+software engineering methodology called \acrfull{TDD} advocates
+writing tests before the actual code being tested. In this way, the test code
+will fail first and just enough code is added to make the test pass. In this way,
+it is clear that the added code made that specific test case pass.
 
-% TODO explain compiler differences
-
-% TODO describe continuous integration and specifically Travis-CI
-
-% TODO explain how TDD and branching and Travis-CI work together
-
+Some of examples of tests that are used in the \gls{orionc} code include
+\begin{enumerate*}[label={}]
+	\enumdescitem{analytic testing} which test numerical
+		calculations where an analytic solution is known
+		for certain inputs (e.g., the \acrshort{FFT} of
+		\(f(x) = \sin 2\pi{}x\);
+	\enumdescitem{property testing} which tests if a function
+		satisfies certain conditions on its outputs (i.e.,
+		a function that outputs data in sorted order can
+		be checked to see if the sorted property is
+		retained);
+	\enumdescitem{integration tests} which test if two
+		separate systems can work together (i.e., the
+		output of one system can be used as the input to
+		another system).
+\end{enumerate*}
 
 % TODO explain the floating point testing
 % e.g., for float32, ε = 1E-7 tolerance is expected
 % What Every Programmer Should Know about Memory <http://www.akkadia.org/drepper/cpumemory.pdf>
 % Kahan summation <http://www.drdobbs.com/floating-point-summation/184403224>
 % "What Every Computer Scientist Should Know About Floating-Point Arithmetic" <http://docs.sun.com/source/806-3568/ncg_goldberg.html>
+It is important to keep in mind that since many of these tests are
+performed on floating point data, the tests can not use strict
+equality and must compare their values to within a tolerance. For
+example, when testing the FFT implementation, one property that
+can be tested is if computing \(\IFourierTrans{\FourierTrans{x}} =
+x\). However, due to numerical errors, the absolute error \(\abs{\IFourierTrans{\FourierTrans{x}} -
+x}\) is within a range of \(\epsilon = \num{1e-7}\) when
+using 32-bit floating point numbers for
+computation which is expected based on the machine epsilon~\autocite{fftw:accuracy-bench,Tashce:FFT-error}.
+
+\section{Testing portability}
+
+% describe continuous integration and specifically Travis-CI
+% explain compiler differences
+One of the issues with testing is that some tests that may hold
+one machine, may not hold on another. This can be due to
+differences in library versions, differences between compilers, or
+even differences between processors. This is why testing in
+multiple environments is necessary to ensure that the tests are
+themselves portable. In order to test in multiple environments,
+\gls{orionc} is tested using a continous integration server which
+tests every change on a different machine using different
+compilers. Using a continuous integration server like this has
+helped track down some issues with using an older version of ITK
+and other issues that had to do with how a specific compiler
+interpreted the source code.
+% explain how TDD and branching and Travis-CI work together
+Furthermore, using a continuous integration server allows for a
+workflow where every new feature can be worked on separately from
+the main ``released'' code and tested as it is being developed.
+Only when that code has been appropriately tested will that
+feature be brought into the main code. This allows in-progress
+code to be worked on separately from working code.
+
+\section{Tracing-based comparison with \gls{orionmat}}
+
+\begin{figure}
+	\resizebox{0.8\linewidth}{!}{\input{gfx/compare.tex}}
+	\caption{Full pipeline}
+\end{figure}
+
+	\begin{itemize}
+	\item Set breakpoints at every function start and end
+	\item Run the MATLAB code
+	\item Save the state of the input and output data at
+		each breakpoint with stack frame ID
+	\item Load the MATLAB data
+	\item Convert MATLAB to C data structures
+	\item Compare the results using an appropriate method
+	\end{itemize}
+
+%\begin{frame}\frametitle{Estimating error for Makefilter}
+\begin{table}
+	\begin{tabular}{cc}
+		\toprule
+		\be{}Stack ID     & \be{} histogram intersection \\		   
+		\midrule
+		1 & 0.999973665203964 \\
+		2 & 0.999967508148729 \\
+		3 & 0.999978416844418 \\
+		4 & 0.999982131154914 \\
+		5 & 0.999959276433577 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 
