@@ -45,7 +45,7 @@ Some of examples of tests that are used in the \gls{orionc} code include
 	\enumdescitem{analytic testing} which test numerical
 		calculations where an analytic solution is known
 		for certain inputs (e.g., the \acrshort{FFT} of
-		\(f(x) = \sin 2\pi{}x\);
+		\(f(x) = \sin 2\pi{}x\));
 	\enumdescitem{property testing} which tests if a function
 		satisfies certain conditions on its outputs (i.e.,
 		a function that outputs data in sorted order can
@@ -98,26 +98,75 @@ code to be worked on separately from working code.
 
 \section{Tracing-based comparison with \gls{orionmat}}
 
+In order to look more closely at whether or not the \gls{orionc}
+code implements the same algorithms as \gls{orionmat}, it is
+possible to compare the data from across the entire \gls{orionmat}
+pipeline. This can be accomplished by recording the input
+parameters given to every \gls{orionmat} function and passing
+those inputs to the \gls{orionc} input. In \cref{fig:abs-pipe},
+the pipeline for \gls{orionc} is depicted on the top row and the
+pipeline for \gls{orionmat} is depicted on the bottom row. The
+middle row represents the process of taking the \gls{orionmat}
+data and passing it to the corresponding \gls{orionc} component.
+Then the output of the components in the middle row and the bottom
+row are compared. The reason for this comparison procedure is so
+that the functions can be compared individually to find where the
+two systems deviate instead of having to see the differences
+accumulate over the entire system. A full description of the
+algorithm is given in
+\cref{alg:mat-trace-data,alg:mat-trace-compare}. In
+\cref{alg:mat-trace-compare}, the algorithm makes reference to an
+appropriate method. This method depends on the kind of data being
+compared. For example, in \cref{tbl:compare-Makefilter}, the
+comparison is done by generating a histogram \(a\) and \(b\) for
+each volume so that both histograms contain the same number of
+bins \(n\) and the same bin boundaries. Then the intersection of the two
+histograms is calculated as
+\[ K_{\cap}(a, b) = \sum_{i = 1}^{n} min( a_i, b_i ). \]
+
 \begin{figure}
+	\centering
 	\resizebox{0.8\linewidth}{!}{\input{gfx/compare.tex}}
-	\caption{Full pipeline}
+	\caption{Abstract diagram of pipeline of both \gls{orionc}
+		and \gls{orionmat}}\label{fig:abs-pipe}
 \end{figure}
 
-	\begin{itemize}
-	\item Set breakpoints at every function start and end
-	\item Run the MATLAB code
-	\item Save the state of the input and output data at
-		each breakpoint with stack frame ID
-	\item Load the MATLAB data
-	\item Convert MATLAB to C data structures
-	\item Compare the results using an appropriate method
-	\end{itemize}
+\begin{algorithm}
+	\caption{MATLAB tracing data capture}\label{alg:mat-trace-data}
+	\begin{algorithmic}[1]
+		\State Set breakpoints at every \gls{orionm} function start and end.
+		\State Run the MATLAB code under the debugger.
+		\While{ \gls{orionm} Program has not finished }
+			\State When the debugger stops, save the $State$ of the input and output data at
+				each breakpoint along with a stack frame
+				ID. Add $State$ to $SavedStates$.
+			\State Continue the debugger.
+		\EndWhile
+	\end{algorithmic}
+\end{algorithm}
 
-%\begin{frame}\frametitle{Estimating error for Makefilter}
+\begin{algorithm}
+	\caption{MATLAB tracing data comparison}\label{alg:mat-trace-compare}
+	\begin{algorithmic}[1]
+		\State \Input $SavedStates \gets$ the list of all saved
+		states from \cref{alg:mat-trace-data}.
+		\For{$State \in SavedStates$}
+			\State Load the MATLAB data from $State$.
+			\State Convert MATLAB data structures to C
+			data structures.
+			\State Call corresponding \gls{orionc}
+				function using C data structures
+			\State Compare the results using an
+				appropriate method.
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
 \begin{table}
+	\centering
 	\begin{tabular}{cc}
 		\toprule
-		\be{}Stack ID     & \be{} histogram intersection \\		   
+		\be{}Stack ID     & \be{} histogram intersection \\
 		\midrule
 		1 & 0.999973665203964 \\
 		2 & 0.999967508148729 \\
@@ -126,6 +175,8 @@ code to be worked on separately from working code.
 		5 & 0.999959276433577 \\
 		\bottomrule
 	\end{tabular}
+	\caption{Example of comparision captured from data for the
+		\computertext{Makefilter} function}\label{tbl:compare-Makefilter}
 \end{table}
 
 
