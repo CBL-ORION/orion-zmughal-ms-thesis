@@ -12,3 +12,39 @@
 \chapter{Conclusion}\label{ch:conclusion}
 % 6. Conclusion
 %    [ Discussion of overall project results and future work. ]
+
+The main contribution of this thesis is a neuron morphology
+reconstruction system with an automated test suite. The existence
+of an automated test suite allows for future refactoring and
+additions to the code with confidence that each component behaves
+as expected. The consequences of this contribution go beyond just
+the testing of the current state of the system --- testing allows
+the code to evolve to incorporate new designs.
+
+While the code currently relies heavily on the original
+\gls{orionmat} design, removing much of the MATLAB specific design
+decisions such as caching make it easier to refactor because the
+only input data to a \gls{orionc} function are those which are passed in
+directly as input parameters. This also leaves room for making
+parts of the system run in parallel as there will be no extra
+overhead or file system contention involved in reading and writing
+to the disk.
+
+Furthermore, although the main backbone of the \gls{orionc}
+pipeline uses the same design as \gls{orionmat}, the
+implementation inside each component calls out to generic,
+reusable code. This reusable code (everything outside of the
+\computertext{lib/kitchen-sink} directory) is designed so that it
+can more easily be tested than the code based on \gls{orionmat}.
+
+% Can be packaged for Vaa3D, NeuroDebian
+Future work on this software system can also include packaging the
+software for easy installation in repositories such as
+NeuroDebian~\autocite{NeuroDebian:Halchenko:2012}. This will allow
+end-users an easy way to install the software without having to
+deal with building it themselves. This also serves as another way
+of testing the software because these end-users will likely use
+the software on a wide variety of data as well as under different
+environments. This opens the door to improvements both to the
+robustness of the reconstruction algorithm and the portability of
+the software system.
