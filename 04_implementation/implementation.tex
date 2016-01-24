@@ -94,8 +94,10 @@ Hessian filter, a collection of the eigenvalue features and the
 associated scales used for that filter are returned by using the C structure
 \begin{lstlisting}
 typedef struct {
- float scale;               /* scale used for this filter result    */
- array_ndarray3* eig_feat;  /* the three eigenvalues for each voxel */
+ /* scale used for this filter result    */
+ float scale;
+ /* the three eigenvalues for each voxel */
+ array_ndarray3* eig_feat;
 } orion_eig_feat_result;
 \end{lstlisting}
 This allows for access to the filter response as well as
