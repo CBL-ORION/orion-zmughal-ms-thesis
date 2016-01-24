@@ -81,7 +81,7 @@ $(GFX_OUT_DIR):
 
 $(GFX_OUT_DIR)/%.tex : gfx/%.dot
 	mkdir -p `dirname $@`
-	dot2tex -ftikz --figonly < $< > $@
+	dot2tex --format tikz --figonly < $< > $@
 
 tags:
 	ctags -R .
