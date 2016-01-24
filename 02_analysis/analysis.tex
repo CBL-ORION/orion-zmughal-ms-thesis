@@ -321,7 +321,7 @@ call graph and steadily moves upwards.
 
 		\Function{multiscaleLaplacianFilter}{\(Volume, degree, scales\)}
 			\For{ \(scale_i \in scales\) }
-				\State \(F_i \gets \Call{Makefilter}{\Dim{Volume}, degree, scale}\)
+				\State \(F_i \gets \Call{Makefilter}{\Dim{Volume}, degree, scale_i}\)
 			\EndFor
 			\State \(MaxScale(x,y,z) \gets \argmax_{i} (Volume \Convolve F_i)(x,y,z)\)
 		\EndFunction
