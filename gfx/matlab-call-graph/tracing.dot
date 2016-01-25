@@ -26,8 +26,8 @@ digraph Registration {
 		}
 		subgraph cluster_computeDistanceMap {
 			computeDistanceMap [shape=none]; label = "";
-			RAWfromMHD ->
-			WriteRAWandMHD
+			/*RAWfromMHD ->
+			WriteRAWandMHD*/
 		}
 		subgraph cluster_findSoma3DPoint {
 			findSoma3DPoint [shape=none]; label = "";
@@ -40,7 +40,7 @@ digraph Registration {
 			image_MIP_gray
 
 
-			subgraph cluster_callHough {
+			/*subgraph cluster_callHough {
 				callHough [shape=none]; label = "";
 				center3D ->
 				coin_detect ->
@@ -56,20 +56,20 @@ digraph Registration {
 						fastsearch
 					}
 				}
-			}
+			}*/
 
-			subgraph cluster_extractAdaptiveSphere {
+			/*subgraph cluster_extractAdaptiveSphere {
 				extractAdaptiveSphere [shape=none]; label = "";
 				circle ->
 				normalizeVo ->
 				traceBack_OR1_P ->
 				report
-			}
+			}*/
 		}
 
 		subgraph cluster_createSWCfromSegments {
 			createSWCfromSegments [shape=none]; label = "";
-			subgraph cluster_createIDforSegments {
+			/*subgraph cluster_createIDforSegments {
 				createIDforSegments [shape=none]; label = "";
 				detectBranchingPointsSWC ->
 				detectTerminalPointsFromSWC ->
@@ -79,7 +79,7 @@ digraph Registration {
 					fix_ordering_of_segments [shape=none]; label = "";
 					move_segment
 				}
-			}
+			}*/
 
 		}
 		subgraph cluster_post_process_centerline {

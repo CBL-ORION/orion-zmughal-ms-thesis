@@ -13,37 +13,29 @@
 \newcommand{\myfun}[2] {$fun^{#1}_{#2}$}
   
 \begin{tikzpicture}
-  % Cases
-  \definecolor{lgray}{RGB}{192,192,192}
-  \definecolor{ngray}{RGB}{160,160,160}
-  \definecolor{dgray}{RGB}{128,128,128}
-  % Cases
-  \definecolor{lblue}{RGB}{102,102,255}
-  \definecolor{nblue}{RGB}{51,51,255}
-  \definecolor{dblue}{RGB}{0,0,255}
 % Input node
-\node[draw,fill=black,text=white,rotate=90] (Input) at (2,2) {Input};  
+\node[draw,fill=inputcol,text=tcol,rotate=90] (Input) at (2,2) {Input};  
   
 % Matlab nodes
-\node[draw,fill=lgray,text=white] (funM1) at ( 4,0) {\myfun{M}{1}};
-\node[draw,fill=lgray,text=white] (funM2) at ( 7,0) {\myfun{M}{2}};
-\node[draw,fill=lgray,text=white] (funM3) at (10,0) {\myfun{M}{3}};
-\node[draw,fill=lgray,text=white] (funM4) at (13,0) {\myfun{M}{4}};
-\node[draw,fill=lgray,text=white] (funM5) at (16,0) {\myfun{M}{5}};
+\node[draw,fill=lgray,text=tcol] (funM1) at ( 4,0) {\myfun{M}{1}};
+\node[draw,fill=lgray,text=tcol] (funM2) at ( 7,0) {\myfun{M}{2}};
+\node[draw,fill=lgray,text=tcol] (funM3) at (10,0) {\myfun{M}{3}};
+\node[draw,fill=lgray,text=tcol] (funM4) at (13,0) {\myfun{M}{4}};
+\node[draw,fill=lgray,text=tcol] (funM5) at (16,0) {\myfun{M}{5}};
 
 % MC nodes
-\node[draw,fill=ngray,text=white] (funMC1) at ( 4,2) {\myfun{M-C}{1}};
-\node[draw,fill=ngray,text=white] (funMC2) at ( 7,2) {\myfun{M-C}{2}};
-\node[draw,fill=ngray,text=white] (funMC3) at (10,2) {\myfun{M-C}{3}};
-\node[draw,fill=ngray,text=white] (funMC4) at (13,2) {\myfun{M-C}{4}};
-\node[draw,fill=ngray,text=white] (funMC5) at (16,2) {\myfun{M-C}{5}};
+\node[draw,fill=ngray,text=tcol] (funMC1) at ( 4,2) {\myfun{M-C}{1}};
+\node[draw,fill=ngray,text=tcol] (funMC2) at ( 7,2) {\myfun{M-C}{2}};
+\node[draw,fill=ngray,text=tcol] (funMC3) at (10,2) {\myfun{M-C}{3}};
+\node[draw,fill=ngray,text=tcol] (funMC4) at (13,2) {\myfun{M-C}{4}};
+\node[draw,fill=ngray,text=tcol] (funMC5) at (16,2) {\myfun{M-C}{5}};
 
 % C nodes
-\node[draw,fill=dgray,text=white] (funC1) at ( 4,4) {\myfun{C}{1}};
-\node[draw,fill=dgray,text=white] (funC2) at ( 7,4) {\myfun{C}{2}};
-\node[draw,fill=dgray,text=white] (funC3) at (10,4) {\myfun{C}{3}};
-\node[draw,fill=dgray,text=white] (funC4) at (13,4) {\myfun{C}{4}};
-\node[draw,fill=dgray,text=white] (funC5) at (16,4) {\myfun{C}{5}};
+\node[draw,fill=dgray,text=tcol] (funC1) at ( 4,4) {\myfun{C}{1}};
+\node[draw,fill=dgray,text=tcol] (funC2) at ( 7,4) {\myfun{C}{2}};
+\node[draw,fill=dgray,text=tcol] (funC3) at (10,4) {\myfun{C}{3}};
+\node[draw,fill=dgray,text=tcol] (funC4) at (13,4) {\myfun{C}{4}};
+\node[draw,fill=dgray,text=tcol] (funC5) at (16,4) {\myfun{C}{5}};
 
 
 % Initial data conection

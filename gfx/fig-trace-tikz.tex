@@ -1,0 +1,47 @@
+\begin{tikzpicture}[>= triangle 60,
+  remember picture,
+  %every node/.style={scale=0.8},
+  inner/.style={draw=black,thick},% draw=blue!50,fill=blue!20,circle,inner sep=3pt
+  test/.style={draw=none},
+  outer/.style={draw=black,thick}, % draw=green,inner sep=10pt,fill=green!20,
+  call/.style={black,thick} % red
+  ]
+		extractCenterlineFromSegmentation
+		SWCtoVTK
+		createVisualizationFromSWC
+		computeDistanceMap
+		findSoma3DPoint
+		compute_fast_marching
+		createSWCfromSegments
+		detectCenterlinePoints
+		detect_end_points_as_maximal_chains
+		getStartingPointsFromSegmentation
+		post_process_centerline
+
+
+
+		\draw[call,->] (SWCtoVTK) -> (createVisualizationFromSWC);
+		  \draw[call,->] (createVisualizationFromSWC) -> (computeDistanceMap);
+		  \draw[call,->] (computeDistanceMap) -> (findSoma3DPoint);
+		  \draw[call,->] (findSoma3DPoint) -> (compute_fast_marching);
+		  \draw[call,->] (compute_fast_marching) -> (createSWCfromSegments);
+		  \draw[call,->] (createSWCfromSegments) -> (detectCenterlinePoints);
+		  \draw[call,->] (detectCenterlinePoints) -> (detect_end_points_as_maximal_chains);
+		  \draw[call,->] (detect_end_points_as_maximal_chains) -> (getStartingPointsFromSegmentation);
+		  \draw[call,->] (getStartingPointsFromSegmentation) -> (post_process_centerline);
+
+		  \draw[call,->] (uhnToDxf) edge (updateUHNtypes)
+		  \draw[call,->] (RAWfromMHD) edge (WriteRAWandMHD)
+		  \draw[call,->] (callHough) edge (computeDistanceTransformOfSomaAndPipette_02)
+				(computeDistanceTransformOfSomaAndPipette_02) edge (extractAdaptiveSphere)
+				(extractAdaptiveSphere) edge (segmentSomaPipette)
+				(segmentSomaPipette) edge (segmentSomaPipetteRemoval)
+				(segmentSomaPipetteRemoval) edge (delete_RAW)
+				(delete_RAW)  edge (image_MIP_gray);
+		  \draw[call,->] (center3D) -> (coin_detect) -> (draw_soma);
+		  \draw[call,->] circle_center -> hough_circle
+		  \draw[call,->] circle -> normalizeVo -> traceBack_OR1_P -> report
+		  \draw[call,->] detectBranchingPointsSWC -> detectTerminalPointsFromSWC -> fix_ordering_of_segments
+		  \draw[call,->] num2string -> detect_crossings -> mergeClose_BranchingPoints -> remove_small_segments_from_SWC -> smooth_SWC -> connectCenterline
+		  \draw[call,->] reorganize_SWC -> getDisconnectedComponents -> merge_connected_components
+\end{tikzpicture}

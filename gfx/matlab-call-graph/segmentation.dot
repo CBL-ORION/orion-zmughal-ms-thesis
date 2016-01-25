@@ -1,7 +1,7 @@
 digraph Segmentation {
 	//rankdir = "TB";
-	graph [fontsize=10 fontname="Verdana" compound=true];
-	node [shape=rect fontsize=10 fontname="Verdana"];
+	graph [fontsize=12 fontname="Verdana" compound=true];
+	node [shape=rect fontsize=12 fontname="Verdana"];
 	//ranksep=3;
 	//ratio=auto;
 	//node [nodesep=0.2 ranksep=0.2];

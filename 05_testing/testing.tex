@@ -124,12 +124,23 @@ bins \(n\) and the same bin boundaries. Then the intersection of the two
 histograms is calculated as
 \[ K_{\cap}(a, b) = \sum_{i = 1}^{n} min( a_i, b_i ). \]
 
-\begin{figure}
+\begin{sidewaysfigure}
 	\centering
-	\resizebox{0.8\linewidth}{!}{\input{gfx/compare.tex}}
+	  % Cases
+	  \definecolor{inputcol}{RGB}{255,255,255}
+	  \definecolor{lgray}{RGB}{255,255,255}
+	  \definecolor{ngray}{RGB}{255,255,255}
+	  \definecolor{dgray}{RGB}{255,255,255}
+
+	  \definecolor{tcol}{RGB}{0,0,0}
+	  % Cases
+	  \definecolor{lblue}{RGB}{102,102,255}
+	  \definecolor{nblue}{RGB}{51,51,255}
+	  \definecolor{dblue}{RGB}{0,0,255}
+	\resizebox{1.0\linewidth}{!}{\input{gfx/compare.tex}}
 	\caption{Abstract diagram of pipeline of both \gls{orionc}
 		and \gls{orionmat}}\label{fig:abs-pipe}
-\end{figure}
+\end{sidewaysfigure}
 
 \begin{algorithm}
 	\caption{MATLAB tracing data capture}\label{alg:mat-trace-data}

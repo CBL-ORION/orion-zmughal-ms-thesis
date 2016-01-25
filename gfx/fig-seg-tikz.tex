@@ -1,0 +1,63 @@
+\begin{tikzpicture}[>= triangle 60,
+  remember picture,
+  %every node/.style={scale=0.8},
+  inner/.style={draw=black,thick},% draw=blue!50,fill=blue!20,circle,inner sep=3pt
+  test/.style={draw=none},
+  outer/.style={draw=black,thick}, % draw=green,inner sep=10pt,fill=green!20,
+  call/.style={black,thick} % red
+  ]
+  \node[outer] (crunSegmentationSpines) {\begin{tikzpicture}
+    \node [test] (runSegmentationSpines)  {runSegmentationSpines};
+      \node[outer,below=of runSegmentationSpines] (cORION3_Spines) {\begin{tikzpicture}
+        \node [test] (ORION3_Spines) {ORION3\_Spines};
+        \node[outer,below=of ORION3_Spines] (ccomputeEigenvaluesGaussianFilter) {\begin{tikzpicture}
+         \node [test] (computeEigenvaluesGaussianFilter) {computeEigenvaluesGaussianFilter};
+         \node[outer,below=of computeEigenvaluesGaussianFilter] (cFilterTypes) {\begin{tikzpicture}
+			 \node [test,below=of computeEigenvaluesGaussianFilter] (FilterTypes) {Filter Types};
+			 \node [inner,below left=of FilterTypes] (FilterFrangi) {FilterFrangi};
+		         \node [inner,right=of FilterFrangi] (FilterSato) {FilterSato};
+		         \node [inner,right=of FilterSato] (FilterORION1) {FilterORION1};
+		 \end{tikzpicture} };
+	 \end{tikzpicture} };
+        \node[outer,right=of ccomputeEigenvaluesGaussianFilter] (cORION3_Dendrites) {\begin{tikzpicture}
+           \node [test] (ORION3_Dendrites) {ORION3\_Dendrites};
+
+           \node[outer,below=of ORION3_Dendrites] (creadNegativeSamples) {\begin{tikzpicture}
+             \node [test] (readNegativeSamples) {readNegativeSamples};
+             \node [inner,below left=of readNegativeSamples] (multiscaleLaplacianFilter) {multiscaleLaplacianFilter};
+             \node [inner,right=of multiscaleLaplacianFilter] (Makefilter) {Makefilter};
+             \node [inner,right=of Makefilter] (hdaf) {hdaf};
+           \end{tikzpicture} };
+
+	   \node[outer,right=of creadNegativeSamples] (ccompute2D_DiscrimantFunction) {\begin{tikzpicture}
+            \node [test,below=of ccompute2D_DiscrimantFunction] (compute2D_DiscrimantFunction) {compute2D\_DiscrimantFunction};
+	    \node [inner,below=of compute2D_DiscrimantFunction] (removeIsolatedResponses) {removeIsolatedResponses};
+	   \end{tikzpicture} };
+
+           \node [inner,below=of ccompute2D_DiscrimantFunction] (getResponseToDiscriminantFunction) {getResponseToDiscriminantFunction};
+           \node [inner,left=of getResponseToDiscriminantFunction] (normalizeResponseDiscriminantFunction) {normalizeResponseDiscriminantFunction};
+
+	   \node[outer,below=of normalizeResponseDiscriminantFunction] (cgetFeatures) {\begin{tikzpicture}
+            \node [test] (getFeatures) {getFeatures};
+	    \node [inner,below left=of getFeatures] (computeFeatures) {computeFeatures};
+	    \node [inner,right=of computeFeatures] (readEigenvaluesGaussianFilter) {readEigenvaluesGaussianFilter};
+           \end{tikzpicture} };
+
+           \node [inner,right=of cgetFeatures] (remove_small_conComp3D) {remove\_small\_conComp3D};
+           \node [inner,below=of remove_small_conComp3D] (settingDefaultParameters) {settingDefaultParameters};
+
+	 \end{tikzpicture} };
+      \end{tikzpicture} };
+  \end{tikzpicture} };
+	   \draw[call,->] (ORION3_Spines) -- (computeEigenvaluesGaussianFilter);
+	     \draw[call,->] (computeEigenvaluesGaussianFilter) -- (ORION3_Dendrites);
+	   \draw[call,->] (readNegativeSamples) -- (compute2D_DiscrimantFunction);
+	     \draw[call,->] (compute2D_DiscrimantFunction) -- (getResponseToDiscriminantFunction);
+	     \draw[call,->] (getResponseToDiscriminantFunction) -- (normalizeResponseDiscriminantFunction);
+	   \draw[call,->] (normalizeResponseDiscriminantFunction) -- (getFeatures);
+	     \draw[call,->] (getFeatures) -- (remove_small_conComp3D);
+	     \draw[call,->] (remove_small_conComp3D) -> (settingDefaultParameters);
+	   \draw[call,->] (computeFeatures) -- (readEigenvaluesGaussianFilter);
+	   \draw[call,->] (multiscaleLaplacianFilter) -- (Makefilter);
+	     \draw[call,->] (Makefilter) -- (hdaf);
+\end{tikzpicture}
