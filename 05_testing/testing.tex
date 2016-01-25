@@ -116,13 +116,15 @@ accumulate over the entire system. A full description of the
 algorithm is given in
 \cref{alg:mat-trace-data,alg:mat-trace-compare}. In
 \cref{alg:mat-trace-compare}, the algorithm makes reference to an
-appropriate method. This method depends on the kind of data being
+``appropriate method''. This method depends on the kind of data being
 compared. For example, in \cref{tbl:compare-Makefilter}, the
 comparison is done by generating a histogram \(a\) and \(b\) for
 each volume so that both histograms contain the same number of
 bins \(n\) and the same bin boundaries. Then the intersection of the two
 histograms is calculated as
-\[ K_{\cap}(a, b) = \sum_{i = 1}^{n} min( a_i, b_i ). \]
+\begin{equation}
+ K_{\cap}(a, b) = \sum_{i = 1}^{n} min( a_i, b_i ).
+\end{equation}
 
 \begin{sidewaysfigure}
 	\centering
